@@ -17,36 +17,36 @@ const About = () => {
   return (
     <div>
       <ImageBanner text={"About Us"} />
-      <div className="w-full md:w-11/12 mx-auto flex flex-col md:flex-row items-center md:justify-between">
-        <div className="py-8 px-4 md:px-10 lg:px-20 flex flex-col gap-4 md:gap-8 md:w-1/2">
-          <h1 className="text-4xl font-bold mt-10 md:mt-0 md:ml-0"> 
-            About Recruitment Agency
-          </h1>
-          <h2 className="text-base md:text-lg lg:text-medium text-gray-800 mt-8"> 
-            Helping people all around the world bag their dream job.
-          </h2>
-          <div className="mt-4"> 
-            <p className="text-sm leading-loose">
-              Welcome to Jobs Shopper, number one source for finding and posting job applications. 
-              We are dedicated to giving you the absolute best experience when it comes to job 
-              searching and posting, with a focus on simplicity, efficiency, ease of use, and 
-              uniqueness. We hope you enjoy our simple process as much as we enjoy offering it 
-              to you. If you have any questions or comments, please do not hesitate to contact 
-              us.
-            </p>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2">
-          <img
-            src={aboutMap}
-            alt="About Us"
-            className="max-w-full h-auto mx-auto"
-          />
-        </div>
+      <div className="w-full md:w-11/12 mx-auto flex flex-col md:flex-row items-center md:justify-between mt-8 md:mt-24">
+    <div className="py-8 px-4 md:px-10 lg:px-20 flex flex-col gap-4 md:gap-8 md:w-1/2">
+      <h1 className="text-4xl font-bold mt-10 md:mt-0 md:ml-0">
+        About Recruitment Agency
+      </h1>
+      <h2 className="text-base md:text-lg lg:text-medium text-gray-800 mt-8">
+        Helping people all around the world bag their dream job.
+      </h2>
+      <div className="mt-4">
+        <p className="text-sm leading-loose">
+          Welcome to Jobs Shopper, number one source for finding and posting job
+          applications. We are dedicated to giving you the absolute best experience
+          when it comes to job searching and posting, with a focus on simplicity,
+          efficiency, ease of use, and uniqueness. We hope you enjoy our simple
+          process as much as we enjoy offering it to you. If you have any questions
+          or comments, please do not hesitate to contact us.
+        </p>
       </div>
+    </div>
+    <div className="w-full md:w-1/2">
+      <img
+        src={aboutMap}
+        alt="About Us"
+        className="max-w-full h-auto mx-auto"
+      />
+    </div>
+  </div>
 
       <div className="">
-        <div className="flex flex-wrap justify-center lg:justify-center">
+      <div className="flex flex-wrap justify-center lg:justify-start mt-8 md:mt-24 md:ml-32">
   <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
     <div className="bg-white p-4 rounded-lg hover:shadow-md">
       <div className="flex items-center">
@@ -82,7 +82,7 @@ const About = () => {
   </div>
   </div>
 
-  <div className="flex flex-wrap justify-center lg:justify-center">
+  <div className="flex flex-wrap justify-center lg:justify-start mt-8 md:mt-24 md:ml-32">
   <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
     <div className="bg-white p-4 rounded-lg hover:shadow-md">
       <div className="flex items-center">
@@ -119,8 +119,8 @@ const About = () => {
   </div>
 </div>
 
-<div className="bg-gray-200">
-  <div className="bg-gray-200 min-h-[30vh] flex flex-wrap items-center justify-center lg:justify-center w-11/12 mx-auto md:p-8">
+<div className="bg-gray-200 mt-8 md:mt-20 mb-16">
+<div className="bg-gray-200 min-h-[30vh] flex flex-wrap items-center justify-center w-11/12 mx-auto md:p-8">
     <div className="flex w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
       <div>
         <img src={countericon3} alt="/" className="bg-white rounded-full" />

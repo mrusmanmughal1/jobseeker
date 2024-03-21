@@ -3,32 +3,32 @@ import contact from '../assets/contact-us.png';
 
 const Contact = () => {
   return (
-    <div className="px-4 md:px-8 lg:px-16">
-      <div className="mt-8 lg:mt-16">
+    <div className="px-4 md:px-8 lg:px-32">
+      <div className="mt-8 lg:mt-32">
         <h1 className="text-4xl font-semibold text-center lg:text-center"> 
           Contact <span className="text-[#4E007A]">Us</span>
         </h1>
       </div>
-      <div className="flex flex-col lg:flex-row justify-between mt-8 md:mt-12 lg:mt-16">
-        <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 ml-4 lg:ml-[10rem]">
-          <h2 className="text-lg text-[#4E007A] font-semibold py-2">Address</h2>
-          <h3 className="text-base font-semibold">Head Office:</h3>
-          <p className="text-base py-1">140 N University Dr Coral Springs,</p>
-          <p className="text-base py-1">FL 33071</p>
-        </div>
-        <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 mr-4 lg:mr-[12rem]">
-          <h2 className="text-lg text-[#4E007A] font-semibold py-2">Email</h2>
-          <p className="text-base">info@jobsshopper.com</p>
-        </div>
-      </div>
+      <div className="flex flex-col lg:flex-row justify-between mt-8 md:mt-12 lg:mt-16 md:justify-center">
+  <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 ml-4 lg:ml-[10rem]">
+    <h2 className="text-lg text-[#4E007A] font-semibold py-2">Address</h2>
+    <h3 className="text-base font-semibold">Head Office:</h3>
+    <p className="text-base py-1">140 N University Dr Coral Springs,</p>
+    <p className="text-base py-1">FL 33071</p>
+  </div>
+  <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 mr-4 lg:mr-[12rem]">
+    <h2 className="text-lg text-[#4E007A] font-semibold py-2">Email</h2>
+    <p className="text-base">info@jobsshopper.com</p>
+  </div>
+</div>
       <div className="mt-8 md:mt-12 lg:mt-16 flex flex-col lg:flex-row items-start">
         
         <div className="lg:w-1/2 mx-auto lg:mx-0 lg:ml-[10rem] lg:mr-[12rem]">
           <h1 className="text-black text-5xl font-semibold">
             Leave a <span className="text-[#4E007A]">Message</span>
           </h1>
-          <form action="contact" method="post" className="w-full max-w-lg p-8 bg-white shadow-md rounded-lg mt-8">
-            <div className="hidden">
+          <form action="contact" method="post" className="w-full max-w-lg p-8 bg-white mt-8 md:mt-0 md:ml-4 lg:mt-0 lg:ml-0 lg:mr-[12rem]">
+          <div className="hidden">
               <input type="hidden" name="" value="" />
               <input type="hidden" name="" value="" />
               <input type="hidden" name="" value="" />
@@ -57,7 +57,7 @@ const Contact = () => {
             </div>
           </form>
         </div>
-        <img src={contact} alt="Contact Us" className="lg:w-1/2" />
+        <img src={contact} alt="Contact Us" className="lg:w-1/3 mt-8 lg:mt-0 mb-4 md:mb-8" />
       </div>
       
     </div>
