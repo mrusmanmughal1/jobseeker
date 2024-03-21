@@ -24,7 +24,7 @@ const Manageprofile = () => {
               </label>
               <input
                 type="text"
-                placeholder="Firt Name"
+                placeholder="First Name"
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
             </div>

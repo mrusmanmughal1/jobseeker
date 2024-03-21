@@ -6,6 +6,15 @@ import JobType from "../UI/JobType";
 
 const Jobs = () => {
   const job = [1, 1, 1, 1, 1, 1];
+  const daata = [{
+    name:"job posting ",
+    text:"hello",
+    icons:"ojo"
+  },{
+    name:"job posting ",
+    text:"hello",
+    icons:"ojo"
+  }]
   return (
     <div>
       <ImageBanner text={"JOBS"} />
@@ -19,7 +28,7 @@ const Jobs = () => {
           <div className="   md:w-3/4 mx-auto ">
             <JobSearchbar />
           </div>
-          <div className=" md:px-8  mt-8">
+          <div className=" md:px-8   mt-8">
             {job.map((val, i) => (
               <Job jobs={true} key={i} />
             ))}
