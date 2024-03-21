@@ -18,8 +18,8 @@ const reducer = (state, action) => {
 };
 
 const Userinfo = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  return <User.Provider value={{ dispatch }}>{children}</User.Provider>;
+  const [{ user, key }, dispatch] = useReducer(reducer, initialState);
+  return <User.Provider value={{ dispatch, user }}>{children}</User.Provider>;
 };
 const useUserinfo = () => {
   const Userdata = useContext(User);

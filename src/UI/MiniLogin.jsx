@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useUserinfo } from "../Context/Userinfo";
 
 const MiniLogin = () => {
+  const { dispatch } = useUserinfo();
   return (
     <div>
       <p className="text-purple-900 font-bold">Existing User Login Below</p>
@@ -24,11 +26,14 @@ const MiniLogin = () => {
         <div className="text-xs"> Forgot Password? </div>
       </div>
       <div className="flex justify-between  gap-4 py-2">
-        <button className="px-4 py-2 bg-purple-900 w-full  text-white rounded-md">
+        <button
+          className="px-4 py-2 bg-purple-900 w-full  text-white rounded-md"
+          onClick={() => dispatch({ type: "login", payload: 2 })}
+        >
           LOGIN
         </button>
         <NavLink to="/register">
-          <button className="px-4 py-2 border-2 w-full border-purple-900 rounded-md text-purple-900 ">
+          <button className="px-4 py-2 border-2 w-full border-purple-900 rounded-md text-purple-900 hover:bg-black hover:text-white hover:border-black ">
             REGISTER
           </button>
         </NavLink>

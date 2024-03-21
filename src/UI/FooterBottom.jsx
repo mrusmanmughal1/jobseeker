@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { BiSolidUpArrowSquare } from "react-icons/bi";
 
 const FooterBottom = () => {
@@ -7,11 +8,11 @@ const FooterBottom = () => {
         &#169; 202. Copyrights by Jobs Shopper & 7 Kings Code{" "}
       </p>
       <div className="hidden lg:block ">
-        <a href="#nav">
+        <button href="#nav">
           <p className="flex    hover:cursor-pointer items-center gap-2">
             Back to Top <BiSolidUpArrowSquare />{" "}
           </p>
-        </a>
+        </button>
       </div>
     </div>
   );
