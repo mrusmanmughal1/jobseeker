@@ -5,7 +5,7 @@ import SearchJobsMain from "../UI/SearchJobsMain";
 
 const Home = () => {
   return (
-    <div>
+    <section id="nav">
       <SearchJobsMain />
       <MainInfoBar />
       <div className="flex flex-col w-full  lg:flex-row lg:w-11/12 mx-auto py-4">
@@ -14,7 +14,7 @@ const Home = () => {
           <FeaturedJobs />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

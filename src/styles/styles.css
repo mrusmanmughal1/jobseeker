@@ -24,7 +24,7 @@ a {
 }
 .usman::after {
   content: "";
-  z-index: 99999;
+  z-index: 2;
   height: 12px;
   width: 85%;
   background-color: #6f00ad;
@@ -36,7 +36,7 @@ a {
 nav li {
   position: relative;
 }
-nav li.active::after {
+nav .active::after {
   content: "";
   position: absolute;
   bottom: -30%;
@@ -58,6 +58,9 @@ nav li:hover:after {
   opacity: 100;
   transition: all 1s ease;
 }
+.active {
+  color: #6f00ad;
+}
 
 @media (max-width: 767px) {
   .main-banner {
@@ -71,7 +74,7 @@ nav li:hover:after {
   }
   .usman::after {
     content: "";
-    z-index: 99999;
+    z-index: 2;
     height: 0px;
     width: 85%;
     background-color: #6f00ad;

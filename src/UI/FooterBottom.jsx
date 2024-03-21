@@ -7,7 +7,7 @@ const FooterBottom = () => {
         &#169; 202. Copyrights by Jobs Shopper & 7 Kings Code{" "}
       </p>
       <div className="hidden lg:block ">
-        <a href="@">
+        <a href="#nav">
           <p className="flex    hover:cursor-pointer items-center gap-2">
             Back to Top <BiSolidUpArrowSquare />{" "}
           </p>
