@@ -17,8 +17,6 @@ import ApplicationHistory from "./Feature/Accounts/ApplicationHistory";
 import Manageprofile from "./Feature/Accounts/Manageprofile";
 import { useUserinfo } from "./Context/Userinfo";
 const App = () => {
-  const data = useUserinfo();
-  console.log(data);
   return (
     <BrowserRouter>
       <Header />

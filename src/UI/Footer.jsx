@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import FooterBottom from "./FooterBottom";
 import { CiMail } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
