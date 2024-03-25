@@ -75,7 +75,7 @@ const Navbar = () => {
               <>
                 <li>
                   <NavLink to=" ">
-                    <div className="flex items-center  font-bold gap-2">
+                    <div className="flex items-center  mx-4 font-semibold gap-2">
                       <div className=" rounded-full   ">
                         <img
                           className="rounded-full w-7 h-7"
@@ -88,24 +88,29 @@ const Navbar = () => {
                     </div>
                   </NavLink>
                 </li>
-                <li>
+                <li className="relative">
                   <NavLink to=" ">
-                    <div className=" flex items-center font-bold">
+                    <div className="  gap-4 flex items-center font-semibold">
                       <p>JOB CART</p>
-                      <BsCart />
+                      <BsCart className="text-2xl" />
                     </div>
                   </NavLink>
+                  <div className="rounded-full border-2 absolute bottom-5 border-purple-950 px-2  left-28 ">
+                    {9}
+                  </div>
                 </li>{" "}
               </>
             )}
-            <p
-              className="font-semibold flex items-center  text-sm gap-4 cursor-pointer"
-              onClick={() => setshow(!show)}
-            >
-              {/* <NavLink to="/login"></NavLink> */}
-              LOGIN/REGISTRATION
-              <img src={loginicon} width={35} />
-            </p>
+            {!user && (
+              <p
+                className="font-semibold flex items-center  text-sm gap-4 cursor-pointer"
+                onClick={() => setshow(!show)}
+              >
+                {/* <NavLink to="/login"></NavLink> */}
+                LOGIN/REGISTRATION
+                <img src={loginicon} width={35} />
+              </p>
+            )}
           </ul>
         </nav>
       </div>
