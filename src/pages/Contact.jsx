@@ -9,18 +9,18 @@ const Contact = () => {
           Contact <span className="text-[#4E007A]">Us</span>
         </h1>
       </div>
-      <div className="flex flex-col lg:flex-row justify-between mt-8 md:mt-12 lg:mt-16 md:justify-center">
-  <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 ml-4 lg:ml-[10rem]">
-    <h2 className="text-lg text-[#4E007A] font-semibold py-2">Address</h2>
-    <h3 className="text-base font-semibold">Head Office:</h3>
-    <p className="text-base py-1">140 N University Dr Coral Springs,</p>
-    <p className="text-base py-1">FL 33071</p>
-  </div>
-  <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 mr-4 lg:mr-[12rem]">
-    <h2 className="text-lg text-[#4E007A] font-semibold py-2">Email</h2>
-    <p className="text-base">info@jobsshopper.com</p>
-  </div>
-</div>
+      <div className="flex flex-col lg:flex-row justify-between mt-8 md:mt-12 lg:mt-16">
+        <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 ml-4 lg:ml-[10rem]">
+          <h2 className="text-lg text-[#4E007A] font-semibold py-2">Address</h2>
+          <h3 className="text-base font-semibold">Head Office:</h3>
+          <p className="text-base py-1">140 N University Dr Coral Springs,</p>
+          <p className="text-base py-1">FL 33071</p>
+        </div>
+        <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 mr-4 lg:mr-[12rem]">
+          <h2 className="text-lg text-[#4E007A] font-semibold py-2">Email</h2>
+          <p className="text-base">info@jobsshopper.com</p>
+        </div>
+      </div>
       <div className="mt-8 md:mt-12 lg:mt-16 flex flex-col lg:flex-row items-start">
         
         <div className="lg:w-1/2 mx-auto lg:mx-0 lg:ml-[10rem] lg:mr-[12rem]">

@@ -14,7 +14,7 @@ const Sidebar = () => {
           <NavLink to="profile"> Manage Profile </NavLink>
         </li>
         <li className="border-b pb-5">
-          <NavLink to="jobs-basket ">Job Baskry</NavLink>
+          <NavLink to="jobs-basket ">Job Basket</NavLink>
         </li>
 
         <li className="border-b pb-5">Logout</li>
