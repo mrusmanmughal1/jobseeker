@@ -7,7 +7,7 @@ const Job = ({ jobs }) => {
     <div
       className={`${
         jobs && "shadow-lg  my-4   border-2 "
-      } border-b hover:bg-slate-100 `}
+      } border-b hover:bg-slate-100 bg-white `}
     >
       <div className=" flex flex-col md:flex-row gap-4 p-5  ">
         <div className=" w-full   md:w-1/3 flex flex-col gap-4">

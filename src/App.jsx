@@ -16,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import ApplicationHistory from "./Feature/Accounts/ApplicationHistory";
 import Manageprofile from "./Feature/Accounts/Manageprofile";
 import { useUserinfo } from "./Context/Userinfo";
+import Jobtitle from "./UI/Jobtitle";
 const App = () => {
   return (
     <BrowserRouter>
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/Jobtitle" element={<Jobtitle />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -1,3 +1,5 @@
+import BrowseBySectors from "../UI/BrowseBySectors";
+import CvUpload from "../UI/CvUpload";
 import FeaturedJobs from "../UI/FeaturedJobs";
 import ImageBanner from "../UI/ImageBanner";
 import Job from "../UI/Job";
@@ -6,20 +8,12 @@ import JobType from "../UI/JobType";
 
 const Jobs = () => {
   const job = [1, 1, 1, 1, 1, 1];
-  const daata = [{
-    name:"job posting ",
-    text:"hello",
-    icons:"ojo"
-  },{
-    name:"job posting ",
-    text:"hello",
-    icons:"ojo"
-  }]
   return (
     <div>
       <ImageBanner text={"JOBS"} />
-      <div className="flex lg:flex-row flex-col w-11/12 mx-auto">
-        <div className="">
+      <div className="flex lg:flex-row flex-col w-11/12 mx-auto bg-slate-50">
+        <div className="pt-4">
+          <CvUpload />
           <FeaturedJobs />
           <JobType />
         </div>
@@ -33,6 +27,7 @@ const Jobs = () => {
               <Job jobs={true} key={i} />
             ))}
           </div>
+          <BrowseBySectors />
         </div>
       </div>
     </div>
