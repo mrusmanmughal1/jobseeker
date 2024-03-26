@@ -14,14 +14,10 @@ const Sidebar = () => {
           <NavLink to="profile"> Manage Profile </NavLink>
         </li>
         <li className="border-b pb-5">
-<<<<<<< HEAD
           <NavLink to="jobs-basket">Job Baskry</NavLink>
         </li>
         <li className="border-b pb-5">
           <NavLink to="new-post">New Post</NavLink>
-=======
-          <NavLink to="jobs-basket ">Job Basket</NavLink>
->>>>>>> afc30c23ec938a37d4378bbf29b35e591a7c4880
         </li>
 
         <li className="border-b pb-5">Logout</li>

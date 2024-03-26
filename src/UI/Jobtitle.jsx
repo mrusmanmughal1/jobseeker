@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCartPlus, FaSearch, FaFacebookSquare, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { IoMailOutline } from "react-icons/io5";
 import Profile from '../assets/Profile-picture.png';

@@ -18,6 +18,7 @@ import Manageprofile from "./Feature/Accounts/Manageprofile";
 import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
 import NewPost from "./UI/NewPost";
+import Jobtitle from "./UI/Jobtitle";
 const App = () => {
   return (
     <BrowserRouter>
@@ -48,7 +49,8 @@ const App = () => {
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
-
+        <Route path="/jobtitle" element={<Jobtitle />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
