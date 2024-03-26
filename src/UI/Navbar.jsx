@@ -9,10 +9,12 @@ import Mobilenav from "./Mobilenav";
 import loginicon from "../assets/login-icon.webp";
 import { BsCart } from "react-icons/bs";
 import { Userinfo, useUserinfo } from "../Context/Userinfo";
+import Sidebar from "./Sidebar";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [show, setshow] = useState(false);
   const [showMblNav, setshowMblNav] = useState(false);
+  const [profile, showprofile] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 60 && window.screen.width > 1000);
@@ -45,6 +47,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/jobs">JOBS</NavLink>
               </li>
+              <li>
+                <NavLink to="/candidate">Candidates</NavLink>
+              </li>
             </ul>
           </nav>
         </div>
@@ -73,7 +78,7 @@ const Navbar = () => {
             </li>
             {user && (
               <>
-                <li>
+                <li onClick={() => showprofile(!profile)}>
                   <NavLink to=" ">
                     <div className="flex items-center  mx-4 font-semibold gap-2">
                       <div className=" rounded-full   ">
@@ -124,6 +129,11 @@ const Navbar = () => {
       {show && (
         <Minicart style={"p-8 right-16"} data={isSticky} set={setshow}>
           <MiniLogin />
+        </Minicart>
+      )}
+      {profile && (
+        <Minicart style={"p-8  w-[25%] right-10"}>
+          <Sidebar style={"text-sm"} />
         </Minicart>
       )}
     </section>
