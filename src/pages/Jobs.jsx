@@ -8,18 +8,6 @@ import JobType from "../UI/JobType";
 
 const Jobs = () => {
   const job = [1, 1, 1, 1, 1, 1];
-  const daata = [
-    {
-      name: "job posting ",
-      text: "hello",
-      icons: "ojo",
-    },
-    {
-      name: "job posting ",
-      text: "hello",
-      icons: "ojo",
-    },
-  ];
   return (
     <div>
       <ImageBanner text={"JOBS"} />

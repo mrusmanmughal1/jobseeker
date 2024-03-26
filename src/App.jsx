@@ -15,7 +15,6 @@ import "./styles/styles.css";
 import Dashboard from "./pages/Dashboard";
 import ApplicationHistory from "./Feature/Accounts/ApplicationHistory";
 import Manageprofile from "./Feature/Accounts/Manageprofile";
-import { useUserinfo } from "./Context/Userinfo";
 import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
 import NewPost from "./UI/NewPost";

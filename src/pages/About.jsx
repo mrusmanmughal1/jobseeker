@@ -12,6 +12,7 @@ import countericon2 from "../assets/About-Counter-Icon2.webp";
 import countericon3 from "../assets/About-Counter-Icon3.webp";
 import countericon4 from "../assets/About-Counter-Icon4.webp";
 
+
 const About = () => {
   return (
     <div>
