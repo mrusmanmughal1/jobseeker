@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useUserinfo } from "../Context/Userinfo";
 
-const MiniLogin = () => {
+const MiniLogin = ({ set }) => {
   const { dispatch } = useUserinfo();
+  const handleClick = () => {
+    set(false);
+
+    dispatch({ type: "login", payload: 2 });
+  };
   return (
     <div>
       <p className="text-purple-900 font-bold">Existing User Login Below</p>
@@ -28,7 +33,7 @@ const MiniLogin = () => {
       <div className="flex justify-between  gap-4 py-2">
         <button
           className="px-4 py-2 bg-purple-900 w-full  text-white rounded-md"
-          onClick={() => dispatch({ type: "login", payload: 2 })}
+          onClick={handleClick}
         >
           LOGIN
         </button>

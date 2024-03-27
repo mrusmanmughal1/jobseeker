@@ -12,7 +12,7 @@ const Jobs = () => {
     <div>
       <ImageBanner text={"JOBS"} />
       <div className="flex lg:flex-row flex-col w-11/12 mx-auto bg-slate-50">
-        <div className="pt-4">
+        <div className="pt-4  md:order-none order-2">
           <CvUpload />
           <FeaturedJobs />
           <JobType />

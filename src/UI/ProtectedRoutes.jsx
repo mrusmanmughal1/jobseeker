@@ -1,14 +1,17 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserinfo } from "../Context/Userinfo";
 
 const ProtectedRoutes = ({ children }) => {
-  const isAuth = 1;
   const navigate = useNavigate();
+  const { user } = useUserinfo();
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
-  //   if user is Authentic
-  if (!isAuth) {
-    navigate("/login");
-  }
-  if (isAuth) return children;
+  if (user) return children;
 };
 
 export default ProtectedRoutes;

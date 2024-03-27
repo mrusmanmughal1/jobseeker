@@ -14,7 +14,7 @@ const Manageprofile = () => {
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
           </div>
-          <div className="flex gap-10">
+          <div className="flex md:flex-row flex-col gap-10">
             <div className="">
               <label className="font-semibold ">
                 First Name
@@ -42,7 +42,7 @@ const Manageprofile = () => {
               />
             </div>
           </div>
-          <div className="flex gap-10">
+          <div className="flex md:flex-row flex-col gap-10">
             <div className="w-full">
               <label className="font-semibold ">
                 Sex

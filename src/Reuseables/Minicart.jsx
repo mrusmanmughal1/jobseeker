@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 
 const Minicart = ({ children, style, data, set }) => {
-  console.log(data);
   const top = data ? "top-20" : "top-28";
   const ref = useRef();
 
@@ -9,7 +8,6 @@ const Minicart = ({ children, style, data, set }) => {
     function handleClick(e) {
       if (ref.current && !ref.current.contains(e.target)) {
         set(false);
-        console.log("first");
       }
     }
     document.addEventListener("click", handleClick, true);
@@ -20,7 +18,7 @@ const Minicart = ({ children, style, data, set }) => {
   return (
     <div
       ref={ref}
-      className={`${style} " bg-white absolute  z-50 shadow-md rounded-sm   ${top}     "`}
+      className={`${style}  bg-white absolute z-50 shadow-md rounded-sm ${top}`}
     >
       {children}
     </div>

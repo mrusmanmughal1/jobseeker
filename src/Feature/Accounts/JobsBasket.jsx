@@ -16,10 +16,10 @@ const JobsBasket = () => {
           <>
             <div
               key={i}
-              className="flex items-center py-4  hover:bg-gray-100 border-b "
+              className="flex items-center py-4     hover:bg-gray-100 border-b "
             >
               <div className="md:w-full w-1/2 flex md:flex-row  flex-col  md:items-center justify-between px-4">
-                <div className="flex  text-sm  md:text-base flex-col gap-3">
+                <div className="flex  text-sm   md:text-base flex-col gap-3">
                   <div className="font-semibold">React Js Developer</div>
                   <div className=" flex items-center gap-2 text-xs">
                     <FaEarthAmericas /> Lahore , Pakistan

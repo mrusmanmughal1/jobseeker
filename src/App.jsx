@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/jobtitle" element={<Jobtitle />} />
-        
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

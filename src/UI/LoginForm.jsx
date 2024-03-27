@@ -1,4 +1,12 @@
+import { useUserinfo } from "../Context/Userinfo";
+
 const LoginForm = () => {
+  const { dispatch } = useUserinfo();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: "login", payload: 2 });
+  };
+
   return (
     <div className=" p-6 py-20 md:p-14 ">
       <div className="md:mx-auto   lg:w-1/2 text-center flex flex-col justify-center  gap-6">
@@ -6,7 +14,7 @@ const LoginForm = () => {
           Existing Users Login Below
         </div>
 
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <div className=" flex flex-col gap-6">
             <input
               type="text"
@@ -30,20 +38,20 @@ const LoginForm = () => {
           </div>
           <div className="flex  justify-between">
             <div className=" ">
-              <a
-                href=""
+              <button
+                type="submit"
                 className="font-bold bg-[#4e007a] text-white  px-8  w-full  rounded-md py-2"
               >
                 LOGIN
-              </a>
+              </button>
             </div>
             <div className=" ">
-              <a
+              <button
                 href=""
                 className=" text-[#4e007a] font-bold rounded-md   px-8   border-2 py-2 hover:bg-black hover:text-white  transition-all hover:ease-in "
               >
                 REGISTER
-              </a>
+              </button>
             </div>
           </div>
         </form>

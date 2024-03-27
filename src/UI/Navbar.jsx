@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { NavLink } from "react-router-dom";
 import Minicart from "../Reuseables/Minicart";
@@ -8,13 +8,16 @@ import { RxCross2 } from "react-icons/rx";
 import Mobilenav from "./Mobilenav";
 import loginicon from "../assets/login-icon.webp";
 import { BsCart } from "react-icons/bs";
-import { Userinfo, useUserinfo } from "../Context/Userinfo";
+import { useUserinfo } from "../Context/Userinfo";
 import Sidebar from "./Sidebar";
+import JobsBasket from "../Feature/Accounts/JobsBasket";
+import LoginForm from "./LoginForm";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
-  const [show, setshow] = useState(false);
+  const [showLogin, setshow] = useState(false);
   const [showMblNav, setshowMblNav] = useState(false);
   const [profile, showprofile] = useState(false);
+  const [cart, setcart] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 60 && window.screen.width > 1000);
@@ -28,6 +31,7 @@ const Navbar = () => {
   }, []);
 
   const { user } = useUserinfo();
+
   return (
     <section
       className={`${
@@ -40,7 +44,7 @@ const Navbar = () => {
         </NavLink>
         <div className="md:block hidden">
           <nav>
-            <ul className="flex gap-6 items-center   text-lg  uppercase m">
+            <ul className="flex gap-4 items-center   text-lg  uppercase m">
               <li className=" ">
                 <NavLink to="/">HOME</NavLink>
               </li>
@@ -58,11 +62,9 @@ const Navbar = () => {
           onClick={() => setshowMblNav(!showMblNav)}
         >
           {showMblNav ? (
-            <div className="bg-[#4e007a] text-white p-1 ">
-              <GiHamburgerMenu />
-            </div>
+            <RxCross2 className="bg-[#4e007a] text-white p-1 " />
           ) : (
-            <RxCross2 className="font-bold " />
+            <GiHamburgerMenu className="font-bold bg-[#4e007a] text-white p-1" />
           )}
         </div>
       </div>
@@ -78,38 +80,38 @@ const Navbar = () => {
             </li>
             {user && (
               <>
-                <li onClick={() => showprofile(!profile)}>
-                  <NavLink to=" ">
-                    <div className="flex items-center  mx-4 font-semibold gap-2">
-                      <div className=" rounded-full   ">
-                        <img
-                          className="rounded-full w-7 h-7"
-                          src="https://jobsshopper.com/wp-content/uploads/2024/03/530903-150x150.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <p>USMAN</p>
-                      <img src={loginicon} width={35} />
+                <div onClick={() => showprofile(!profile)}>
+                  <div className="flex items-center  cursor-pointer  mx-4 font-semibold gap-2">
+                    <div className=" rounded-full">
+                      <img
+                        className="rounded-full w-7 h-7"
+                        src="https://jobsshopper.com/wp-content/uploads/2024/03/530903-150x150.jpg"
+                        alt=""
+                      />
                     </div>
-                  </NavLink>
-                </li>
-                <li className="relative">
-                  <NavLink to=" ">
-                    <div className="  gap-4 flex items-center font-semibold">
-                      <p>JOB CART</p>
-                      <BsCart className="text-2xl" />
-                    </div>
-                  </NavLink>
-                  <div className="rounded-full border-2 absolute bottom-5 border-purple-950 px-2  left-28 ">
+                    <p>USMAN</p>
+                    <img src={loginicon} width={35} />
+                  </div>
+                </div>
+                <div
+                  className="relative cursor-pointer"
+                  onClick={() => setcart(!cart)}
+                >
+                  <div className="  gap-4 flex items-center font-semibold">
+                    <p>JOB CART</p>
+                    <BsCart className="text-2xl" />
+                  </div>
+
+                  <div className="rounded-full border-2 absolute bottom-6 border-purple-950 px-1   text-sm left-28 ">
                     {9}
                   </div>
-                </li>{" "}
+                </div>{" "}
               </>
             )}
             {!user && (
               <p
                 className="font-semibold flex items-center  text-sm gap-4 cursor-pointer"
-                onClick={() => setshow(!show)}
+                onClick={() => setshow(true)}
               >
                 {/* <NavLink to="/login"></NavLink> */}
                 LOGIN/REGISTRATION
@@ -126,14 +128,29 @@ const Navbar = () => {
         </Minicart>
       )}
 
-      {show && (
+      {showLogin && !user && (
         <Minicart style={"p-8 right-16"} data={isSticky} set={setshow}>
-          <MiniLogin />
+          <MiniLogin set={setshow} />
+
+          {/* <LoginForm/> */}
         </Minicart>
       )}
       {profile && (
-        <Minicart style={"p-8  w-[25%] right-10"}>
-          <Sidebar style={"text-sm"} />
+        <Minicart
+          style={"p-8  w-[25%] right-10"}
+          data={isSticky}
+          set={showprofile}
+        >
+          <Sidebar style={"text-sm"} baseurl="/dashboard/" set={showprofile} />
+        </Minicart>
+      )}
+      {cart && (
+        <Minicart
+          style={"p-8  w-[25%] overflow-auto right-10"}
+          data={isSticky}
+          set={setcart}
+        >
+          <JobsBasket />
         </Minicart>
       )}
     </section>
