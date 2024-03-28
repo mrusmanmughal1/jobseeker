@@ -9,10 +9,10 @@ import JobType from "../UI/JobType";
 const Jobs = () => {
   const job = [1, 1, 1, 1, 1, 1];
   return (
-    <div>
+    <div className="bg-slate-50">
       <ImageBanner text={"JOBS"} />
-      <div className="flex lg:flex-row flex-col w-11/12 mx-auto bg-slate-50">
-        <div className="pt-4  md:order-none order-2">
+      <div className="flex lg:flex-row flex-col w-11/12 mx-auto ">
+        <div className="pt-4  lg:order-none order-2">
           <CvUpload />
           <FeaturedJobs />
           <JobType />
@@ -22,7 +22,7 @@ const Jobs = () => {
           <div className="   md:w-3/4 mx-auto ">
             <JobSearchbar />
           </div>
-          <div className=" md:px-8   mt-8">
+          <div className=" lg:px-8   mt-8">
             {job.map((val, i) => (
               <Job jobs={true} key={i} />
             ))}

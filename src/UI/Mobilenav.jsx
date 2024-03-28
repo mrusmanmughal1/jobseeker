@@ -17,10 +17,14 @@ const Mobilenav = () => {
         <li className="  border-b pb-2">
           <NavLink to="/contact-us">Contact US</NavLink>
         </li>
-        <li className="font-bold flex items-center gap-4 cursor-pointer">
-          {/* <NavLink to="/login"></NavLink> */}
-          LOGIN/REGISTRATION
-          <GrLogin />
+        <li className="font-bold ">
+          <NavLink
+            to="/login"
+            className="flex items-center gap-4 cursor-pointer"
+          >
+            LOGIN/REGISTRATION
+            <GrLogin />
+          </NavLink>
         </li>
       </ul>
     </div>

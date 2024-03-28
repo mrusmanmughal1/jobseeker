@@ -6,7 +6,7 @@ const SearchJobsMain = () => {
       <p className="text-2xl font-medium   text-center">
         Join us & Explore Thousands of Jobs
       </p>
-      <p className="text-sm  text-center  ">
+      <p className="text-sm  text-center hidden sm:block  ">
         Select your industry and/or type your keyword, then click search to find
         your perfect job
       </p>

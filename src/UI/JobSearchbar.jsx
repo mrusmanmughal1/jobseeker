@@ -29,7 +29,7 @@ const JobSearchbar = () => {
           <input type="checkbox" className="text-black" name="" id="" />
           <p className="text-sm text-white">Remote Only</p>
         </div>
-        <button className="px-10 text-sm rounded-md  font-bold text-white py-6 bg-[#4e007a]">
+        <button className="px-10 text-sm rounded-md  font-bold text-white py-[22px] bg-[#4e007a]">
           Search
         </button>
       </div>

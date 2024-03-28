@@ -18,7 +18,7 @@ const BrowseBySectors = () => {
     "yahooo",
   ];
   return (
-    <div className="bg-white p-8  mx-8 shadow-md flex flex-col gap-4">
+    <div className="bg-white p-8 mx-0  md:mx-8 shadow-md flex flex-col gap-4">
       <p className="text-2xl font-semibold mb-2">Browse More Jobs by Sector</p>
       <div className=" flex gap-4 flex-wrap  ">
         {arr.map((val, i) => (
