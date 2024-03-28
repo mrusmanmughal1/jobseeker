@@ -48,7 +48,7 @@ const LoginForm = () => {
             <div className=" ">
               <button
                 href=""
-                className=" text-[#4e007a] font-bold rounded-md   px-8   border-2 py-2 hover:bg-black hover:text-white  transition-all hover:ease-in "
+                className=" text-[#4e007a] font-bold rounded-md   px-8   border-btn-primary border-2 py-2 hover:bg-black hover:text-white  transition-all hover:ease-in "
               >
                 REGISTER
               </button>

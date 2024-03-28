@@ -10,7 +10,6 @@ const Annoucmentbar = () => {
           <FaFacebookF />
           <FaTwitter />
           <FaLinkedinIn />
-          <FaFacebookF />
         </div>
       </div>
     </div>

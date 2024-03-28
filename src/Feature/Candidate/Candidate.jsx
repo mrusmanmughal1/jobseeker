@@ -7,14 +7,14 @@ import SearchJobsMain from "../../UI/SearchJobsMain";
 const arr = [1, 1, 1, 1, 1, 1, 1];
 const Candidate = () => {
   return (
-    <div>
+    <div className=" bg-purple-50">
       <ImageBanner text="Candiatte" />
-      <div className="flex gap-20 mt-16 w-11/12 mx-auto">
-        <div className="w-1/4">
+      <div className="flex flex-col  lg:flex-row gap-20 mt-16 w-11/12 mx-auto  ">
+        <div className="w-full lg:w-1/4 order-2 lg:order-none ">
           <SearchFilter />
           <FeaturedJobs />
         </div>
-        <div className=" w-3/4">
+        <div className=" w-full lg:w-3/4">
           <JobSearchbar />
           {arr.map((val, i) => {
             return (

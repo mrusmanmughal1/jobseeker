@@ -2,7 +2,7 @@ import React from "react";
 
 const CandidateProfile = () => {
   return (
-    <div className="shadow-md  p-10 w-full">
+    <div className="shadow-md  bg-white p-10 w-full">
       <div className="border p-8">
         <div className="flex gap-4 items-center">
           <img

@@ -33,7 +33,7 @@ const Job = ({ jobs }) => {
             <FaCartPlus />
             ADD
           </button>
-          <button className=" text-xs     xl:py-3 px-6 rounded-md py-3 border-2 border-purple-900  hover:text-white hover:bg-purple-900">
+          <button className=" text-xs    lg:px-2  xl:px-6   xl:py-3 px-6 rounded-md py-3 border-2 border-purple-900  hover:text-white hover:bg-purple-900">
             VIEW MORE
           </button>
         </div>

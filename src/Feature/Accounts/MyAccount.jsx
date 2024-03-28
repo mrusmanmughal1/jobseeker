@@ -7,8 +7,8 @@ const MyAccount = () => {
         </p>
         <a href=""> Edit</a>
       </div>
-      <div className="flex gap-24 py-8">
-        <div className="">
+      <div className="flex gap-10 sm:gap-24 py-8">
+        <div className="w-full">
           <ul className="flex  font-semibold flex-col gap-8">
             <li>Email</li>
             <li>First Name</li>
@@ -22,7 +22,7 @@ const MyAccount = () => {
             <li>Minimum Salary</li>
           </ul>
         </div>
-        <div className="">
+        <div className="w-full">
           <ul className="flex flex-col gap-8">
             <li>misterusman3@gmail.com</li>
             <li>muhammad</li>

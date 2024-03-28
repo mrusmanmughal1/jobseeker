@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Minicart from "../Reuseables/Minicart";
 import MiniLogin from "./MiniLogin";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -12,6 +12,7 @@ import { useUserinfo } from "../Context/Userinfo";
 import Sidebar from "./Sidebar";
 import JobsBasket from "../Feature/Accounts/JobsBasket";
 import LoginForm from "./LoginForm";
+import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [showLogin, setshow] = useState(false);
@@ -38,11 +39,11 @@ const Navbar = () => {
         isSticky && "fixed top-0 bottom-0 shadow-sm  z-10 bg-white h-20"
       } md:px-16 flex justify-between   w-full  items-center shadow  `}
     >
-      <div className="flex  px-6 md:px-0  w-full md:w-auto   relative justify-between items-center  gap-10">
+      <div className="flex  px-6 md:px-0  w-full lg:w-auto   relative justify-between items-center  gap-10">
         <NavLink to="/">
           <Logo width={210} isSticky={isSticky} />
         </NavLink>
-        <div className="md:block hidden">
+        <div className="lg:block hidden">
           <nav>
             <ul className="flex gap-4 items-center   text-lg  uppercase m">
               <li className=" ">
@@ -57,18 +58,26 @@ const Navbar = () => {
             </ul>
           </nav>
         </div>
-        <div
-          className="md:hidden text-2xl"
-          onClick={() => setshowMblNav(!showMblNav)}
-        >
+        <div className="lg:hidden text-2xl">
           {showMblNav ? (
-            <RxCross2 className="bg-[#4e007a] text-white p-1 " />
+            <RxCross2
+              className="bg-[#4e007a] text-white p-1 "
+              onClick={() => setshowMblNav(!showMblNav)}
+            />
           ) : (
-            <GiHamburgerMenu className="font-bold bg-[#4e007a] text-white p-1" />
+            <div className="flex gap-2">
+              <Link to="/login">
+                <FaUser className="font-bold bg-[#4e007a] text-white p-1" />
+              </Link>
+              <GiHamburgerMenu
+                className="font-bold bg-[#4e007a] text-white p-1"
+                onClick={() => setshowMblNav(!showMblNav)}
+              />
+            </div>
           )}
         </div>
       </div>
-      <div className="md:block hidden">
+      <div className="lg:block hidden">
         <nav>
           {" "}
           <ul className="flex gap-2    uppercase text-lg  items-center">
@@ -123,7 +132,7 @@ const Navbar = () => {
       </div>
 
       {showMblNav && (
-        <Minicart style={"w-full left-0  md:hidden block shadow-lg p-6"}>
+        <Minicart style={"w-full left-0  lg:hidden block shadow-lg p-6"}>
           <Mobilenav />
         </Minicart>
       )}
