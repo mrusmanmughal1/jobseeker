@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import ImageBanner from "../UI/ImageBanner";
 import aboutMap from "../assets/Map.webp";
 import icon6 from "../assets/About-Icon-6.png";
@@ -11,9 +11,14 @@ import countericon1 from "../assets/About-Counter-Icon1.webp";
 import countericon2 from "../assets/About-Counter-Icon2.webp";
 import countericon3 from "../assets/About-Counter-Icon3.webp";
 import countericon4 from "../assets/About-Counter-Icon4.webp";
+import CountUp from "react-countup";
+import ScrollTrigger from 'react-scroll-trigger';
+
 
 const About = () => {
+const [counterOn, setCounterOn] = useState(false);
   return (
+
     <div>
       <ImageBanner text={"About Us"} />
       <div className="w-full md:w-11/12 mx-auto flex flex-col md:flex-row items-center md:justify-between mt-8 md:mt-24">
@@ -154,7 +159,11 @@ const About = () => {
               />
             </div>
             <div className="ml-4">
-              <h2 className="text-4xl font-bold text-[#4E007A]">1875</h2>
+              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
+              <h2 className="text-4xl font-bold text-[#4E007A]">
+                {counterOn && <CountUp start={0} end={1875} duration={2.5}/>}
+                </h2>
+                </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Candidates</p>
             </div>
           </div>
@@ -168,7 +177,13 @@ const About = () => {
               />
             </div>
             <div className="ml-4">
-              <h2 className="text-4xl font-bold text-[#4E007A]">2500</h2>
+              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
+
+             
+              <h2 className="text-4xl font-bold text-[#4E007A]">
+              {counterOn && <CountUp start={0} end={2500} duration={2.5}/>}
+              </h2>
+              </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Applications</p>
             </div>
           </div>
@@ -182,7 +197,11 @@ const About = () => {
               />
             </div>
             <div className="ml-4">
-              <h2 className="text-4xl font-bold text-[#4E007A]">1500</h2>
+              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
+              <h2 className="text-4xl font-bold text-[#4E007A]">
+              {counterOn && <CountUp start={0} end={1500} duration={2.5}/>}
+              </h2>
+              </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Job Posted</p>
             </div>
           </div>
@@ -196,7 +215,11 @@ const About = () => {
               />
             </div>
             <div className="ml-4">
-              <h2 className="text-4xl font-bold text-[#4E007A]">12500</h2>
+              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
+              <h2 className="text-4xl font-bold text-[#4E007A]">
+              {counterOn && <CountUp start={0} end={12500} duration={2.5}/>}
+              </h2>
+              </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Employed</p>
             </div>
           </div>
