@@ -1,25 +1,43 @@
+import { useEffect, useRef } from "react";
 import { GrLogin } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 
-const Mobilenav = () => {
+const Mobilenav = ({ setMblNav }) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setMblNav(false);
+      }
+    }
+    document.addEventListener("click", handleClick, true);
+    return () => {
+      document.removeEventListener("click", handleClick, true);
+    };
+  }, []);
+  const handleclick = () => {
+    setMblNav(false);
+  };
   return (
-    <div>
-      <ul className="flex  w-full  flex-col gap-4   font-semibold uppercase m">
-        <li className="  border-b pb-2">
+    <div ref={ref}>
+      <ul className="flex  w-full  flex-col gap-4     mblnav  font-semibold uppercase m">
+        <li onClick={handleclick} className="    border-b pb-2">
           <NavLink to="/">HOME</NavLink>
         </li>
-        <li className="  border-b pb-2">
+        <li onClick={handleclick} className="  border-b pb-2">
           <NavLink to="/jobs">JOBS</NavLink>
         </li>
-        <li className="  border-b pb-2">
+        <li onClick={handleclick} className="  border-b pb-2">
           <NavLink to="/about-us">ABOUT US</NavLink>
         </li>
-        <li className="  border-b pb-2">
+        <li onClick={handleclick} className="  border-b pb-2">
           <NavLink to="/contact-us">Contact US</NavLink>
         </li>
-        <li className="font-bold ">
+        <li onClick={handleclick} className="font-bold ">
           <NavLink
             to="/login"
+            onClick={handleclick}
             className="flex items-center gap-4 cursor-pointer"
           >
             LOGIN/REGISTRATION

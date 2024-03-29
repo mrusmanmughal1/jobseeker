@@ -41,13 +41,13 @@ const NewPost = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-2">
-            <div className="w-full">
+            <div className="w-[32%]">
               <div className="flex   flex-col gap-3">
                 <label htmlFor="">Job Address</label>
                 <input type="text" className="border p-2 bg-gray-300" />
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-[32%]">
               <div className="flex   flex-col gap-3">
                 <label htmlFor="">City</label>
                 <input
@@ -57,7 +57,7 @@ const NewPost = () => {
                 />
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-[32%]">
               <div className="flex  flex-col gap-3">
                 <label htmlFor="">City</label>
                 <input

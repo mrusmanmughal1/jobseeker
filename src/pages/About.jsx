@@ -12,13 +12,11 @@ import countericon2 from "../assets/About-Counter-Icon2.webp";
 import countericon3 from "../assets/About-Counter-Icon3.webp";
 import countericon4 from "../assets/About-Counter-Icon4.webp";
 import CountUp from "react-countup";
-import ScrollTrigger from 'react-scroll-trigger';
-
+import ScrollTrigger from "react-scroll-trigger";
 
 const About = () => {
-const [counterOn, setCounterOn] = useState(false);
+  const [counterOn, setCounterOn] = useState(false);
   return (
-
     <div>
       <ImageBanner text={"About Us"} />
       <div className="w-full md:w-11/12 mx-auto flex flex-col md:flex-row items-center md:justify-between mt-8 md:mt-24">
@@ -148,8 +146,8 @@ const [counterOn, setCounterOn] = useState(false);
         </div>
       </div>
 
-      <div className="bg-gray-200 mt-8 md:mt-20 mb-16">
-        <div className="bg-gray-200 min-h-[30vh] flex flex-wrap items-center justify-center w-11/12 mx-auto md:p-8">
+      <div className="bg-gray-200 mt-8  py-14 sm:py-0 md:mt-20 mb-16">
+        <div className="bg-gray-200 min-h-[30vh] flex flex-wrap gap-10 sm:gap-0 items-center justify-center w-11/12 mx-auto md:p-8">
           <div className="flex w-full items-center md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
             <div>
               <img
@@ -159,11 +157,14 @@ const [counterOn, setCounterOn] = useState(false);
               />
             </div>
             <div className="ml-4">
-              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
-              <h2 className="text-4xl font-bold text-[#4E007A]">
-                {counterOn && <CountUp start={0} end={1875} duration={2.5}/>}
+              <ScrollTrigger
+                onEnter={() => setCounterOn(true)}
+                onExit={() => setCounterOn(false)}
+              >
+                <h2 className="text-4xl font-bold text-[#4E007A]">
+                  {counterOn && <CountUp start={0} end={1875} duration={2.5} />}
                 </h2>
-                </ScrollTrigger>
+              </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Candidates</p>
             </div>
           </div>
@@ -177,12 +178,13 @@ const [counterOn, setCounterOn] = useState(false);
               />
             </div>
             <div className="ml-4">
-              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
-
-             
-              <h2 className="text-4xl font-bold text-[#4E007A]">
-              {counterOn && <CountUp start={0} end={2500} duration={2.5}/>}
-              </h2>
+              <ScrollTrigger
+                onEnter={() => setCounterOn(true)}
+                onExit={() => setCounterOn(false)}
+              >
+                <h2 className="text-4xl font-bold text-[#4E007A]">
+                  {counterOn && <CountUp start={0} end={2500} duration={2.5} />}
+                </h2>
               </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Applications</p>
             </div>
@@ -197,10 +199,13 @@ const [counterOn, setCounterOn] = useState(false);
               />
             </div>
             <div className="ml-4">
-              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
-              <h2 className="text-4xl font-bold text-[#4E007A]">
-              {counterOn && <CountUp start={0} end={1500} duration={2.5}/>}
-              </h2>
+              <ScrollTrigger
+                onEnter={() => setCounterOn(true)}
+                onExit={() => setCounterOn(false)}
+              >
+                <h2 className="text-4xl font-bold text-[#4E007A]">
+                  {counterOn && <CountUp start={0} end={1500} duration={2.5} />}
+                </h2>
               </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Job Posted</p>
             </div>
@@ -215,10 +220,15 @@ const [counterOn, setCounterOn] = useState(false);
               />
             </div>
             <div className="ml-4">
-              <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
-              <h2 className="text-4xl font-bold text-[#4E007A]">
-              {counterOn && <CountUp start={0} end={12500} duration={2.5}/>}
-              </h2>
+              <ScrollTrigger
+                onEnter={() => setCounterOn(true)}
+                onExit={() => setCounterOn(false)}
+              >
+                <h2 className="text-4xl font-bold text-[#4E007A]">
+                  {counterOn && (
+                    <CountUp start={0} end={12500} duration={2.5} />
+                  )}
+                </h2>
               </ScrollTrigger>
               <p className="text-gray-700 font-semibold">Employed</p>
             </div>

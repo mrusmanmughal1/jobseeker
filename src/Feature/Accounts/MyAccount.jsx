@@ -1,6 +1,8 @@
+import ImageBanner from "../../UI/ImageBanner";
+
 const MyAccount = () => {
   return (
-    <div className="   w-full    ">
+    <div className="   w-full  md:w-3/4   ">
       <div className="  flex justify-between   ">
         <p className="text-3xl font-semibold  tracking-wider">
           ACCOUNT INFORMATION

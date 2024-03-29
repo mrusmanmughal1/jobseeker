@@ -26,8 +26,10 @@ const JobSearchbar = () => {
       </div>
       <div className=" flex flex-col sm:gap-0   gap-4">
         <div className="flex gap-1  items-center mt-2 sm:mt-0 ">
-          <input type="checkbox" className="text-black" name="" id="" />
-          <p className="text-sm text-white">Remote Only</p>
+          <input type="checkbox" className="text-black" name="" id="remote" />
+          <label htmlFor="remote" className="text-sm text-white">
+            Remote Only
+          </label>
         </div>
         <button className="px-10 text-sm rounded-md  font-bold text-white py-[22px] bg-[#4e007a]">
           Search

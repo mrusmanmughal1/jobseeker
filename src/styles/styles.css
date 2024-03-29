@@ -14,15 +14,11 @@ a {
   width: 100%;
 }
 .main-banner {
-  background-image: url("../assets/jobsshopper_banner.webp");
-  background-attachment: fixed;
-  background-position-y: 6rem;
   background-repeat: no-repeat;
   height: 100vh;
   width: 100%;
-  background-size: cover;
 }
-.usman::after {
+.infobar::after {
   content: "";
   z-index: 2;
   height: 12px;
@@ -79,29 +75,6 @@ nav li:hover:after {
   color: #6f00ad;
 }
 
-@media (max-width: 767px) {
-  .main-banner {
-    background-image: url("../assets/jobsshopper_banner.webp");
-    background-attachment: fixed;
-    background-position-y: 0%;
-    background-repeat: no-repeat;
-
-    height: 100vh;
-    width: 100%;
-  }
-  .usman::after {
-    content: "";
-    z-index: 2;
-    height: 0px;
-    width: 85%;
-    background-color: #6f00ad;
-    content: "";
-    position: absolute;
-    top: 30%;
-    left: 80%;
-  }
-}
-
 /* Accordian  */
 .accordion {
   background-color: #eee;
@@ -126,4 +99,24 @@ nav li:hover:after {
   display: none;
   background-color: white;
   overflow: hidden;
+}
+
+/* Responsive Design  */
+
+@media (max-width: 767px) {
+  .main-banner {
+    background-size: auto;
+    height: 70vh;
+  }
+  .infobar::after {
+    content: "";
+    z-index: 2;
+    height: 0px;
+    width: 85%;
+    background-color: #6f00ad;
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 80%;
+  }
 }

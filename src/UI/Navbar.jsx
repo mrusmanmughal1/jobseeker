@@ -66,13 +66,20 @@ const Navbar = () => {
             />
           ) : (
             <div className="flex gap-2">
-              <Link to="/login">
-                <FaUser className="font-bold bg-[#4e007a] text-white p-1" />
-              </Link>
               <GiHamburgerMenu
                 className="font-bold bg-[#4e007a] text-white p-1"
                 onClick={() => setshowMblNav(!showMblNav)}
               />
+              {!user ? (
+                <Link to="/login">
+                  <FaUser className="font-bold bg-[#4e007a] text-white p-1" />
+                </Link>
+              ) : (
+                <FaUser
+                  className="font-bold bg-[#4e007a] text-white p-1"
+                  onClick={() => showprofile(!profile)}
+                />
+              )}
             </div>
           )}
         </div>
@@ -133,7 +140,7 @@ const Navbar = () => {
 
       {showMblNav && (
         <Minicart style={"w-full left-0  lg:hidden block shadow-lg p-6"}>
-          <Mobilenav />
+          <Mobilenav setMblNav={setshowMblNav} />
         </Minicart>
       )}
 
@@ -146,7 +153,7 @@ const Navbar = () => {
       )}
       {profile && (
         <Minicart
-          style={"p-8  w-[25%] right-10"}
+          style={"p-8  w-[75%] right-0  sm:w-[25%] sm:right-10"}
           data={isSticky}
           set={showprofile}
         >
