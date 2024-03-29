@@ -1,4 +1,3 @@
-// import bgimg from "../assets";
 import JobSearchbar from "./JobSearchbar";
 import { Parallax } from "react-parallax";
 import bgimp from "../assets/jobsshopper_banner.webp";
