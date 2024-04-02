@@ -2,6 +2,7 @@ import { BiWorld } from "react-icons/bi";
 import { CiClock2 } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { GiLetterBomb } from "react-icons/gi";
+import { NavLink } from "react-router-dom";
 const Job = ({ jobs }) => {
   return (
     <div
@@ -33,9 +34,11 @@ const Job = ({ jobs }) => {
             <FaCartPlus />
             ADD
           </button>
-          <button className=" text-xs    lg:px-2  xl:px-6   xl:py-3 px-6 rounded-md py-3 border-2 border-purple-900  hover:text-white hover:bg-purple-900">
-            VIEW MORE
-          </button>
+          <NavLink to="/job-Details">
+            <button className=" text-xs    lg:px-2  xl:px-6   xl:py-3 px-6 rounded-md py-3 border-2 border-purple-900  hover:text-white hover:bg-purple-900">
+              VIEW MORE
+            </button>
+          </NavLink>
         </div>
       </div>
     </div>

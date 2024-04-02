@@ -39,7 +39,7 @@ const Navbar = () => {
         isSticky && "fixed top-0 bottom-0 shadow-sm  z-10 bg-white h-20"
       } md:px-16 flex justify-between   w-full  items-center shadow  `}
     >
-      <div className="flex  px-6 md:px-0  w-full lg:w-auto   relative justify-between items-center  gap-10">
+      <div className="flex  px-4 md:px-0  w-full lg:w-auto   relative justify-between items-center  gap-10">
         <NavLink to="/">
           <Logo width={210} isSticky={isSticky} />
         </NavLink>
@@ -157,7 +157,12 @@ const Navbar = () => {
           data={isSticky}
           set={showprofile}
         >
-          <Sidebar style={"text-sm"} baseurl="/dashboard/" set={showprofile} />
+          <Sidebar
+            style={"text-sm"}
+            baseurl="/dashboard/"
+            set={showprofile}
+            gap="gap-3 text-sm"
+          />
         </Minicart>
       )}
       {cart && (

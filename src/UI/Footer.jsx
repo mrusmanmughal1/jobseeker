@@ -7,7 +7,7 @@ import { FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className=" border-t">
-      <div className="flex md:flex-row flex-wrap    gap-4    flex-col px-6   sm:px-24   py-14">
+      <div className="flex md:flex-row flex-wrap    gap-12  md:gap-4    flex-col px-6   sm:px-24   py-20">
         <div className="flex flex-col flex-1 items-center  ">
           <p className="font-bold text-[#4e007a] pb-4">JOBS</p>
           <ul className="flex flex-col gap-2">

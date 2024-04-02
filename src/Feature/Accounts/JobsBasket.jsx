@@ -5,7 +5,7 @@ const JobsBasket = () => {
   const data = [1, 2];
 
   return (
-    <div className="rounded-md border w-11/12 mx-auto ">
+    <div className="rounded-md border w-11/12 max-w-full mx-auto ">
       <div className=" font-semibold  text-sm md:text-sm   bg-gray-200 flex p-3 px-5 ">
         <div className=" w-1/2 lg:w-full">Job Title </div>
         <div className="w-1/3 md:w-1/4 md:text-center"> Date Added </div>
@@ -18,7 +18,7 @@ const JobsBasket = () => {
               key={i}
               className="flex items-center py-4   md:text-xs   hover:bg-gray-100 border-b "
             >
-              <div className="lg:w-full w-2/5 flex lg:flex-row  flex-col  lg:items-center justify-between ps-4">
+              <div className="lg:max-w-full w-2/5 flex lg:flex-row  flex-col  lg:items-center justify-between ps-4">
                 <div className="flex  text-sm   lg:text-base flex-col gap-3">
                   <div className="font-semibold">React Js Developer</div>
                   <div className=" flex items-center gap-2 text-xs">

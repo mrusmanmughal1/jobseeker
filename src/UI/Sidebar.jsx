@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useUserinfo } from "../Context/Userinfo";
 
-const Sidebar = ({ baseurl, set, setSidebarStatus }) => {
+const Sidebar = ({ baseurl, set, setSidebarStatus, gap = "gap-5" }) => {
   const { dispatch } = useUserinfo();
   const handleClick = () => {
     set(false);
@@ -9,8 +9,11 @@ const Sidebar = ({ baseurl, set, setSidebarStatus }) => {
   };
   return (
     <div className="   mx-auto  w-full  ">
-      <ul className="flex flex-col gap-8 ">
-        <li className="border-b w- border-t py-5" onClick={() => set(false)}>
+      <ul className={`flex flex-col   ${gap}`}>
+        <li
+          className="border-b w- border-t pb-5 pt-5"
+          onClick={() => set(false)}
+        >
           <NavLink to={`${baseurl}myaccount`}> My Account</NavLink>
         </li>
         <li className="border-b pb-5 " onClick={() => set(false)}>

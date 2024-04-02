@@ -3,8 +3,9 @@ import { createContext, useContext, useReducer } from "react";
 const User = createContext();
 
 const initialState = {
-  user: "",
+  auth: "",
   key: "",
+  role: "admin",
 };
 
 const reducer = (state, action) => {

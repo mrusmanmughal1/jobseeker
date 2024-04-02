@@ -4,14 +4,14 @@ import { useUserinfo } from "../Context/Userinfo";
 
 const ProtectedRoutes = ({ children }) => {
   const navigate = useNavigate();
-  const { user } = useUserinfo();
+  const { auth } = useUserinfo();
   useEffect(() => {
-    if (!user) {
+    if (!auth) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [auth, navigate]);
 
-  if (user) return children;
+  if (auth) return children;
 };
 
 export default ProtectedRoutes;
