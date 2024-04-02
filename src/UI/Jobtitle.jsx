@@ -9,7 +9,7 @@ function Jobtitle() {
         <div className="flex flex-col lg:flex-row justify-between text-white">
           <div className="mb-8 lg:mb-0 py-6 border-b w-full">
             <h1 className="text-xl font-bold">Job Title</h1>
-            <h2 className="text-4xl">Ui designer</h2>
+            <h2 className="text-4xl">UI designer</h2>
           </div>
           <div className="flex flex-col items-center w-full lg:items-end uppercase mt-4 lg:mt-0">
             <p>Share this Job</p>
