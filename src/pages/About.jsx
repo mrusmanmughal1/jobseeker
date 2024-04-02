@@ -148,7 +148,7 @@ const About = () => {
 
       <div className="bg-gray-200 mt-8  py-14 sm:py-0 md:mt-20 mb-16">
         <div className="bg-gray-200 min-h-[30vh] flex flex-wrap gap-10 sm:gap-0 items-center justify-center w-11/12 mx-auto md:p-8">
-          <div className="flex w-full items-center md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
+          <div className="flex w-full items-center justify-center md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
             <div>
               <img
                 src={countericon3}
@@ -169,7 +169,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="flex w-full items-center md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
+          <div className="flex w-full items-center justify-center md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
             <div>
               <img
                 src={countericon2}
@@ -190,7 +190,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="flex w-full  items-center md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
+          <div className="flex w-full  items-center justify-center md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
             <div>
               <img
                 src={countericon1}
@@ -211,7 +211,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="flex w-full items-center  md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
+          <div className="flex w-full items-center justify-center  md:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
             <div>
               <img
                 src={countericon4}
