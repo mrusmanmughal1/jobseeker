@@ -30,7 +30,7 @@ const Job = ({ jobs }) => {
           </div>
         </div>
         <div className="md:w-1/3  w-full flex  justify-end gap-4  md:flex-row  md: items-center text-purple-900">
-          <button className="flex text-xs  flex-col items-center px-6 rounded-md py-1 border-2 border-purple-900 hover:text-white hover:bg-purple-900">
+          <button className="flex text-xs   flex-col items-center px-6 rounded-md py-[0.30rem] border-2 border-purple-900 hover:text-white hover:bg-purple-900">
             <FaCartPlus />
             ADD
           </button>

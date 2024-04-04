@@ -8,7 +8,7 @@ const Home = () => {
     <section id="main-section">
       <SearchJobsMain />
       <MainInfoBar />
-      <div className="flex flex-col   lg:flex-row  w-11/12 mx-auto py-4">
+      <div className="flex flex-col   lg:flex-row md:gap-10 gap-0    w-11/12 mx-auto py-4">
         <RecentJObs />
         <div className="md:w-[40%] w-11/12  mx-auto">
           <FeaturedJobs />

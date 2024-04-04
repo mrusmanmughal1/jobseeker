@@ -11,7 +11,7 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
-      return { ...state, user: action.payload };
+      return { ...state, auth: action.payload };
     case "logout":
       return { user: null };
     default:
@@ -20,8 +20,10 @@ const reducer = (state, action) => {
 };
 
 const Userinfo = ({ children }) => {
-  const [{ user, key }, dispatch] = useReducer(reducer, initialState);
-  return <User.Provider value={{ dispatch, user }}>{children}</User.Provider>;
+  const [{ auth, key, role }, dispatch] = useReducer(reducer, initialState);
+  return (
+    <User.Provider value={{ dispatch, auth, role }}>{children}</User.Provider>
+  );
 };
 const useUserinfo = () => {
   const Userdata = useContext(User);

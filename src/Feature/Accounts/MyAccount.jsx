@@ -1,6 +1,8 @@
-import ImageBanner from "../../UI/ImageBanner";
+import { useData } from "./useData";
 
 const MyAccount = () => {
+  const { data } = useData();
+  console.log(data);
   return (
     <div className="   w-full  md:w-3/4   ">
       <div className="  flex justify-between   ">
@@ -44,7 +46,7 @@ const MyAccount = () => {
           APPLICATION HISTORY
         </p>
         <p className="text-sm">
-          You have applied for 3 jobs in the past 30 days.
+          You have applied for 3 jobs in the past 30 days. &nbsp;
           <a href="" className="text-btn-primary">
             View application
           </a>

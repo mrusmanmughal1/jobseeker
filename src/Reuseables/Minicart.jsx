@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 const Minicart = ({ children, style, data, set }) => {
-  const top = data ? "top-20" : "top-32";
+  const top = data ? "top-22" : "md:top-[7.5rem] top-24";
   const ref = useRef();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Minicart = ({ children, style, data, set }) => {
   return (
     <div
       ref={ref}
-      className={`${style}  bg-white absolute z-50 shadow-md rounded-sm  transition ease-linear duration-300 ${top}`}
+      className={`${style}  bg-white    absolute z-50 shadow-md rounded-sm  transition ease-linear duration-300 ${top}`}
     >
       {children}
     </div>

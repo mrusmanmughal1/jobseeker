@@ -22,7 +22,7 @@ const Jobs = () => {
           <div className="   md:w-3/4 mx-auto ">
             <JobSearchbar />
           </div>
-          <div className=" lg:px-8   mt-8">
+          <div className=" lg:ps-8   mt-8">
             {job.map((val, i) => (
               <Job jobs={true} key={i} />
             ))}
