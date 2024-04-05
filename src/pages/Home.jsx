@@ -5,12 +5,12 @@ import SearchJobsMain from "../UI/SearchJobsMain";
 
 const Home = () => {
   return (
-    <section id="nav">
+    <section id="main-section">
       <SearchJobsMain />
       <MainInfoBar />
-      <div className="flex flex-col w-full  lg:flex-row lg:w-11/12 mx-auto py-4">
+      <div className="flex flex-col   lg:flex-row md:gap-10 gap-0    w-11/12 mx-auto py-4">
         <RecentJObs />
-        <div className="md:w-[50%] w-11/12  mx-auto">
+        <div className="md:w-[40%] w-11/12  mx-auto">
           <FeaturedJobs />
         </div>
       </div>

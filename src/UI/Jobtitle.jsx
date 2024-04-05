@@ -1,10 +1,17 @@
- import { FaCartPlus, FaSearch, FaFacebookSquare, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaCartPlus,
+  FaSearch,
+  FaFacebookSquare,
+  FaTwitter,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import { IoMailOutline } from "react-icons/io5";
-import Profile from '../assets/Profile-picture.png';
+import Profile from "../assets/Profile-picture.png";
+import SimilarJobs from "./SimilarJobs";
 
 function Jobtitle() {
   return (
-    <div className="mb-32">
+    <div className=" ">
       <div className="bg-btn-primary py-8 px-4 md:px-8 lg:py-32">
         <div className="flex flex-col lg:flex-row justify-between text-white">
           <div className="mb-8 lg:mb-0 py-6 border-b w-full">
@@ -43,28 +50,37 @@ function Jobtitle() {
         </div>
       </div>
       <div className="py-8 px-4 md:px-6">
-        <h3><span className="font-semibold">Required Skills</span>: Design</h3>
+        <h3>
+          <span className="font-semibold">Required Skills</span>: Design
+        </h3>
       </div>
-      <div className="border-t pt-8 pb-4"></div>
-      <div className="flex flex-col lg:flex-row px-6 py-12">
-        <img src={Profile} alt="/" className="w-full lg:w-auto" />
-        <div className="lg:w-3/4 px-8 mt-4 lg:mt-0 flex flex-col justify-center">
-          <div className="font-semibold text-2xl mb-4">Muhammad Ahmad Butt</div>
-          <div className="flex flex-col gap-2">
-            <p>1 Active Position</p>
-            <p>View More Jobs</p>
+      <div className="border-t pt-8 pb-4 bg-purple-50"></div>
+      <div className="flex bg-purple-50  pb-20 flex-col md:flex-row gap-10">
+        <div className=" flex-1">
+          <div className="flex flex-col lg:flex-row px-6 py-12">
+            <img src={Profile} alt="/" className="w-full lg:w-auto" />
+            <div className="lg:w-3/4 px-8 mt-4 lg:mt-0 flex flex-col justify-center">
+              <div className="font-semibold text-2xl mb-4">
+                Muhammad Ahmad Butt
+              </div>
+              <div className="flex flex-col gap-2">
+                <p>1 Active Position</p>
+                <p>View More Jobs</p>
+              </div>
+            </div>
+          </div>
+          <div className="border-t pt-8 pb-4"></div>
+          <div className="flex flex-col gap-4">
+            <div className="px-8 text-3xl font-semibold text-gray-900">
+              <h4>Job Description</h4>
+            </div>
+            <div className="px-8">
+              <p>Figma, Adobe Photoshop, Canvas</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="border-t pt-8 pb-4"></div>
-      <div className="flex flex-col gap-4">
-        <div className="px-8 text-3xl font-semibold text-gray-900">
-          <h4>
-            Job Description
-          </h4>
-        </div>
-        <div className="px-8">
-          <p>Figma, Adobe Photoshop, Canvas</p>
+        <div className="flex-1">
+          <SimilarJobs />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const CvUpload = () => {
   return (
-    <div className="w-72 mt cv rela">
+    <div className="w-72 mt cv mx-auto rela">
       <div className="bg-blue-600   flex flex-col gap-4 py-4 text-center text-white rounded-md">
         <div className=" py-4   ">
           <p className="font-semibold text-4xl px-5  ">Upload Your CV</p>

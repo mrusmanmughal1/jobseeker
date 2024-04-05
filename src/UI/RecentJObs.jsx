@@ -7,7 +7,7 @@ import Job from "./Job";
 const RecentJObs = () => {
   const job = [1, 1, 1, 1, 1, 1];
   return (
-    <div className=" w-full px-6   mx-auto  ">
+    <div className=" w-full   mx-auto  ">
       <div className="flex items-center   justify-between     border-b-2">
         <div className="font-bold">Recent Jobs</div>
         <div className=" flex justify-between py-4 ">

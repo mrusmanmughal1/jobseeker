@@ -11,11 +11,9 @@ const JobSearchbar = () => {
 
   return (
     <div
-      className={`flex-col rounded-sm md:flex sm:flex-row pt-3 px-2 pb-2 md:gap-4 bg-blurr-bg ${
-        isVisible
-          ? "transition-transform transform translate-y-0 duration-500 ease-out"
-          : "transition-transform transform translate-y-full duration-500 ease-in"
-      }`}
+      className={`flex-col rounded-sm md:flex sm:flex-row pt-3 px-2 pb-2 md:gap-4 bg-blurr-bg 
+      
+      `}
     >
       <div className="text-sm w-full">
         <p className="text-white"> Job Title </p>
@@ -45,7 +43,7 @@ const JobSearchbar = () => {
             Remote Only
           </label>
         </div>
-        <button className="px-10 text-sm rounded-md font-bold text-white py-6 bg-[#4e007a]">
+        <button className="px-10 text-sm rounded-md font-bold text-white py-5 bg-[#4e007a]">
           Search
         </button>
       </div>

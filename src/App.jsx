@@ -19,6 +19,8 @@ import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
 import NewPost from "./UI/NewPost";
 import Jobtitle from "./UI/Jobtitle";
+import CandidateDetails from "./Feature/Candidate/CandidateDetails";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -42,6 +44,7 @@ const App = () => {
         </Route>
         {/* Public Routes */}
         <Route path="/candidate" element={<Candidate />} />
+        <Route path="/Details" element={<CandidateDetails />} />
 
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
@@ -49,7 +52,7 @@ const App = () => {
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/jobtitle" element={<Jobtitle />} />
+        <Route path="/job-Details" element={<Jobtitle />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
