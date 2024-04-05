@@ -9,7 +9,7 @@ const Contact = () => {
         </h1>
       </div>
       <div className="flex flex-col lg:flex-row justify-between mt-8 md:mt-12 lg:mt-16">
-  <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 ml-4 lg:ml-[7rem]">
+  <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 lg:ml-[7rem]">
     <h2 className="text-lg text-[#4E007A] font-semibold py-2">Address</h2>
     <h3 className="text-base font-semibold">Head Office:</h3>
     <p className="text-base py-1">140 N University Dr Coral Springs,</p>

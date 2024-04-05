@@ -50,8 +50,8 @@ const About = () => {
 
       <div className=" w-[80%] mx-auto mt-16 ">
         <div className="flex flex-wrap mx-auto justify-center lg:justify-between  ">
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
-            <div className="bg-white p-4 rounded-lg hover:shadow-md">
+          <div className="w-full md:w-1/3 xl:w-1/3 mb-4 px-2">
+            <div className="bg-white  rounded-lg hover:shadow-md">
               <div className="flex items-center">
                 <img src={icon6} alt="icon-6" />
                 <div className="ml-4">
@@ -65,8 +65,8 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
-            <div className="bg-white p-4 rounded-lg hover:shadow-md">
+          <div className="w-full md:w-1/3 xl:w-1/3 mb-4 px-2">
+            <div className="bg-white rounded-lg hover:shadow-md">
               <div className="flex items-center">
                 <img src={icon5} alt="icon-6" />
                 <div className="ml-4">
@@ -80,8 +80,8 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
-            <div className="bg-white p-4 rounded-lg hover:shadow-md">
+          <div className="w-full md:w-1/3 xl:w-1/3 mb-4 px-2">
+            <div className="bg-white rounded-lg hover:shadow-md">
               <div className="flex items-center">
                 <img src={icon4} alt="icon-6" />
                 <div className="ml-4">
@@ -98,8 +98,8 @@ const About = () => {
         </div>
 
         <div className="flex flex-wrap justify-between lg:justify-between  ">
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
-            <div className="bg-white p-4 rounded-lg hover:shadow-md">
+          <div className="w-full md:w-1/3 xl:w-1/3 mb-4">
+            <div className="bg-white rounded-lg hover:shadow-md">
               <div className="flex items-center">
                 <img src={icon3} alt="icon-6" />
                 <div className="ml-4">
@@ -113,8 +113,8 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
-            <div className="bg-white p-4 rounded-lg hover:shadow-md">
+          <div className="w-full md:w-1/3 xl:w-1/3 mb-4">
+            <div className="bg-white rounded-lg hover:shadow-md">
               <div className="flex items-center">
                 <img src={icon2} alt="icon-6" />
                 <div className="ml-4">
@@ -128,8 +128,8 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 px-2">
-            <div className="bg-white p-4 rounded-lg hover:shadow-md">
+          <div className="w-full md:w-1/3 xl:w-1/3 mb-4">
+            <div className="bg-white rounded-lg hover:shadow-md">
               <div className="flex items-center">
                 <img src={icon1} alt="icon-6" />
                 <div className="ml-4">
