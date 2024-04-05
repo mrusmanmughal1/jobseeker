@@ -106,7 +106,13 @@ nav li:hover:after {
   background-color: white;
   overflow: hidden;
 }
-
+.candidate-man {
+  background-image: url("http://demo.cmssuperheroes.com/themeforest/wp-recruitment/wp-content/themes/wp-recruitment/assets/images/bg-page-title.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+}
 /* Responsive Design  */
 
 @media (max-width: 767px) {

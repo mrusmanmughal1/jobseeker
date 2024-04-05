@@ -19,6 +19,7 @@ import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
 import NewPost from "./UI/NewPost";
 import Jobtitle from "./UI/Jobtitle";
+import CandidateDetails from "./Feature/Candidate/CandidateDetails";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
         </Route>
         {/* Public Routes */}
         <Route path="/candidate" element={<Candidate />} />
+        <Route path="/Details" element={<CandidateDetails />} />
 
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import CandidateProfile from "../../UI/CandidateProfile";
 import FeaturedJobs from "../../UI/FeaturedJobs";
 import ImageBanner from "../../UI/ImageBanner";
@@ -19,7 +20,9 @@ const Candidate = () => {
           {arr.map((val, i) => {
             return (
               <div key={i} className="my-4 w-full">
-                <CandidateProfile />
+                <NavLink to="/Details">
+                  <CandidateProfile />
+                </NavLink>
               </div>
             );
           })}

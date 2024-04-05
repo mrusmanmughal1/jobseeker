@@ -1,8 +1,6 @@
 import { useData } from "./useData";
 
 const MyAccount = () => {
-  const { data } = useData();
-  console.log(data);
   return (
     <div className="   w-full  md:w-3/4   ">
       <div className="  flex justify-between   ">
