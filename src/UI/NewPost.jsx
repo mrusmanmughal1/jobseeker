@@ -6,21 +6,21 @@ const NewPost = () => {
           <p className="mb-4 font-semibold uppercase text-2xl">Contact Type</p>
           <div className="md:flex grid  grid-cols-2  gap-4">
             <div className="div flex items-center gap-2">
-              <input type="checkbox" name="" id="Contract" />
+              <input type="radio" name="contract_type" id="Contract" />
               <label htmlFor="Contract">Contract</label>
             </div>
             <div className="div flex items-center gap-2">
-              <input type="checkbox" name="" id="ft" />
+              <input type="radio" name="contract_type" id="ft" />
               <label htmlFor="ft">Full Time</label>
             </div>
 
             <div className="div flex items-center gap-2">
-              <input type="checkbox" name="" id="int" />
+              <input type="radio" name="contract_type" id="int" />
               <label htmlFor="int">Internshop </label>
             </div>
 
             <div className="div flex items-center gap-2">
-              <input type="checkbox" name="" id="pt" />
+              <input type="radio" name="contract_type" id="pt" />
               <label htmlFor="pt">Part Time</label>
             </div>
           </div>

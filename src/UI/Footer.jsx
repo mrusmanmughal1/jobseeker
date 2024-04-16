@@ -4,6 +4,7 @@ import { CiMail } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 const Footer = () => {
   return (
     <div className=" border-t">
@@ -18,10 +19,18 @@ const Footer = () => {
         <div className="flex flex-col  flex-1  items-center  ">
           <p className="font-bold text-[#4e007a] pb-4">OTHER</p>
           <ul className="flex flex-col gap-2 items-center">
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Contact Us</li>
-            <li>Privacy Policy </li>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about-us">About Us </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact-us">Contact Us</NavLink>
+            </li>
+            <li>
+              <NavLink to="/privacy-policy">Privacy Policy </NavLink>
+            </li>
           </ul>
         </div>
         <div className="flex flex-col  items-center flex-1 sm:text-center  ">

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserinfo } from "../Context/Userinfo";
+import { useUserinfo } from "../../Context/Userinfo";
 
 const ProtectedRoutes = ({ children }) => {
   const navigate = useNavigate();
-  const { auth } = useUserinfo();
+  const { auth, role } = useUserinfo();
   useEffect(() => {
     if (!auth) {
       navigate("/login");

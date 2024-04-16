@@ -2,7 +2,7 @@ import Button from "../../Reuseables/Button";
 
 const CandidateContact = () => {
   return (
-    <div>
+    <div className="md:w-1/4">
       <div className="bg-slate-100">
         <div className="p-4 font-semibold text-white bg-btn-primary">
           CONTACT USMAN

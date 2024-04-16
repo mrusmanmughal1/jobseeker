@@ -15,10 +15,11 @@ const Minicart = ({ children, style, data, set }) => {
       document.removeEventListener("click", handleClick, true);
     };
   }, []);
+
   return (
     <div
       ref={ref}
-      className={`${style}  bg-white    absolute z-50 shadow-md rounded-sm  transition ease-linear duration-300 ${top}`}
+      className={`${style}  bg-white absolute z-50 shadow-md rounded-sm    ${top}`}
     >
       {children}
     </div>

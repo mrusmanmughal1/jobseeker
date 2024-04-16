@@ -2,12 +2,14 @@ import { useNavigate } from "react-router-dom";
 import ImageBanner from "../UI/ImageBanner";
 import LoginForm from "../UI/LoginForm";
 import { useUserinfo } from "../Context/Userinfo";
+import { useEffect } from "react";
 
 const LoginPage = () => {
-  const { user } = useUserinfo();
+  const { auth } = useUserinfo();
   const navigate = useNavigate();
+  useEffect(() => {});
 
-  if (user) {
+  if (auth) {
     navigate("/dashboard");
   } else {
     const url =

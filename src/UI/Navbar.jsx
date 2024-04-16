@@ -108,7 +108,7 @@ const Navbar = () => {
                           alt=""
                         />
                       </div>
-                      <p>USMAN</p>
+                      <p>{auth}</p>
                       <img src={loginicon} width={35} />
                     </div>
                   </div>

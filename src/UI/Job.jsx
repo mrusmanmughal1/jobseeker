@@ -3,6 +3,7 @@ import { CiClock2 } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { GiLetterBomb } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
+
 const Job = ({ jobs }) => {
   return (
     <div

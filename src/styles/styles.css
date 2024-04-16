@@ -3,6 +3,9 @@
 a {
   text-decoration: none;
 }
+input {
+  outline: none;
+}
 
 /* General ends here  */
 .img-banner {
@@ -140,4 +143,10 @@ nav li:hover:after {
     top: 30%;
     left: 80%;
   }
+}
+
+/* Options  */
+
+option {
+  @apply bg-btn-primary text-white     font-semibold py-2 px-4 rounded    hover:bg-black hover:text-white;
 }

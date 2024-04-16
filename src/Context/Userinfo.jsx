@@ -5,13 +5,13 @@ const User = createContext();
 const initialState = {
   auth: "",
   key: "",
-  role: "admin",
+  role: null,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
-      return { ...state, auth: action.payload };
+      return { ...state, auth: action.payload, role: "user" };
     case "logout":
       return { user: null };
     default:

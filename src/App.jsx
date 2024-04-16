@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Header from "./UI/Header";
 import LoginPage from "./pages/LoginPage";
 import Footer from "./UI/Footer";
-import ProtectedRoutes from "./UI/ProtectedRoutes";
+import ProtectedRoutes from "./Feature/Authentication/ProtectedRoutes";
 import "./styles/styles.css";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -20,13 +20,17 @@ import NotFound from "./pages/NotFound";
 import NewPost from "./UI/NewPost";
 import Jobtitle from "./UI/Jobtitle";
 import CandidateDetails from "./Feature/Candidate/CandidateDetails";
-
+import PrivacyLopicy from "./pages/PrivacyLopicy";
+import AdminDashboard from "./Feature/Admin/AdminDashboard";
+import Admin from "./Feature/Admin/Admin";
+import AdminPrivate from "./Feature/Admin/AdminPrivate";
+import AdminProtected from "./Feature/Authentication/AdminProtected";
 const App = () => {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {/* Protected Routes  Nested Routing  */}
+        {/* Protected Routes  Nested Routing  for Candidate & Employee */}
         <Route
           path="dashboard"
           element={
@@ -42,6 +46,20 @@ const App = () => {
           <Route path="profile" element={<Manageprofile />} />
           <Route path="new-post" element={<NewPost />} />
         </Route>
+
+        {/* Admin routes   */}
+        <Route
+          path="admin"
+          element={
+            <AdminProtected>
+              <AdminDashboard />
+            </AdminProtected>
+          }
+        >
+          <Route index element={<Admin />} />
+          <Route path="ok" exact element={<AdminPrivate />} />
+        </Route>
+
         {/* Public Routes */}
         <Route path="/candidate" element={<Candidate />} />
         <Route path="/Details" element={<CandidateDetails />} />
@@ -53,6 +71,7 @@ const App = () => {
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/job-Details" element={<Jobtitle />} />
+        <Route path="/privacy-policy" element={<PrivacyLopicy />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

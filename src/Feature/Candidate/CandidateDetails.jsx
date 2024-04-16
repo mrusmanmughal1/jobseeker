@@ -41,7 +41,7 @@ const CandidateDetails = () => {
             About <span className="text-btn-primary">USMAN</span>
           </div>
           <div className="flex  flex-col md:flex-row gap-8">
-            <div className=" text-justify">
+            <div className="  text-justify">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis
               doloremque animi fugiat ea tempore! Sit doloribus asperiores
               commodi magnam optio autem perspiciatis vero dolores maxime
