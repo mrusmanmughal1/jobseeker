@@ -27,7 +27,9 @@ const Jobs = () => {
               <Job jobs={true} key={i} />
             ))}
           </div>
-          <BrowseBySectors />
+          <div className="mx-auto md:w-11/12 ">
+            <BrowseBySectors />
+          </div>
         </div>
       </div>
     </div>

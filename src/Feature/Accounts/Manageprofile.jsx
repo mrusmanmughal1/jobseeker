@@ -30,9 +30,9 @@ const Manageprofile = () => {
             </div>
             <div className="">
               <label className="font-semibold ">
-                Last
+                Last Name
                 <span className="text-sm px-2 font-normal">
-                  Name Enter your first name
+                  Enter your first name
                 </span>
               </label>
               <input
@@ -45,9 +45,9 @@ const Manageprofile = () => {
           <div className="flex md:flex-row flex-col gap-10">
             <div className="w-full">
               <label className="font-semibold ">
-                Sex
+                Gender
                 <span className="text-sm px-2 font-normal">
-                  Select your sex.
+                  Select your gender.
                 </span>
               </label>
               <select className="block w-full border p-3 bg-gray-100">
@@ -57,7 +57,7 @@ const Manageprofile = () => {
             </div>
             <div className="w-full">
               <label className="font-semibold ">
-                Birthday
+                Date Of Birth
                 <span className="text-sm px-2 font-normal">(dd/mm/yyy)</span>
               </label>
               <input
