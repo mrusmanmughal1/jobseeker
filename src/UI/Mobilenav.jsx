@@ -21,7 +21,7 @@ const Mobilenav = ({ setMblNav }) => {
   };
   return (
     <div ref={ref}>
-      <ul className="flex  w-full  flex-col gap-4     mblnav  font-semibold uppercase m">
+      <ul className="flex  w-full  flex-col gap-4     mblnav  font-semibold uppercase ">
         <li onClick={handleclick} className="    border-b pb-2">
           <NavLink to="/">HOME</NavLink>
         </li>

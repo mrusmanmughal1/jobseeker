@@ -7,6 +7,11 @@ input {
   outline: none;
 }
 
+/* toaster check  */
+.go2344853693 {
+  background-color: #7f0cc2;
+}
+
 /* General ends here  */
 .img-banner {
   background-image: url("http://demo.cmssuperheroes.com/themeforest/wp-recruitment/wp-content/themes/wp-recruitment/assets/images/bg-page-title.jpg");

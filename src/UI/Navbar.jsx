@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { Link, NavLink } from "react-router-dom";
 import Minicart from "../Reuseables/Minicart";
-import MiniLogin from "./MiniLogin";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 import Mobilenav from "./Mobilenav";
@@ -10,7 +9,6 @@ import loginicon from "../assets/login-icon.webp";
 import { BsCart } from "react-icons/bs";
 import { useUserinfo } from "../Context/Userinfo";
 import Sidebar from "./Sidebar";
-import JobsBasket from "../Feature/Accounts/JobsBasket";
 import LoginForm from "./LoginForm";
 import { FaUser } from "react-icons/fa";
 import MiniJobsCart from "./MiniJobsCart";
@@ -20,13 +18,13 @@ const Navbar = () => {
   const [showMblNav, setshowMblNav] = useState(false);
   const [profile, showprofile] = useState(false);
   const [cart, setcart] = useState(false);
+
+  // sticky Navbar no scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 60 && window.screen.width > 1000);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -36,11 +34,11 @@ const Navbar = () => {
   return (
     <section
       className={`${
-        isSticky && "fixed top-0 bottom-0 shadow     w-full  z-10 bg-white h-20"
+        isSticky && "fixed top-0 bottom-0 shadow   w-full  z-10 bg-white h-20"
       }   shadow `}
     >
       <div className=" flex justify-between   w-11/12 mx-auto  items-center ">
-        <div className="flex    w-full lg:w-auto    relative justify-between items-center  gap-10">
+        <div className="flex    w-full lg:w-auto  md:text-sm   relative justify-between items-center  gap-10">
           <NavLink to="/">
             <Logo width={210} isSticky={isSticky} />
           </NavLink>
@@ -89,7 +87,6 @@ const Navbar = () => {
         </div>
         <div className="lg:block hidden">
           <nav>
-            {" "}
             <ul className="flex gap-2    uppercase text-lg  items-center">
               <li>
                 <NavLink to="/about-us">ABOUT US</NavLink>
@@ -124,7 +121,7 @@ const Navbar = () => {
                     <div className="rounded-full border-2 absolute bottom-6 border-purple-950 px-1   text-sm left-28 ">
                       {9}
                     </div>
-                  </div>{" "}
+                  </div>
                 </>
               )}
               {!auth && (
@@ -143,21 +140,24 @@ const Navbar = () => {
       </div>
 
       {showMblNav && (
-        <Minicart style={"w-full left-0  lg:hidden block shadow-lg p-6"}>
+        <Minicart style={"w-full left-0   lg:hidden block shadow-lg p-6"}>
           <Mobilenav setMblNav={setshowMblNav} />
         </Minicart>
       )}
 
       {showLogin && !auth && (
-        <Minicart style={"p-8 right-16"} data={isSticky} set={setshow}>
-          <MiniLogin set={setshow} />
-
-          {/* <LoginForm/> */}
+        <Minicart style={" right-4"} data={isSticky} set={setshow}>
+          <LoginForm
+            set={setshow}
+            paddingMain="lg:p-8"
+            width="lg:w-full xl:w-full md:w-full"
+            fontSize="text-xs"
+          />
         </Minicart>
       )}
       {profile && (
         <Minicart
-          style={"p-8  w-[75%] right-0  sm:w-[25%] sm:right-10"}
+          style={"p-4 px-8  w-[75%] right-0  sm:w-[25%] sm:right-10"}
           data={isSticky}
           set={showprofile}
         >

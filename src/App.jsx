@@ -30,7 +30,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        {/* Protected Routes  Nested Routing  for Candidate & Employee */}
+        {/* Protected Routes  Nested Routing  for Candidate Employee & admin  */}
         <Route
           path="dashboard"
           element={
@@ -57,11 +57,12 @@ const App = () => {
           }
         >
           <Route index element={<Admin />} />
+          <Route path="candidate" element={<Candidate />} />
+
           <Route path="ok" exact element={<AdminPrivate />} />
         </Route>
 
         {/* Public Routes */}
-        <Route path="/candidate" element={<Candidate />} />
         <Route path="/Details" element={<CandidateDetails />} />
 
         <Route path="/" index element={<Home />} />

@@ -1,37 +1,18 @@
-import BrowseBySectors from "../UI/BrowseBySectors";
-import CvUpload from "../UI/CvUpload";
-import FeaturedJobs from "../UI/FeaturedJobs";
+import { useAllJobs } from "../Services/Jobs/useAllJobs";
 import ImageBanner from "../UI/ImageBanner";
-import Job from "../UI/Job";
-import JobSearchbar from "../UI/JobSearchbar";
-import JobType from "../UI/JobType";
+import JobsLayout from "../UI/Layouts/JobsLayout";
+import Loader from "../UI/Loader";
 
 const Jobs = () => {
-  const job = [1, 1, 1, 1, 1, 1];
+  const { data, isLoading, status } = useAllJobs();
+
+  if (isLoading) return <Loader />;
+  if (!status) return <Loader />;
+
   return (
     <div className="bg-slate-50">
       <ImageBanner text={"JOBS"} />
-      <div className="flex lg:flex-row flex-col w-11/12 mx-auto ">
-        <div className="pt-4  lg:order-none order-2">
-          <CvUpload />
-          <FeaturedJobs />
-          <JobType />
-        </div>
-
-        <div className=" w-full   py-8 md:pt-4">
-          <div className="   md:w-3/4 mx-auto ">
-            <JobSearchbar />
-          </div>
-          <div className=" lg:ps-8   mt-8">
-            {job.map((val, i) => (
-              <Job jobs={true} key={i} />
-            ))}
-          </div>
-          <div className="mx-auto md:w-11/12 ">
-            <BrowseBySectors />
-          </div>
-        </div>
-      </div>
+      {data && <JobsLayout />}
     </div>
   );
 };

@@ -3,24 +3,25 @@ import ImageBanner from "../UI/ImageBanner";
 import LoginForm from "../UI/LoginForm";
 import { useUserinfo } from "../Context/Userinfo";
 import { useEffect } from "react";
+import topimg from "../assets/bg-page-top.jpg";
 
 const LoginPage = () => {
   const { auth } = useUserinfo();
   const navigate = useNavigate();
-  useEffect(() => {});
+  useEffect(() => {
+    if (auth) {
+      navigate("/");
+    }
+  }, [auth, navigate]);
 
-  if (auth) {
-    navigate("/dashboard");
-  } else {
-    const url =
-      "http://demo.cmssuperheroes.com/themeforest/wp-recruitment/wp-content/themes/wp-recruitment/assets/images/bg-page-title.jpg";
-    return (
-      <div className=" ">
-        <ImageBanner url={url} text={"LOGIN"} />
+  return (
+    <div className=" ">
+      <ImageBanner url={topimg} text={"LOGIN"} />
+      <div className=" py-10    ">
         <LoginForm />
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default LoginPage;

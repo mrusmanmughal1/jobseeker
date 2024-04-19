@@ -10,7 +10,12 @@ const NewPost = () => {
               <label htmlFor="Contract">Contract</label>
             </div>
             <div className="div flex items-center gap-2">
-              <input type="radio" name="contract_type" id="ft" />
+              <input
+                type="radio"
+                name="contract_type"
+                id="ft"
+                className="bg-gray-100"
+              />
               <label htmlFor="ft">Full Time</label>
             </div>
 
@@ -24,12 +29,12 @@ const NewPost = () => {
               <label htmlFor="pt">Part Time</label>
             </div>
           </div>
-          <div className=" w-full">
+          <div className=" w-full space-y-2">
             <p>Job Title</p>
 
             <input
               type="text"
-              className="w-full p-2 bg-slate-300 "
+              className="w-full p-2  bg-gray-100"
               placeholder="Job Title"
             />
           </div>
@@ -44,7 +49,7 @@ const NewPost = () => {
             <div className="w-[32%]">
               <div className="flex   flex-col gap-3">
                 <label htmlFor="">Job Address</label>
-                <input type="text" className="border p-2 bg-gray-300" />
+                <input type="text" className="border p-2 bg-gray-100" />
               </div>
             </div>
             <div className="w-[32%]">
@@ -53,7 +58,7 @@ const NewPost = () => {
                 <input
                   type="text"
                   placeholder="CIty"
-                  className="border p-2 bg-gray-300"
+                  className="border p-2 bg-gray-100"
                 />
               </div>
             </div>
@@ -63,7 +68,7 @@ const NewPost = () => {
                 <input
                   type="text"
                   placeholder="CIty"
-                  className="border p-2 bg-gray-300"
+                  className="border p-2 bg-gray-100"
                 />
               </div>
             </div>
@@ -74,7 +79,7 @@ const NewPost = () => {
 
               <input
                 type="text"
-                className="w-full p-2 bg-slate-300 "
+                className="w-full p-2 bg-gray-100 "
                 placeholder="Job Title"
               />
             </div>
@@ -83,7 +88,7 @@ const NewPost = () => {
 
               <input
                 type="text"
-                className="w-full p-2 bg-slate-300 "
+                className="w-full p-2 bg-gray-100 "
                 placeholder="Job Title"
               />
             </div>
@@ -92,7 +97,7 @@ const NewPost = () => {
 
               <input
                 type="text"
-                className="w-full p-2 bg-slate-300 "
+                className="w-full p-2 bg-gray-100 "
                 placeholder="Job Title"
               />
             </div>
@@ -101,7 +106,7 @@ const NewPost = () => {
 
               <input
                 type="text"
-                className="w-full p-2 bg-slate-300 "
+                className="w-full p-2 bg-gray-100 "
                 placeholder="Job Title"
               />
             </div>
@@ -110,7 +115,7 @@ const NewPost = () => {
 
               <input
                 type="text"
-                className="w-full p-2 bg-slate-300 "
+                className="w-full p-2 bg-gray-100 "
                 placeholder="Job Title"
               />
             </div>
@@ -119,7 +124,7 @@ const NewPost = () => {
 
               <input
                 type="text"
-                className="w-full p-2 bg-slate-300 "
+                className="w-full p-2 bg-gray-100 "
                 placeholder="Job Title"
               />
             </div>
@@ -128,10 +133,16 @@ const NewPost = () => {
               <input
                 type="date"
                 id="birthday"
-                className="w-full p-2 bg-slate-300 "
+                className="w-full p-2 bg-gray-100 "
                 name="birthday"
               />
             </div>
+          </div>
+          <div className="  text-center">
+            <button className="px-8 py-4 rounded-md font-semibold  text-white bg-btn-primary">
+              {" "}
+              POST JOB
+            </button>
           </div>
         </div>
       </form>
