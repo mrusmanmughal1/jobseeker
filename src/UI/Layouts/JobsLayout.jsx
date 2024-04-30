@@ -17,7 +17,7 @@ const JobsLayout = () => {
       </div>
 
       <div className=" w-full   py-8 md:pt-4">
-        <div className="   md:w-3/4 mx-auto ">
+        <div className="   lg:w-3/4 mx-auto ">
           <JobSearchbar />
         </div>
         <div className=" lg:ps-8   mt-8">
@@ -25,7 +25,7 @@ const JobsLayout = () => {
             <Job jobs={true} key={i} />
           ))}
         </div>
-        <div className="mx-auto md:w-11/12 ">
+        <div className="mx-auto lg:w-11/12  ">
           <BrowseBySectors />
         </div>
       </div>

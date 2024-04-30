@@ -4,7 +4,7 @@ export const LoginSchema = Yup.object({
   login: Yup.string()
     .min(4)
     .max(25)
-    .required("Enter Your User name or E-mail !"),
+    .required("Enter Your User Name or E-mail !"),
   password: Yup.string().required("Please Enter Your Password !"),
 });
 

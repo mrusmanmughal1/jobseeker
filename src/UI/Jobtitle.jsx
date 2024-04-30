@@ -8,8 +8,11 @@ import {
 import { IoMailOutline } from "react-icons/io5";
 import Profile from "../assets/Profile-picture.png";
 import SimilarJobs from "./SimilarJobs";
+import JobSubmitForm from "./JobSubmitForm";
+import { useState } from "react";
 
 function Jobtitle() {
+  const [showModel, setshowModel] = useState(false);
   return (
     <div className=" ">
       <div className="bg-btn-primary py-8 px-4 md:px-8 lg:py-32">
@@ -42,7 +45,10 @@ function Jobtitle() {
               Add to job basket
             </button>
             <br className="lg:hidden" />
-            <button className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold rounded-md py-2 border border-black">
+            <button
+              onClick={() => setshowModel(true)}
+              className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold rounded-md py-2 border border-black"
+            >
               <FaSearch className="mr-2" />
               Apply for this job
             </button>
@@ -83,6 +89,8 @@ function Jobtitle() {
           <SimilarJobs />
         </div>
       </div>
+
+      {showModel && <JobSubmitForm setshowModel={setshowModel} />}
     </div>
   );
 }

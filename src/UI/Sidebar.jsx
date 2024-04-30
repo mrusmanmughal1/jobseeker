@@ -23,7 +23,7 @@ const Sidebar = ({ baseurl, set, setSidebarStatus, gap = "gap-5" }) => {
           <NavLink to={`${baseurl}profile`}> Manage Profile </NavLink>
         </li>
         <li className="border-b pb-5" onClick={() => set(false)}>
-          <NavLink to={`${baseurl}jobs-basket`}>Job Baskry</NavLink>
+          <NavLink to={`${baseurl}jobs-basket`}>Jobs Basket</NavLink>
         </li>
         <li className="border-b pb-5" onClick={() => set(false)}>
           <NavLink to={`${baseurl}new-post`}>New Post</NavLink>

@@ -1,7 +1,7 @@
 const JobType = () => {
   return (
-    <div>
-      <p className="text-purple-900 font-semibold py-5 border-b">JOB TYPE</p>
+    <div className="pb-10">
+      <p className="text-purple-900 font-semibold pb-5 border-b">JOB TYPE</p>
       <div className="">
         <div className="flex justify-between pt-4">
           <p className="text-purple-900">Contract</p>

@@ -17,6 +17,7 @@ const RegisterFOrm = () => {
       initialValues,
       onSubmit: (values, action) => {
         console.log(values);
+        action.resetForm();
       },
       validationSchema: RegisterSchema,
     });
