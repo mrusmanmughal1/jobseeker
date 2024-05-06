@@ -31,12 +31,12 @@ const Job = ({ jobs }) => {
           </div>
         </div>
         <div className="md:w-1/3  w-full flex  justify-end gap-4  md:flex-row  md: items-center text-purple-900">
-          <button className="flex text-xs   flex-col items-center px-6 rounded-md py-[0.30rem] border-2 border-purple-900 hover:text-white hover:bg-purple-900">
+          <button className="flex text-xs   font-semibold flex-col items-center px-6 rounded-md py-[0.30rem] border-2 border-purple-900 hover:text-white hover:bg-purple-900">
             <FaCartPlus />
             ADD
           </button>
           <NavLink to="/job-Details">
-            <button className=" text-xs    lg:px-2  xl:px-6   xl:py-3 px-6 rounded-md py-3 border-2 border-purple-900  hover:text-white hover:bg-purple-900">
+            <button className=" text-xs    font-semibold lg:px-2  xl:px-6   xl:py-3 px-6 rounded-md py-3 border-2 border-purple-900  hover:text-white hover:bg-purple-900">
               VIEW MORE
             </button>
           </NavLink>
