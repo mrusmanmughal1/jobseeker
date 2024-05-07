@@ -2,15 +2,15 @@ import contact from "../assets/contact-us.png";
 
 const Contact = () => {
   return (
-    <div className="px-4 md:px-8 lg:px-32">
-      <div className="mt-8 lg:mt-32">
+    <div className="px-4 md:px-8  ">
+      <div className="mt-8 lg:mt-10">
         <h1 className="text-4xl font-semibold text-center lg:text-center">
           Contact <span className="text-[#4E007A]">Us</span>
         </h1>
       </div>
       <div className="w-11/12 mx-auto">
         <div className="flex flex-col lg:flex-row justify-between mt-8 md:mt-12 lg:mt-16">
-          <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 lg:ml-[7rem]">
+          <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 lg:ml-[7rem] text-center">
             <h2 className="text-lg text-[#4E007A] font-semibold py-2">
               Address
             </h2>
@@ -18,7 +18,7 @@ const Contact = () => {
             <p className="text-base py-1">140 N University Dr Coral Springs,</p>
             <p className="text-base py-1">FL 33071</p>
           </div>
-          <div className="w-full lg:w-auto lg:max-w-md mx-auto lg:mx-0 mr-4 lg:mr-[12rem]">
+          <div className="w-full lg:w-auto lg:max-w-md mx-auto text-center lg:mx-0 mr-4 lg:mr-[12rem]">
             <h2 className="text-lg text-[#4E007A] font-semibold py-2">Email</h2>
             <p className="text-base">info@jobsshopper.com</p>
           </div>
