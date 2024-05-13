@@ -30,7 +30,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        {/* Protected Routes  Nested Routing  for Candidate Employee & admin  */}
+        {/* Protected   Nested Routing  for Candidate   */}
         <Route
           path="dashboard"
           element={
