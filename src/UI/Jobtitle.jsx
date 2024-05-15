@@ -15,8 +15,9 @@ function Jobtitle() {
   const [showModel, setshowModel] = useState(false);
   return (
     <div className=" ">
-      <div className="bg-btn-primary py-8 px-4 md:px-8 lg:py-32">
-        <div className="flex flex-col lg:flex-row justify-between text-white">
+      <div className="bg-btn-primary py-8 px-4   lg:py-20">
+        <div className="mx-auto w-11/12">
+        <div className="flex flex-col md:flex-row justify-between text-white">
           <div className="mb-8 lg:mb-0 py-6 border-b w-full">
             <h1 className="text-xl font-bold">Job Title</h1>
             <h2 className="text-4xl">UI designer</h2>
@@ -31,7 +32,7 @@ function Jobtitle() {
             </div>
           </div>
         </div>
-        <div className="lg:flex justify-between items-center leading-loose">
+        <div className="md:flex justify-between items-center leading-loose">
           <div className="text-white flex flex-col gap-6 text-lg lg:text-xl pt-4 lg:pt-12 xl:pt-20 lg:pr-16 xl:pr-20">
             <p>Position: Full Time</p>
             <p>Salary: $20/hrs</p>
@@ -39,7 +40,7 @@ function Jobtitle() {
             <p>Work Eligibility: USC, CPT</p>
             <p>Job ID: 56440</p>
           </div>
-          <div className="mt-4 lg:mt-0 flex flex-col gap-4">
+          <div className="mt-4 lg:mt-0 flex flex-col lg:gap-4">
             <button className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold w-full rounded-md py-2 border border-black lg:mb-0 lg:mr-4">
               <FaCartPlus className="mr-2" />
               Add to job basket
@@ -54,14 +55,16 @@ function Jobtitle() {
             </button>
           </div>
         </div>
+        </div>
       </div>
-      <div className="py-8 px-4 md:px-6">
+      <div className="py-8 px-4 md:px-6 mx-auto w-11/12">
         <h3>
           <span className="font-semibold">Required Skills</span>: Design
         </h3>
       </div>
       <div className="border-t pt-8 pb-4 bg-purple-50"></div>
-      <div className="flex bg-purple-50  pb-20 flex-col md:flex-row gap-10">
+      <div className="bg-purple-50">
+      <div className="flex  w-11/12 mx-auto  pb-20 flex-col md:flex-row gap-10">
         <div className=" flex-1">
           <div className="flex flex-col lg:flex-row px-6 py-12">
             <img src={Profile} alt="/" className="w-full lg:w-auto" />
@@ -85,11 +88,13 @@ function Jobtitle() {
             </div>
           </div>
         </div>
-        <div className="flex-1">
+        <div className="flex-1    flex md:justify-end ">
+          <div className="  w-11/12 md:w-full   lg:w-2/3  mx-auto md:mx-0">
           <SimilarJobs />
+          </div>
         </div>
       </div>
-
+      </div>
       {showModel && <JobSubmitForm setshowModel={setshowModel} />}
     </div>
   );

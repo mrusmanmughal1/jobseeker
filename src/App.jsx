@@ -21,17 +21,29 @@ import NewPost from "./UI/NewPost";
 import Jobtitle from "./UI/Jobtitle";
 import CandidateDetails from "./Feature/Candidate/CandidateDetails";
 import PrivacyLopicy from "./pages/PrivacyLopicy";
-import AdminDashboard from "./Feature/Admin/AdminDashboard";
-import Admin from "./Feature/Admin/Admin";
 import AdminPrivate from "./Feature/Admin/AdminPrivate";
 import AdminProtected from "./Feature/Authentication/AdminProtected";
+import Admin from "./Feature/Admin/Admin";
+import AdminCandidateList from "./Feature/Admin/AdminCandidateList";
+import AdminJobsLIst from "./Feature/Admin/AdminJobsLIst";
+import AdminEmployeerList from "./Feature/Admin/AdminEmployeerList";
 import JobsBySector from "./UI/JobsBySector";
 const App = () => {
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
       <Routes>
-        {/* Protected Routes  Nested Routing  for Candidate Employee & admin  */}
+        <Route path="admin" element={<AdminPrivate />}>
+          {/* <Route path="/admin" element={<AdminPrivate />} /> */}
+          <Route path="dashboard" element={<Admin />} />
+          <Route path="candidates" element={<AdminCandidateList />} />
+
+          <Route path="/admin/Jobs" element={<AdminJobsLIst />} />
+
+          <Route path="/admin/employeers" element={<AdminEmployeerList />} />
+        </Route>
+
+        {/* Protected   Nested Routing  for Candidate   */}
         <Route
           path="dashboard"
           element={
@@ -49,7 +61,7 @@ const App = () => {
         </Route>
 
         {/* Admin routes   */}
-        <Route
+        {/* <Route
           path="admin"
           element={
             <AdminProtected>
@@ -60,12 +72,11 @@ const App = () => {
           <Route index element={<Admin />} />
 
           <Route path="ok" exact element={<AdminPrivate />} />
-        </Route>
+        </Route> */}
 
         {/* Public Routes */}
-        <Route path="candidate" element={<Candidate />} />
-        <Route path="Details" element={<CandidateDetails />} />
-        <Route path="jobs-by-sector" element={<JobsBySector />} />
+        <Route path="/candidate" element={<Candidate />} />
+        <Route path="/Details" element={<CandidateDetails />} />
 
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
@@ -75,6 +86,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/job-Details" element={<Jobtitle />} />
         <Route path="/privacy-policy" element={<PrivacyLopicy />} />
+        <Route path="/jobs-by-sector" element={<JobsBySector />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

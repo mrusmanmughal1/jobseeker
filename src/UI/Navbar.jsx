@@ -42,6 +42,7 @@ const Navbar = () => {
           <NavLink to="/">
             <Logo width={210} isSticky={isSticky} />
           </NavLink>
+          <NavLink to="admin"> admin</NavLink>
           <div className="lg:block hidden">
             <nav>
               <ul className="flex gap-4 items-center   text-lg  uppercase m">
@@ -94,6 +95,7 @@ const Navbar = () => {
               <li>
                 <NavLink to="/contact-us">Contact US</NavLink>
               </li>
+
               {auth && (
                 <>
                   <div onClick={() => showprofile(!profile)}>

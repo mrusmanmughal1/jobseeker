@@ -1,6 +1,7 @@
 import DashboadLayout from "../Feature/Dashboard/DashboadLayout";
 
 const Dashboard = () => {
+
   return (
     <div>
       <DashboadLayout />

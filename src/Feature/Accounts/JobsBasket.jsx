@@ -5,7 +5,7 @@ const JobsBasket = () => {
   const data = [1, 2];
 
   return (
-    <div className="rounded-md border w-11/12 max-w-full mx-auto ">
+    <div className="rounded-md border md:w-11/12  max-w-full mx-auto ">
       <div className=" font-semibold  text-sm md:text-sm  gap-2   justify-between bg-gray-200 flex   p-3  px-4  md:px-10 ">
         <div className="    ">Job Title </div>
         <div className="     "> Date Added </div>

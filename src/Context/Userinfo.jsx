@@ -11,7 +11,7 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
-      return { ...state, auth: action.payload, role: "employee" };
+      return { ...state, auth: action.payload, role: "admin" };
     case "logout":
       return { user: null };
     default:

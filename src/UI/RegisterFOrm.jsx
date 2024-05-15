@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { RegisterSchema } from "../Hooks/Schema/FormValidation";
+import { RegisterSchema } from "../helpers/Schema/FormValidation";
 
 const initialValues = {
   Account_type: "",

@@ -4,7 +4,7 @@ import { CiClock2 } from "react-icons/ci";
 const SimilarJobs = () => {
   const ar = [1, 2, 3];
   return (
-    <div className="shadow py-8 w-11/12 md:w-2/3 mx-auto bg-white rounded-md">
+    <div className="shadow py-8  bg-white rounded-md">
       <div className="text-2xl font-semibold pb-5 px-4">SILIMAR JOBS</div>
       <div className=" border-b border-t">
         {ar.map((val, i) => {

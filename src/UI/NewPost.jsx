@@ -46,29 +46,29 @@ const NewPost = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-2">
-            <div className="w-[32%]">
+            <div className="md:w-[32%]">
               <div className="flex   flex-col gap-3">
                 <label htmlFor="">Job Address</label>
-                <input type="text" className="border p-2 bg-gray-100" />
+                <input type="text" className="border p-2 w-full bg-gray-100" />
               </div>
             </div>
-            <div className="w-[32%]">
+            <div className="md:w-[32%]">
               <div className="flex   flex-col gap-3">
                 <label htmlFor="">City</label>
                 <input
                   type="text"
                   placeholder="CIty"
-                  className="border p-2 bg-gray-100"
+                  className="border p-2 w-full bg-gray-100"
                 />
               </div>
             </div>
-            <div className="w-[32%]">
+            <div className="md:w-[32%]">
               <div className="flex  flex-col gap-3">
                 <label htmlFor="">City</label>
                 <input
                   type="text"
                   placeholder="CIty"
-                  className="border p-2 bg-gray-100"
+                  className="border w-full p-2 bg-gray-100"
                 />
               </div>
             </div>
@@ -95,7 +95,9 @@ const NewPost = () => {
             <div className="">
               <p>Job Description</p>
 
-              <input
+              <textarea
+                cols={4}
+                rows={4}
                 type="text"
                 className="w-full p-2 bg-gray-100 "
                 placeholder="Job Title"

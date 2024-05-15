@@ -25,7 +25,7 @@ const RecentJObs = () => {
         ))}
       </div>
       <div className="flex py-4  justify-end">
-        <button className="px-4 py-2 bg-purple-900 rounded-md text-white">
+        <button className="px-4 py-2 bg-purple-900 font-semibold rounded-md text-white">
           {" "}
           ALL JOBS
         </button>
