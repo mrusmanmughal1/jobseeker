@@ -17,5 +17,5 @@ export const useAllJobs = () => {
     queryKey: ["allJobs"],
     queryFn: getAllJobs,
   });
-  return { data, isLoading, status ,isError };
+  return { data, isLoading, status, isError };
 };

@@ -6,8 +6,12 @@ const AdminProtected = ({ children }) => {
   const navigate = useNavigate();
   const { auth, role } = useUserinfo();
   useEffect(() => {
-    (role !== "admin") & auth ? navigate("/", { replace: true }) : children;
+    if (!auth) {
+      navigate("/login");
+    }
   }, [auth, navigate]);
+
+  role == "admin" ? children : navigate("/");
 };
 
 export default AdminProtected;

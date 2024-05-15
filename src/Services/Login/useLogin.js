@@ -11,7 +11,7 @@ export const useLogin = () => {
     mutationFn: (credentials) => getLogin(credentials),
 
     onSuccess: () => {
-      toast.success("Successfully Logged in  !");
+      toast.success("Successfully Logged in !");
       navigate("/dashboard", { replace: true });
       //   query.setQueryData(["user"], user.user);
     },

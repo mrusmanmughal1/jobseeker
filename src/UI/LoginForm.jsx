@@ -1,8 +1,7 @@
 import { useFormik } from "formik";
 import { useUserinfo } from "../Context/Userinfo";
-import { LoginSchema } from "../Hooks/Schema/FormValidation";
+import { LoginSchema } from "../helpers/Schema/FormValidation";
 import { NavLink } from "react-router-dom";
-import { useAllJobs } from "../Services/Jobs/useAllJobs";
 import { useLogin } from "../Services/Login/useLogin";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
