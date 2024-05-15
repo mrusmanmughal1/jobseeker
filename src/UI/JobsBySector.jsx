@@ -54,10 +54,10 @@ const JobsBySector = () => {
     { alb: "T", title: "Technical Specialist", num: 82 },
     { alb: "U", title: "Utilities Manager", num: 29 },
     { alb: "V", title: "Validation Engineer", num: 15 },
-    { alb: "W", title: "Web Content writer", num: 61 },
-    { alb: "X", title: "X-ray Engineer", num: 71 },
-    { alb: "Y", title: "Yard Engineer", num: 77 },
-    { alb: "Z", title: "Zoologist", num: 13 },
+    { alb: "W", title: "Web Content writer", num: 16 },
+    { alb: "X", title: "X-ray Engineer", num: 67 },
+    { alb: "Y", title: "Yard Engineer", num: 79 },
+    { alb: "Z", title: "Zoologist", num: 48 },
   ];
 
   alphabets.map((v, i) => {
