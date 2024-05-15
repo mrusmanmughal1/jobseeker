@@ -5,8 +5,8 @@ import { FaThList } from "react-icons/fa";
 import { BsPersonWorkspace } from "react-icons/bs";
 import { FaNetworkWired } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
-
-const AdminSideBar = ({ baseurl, set, setSidebarStatus, gap = "gap-5" }) => {
+import { IoSettingsSharp } from "react-icons/io5";
+const AdminSideBar = () => {
   const { dispatch } = useUserinfo();
   const handleClick = () => {
     dispatch({ type: "logout" });
@@ -27,24 +27,30 @@ const AdminSideBar = ({ baseurl, set, setSidebarStatus, gap = "gap-5" }) => {
       to: `/admin/employeers`,
       icon: <BsPersonWorkspace />,
     },
+    {
+      title: "Settings",
+      to: "/admin/settings",
+      icon: <IoSettingsSharp />,
+    },
   ];
   return (
     <div className="relative">
       <div className="    mx-auto          ">
-        <ul className={`flex flex-col   ${gap}`}>
+        <ul className={`flex flex-col    gap-5`}>
           <li className="  w-   pb-5 pt-5 "></li>
-          {AdminNavLinks.map((val, i) => {
+          {AdminNavLinks.map((NavValue, i) => {
+            const { title, icon, to } = NavValue;
             return (
-              <li key={i} className=" py-5">
-                <NavLink to={val.to} className="flex gap-2 items-center">
-                 {val.icon} {val.title}
+              <li key={i} className=" py-4">
+                <NavLink to={to} className="flex admin gap-2 items-center">
+                  {icon} {title}
                 </NavLink>
               </li>
             );
           })}
 
           <button
-            className="  flex gap-2 items-center pb-5 text-start"
+            className="  flex gap-2 items-center py-5 text-start"
             onClick={handleClick}
           >
             <BiLogOutCircle /> Logout

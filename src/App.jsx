@@ -27,6 +27,7 @@ import Admin from "./Feature/Admin/Admin";
 import AdminCandidateList from "./Feature/Admin/AdminCandidateList";
 import AdminJobsLIst from "./Feature/Admin/AdminJobsLIst";
 import AdminEmployeerList from "./Feature/Admin/AdminEmployeerList";
+import AdminSettings from "./Feature/Admin/AdminSettings";
 const App = () => {
   return (
     <BrowserRouter>
@@ -34,12 +35,14 @@ const App = () => {
       <Routes>
         <Route path="admin" element={<AdminPrivate />}>
           {/* <Route path="/admin" element={<AdminPrivate />} /> */}
-          <Route path="dashboard" element={<Admin />} />
+          <Route path="dashboard"  index element={<Admin />} />
           <Route path="candidates" element={<AdminCandidateList />} />
 
           <Route path="/admin/Jobs" element={<AdminJobsLIst />} />
 
           <Route path="/admin/employeers" element={<AdminEmployeerList />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
+
         </Route>
 
         {/* Protected   Nested Routing  for Candidate   */}

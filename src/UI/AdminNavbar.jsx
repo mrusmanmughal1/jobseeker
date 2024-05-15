@@ -1,6 +1,7 @@
 import Logo from "./Logo";
 import image from "../assets/bg-page-top.jpg";
 import { IoMdLogOut } from "react-icons/io";
+import { AiOutlineNotification } from "react-icons/ai";
 const AdminNavbar = () => {
   return (
     <div className="shadow-sm">
@@ -18,8 +19,13 @@ const AdminNavbar = () => {
                   <p className="text-sm">Adminitator</p>
                 </div>
               </div>
-              <div className="">
-                <p className="text-2xl hover:border-purple-700 border   transition-all duration-500  hover:border hover:shadow-lg shadow-md p-2 rounded-md hover:text-btn-primary cursor-pointer">
+              <div className="flex gap-2 relative">
+                <p className="text-2xl hover:border-purple-700 border    transition-all duration-500  hover:border hover:shadow-lg shadow-md p-2 rounded-md hover:text-btn-primary cursor-pointer ">
+                  <AiOutlineNotification />
+                </p>
+                <p className="w-2  h-2 left-6 top-1 bg-red-700 absolute  animate-ping rounded-full top"></p>
+
+                <p className="text-2xl hover:border-red-700 border   transition-all duration-500  hover:border hover:shadow-lg shadow-md p-2 rounded-md hover:text-red-500 cursor-pointer">
                   {" "}
                   <IoMdLogOut />
                 </p>

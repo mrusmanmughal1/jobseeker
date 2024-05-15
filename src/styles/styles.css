@@ -1,8 +1,8 @@
 /* General css */
-
 a {
   text-decoration: none;
 }
+
 input {
   outline: none;
 }
@@ -87,6 +87,13 @@ nav li:hover:after {
 }
 .active {
   color: #6f00ad;
+}
+.admin.active {
+  color: purple;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0.5rem 4rem 0.5rem 00.5rem;
+  font-weight: 600;
 }
 
 /* Accordian  */
