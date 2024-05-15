@@ -87,7 +87,7 @@ const App = () => {
         <Route path="/job-Details" element={<Jobtitle />} />
         <Route path="/privacy-policy" element={<PrivacyLopicy />} />
         <Route path="/jobs-by-sector" element={<JobsBySector />} />
-
+        {/* olol */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
