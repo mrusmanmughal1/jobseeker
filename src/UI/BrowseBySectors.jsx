@@ -1,21 +1,23 @@
+import { NavLink } from "react-router-dom";
+
 const BrowseBySectors = () => {
   const arr = [
     "facebook",
     " instagram ",
-    "youtubdsae",
-    "yahooo",
-    "facebook",
-    " instdasdagram ",
     "youtube",
-    "yahooo",
-    "facedasdbook",
+    "yahoo",
+    "facebook",
+    " instagram ",
+    "youtube",
+    "yahoo",
+    "facebook",
     " instagram ",
     "youtube",
     "ssdasd",
     "facebook",
     " instagram ",
     "youtube",
-    "yahooo",
+    "yahoo",
   ];
   return (
     <div className="bg-white p-8 mx-0   shadow-md flex flex-col gap-4">
@@ -28,9 +30,12 @@ const BrowseBySectors = () => {
         ))}
       </div>
       <div className="text-end">
-        <button className="bg-btn-primary text-white py-2  px-4 rounded-md">
+        <NavLink
+          to="/jobs-by-sector"
+          className="bg-btn-primary text-white py-2  px-4 rounded-md"
+        >
           VIEW ALL SECTORS
-        </button>
+        </NavLink>
       </div>
     </div>
   );

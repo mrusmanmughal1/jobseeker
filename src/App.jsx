@@ -25,6 +25,7 @@ import AdminDashboard from "./Feature/Admin/AdminDashboard";
 import Admin from "./Feature/Admin/Admin";
 import AdminPrivate from "./Feature/Admin/AdminPrivate";
 import AdminProtected from "./Feature/Authentication/AdminProtected";
+import JobsBySector from "./UI/JobsBySector";
 const App = () => {
   return (
     <BrowserRouter>
@@ -64,6 +65,7 @@ const App = () => {
         {/* Public Routes */}
         <Route path="candidate" element={<Candidate />} />
         <Route path="Details" element={<CandidateDetails />} />
+        <Route path="jobs-by-sector" element={<JobsBySector />} />
 
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />

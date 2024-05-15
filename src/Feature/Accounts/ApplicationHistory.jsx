@@ -3,7 +3,7 @@ const ApplicationHistory = () => {
   const data = [1, 2, 2, 4];
   return (
     <div className="rounded-md border ">
-      <div className=" font-semibold  text-sm md:text-base   bg-gray-200 flex p-3 px-5 ">
+      <div className=" font-semibold  text-sm md:text-base bg-gray-200 flex p-3 px-5 ">
         <div className=" w-1/2 md:w-full">Job Title </div>
         <div className="w-1/3 md:w-1/4 md:text-center"> Date Applied </div>
         <div className="w-1/3 md:w-1/4 text-end">Status</div>
