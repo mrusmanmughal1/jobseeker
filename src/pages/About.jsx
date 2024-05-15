@@ -19,12 +19,12 @@ const About = () => {
   return (
     <div>
       <ImageBanner text={"About Us"} />
-      <div className=" w-11/12 mx-auto flex flex-col md:flex-row items-center md:justify-between mt-8 md:mt-24">
-        <div className=" px-4    flex flex-col gap-4 md:gap-2 md:w-1/2">
-          <h1 className="text-4xl font-bold mt-10 md:mt-0 md:ml-0">
-            About <span className="text-btn-primary">Recruitment Agency</span> 
+      <div className="w-full md:w-11/12 mx-auto flex flex-col md:flex-row items-center md:justify-between mt-8 md:mt-24">
+        <div className="py-8 px-4 md:px-10 lg:px-20 flex flex-col gap-4 md:gap-8 md:w-1/2">
+          <h1 className="text-3xl font-bold mt-10 md:mt-0 md:ml-0">
+            About <span className="text-[#4E007A]"> Recruitment Agency</span>
           </h1>
-          <h2 className="text-base md:text-lg lg:text-medium font-semibold text-gray-800 mt-8">
+          <h2 className="text-base font-semibold md:text-lg lg:text-medium text-gray-800 mt-8">
             Helping people all around the world bag their dream job.
           </h2>
           <div className="mt-4">

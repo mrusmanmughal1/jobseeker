@@ -16,7 +16,7 @@ const AdminNavbar = () => {
                 </div>{" "}
                 <div className="  ">
                   <p className="font-semibold">Muhammad Usman</p>
-                  <p className="text-sm">Adminitator</p>
+                  <p className="text-sm">Administrator</p>
                 </div>
               </div>
               <div className="flex gap-2 relative">

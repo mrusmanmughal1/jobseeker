@@ -4,7 +4,6 @@ import AdminNavbar from "../../UI/AdminNavbar";
 const AdminPrivate = () => {
   return (
     <div>
-      <AdminNavbar />
 
       <AdminDashboard />
     </div>

@@ -9,9 +9,11 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
+  const { role } = action.payload;
+
   switch (action.type) {
     case "login":
-      return { ...state, auth: action.payload, role: "admin" };
+      return { ...state, role: role };
     case "logout":
       return { user: null };
     default:

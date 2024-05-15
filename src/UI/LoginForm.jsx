@@ -9,6 +9,7 @@ import { useState } from "react";
 const credentials = {
   login: "",
   password: "",
+  role:"admin"
 };
 const LoginForm = ({ paddingMain, width, fontSize }) => {
   const { dispatch } = useUserinfo();
@@ -20,7 +21,7 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
     useFormik({
       initialValues: credentials,
       onSubmit: (values, action) => {
-        dispatch({ type: "login", payload: values.login });
+        dispatch({ type: "login", payload: values });
         action.resetForm();
         Login(values);
       },

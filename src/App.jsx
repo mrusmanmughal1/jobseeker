@@ -27,22 +27,22 @@ import Admin from "./Feature/Admin/Admin";
 import AdminCandidateList from "./Feature/Admin/AdminCandidateList";
 import AdminJobsLIst from "./Feature/Admin/AdminJobsLIst";
 import AdminEmployeerList from "./Feature/Admin/AdminEmployeerList";
+import JobsBySector from "./UI/JobsBySector";
 import AdminSettings from "./Feature/Admin/AdminSettings";
 const App = () => {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <Routes>
-        <Route path="admin" element={<AdminPrivate />}>
-          {/* <Route path="/admin" element={<AdminPrivate />} /> */}
-          <Route path="dashboard"  index element={<Admin />} />
+        {/* admin  */}
+        <Route path="/admin" element={<AdminPrivate />}>
+          <Route path="dashboard" index element={<Admin />} />
           <Route path="candidates" element={<AdminCandidateList />} />
 
           <Route path="/admin/Jobs" element={<AdminJobsLIst />} />
 
           <Route path="/admin/employeers" element={<AdminEmployeerList />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
-
         </Route>
 
         {/* Protected   Nested Routing  for Candidate   */}
@@ -62,20 +62,6 @@ const App = () => {
           <Route path="new-post" element={<NewPost />} />
         </Route>
 
-        {/* Admin routes   */}
-        {/* <Route
-          path="admin"
-          element={
-            <AdminProtected>
-              <AdminDashboard />
-            </AdminProtected>
-          }
-        >
-          <Route index element={<Admin />} />
-
-          <Route path="ok" exact element={<AdminPrivate />} />
-        </Route> */}
-
         {/* Public Routes */}
         <Route path="/candidate" element={<Candidate />} />
         <Route path="/Details" element={<CandidateDetails />} />
@@ -88,7 +74,8 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/job-Details" element={<Jobtitle />} />
         <Route path="/privacy-policy" element={<PrivacyLopicy />} />
-
+        <Route path="/jobs-by-sector" element={<JobsBySector />} />
+        {/* olol */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

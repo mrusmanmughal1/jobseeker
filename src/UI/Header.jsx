@@ -1,13 +1,10 @@
-import Annoucmentbar from "./Annoucmentbar";
-import Navbar from "./Navbar";
+import { useUserinfo } from "../Context/Userinfo";
+import AdminNavbar from "./AdminNavbar";
+import GeneralHeaders from "./GeneralHeaders";
 
 const Header = () => {
-  return (
-    <div className=" ">
-      <Annoucmentbar />
-      <Navbar />
-    </div>
-  );
+  const { role } = useUserinfo();
+  return <>{role == "admin" ? <AdminNavbar /> : <GeneralHeaders />}</>;
 };
 
 export default Header;
