@@ -12,7 +12,11 @@ const ProtectedRoutes = ({ children }) => {
     }
   }, [auth, navigate]);
 
-  auth && role === ("Candidate" || "employeer") ? children : navigate("/");
+  if (auth && role === ("Candidate" || "employeer")) {
+    return children;
+  } else {
+    navigate("/");
+  }
 };
 
 export default ProtectedRoutes;

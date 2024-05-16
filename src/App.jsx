@@ -29,18 +29,25 @@ import AdminJobsLIst from "./Feature/Admin/AdminJobsLIst";
 import AdminEmployeerList from "./Feature/Admin/AdminEmployeerList";
 import JobsBySector from "./UI/JobsBySector";
 import AdminSettings from "./Feature/Admin/AdminSettings";
+import { useUserinfo } from "./Context/Userinfo";
+
 const App = () => {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
         {/* admin  */}
-        <Route path="/admin" element={<AdminPrivate />}>
+        <Route
+          path="admin"
+          element={
+            <AdminProtected>
+              <AdminPrivate />
+            </AdminProtected>
+          }
+        >
           <Route path="dashboard" index element={<Admin />} />
           <Route path="candidates" element={<AdminCandidateList />} />
-
           <Route path="/admin/Jobs" element={<AdminJobsLIst />} />
-
           <Route path="/admin/employeers" element={<AdminEmployeerList />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
         </Route>
@@ -78,7 +85,7 @@ const App = () => {
         {/* olol */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+     <Footer /> 
     </BrowserRouter>
   );
 };

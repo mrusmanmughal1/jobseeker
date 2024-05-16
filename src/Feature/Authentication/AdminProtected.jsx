@@ -10,8 +10,11 @@ const AdminProtected = ({ children }) => {
       navigate("/login");
     }
   }, [auth, navigate]);
-
-  role == "admin" ? children : navigate("/");
+  if (role == "admin") {
+    return children;
+  } else {
+    navigate("/");
+  }
 };
 
 export default AdminProtected;

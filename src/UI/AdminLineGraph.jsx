@@ -1,4 +1,3 @@
-import React from "react";
 import { Line } from "react-chartjs-2";
 
 const AdminLineGraph = () => {
@@ -76,9 +75,20 @@ const AdminLineGraph = () => {
       Jobs: 9090,
     },
   ];
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
+
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+    },
+  };
   return (
-    <div className="  bg-white rounded-md shadow-lg  p-8  h-80 flex  ">
+    <div className="  bg-white rounded-md shadow-lg  p-8   flex  ">
       <Line
+        options={options}
         data={{
           labels: rev.map((data) => data.label),
           datasets: [
@@ -102,18 +112,7 @@ const AdminLineGraph = () => {
             },
           ],
         }}
-        options={{
-          elements: {
-            line: {
-              tension: 0.5,
-            },
-          },
-          plugins: {
-            title: {
-              text: "Monthly Employees & Candidates",
-            },
-          },
-        }}
+        
       />
     </div>
   );

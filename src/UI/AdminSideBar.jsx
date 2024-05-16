@@ -7,6 +7,7 @@ import { FaNetworkWired } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { IoSettingsSharp } from "react-icons/io5";
 const AdminSideBar = () => {
+
   const { dispatch } = useUserinfo();
   const handleClick = () => {
     dispatch({ type: "logout" });
@@ -34,15 +35,15 @@ const AdminSideBar = () => {
     },
   ];
   return (
-    <div className="relative">
-      <div className="    mx-auto          ">
+    <div className="relative w-full">
+      <div className="   mx-auto   ">
         <ul className={`flex flex-col    gap-5`}>
-          <li className="  w-   pb-5 pt-5 "></li>
+          <li className="      pb-5 pt-5 "></li>
           {AdminNavLinks.map((NavValue, i) => {
             const { title, icon, to } = NavValue;
             return (
-              <li key={i} className=" py-4">
-                <NavLink to={to} className="flex admin gap-2 items-center">
+              <li key={i} className=" md:py-3  lg:py-4">
+                <NavLink to={to} className="flex admin  gap-2 items-center">
                   {icon} {title}
                 </NavLink>
               </li>
@@ -50,7 +51,7 @@ const AdminSideBar = () => {
           })}
 
           <button
-            className="  flex gap-2 items-center py-5 text-start"
+            className="  flex gap-2 items-center  md:py-3  lg:py-4 text-start"
             onClick={handleClick}
           >
             <BiLogOutCircle /> Logout

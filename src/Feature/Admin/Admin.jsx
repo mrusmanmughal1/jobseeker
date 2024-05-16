@@ -39,12 +39,14 @@ const Admin = () => {
       <AdminTopWidgets />
 
       {/* Chart js   */}
-      <div className=" flex flex-col md:flex-row  gap-14 py-14  ">
+      <div className=" flex flex-col    md:flex-row md:gap-2 gap-8    lg:gap-14 py-14  ">
         <AdminBarGraph />
         {/* / Doughnut */}
         <AdminDoughnut />
       </div>
+      <div className="">
       <AdminLineGraph />
+      </div>
     </div>
   );
 };

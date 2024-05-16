@@ -16,8 +16,10 @@ const AdminDoughnut = () => {
       value: 23,
     },
   ];
-  const DoughnutOptions = {
+  const options = {
     responsive: true,
+    maintainAspectRatio: true,
+
     plugins: {
       legend: {
         position: "bottom",
@@ -27,7 +29,7 @@ const AdminDoughnut = () => {
   return (
     <div className="w-full h-80  bg-white rounded-md shadow-lg   flex justify-center ">
       <Doughnut
-        options={DoughnutOptions}
+        options={options}
         data={{
           labels: SourceData.map((data) => data.label),
           datasets: [
