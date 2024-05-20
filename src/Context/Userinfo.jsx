@@ -9,7 +9,6 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-
   switch (action.type) {
     case "login":
       return { ...state, role: action.payload.role, auth: true };

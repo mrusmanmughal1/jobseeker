@@ -29,7 +29,9 @@ import AdminJobsLIst from "./Feature/Admin/AdminJobsLIst";
 import AdminEmployeerList from "./Feature/Admin/AdminEmployeerList";
 import JobsBySector from "./UI/JobsBySector";
 import AdminSettings from "./Feature/Admin/AdminSettings";
+import AdminViewJobs from "./UI/AdminViewJobs";
 import { useUserinfo } from "./Context/Userinfo";
+import EmployerViewProfile from "./UI/EmployerViewProfile";
 
 const App = () => {
   return (
@@ -50,6 +52,11 @@ const App = () => {
           <Route path="/admin/Jobs" element={<AdminJobsLIst />} />
           <Route path="/admin/employeers" element={<AdminEmployeerList />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
+          <Route path="/admin/view-jobs" element={<AdminViewJobs />} />
+          <Route
+            path="/admin/view-employeer-profile"
+            element={<EmployerViewProfile />}
+          />
         </Route>
 
         {/* Protected   Nested Routing  for Candidate   */}
@@ -85,7 +92,7 @@ const App = () => {
         {/* olol */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-     <Footer /> 
+      <Footer />
     </BrowserRouter>
   );
 };

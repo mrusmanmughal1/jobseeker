@@ -60,10 +60,6 @@ const JobsBySector = () => {
     { alb: "Z", title: "Zoologist", num: 48 },
   ];
 
-  alphabets.map((v, i) => {
-    return v, i;
-  });
-
   return (
     <div>
       <ImageBanner text="Specialisms List" />

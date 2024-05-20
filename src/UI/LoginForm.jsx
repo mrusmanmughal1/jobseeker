@@ -9,7 +9,7 @@ import { useState } from "react";
 const credentials = {
   login: "",
   password: "",
-  role:"admin"
+  role: "admin",
 };
 const LoginForm = ({ paddingMain, width, fontSize }) => {
   const { dispatch } = useUserinfo();

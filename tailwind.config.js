@@ -6,6 +6,7 @@ export default {
       colors: {
         "blurr-bg": "#9d73ad",
         "btn-primary": "#4e007a",
+        "primary-green": "#8DC63E",
       },
     },
   },
