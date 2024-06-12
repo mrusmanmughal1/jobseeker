@@ -10,7 +10,7 @@ const AdminProtected = ({ children }) => {
       navigate("/login");
     }
   }, [auth, navigate]);
-  if (user_type == "admin") {
+  if (user_type == "administrator") {
     return children;
   } else {
     navigate("/");

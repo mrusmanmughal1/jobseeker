@@ -28,7 +28,7 @@ export const useLogin = () => {
 
       // Navigate based on user type
       const destination =
-        user_type === "admin" ? "/admin/dashboard" : "/dashboard";
+        user_type === "administrator" ? "/admin/dashboard" : "/dashboard";
       navigate(destination, { replace: true });
 
       // on success toast
