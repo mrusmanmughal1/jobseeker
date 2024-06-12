@@ -4,8 +4,14 @@ import {
 } from "react-icons/bi";
 
 import Job from "./Job";
+import { useAllJobs } from "../Services/Jobs/useAllJobs";
+import { NavLink } from "react-router-dom";
+import Loader from "./Loader";
 const RecentJObs = () => {
-  const job = [1, 1, 1, 1, 1, 1];
+  const { data, isLoading, status, isError } = useAllJobs();
+if (!data ) {
+  return <Loader/>
+}
   return (
     <div className=" w-full   mx-auto  ">
       <div className="flex items-center   justify-between     border-b-2">
@@ -20,15 +26,16 @@ const RecentJObs = () => {
         </div>
       </div>
       <div className="border  mt-8">
-        {job.map((val, i) => (
-          <Job key={i} />
+        {data?.data?.results.slice(0, 5).map((val, i) => (
+          <Job key={i} job={val} rec='res' />
         ))}
       </div>
       <div className="flex py-4  justify-end">
-        <button className="px-4 py-2 bg-purple-900 font-semibold rounded-md text-white">
-          {" "}
+        <NavLink to={"/jobs"}  className="px-4 py-2 bg-purple-900 font-semibold rounded-md text-white">
+          
+        
           ALL JOBS
-        </button>
+        </NavLink>
       </div>
     </div>
   );

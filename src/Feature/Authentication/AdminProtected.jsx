@@ -4,13 +4,13 @@ import { useUserinfo } from "../../Context/Userinfo";
 
 const AdminProtected = ({ children }) => {
   const navigate = useNavigate();
-  const { auth, role } = useUserinfo();
+  const { auth, user_type } = useUserinfo();
   useEffect(() => {
     if (!auth) {
       navigate("/login");
     }
   }, [auth, navigate]);
-  if (role == "admin") {
+  if (user_type == "admin") {
     return children;
   } else {
     navigate("/");

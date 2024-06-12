@@ -4,7 +4,7 @@ import { useUserinfo } from "../../Context/Userinfo";
 
 const ProtectedRoutes = ({ children }) => {
   const navigate = useNavigate();
-  const { auth, role } = useUserinfo();
+  const { auth, user_type } = useUserinfo();
 
   useEffect(() => {
     if (!auth) {
@@ -12,7 +12,7 @@ const ProtectedRoutes = ({ children }) => {
     }
   }, [auth, navigate]);
 
-  if (auth && role === ("Candidate" || "employeer")) {
+  if (auth && (user_type === "candidate" || user_type === "employer")) {
     return children;
   } else {
     navigate("/");

@@ -3,26 +3,37 @@ import { createContext, useContext, useReducer } from "react";
 const User = createContext();
 
 const initialState = {
-  auth: "",
-  key: "",
-  role: null,
+  auth: null,
+  user_type: "",
+  username: "",
+  user_id: "",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
-      return { ...state, role: action.payload.role, auth: true };
+      return {
+        ...state,
+        user_type: action.payload.user_type,
+        auth: action.payload.username,
+        user_id: action.payload.user_id,
+      };
     case "logout":
-      return { user: null, role: null, auth: null };
+      return { user_type: null, auth: null };
     default:
       state;
   }
 };
 
 const Userinfo = ({ children }) => {
-  const [{ auth, key, role }, dispatch] = useReducer(reducer, initialState);
+  const [{ auth, user_type, user_id, username }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
   return (
-    <User.Provider value={{ dispatch, auth, role }}>{children}</User.Provider>
+    <User.Provider value={{ dispatch, auth, user_type, user_id, username }}>
+      {children}
+    </User.Provider>
   );
 };
 const useUserinfo = () => {

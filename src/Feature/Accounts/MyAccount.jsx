@@ -1,11 +1,19 @@
+import { NavLink } from "react-router-dom";
+import { useCandidateDetails } from "../../Services/Candidate/useCandidateDetails";
+import Loader from "../../UI/Loader";
+
 const MyAccount = () => {
+  const { data, isLoading } = useCandidateDetails();
+  if (isLoading) return <Loader style="pt-20" />;
+  const { first_name, last_name, email, dob, phone, country, city, salary } =
+    data.data.data;
   return (
     <div className="   w-full  md:w-3/4   ">
       <div className="  flex justify-between   ">
         <p className="text-3xl font-semibold  tracking-wider">
           ACCOUNT INFORMATION
         </p>
-        <a href=""> Edit</a>
+        <NavLink to='/dashboard/profile' className='text-btn-primary hover:font-medium duration-500'> Edit</NavLink>
       </div>
       <div className="flex gap-10 sm:gap-24 py-8">
         <div className="w-full">
@@ -14,26 +22,24 @@ const MyAccount = () => {
             <li>First Name</li>
             <li>Last name</li>
             <li>Birthday</li>
-            <li>Address 1</li>
+            {/* <li>Address 1</li> */}
             <li>City</li>
             <li>Country</li>
             <li>Phone</li>
-            <li>Cover Letter</li>
             <li>Minimum Salary</li>
           </ul>
         </div>
         <div className="w-full">
           <ul className="flex flex-col gap-8">
-            <li>misterusman3@gmail.com</li>
-            <li>muhammad</li>
-            <li>Usman</li>
-            <li>1996-02-02</li>
+            <li>{email}</li>
+            <li>{first_name}</li>
+            <li>{last_name}</li>
+            <li>{dob}</li>
             <li>Lahore</li>
-            <li>Lahore</li>
+            <li>{city}</li>
             <li>Pakistan</li>
-            <li>923049513443</li>
-            <li>sadasdas</li>
-            <li>50000</li>
+            <li>{phone}</li>
+            <li>{salary}</li>
           </ul>
         </div>
       </div>

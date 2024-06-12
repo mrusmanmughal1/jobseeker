@@ -5,12 +5,12 @@ import Job from "../Job";
 import JobSearchbar from "../../UI/JobSearchbar";
 import JobType from "../../UI/JobType";
 
-const JobsLayout = () => {
-  const job = [1, 1, 1, 1, 1, 1];
+const JobsLayout = (data = []) => {
+  const Jobs = data?.data?.data?.results;
 
   return (
     <div className="flex lg:flex-row flex-col w-11/12 mx-auto ">
-      <div className="pt-4  lg:order-none order-2">
+      <div className="pt-4 lg:w-[30%]  lg:order-none order-2">
         <CvUpload />
         <FeaturedJobs />
         <JobType />
@@ -21,8 +21,8 @@ const JobsLayout = () => {
           <JobSearchbar />
         </div>
         <div className=" lg:ps-8   mt-8">
-          {job.map((val, i) => (
-            <Job jobs={true} key={i} />
+          {Jobs?.map((val, i) => (
+            <Job job={val} key={i} />
           ))}
         </div>
         <div className="mx-auto lg:w-11/12  ">

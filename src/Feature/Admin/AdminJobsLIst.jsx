@@ -2,11 +2,13 @@ import { BiWorld } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
+import Adminfilters from "./Adminfilters";
 
 const AdminJobsList = () => {
   const aa = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className="flex flex-col gap-4">
+      <Adminfilters/>
       {aa.map((v, i) => (
         <div
           key={i}
@@ -19,7 +21,10 @@ const AdminJobsList = () => {
               <BiWorld /> Lahore , Pakistan
             </p>
           </div>
-          <div className="w-full md:w-1/3 text-sm p-2"></div>
+          <div className="w-full md:w-1/3 text-sm p-2 font-bold">
+            <p>Salary :  <span  className="text-sm font-medium">20$ /hr</span> </p>
+            <p>Job Type : <span className="font-medium">Contract</span></p>
+          </div>
           <div className="md:w-1/3 w-full flex justify-end gap-4 md:flex-row md:items-center text-purple-900">
             <div className="flex gap-4">
               <button

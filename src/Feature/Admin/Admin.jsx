@@ -3,8 +3,7 @@ import {
   Chart as ChartJS,
   Legend,
   Tooltip,
-  defaults,
-  plugins,
+  
 } from "chart.js/auto";
 
 import AdminBarGraph from "../../UI/AdminBarGraph";

@@ -6,14 +6,16 @@ import { useLogin } from "../Services/Login/useLogin";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
+import MiniLoader from "./MiniLoader";
+
 const credentials = {
-  login: "",
+  username_or_email: "",
   password: "",
-  role: "admin",
 };
+
 const LoginForm = ({ paddingMain, width, fontSize }) => {
-  const { dispatch } = useUserinfo();
   const { mutate: Login, isLoading } = useLogin();
+  console.log(isLoading , 'loading')
 
   const [showPassword, setshowPassword] = useState(false);
 
@@ -21,8 +23,6 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
     useFormik({
       initialValues: credentials,
       onSubmit: (values, action) => {
-        dispatch({ type: "login", payload: values });
-        action.resetForm();
         Login(values);
       },
       validationSchema: LoginSchema,
@@ -43,15 +43,15 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
               <input
                 className="border p-3 font-bold w-full bg-slate-200 "
                 placeholder="User Name or Email Address"
-                name="login"
-                id="login"
+                name="username_or_email"
+                id="username_or_email"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.login}
+                value={values.username_or_email}
               />
-              {errors.login && touched.login && (
+              {errors.username_or_email && touched.username_or_email && (
                 <p className="text-start px-1  text-sm font-semibold text-red-600">
-                  {errors.login}
+                  {errors.username_or_email}
                 </p>
               )}
             </div>
@@ -88,16 +88,17 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
               <label htmlFor="remember">Remember Me</label>
             </div>
             <div className=" font-semibold">
-              <a href=""> Forget Password?</a>
+              <NavLink to="/forget-password" className='hover:text-btn-primary'> Forget Password?</NavLink>
             </div>
           </div>
           <div className="flex    gap-4 justify-between">
             <div className=" ">
               <button
                 type="submit"
+                disabled={isLoading}
                 className="font-bold bg-[#4e007a] text-white border-btn-primary border-2  px-10  w-full  rounded-md py-2"
               >
-                LOGIN
+                {isLoading ? <MiniLoader/> : 'LOGIN'}
               </button>
             </div>
             <div className=" ">

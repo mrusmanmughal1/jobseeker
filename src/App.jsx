@@ -17,7 +17,7 @@ import ApplicationHistory from "./Feature/Accounts/ApplicationHistory";
 import Manageprofile from "./Feature/Accounts/Manageprofile";
 import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
-import NewPost from "./UI/NewPost";
+import NewPost from "./UI/NewJobPost";
 import Jobtitle from "./UI/Jobtitle";
 import CandidateDetails from "./Feature/Candidate/CandidateDetails";
 import PrivacyLopicy from "./pages/PrivacyLopicy";
@@ -30,8 +30,8 @@ import AdminEmployeerList from "./Feature/Admin/AdminEmployeerList";
 import JobsBySector from "./UI/JobsBySector";
 import AdminSettings from "./Feature/Admin/AdminSettings";
 import AdminViewJobs from "./UI/AdminViewJobs";
-import { useUserinfo } from "./Context/Userinfo";
 import EmployerViewProfile from "./UI/EmployerViewProfile";
+import ForGetPassword from "./UI/ForGetPassword";
 
 const App = () => {
   return (
@@ -58,7 +58,6 @@ const App = () => {
             element={<EmployerViewProfile />}
           />
         </Route>
-
         {/* Protected   Nested Routing  for Candidate   */}
         <Route
           path="dashboard"
@@ -75,14 +74,13 @@ const App = () => {
           <Route path="profile" element={<Manageprofile />} />
           <Route path="new-post" element={<NewPost />} />
         </Route>
-
         {/* Public Routes */}
         <Route path="/candidate" element={<Candidate />} />
         <Route path="/Details" element={<CandidateDetails />} />
-
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/about-us" element={<About />} />
+        <Route path="/forget-password" element={<ForGetPassword />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<LoginPage />} />

@@ -20,6 +20,7 @@ const LoginPage = () => {
       <div className=" py-10    ">
         <LoginForm />
       </div>
+    
     </div>
   );
 };

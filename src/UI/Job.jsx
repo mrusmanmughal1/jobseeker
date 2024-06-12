@@ -4,29 +4,30 @@ import { FaCartPlus } from "react-icons/fa";
 import { GiLetterBomb } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 
-const Job = ({ jobs }) => {
+const Job = ({ job = [] , rec }) => {
   return (
     <div
       className={`${
-        jobs && "shadow-lg  my-4   border-2 "
+        !rec  && "shadow-lg  my-4   border-2 "
       } border-b hover:bg-slate-100 bg-white `}
     >
       <div className=" flex flex-col md:flex-row gap-4 p-5  ">
         <div className=" w-full   md:w-1/3 flex flex-col gap-4">
-          <p className="uppercase font-bold">UI designer</p>
+          <p className="uppercase font-bold">{job.title}</p>
           <p className="text-xs flex gap-2 items-center">
             <BiWorld /> Lahore , Pakistan
           </p>
         </div>
         <div className=" w-full md:w-1/3 text-sm p-2">
           <p className="flex gap-2 items-center text-btn-primary ">
-            <CiClock2 className="font-extrabold  " /> Full Time
+            <CiClock2 className="font-extrabold  " /> {job.contract_type}
           </p>
           <div>
             <p className="flex items-start gap-1">
               {" "}
               <GiLetterBomb className="text-gray-500 pt-1 text-lg " /> Salary
-              $20/hours Work Eligibility: USC,CPT
+              &nbsp;
+              {job.rate} Eligibility: USC,CPT
             </p>
           </div>
         </div>

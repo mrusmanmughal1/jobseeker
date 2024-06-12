@@ -30,7 +30,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const { auth, role } = useUserinfo();
+  const { auth,  user_type } = useUserinfo();
   return (
     <section
       className={`${
@@ -51,7 +51,7 @@ const Navbar = () => {
                 <li>
                   <NavLink to="/jobs">JOBS</NavLink>
                 </li>
-                {role && (
+                {user_type == 'employer' && (
                   <li>
                     <NavLink to="/candidate">Candidates</NavLink>
                   </li>
@@ -110,7 +110,7 @@ const Navbar = () => {
                       <img src={loginicon} width={35} />
                     </div>
                   </div>
-                  <div
+                {user_type =='candidate' &&   <div
                     className="relative cursor-pointer"
                     onClick={() => setcart(!cart)}
                   >
@@ -122,7 +122,7 @@ const Navbar = () => {
                     <div className="rounded-full border-2 absolute bottom-6 border-purple-950 px-1   text-sm left-28 ">
                       {9}
                     </div>
-                  </div>
+                  </div>}
                 </>
               )}
               {!auth && (

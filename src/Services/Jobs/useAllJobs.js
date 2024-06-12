@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
+import { BASE_URL } from "../../config/Config";
+import axios from "axios";
 
 const getAllJobs = async () => {
-  try {
-    const api = "https://jsonplaceholder.typicode.com/todos";
+  const API = `${BASE_URL}api/jobs/`;
 
-    const res = await fetch(api).then((a) => a.json());
-    return res;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+   
+
+  const res = await axios.get(API);
+  console.log(res);
+  return res;
 };
 
 export const useAllJobs = () => {

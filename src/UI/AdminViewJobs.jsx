@@ -32,15 +32,15 @@ const AdminViewJobs = () => {
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           </div>
           <div className="mt-4 lg:mt-0 flex flex-col lg:gap-4">
-            <button className="uppercase bg-[#008000] w-60 py-2 flex items-center font-bold text-white rounded-md mb-4 lg:mb-0">
+            <button className="uppercase bg-[#008000] w-60 p-2 flex items-center font-bold text-white rounded-md mb-4 lg:mb-0">
               <FaCheck className=" mr-6" />
               Approve the job
             </button>
             <button
               onClick={() => setshowModel(true)}
-              className="uppercase bg-[#008000] flex items-center w-60 font-bold text-white rounded-md py-2 "
+              className="uppercase bg-[#008000] flex items-center w-60 font-bold text-white rounded-md p-2 "
             >
-              <RxCross1 className=" font-bold mr-6" />
+              <RxCross1 className=" font-extrabold mr-6 " />
               Reject the job
             </button>
           </div>

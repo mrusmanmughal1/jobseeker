@@ -12,8 +12,8 @@ const FooterBottom = () => {
       </p>
       <div className="hidden lg:block ">
         <button onClick={scrollToTop}>
-          <p className="flex    hover:cursor-pointer items-center gap-2">
-            Back to Top <BiSolidUpArrowSquare />{" "}
+          <p className="flex   capitalize  hover:cursor-pointer items-center gap-2">
+            Back to Top <BiSolidUpArrowSquare className="text-2xl" />{" "}
           </p>
         </button>
       </div>

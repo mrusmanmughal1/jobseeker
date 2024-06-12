@@ -10,7 +10,7 @@ const Home = () => {
       <MainInfoBar />
       <div className="flex flex-col   lg:flex-row md:gap-10 gap-0    w-11/12 mx-auto py-4">
         <RecentJObs />
-        <div className="md:w-[40%] w-11/12  mx-auto">
+        <div className="md:w-[30%] w-11/12  mx-auto">
           <FeaturedJobs />
         </div>
       </div>

@@ -1,26 +1,82 @@
 import { useFormik } from "formik";
 import { RegisterSchema } from "../helpers/Schema/FormValidation";
-
+import { useRegister } from "../Services/register/useRegister";
+import { useEffect, useState } from "react";
+import { BASE_URL } from "../config/Config";
+import Select from "react-select";
+import MiniLoader from "./MiniLoader";
 const initialValues = {
-  Account_type: "",
-  UserName: "",
-  Email: "",
-  Password: "",
-  ConfirmPassword: "",
-  FirstName: "",
-  LastName: "",
-  Specialization: "",
+  account_type: "",
+  username: "",
+  email: "",
+  password: "",
+  confirm_password: "",
+  first_name: "",
+  last_name: "",
+  phone: "",
 };
 const RegisterFOrm = () => {
-  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
-    useFormik({
-      initialValues,
-      onSubmit: (values, action) => {
-        console.log(values);
-        action.resetForm();
-      },
-      validationSchema: RegisterSchema,
-    });
+  const [Specializations, setSpecializations] = useState();
+
+  useEffect(() => {
+    const API = `${BASE_URL}api/specializations/`;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(API);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const jsonData = await response.json();
+        setSpecializations(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+    console.log(Specializations?.specializations);
+  }, []);
+  const { mutate: Register, isLoading } = useRegister();
+
+  const arr = [
+    "usmna",
+    "ilyas",
+    " usman ",
+    "hello ",
+    "usmna",
+    "ilyas",
+    " usman ",
+    "hello ",
+  ];
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    setFieldValue,
+  } = useFormik({
+    initialValues,
+    onSubmit: (values, action) => {
+      console.log(values);
+      Register(values);
+      // action.resetForm();
+    },
+    validationSchema: RegisterSchema,
+  });
+
+  // handle special change
+  const handleSpecialChange = (SELECTED) => {
+    console.log(SELECTED);
+    const selectedValues = SELECTED
+      ? SELECTED.map((option) => option.value)
+      : [];
+    console.log(selectedValues);
+
+    setFieldValue("specialization", selectedValues);
+  };
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
@@ -34,28 +90,28 @@ const RegisterFOrm = () => {
               <div className="flex items-center gap-3">
                 <input
                   type="radio"
-                  name="Account_type"
+                  name="account_type"
                   onChange={handleChange}
-                  id="candidate"
-                  value="ss"
+                  id="account_type1"
+                  value="candidate"
                 />
-                <label htmlFor="candidate"> Candidate</label>
+                <label htmlFor="account_type1"> Candidate</label>
               </div>
               <div className=" flex items-center gap-3">
                 <input
                   type="radio"
-                  name="Account_type"
-                  id="Employer"
-                  value="Employeer"
+                  name="account_type"
+                  id="account_type"
+                  value="employer"
                   onChange={handleChange}
                 />
 
-                <label htmlFor="Employer"> Employer</label>
+                <label htmlFor="account_type"> Employer</label>
               </div>
             </div>
-            {errors.Account_type && touched.Account_type && (
+            {errors.account_type && touched.account_type && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
-                {errors.Account_type}
+                {errors.account_type}
               </p>
             )}
           </div>
@@ -68,15 +124,36 @@ const RegisterFOrm = () => {
               type="text"
               className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
               placeholder="USER NAME"
-              name="UserName"
-              id="UserName"
+              name="username"
+              id="username"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.UserName}
+              value={values.username}
             />
-            {errors.UserName && touched.UserName && (
+            {errors.username && touched.username && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
-                {errors.UserName}
+                {errors.username}
+              </p>
+            )}
+          </div>
+          <div className="">
+            <div className="flex gap-2 items-center">
+              <p>Phone </p>
+              <p className="text-xs">Enter Your Phone </p>
+            </div>
+            <input
+              type="text"
+              className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
+              placeholder="USER NAME"
+              name="phone"
+              id="phone"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.phone}
+            />
+            {errors.phone && touched.phone && (
+              <p className="text-start px-1  text-sm font-semibold text-red-600">
+                {errors.phone}
               </p>
             )}
           </div>
@@ -91,15 +168,15 @@ const RegisterFOrm = () => {
               type="text"
               className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
               placeholder="Email Address"
-              name="Email"
-              id="Email"
+              name="email"
+              id="email"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.Email}
+              value={values.email}
             />
-            {errors.Email && touched.Email && (
+            {errors.email && touched.email && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
-                {errors.Email}
+                {errors.email}
               </p>
             )}
           </div>
@@ -112,15 +189,15 @@ const RegisterFOrm = () => {
               type="password"
               className="py-4 px-2 rounded-sm border  w-full text-black font-semibold bg-gray-200 outline-none"
               placeholder="Password "
-              name="Password"
-              id="Password"
+              name="password"
+              id="password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.Password}
+              value={values.password}
             />
-            {errors.Password && touched.Password && (
+            {errors.password && touched.password && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
-                {errors.Password}
+                {errors.password}
               </p>
             )}
           </div>
@@ -133,15 +210,15 @@ const RegisterFOrm = () => {
               type="password"
               className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
               placeholder="Confirm Password "
-              name="ConfirmPassword"
-              id="ConfirmPassword"
+              name="confirm_password"
+              id="confirm_password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.ConfirmPassword}
+              value={values.confirm_password}
             />
-            {errors.ConfirmPassword && touched.ConfirmPassword && (
+            {errors.confirm_password && touched.confirm_password && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
-                {errors.ConfirmPassword}
+                {errors.confirm_password}
               </p>
             )}
           </div>
@@ -156,15 +233,15 @@ const RegisterFOrm = () => {
                   type="text"
                   className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
                   placeholder="First Name "
-                  name="FirstName"
-                  id="FirstName"
+                  name="first_name"
+                  id="first_name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.FirstName}
+                  value={values.first_name}
                 />
-                {errors.FirstName && touched.FirstName && (
+                {errors.first_name && touched.first_name && (
                   <p className="text-start px-1  text-sm font-semibold text-red-600">
-                    {errors.FirstName}
+                    {errors.first_name}
                   </p>
                 )}
               </div>
@@ -179,15 +256,15 @@ const RegisterFOrm = () => {
                   type="text"
                   className="py-4 px-2 w-full rounded-sm border text-black font-semibold bg-gray-200 outline-none"
                   placeholder="Last Name "
-                  name="LastName"
-                  id="LastName"
+                  name="last_name"
+                  id="last_name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.LastName}
+                  value={values.last_name}
                 />
-                {errors.LastName && touched.LastName && (
+                {errors.last_name && touched.last_name && (
                   <p className="text-start px-1  text-sm font-semibold text-red-600">
-                    {errors.LastName}
+                    {errors.last_name}
                   </p>
                 )}
               </div>
@@ -197,26 +274,22 @@ const RegisterFOrm = () => {
             <div className="">
               <div className="flex gap-2 items-center">
                 <p>Specializations </p>
-                <p className="text-xs">Enter Last Name </p>
+                <p className="text-xs">Enter Specializations </p>
               </div>
-              <select
-                name="Specialization"
-                id="cars"
-                className="w-full p-4 text-black font-semibold border-none Specialization  bg-gray-200 outline-none"
-                onChange={handleChange}
-                value={values.Specialization}
-              >
-                <option
-                  value="volvo"
-                  className="hover:bg-btn-primary hover:text-white"
-                >
-                  Volvo
-                </option>
-                <option value="saab">Saab</option>
-              </select>
-              {errors.Specialization && touched.Specialization && (
+
+              <Select
+                isMulti
+                className=""
+                onChange={handleSpecialChange}
+                options={Specializations?.specializations?.map((option) => ({
+                  value: option,
+                  label: option,
+                }))}
+              />
+
+              {errors.specialization && touched.specialization && (
                 <p className="text-start px-1  text-sm font-semibold text-red-600">
-                  {errors.Specialization}
+                  {errors.specialization}
                 </p>
               )}
             </div>
@@ -226,11 +299,12 @@ const RegisterFOrm = () => {
               className="font-semibold px-8 py-4 rounded-md bg-purple-900 text-white"
               type="submit"
             >
-              REGISTER NOW
+             {isLoading ? <MiniLoader/> : ' REGISTER NOW'}
             </button>
           </div>
         </div>
       </form>
+      {values.errors}
     </div>
   );
 };

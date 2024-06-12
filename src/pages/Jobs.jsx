@@ -6,8 +6,7 @@ import Loader from "../UI/Loader";
 
 const Jobs = () => {
   const { data, isLoading, status, isError } = useAllJobs();
-
-  if (isLoading) return <Loader />;
+  if (isLoading) return <Loader style=" py-64" />;
   if (!status) return <Loader />;
 
   return (
@@ -20,7 +19,7 @@ const Jobs = () => {
           }
         />
       )}
-      {data && <JobsLayout />}
+      {data && <JobsLayout data={data} />}
     </div>
   );
 };

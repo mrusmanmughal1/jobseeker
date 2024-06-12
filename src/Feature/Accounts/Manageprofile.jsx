@@ -1,4 +1,47 @@
+import { useFormik } from "formik";
+import { ManageProfileCandidate } from "../../helpers/Schema/FormValidation";
+
 const Manageprofile = () => {
+  const initialValues = {
+    email: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    dateOfBirth: "",
+    address1: "",
+    address2: "",
+    city: "",
+    country: "",
+    phone: "",
+    website: "",
+    about: "",
+    coverLetter: "",
+    jobInterests: "",
+    minimumSalary: "",
+    avatarImage: null,
+    cvFile: null,
+    newPassword: "",
+    confirmPassword: "",
+  };
+
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    setFieldValue,
+  } = useFormik({
+    initialValues,
+    onSubmit: (values, action) => {
+      console.log(values);
+      // Register(values);
+      // action.resetForm();
+    },
+    validationSchema: ManageProfileCandidate,
+  });
+
   return (
     <div className="md:w-3/4">
       <from>
