@@ -73,7 +73,7 @@ export const ManageProfileCandidate = Yup.object({
   city: Yup.string().required("City is required"),
   country: Yup.string().required("Country is required"),
   phone: Yup.string().required("Phone number is required"),
-  website: Yup.string().url("Invalid URL"),
+  website: Yup.string(),
   about: Yup.string(),
   coverLetter: Yup.string(),
   jobInterests: Yup.string(),

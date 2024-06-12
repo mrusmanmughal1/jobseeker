@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
 import { ManageProfileCandidate } from "../../helpers/Schema/FormValidation";
+import { useCandidateDetails } from "../../Services/Candidate/useCandidateDetails";
+import { useCandidateManageProfile } from "../../Services/Candidate/CandidateManageProfile";
 
 const Manageprofile = () => {
   const initialValues = {
@@ -23,6 +25,7 @@ const Manageprofile = () => {
     newPassword: "",
     confirmPassword: "",
   };
+  const { mutate: updateProfile, isLoading } = useCandidateManageProfile();
 
   const {
     values,
@@ -36,7 +39,7 @@ const Manageprofile = () => {
     initialValues,
     onSubmit: (values, action) => {
       console.log(values);
-      // Register(values);
+      updateProfile(values);
       // action.resetForm();
     },
     validationSchema: ManageProfileCandidate,
@@ -44,7 +47,7 @@ const Manageprofile = () => {
 
   return (
     <div className="md:w-3/4">
-      <from>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="">
             <label className="font-semibold ">
@@ -54,8 +57,17 @@ const Manageprofile = () => {
             <input
               type="text"
               placeholder="Email"
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.email && touched.email && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.email}
+              </p>
+            )}
           </div>
           <div className="flex md:flex-row flex-col gap-10">
             <div className="">
@@ -68,21 +80,39 @@ const Manageprofile = () => {
               <input
                 type="text"
                 placeholder="First Name"
+                name="firstName"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.firstName}
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
+              {errors.firstName && touched.firstName && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.firstName}
+                </p>
+              )}
             </div>
             <div className="">
               <label className="font-semibold ">
                 Last Name
                 <span className="text-sm px-2 font-normal">
-                  Enter your first name
+                  Enter your last name
                 </span>
               </label>
               <input
                 type="text"
                 placeholder="Last Name"
+                name="lastName"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.lastName}
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
+              {errors.lastName && touched.lastName && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.lastName}
+                </p>
+              )}
             </div>
           </div>
           <div className="flex md:flex-row flex-col gap-10">
@@ -93,21 +123,41 @@ const Manageprofile = () => {
                   Select your gender.
                 </span>
               </label>
-              <select className="block w-full border p-3 bg-gray-100">
+              <select
+                name="gender"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.gender}
+                className="block w-full border p-3 bg-gray-100"
+              >
+                <option value="">Select Gender</option>
                 <option value="Male">Male</option>
-                <option value="fe-Male">Fe-Male</option>
+                <option value="Female">Female</option>
               </select>
+              {errors.gender && touched.gender && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.gender}
+                </p>
+              )}
             </div>
             <div className="w-full">
               <label className="font-semibold ">
                 Date Of Birth
-                <span className="text-sm px-2 font-normal">(dd/mm/yyy)</span>
+                <span className="text-sm px-2 font-normal">(dd/mm/yyyy)</span>
               </label>
               <input
                 type="date"
-                placeholder="Email"
+                name="dateOfBirth"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.dateOfBirth}
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
+              {errors.dateOfBirth && touched.dateOfBirth && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.dateOfBirth}
+                </p>
+              )}
             </div>
           </div>
           <div className="">
@@ -120,8 +170,17 @@ const Manageprofile = () => {
             <input
               type="text"
               placeholder="Address"
+              name="address1"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.address1}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.address1 && touched.address1 && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.address1}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -133,8 +192,17 @@ const Manageprofile = () => {
             <input
               type="text"
               placeholder="Address"
+              name="address2"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.address2}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.address2 && touched.address2 && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.address2}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -143,9 +211,18 @@ const Manageprofile = () => {
             </label>
             <input
               type="text"
-              placeholder="City "
+              placeholder="City"
+              name="city"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.city}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.city && touched.city && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.city}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -157,8 +234,17 @@ const Manageprofile = () => {
             <input
               type="text"
               placeholder="Country"
+              name="country"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.country}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.country && touched.country && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.country}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -170,8 +256,17 @@ const Manageprofile = () => {
             <input
               type="text"
               placeholder="Phone"
+              name="phone"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.phone}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.phone && touched.phone && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.phone}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -182,9 +277,18 @@ const Manageprofile = () => {
             </label>
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Website"
+              name="website"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.website}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.website && touched.website && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.website}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -197,30 +301,57 @@ const Manageprofile = () => {
               rows="4"
               cols="50"
               type="text"
-              placeholder="Email"
+              placeholder="About"
+              name="about"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.about}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.about && touched.about && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.about}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">Cover Letter</label>
             <input
               type="text"
               placeholder="Cover Letter"
+              name="coverLetter"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.coverLetter}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.coverLetter && touched.coverLetter && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.coverLetter}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
-              Jobs Interests
+              Job Interests
               <span className="text-sm px-2 font-normal">
                 Select your interests
               </span>
             </label>
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Job Interests"
+              name="jobInterests"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.jobInterests}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.jobInterests && touched.jobInterests && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.jobInterests}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -230,10 +361,19 @@ const Manageprofile = () => {
               </span>
             </label>
             <input
-              type="text"
-              placeholder="Salary"
+              type="number"
+              placeholder="Minimum Salary"
+              name="minimumSalary"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.minimumSalary}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.minimumSalary && touched.minimumSalary && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.minimumSalary}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -244,46 +384,85 @@ const Manageprofile = () => {
             </label>
             <input
               type="file"
-              placeholder="Email"
+              name="avatarImage"
+              onChange={(event) => {
+                setFieldValue("avatarImage", event.currentTarget.files[0]);
+              }}
+              onBlur={handleBlur}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.avatarImage && touched.avatarImage && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.avatarImage}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
-              Cv File
+              CV File
               <span className="text-sm px-2 font-normal">
-                Upload Your cv File{" "}
+                Upload Your CV File
               </span>
             </label>
             <input
-              type="text"
-              placeholder="Email"
+              type="file"
+              name="cvFile"
+              onChange={(event) => {
+                setFieldValue("cvFile", event.currentTarget.files[0]);
+              }}
+              onBlur={handleBlur}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.cvFile && touched.cvFile && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.cvFile}
+              </p>
+            )}
           </div>
           <div className="">
-            <label className="font-semibold ">New password</label>
+            <label className="font-semibold ">New Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="New Password"
+              name="newPassword"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.newPassword}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.newPassword && touched.newPassword && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.newPassword}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">Confirm Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Confirm Password"
+              name="confirmPassword"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.confirmPassword}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
+            {errors.confirmPassword && touched.confirmPassword && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.confirmPassword}
+              </p>
+            )}
           </div>
         </div>
         <div className=" text-center py-6">
-          <button className="bg-btn-primary px-8 py-4 rounded-md text-white font-semibold">
+          <button
+            type="submit"
+            className="bg-btn-primary px-8 py-4 rounded-md text-white font-semibold"
+          >
             SAVE CHANGES
           </button>
         </div>
-      </from>
+      </form>
     </div>
   );
 };

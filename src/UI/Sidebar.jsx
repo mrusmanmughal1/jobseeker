@@ -2,36 +2,32 @@ import { NavLink } from "react-router-dom";
 import { useUserinfo } from "../Context/Userinfo";
 import { useLogout } from "../Services/Logout/useLogout";
 
-const Sidebar = ({ baseurl,   setSidebarStatus, gap = "gap-5" }) => {
-  const { dispatch, user_type } = useUserinfo();
+const Sidebar = ({ baseurl, gap = "gap-5" }) => {
+  const { user_type } = useUserinfo();
   const { mutate: logout } = useLogout();
   const handleClick = () => {
-    console.log('sasas')
     logout();
   };
 
   return (
     <div className="   mx-auto  w-full  ">
       <ul className={`flex flex-col   ${gap}`}>
-        <li
-          className="border-b w- border-t pb-5 pt-5"
-          onClick={() => set(false)}
-        >
+        <li className="border-b w- border-t pb-5 pt-5">
           <NavLink to={`${baseurl}myaccount`}> My Account</NavLink>
         </li>
-        <li className="border-b pb-5 " onClick={() => set(false)}>
+        <li className="border-b pb-5 ">
           <NavLink to={`${baseurl}applied`}>Application History </NavLink>
         </li>
-        <li className="border-b pb-5" onClick={() => set(false)}>
+        <li className="border-b pb-5">
           <NavLink to={`${baseurl}profile`}> Manage Profile </NavLink>
         </li>
         {user_type == "candidate" && (
-          <li className="border-b pb-5" onClick={() => set(false)}>
+          <li className="border-b pb-5">
             <NavLink to={`${baseurl}jobs-basket`}>Jobs Basket</NavLink>
           </li>
         )}
         {user_type == "employer" && (
-          <li className="border-b pb-5" onClick={() => set(false)}>
+          <li className="border-b pb-5">
             <NavLink to={`${baseurl}new-post`}>New Post</NavLink>
           </li>
         )}
