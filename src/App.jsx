@@ -32,6 +32,7 @@ import AdminSettings from "./Feature/Admin/AdminSettings";
 import AdminViewJobs from "./UI/AdminViewJobs";
 import EmployerViewProfile from "./UI/EmployerViewProfile";
 import ForGetPassword from "./UI/ForGetPassword";
+import CandidateViewProfile from "./UI/CandidateViewprofile";
 
 const App = () => {
   return (
@@ -56,6 +57,10 @@ const App = () => {
           <Route
             path="/admin/view-employeer-profile"
             element={<EmployerViewProfile />}
+          />
+          <Route
+            path="/admin/view-candidate-profile"
+            element={<CandidateViewProfile />}
           />
         </Route>
         {/* Protected   Nested Routing  for Candidate   */}
