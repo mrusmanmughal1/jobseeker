@@ -10,7 +10,7 @@ const CandidateDetails = async (Credndials, id) => {
   const token = localStorage.getItem("Token");
   console.log(Credndials);
 
-  const res = await axios.get(API, {
+  const res = await axios.put(API, Credndials, {
     headers: {
       Authorization: `Token ${token}`,
     },

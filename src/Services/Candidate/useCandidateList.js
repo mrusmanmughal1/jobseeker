@@ -5,7 +5,7 @@ import axios from "axios";
 const GetAllCandidateList = async () => {
   const API = `${BASE_URL}api/candidates-profiles-list/`;
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("Token");
   console.log(`Token ${token}`);
 
   const res = await axios.get(API, {

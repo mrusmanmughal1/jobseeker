@@ -32,7 +32,7 @@ const MyProfileCandidate = () => {
       <div className="flex gap-10 sm:gap-24 py-8">
         <div className="w-full">
           <ul className="flex  font-semibold flex-col gap-8">
-            <li>Email</li>
+            <li>Emaisl</li>
             <li>First Name</li>
             <li>Last name</li>
             <li>Birthday</li>

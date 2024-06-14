@@ -80,8 +80,8 @@ const App = () => {
           <Route path="new-post" element={<NewPost />} />
         </Route>
         {/* Public Routes */}
-        <Route path="/candidate" element={<Candidate />} />
-        <Route path="/Details" element={<CandidateDetails />} />
+        <Route path="/candidates" element={<Candidate />} />
+        <Route path="/Candidate-Details/:id" element={<CandidateDetails />} />
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/about-us" element={<About />} />

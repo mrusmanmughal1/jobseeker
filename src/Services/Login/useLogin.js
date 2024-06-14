@@ -17,10 +17,9 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const { mutate, isLoading } = useMutation({
     mutationFn: (credentials) => getLogin(credentials),
-    onSuccess: (data) => { 
+    onSuccess: (data) => {
       const { user_type, token } = data.data.data;
       dispatch({ type: "login", payload: data.data.data });
- 
 
       // setting Tokken and UserData to DB
       localStorage.setItem("Token", token);

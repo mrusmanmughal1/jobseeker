@@ -65,7 +65,7 @@ export const ManageProfileCandidate = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
   gender: Yup.string()
-    .oneOf(["Male", "Female"], "Invalid gender")
+    .oneOf(["male", "female"], "Invalid gender")
     .required("Gender is required"),
   dateOfBirth: Yup.string().required("Date of Birth is required"),
   address1: Yup.string().required("Address 1 is required"),

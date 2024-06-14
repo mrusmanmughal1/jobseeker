@@ -1,6 +1,11 @@
 import CandidateContact from "./CandidateContact";
 import Button from "../../Reuseables/Button";
+import { useCandidateDetail } from "../../Services/Employer/useCandidateDetail";
+import { useParams } from "react-router-dom";
 const CandidateDetails = () => {
+  const {id} = useParams()
+const a =  useCandidateDetail()
+console.log(id,a)
   return (
     <div>
       <div className="candidate-man relative  ">

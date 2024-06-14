@@ -17,11 +17,10 @@ const CandidateDetails = async (id) => {
   return res;
 };
 
-export const useCandidateDetails = () => {
-  const { user_id } = useUserinfo();
+export const useCandidateDetail = (id) => {
   const { data, isLoading, isError, status } = useQuery({
     queryKey: ["candidate"],
-    queryFn: () => CandidateDetails(user_id),
+    queryFn: () => CandidateDetails(id),
   });
   return { data, isLoading, status, isError };
 };

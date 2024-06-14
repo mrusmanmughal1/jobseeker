@@ -53,7 +53,7 @@ const Navbar = () => {
                 </li>
                 {user_type == 'employer' && (
                   <li>
-                    <NavLink to="/candidate">Candidates</NavLink>
+                    <NavLink to="/candidates">Candidates</NavLink>
                   </li>
                 )}
               </ul>
@@ -87,7 +87,7 @@ const Navbar = () => {
         </div>
         <div className="lg:block hidden">
           <nav>
-            <ul className="flex gap-2    uppercase text-lg  items-center">
+            <ul className="flex gap-4    uppercase text-lg  items-center">
               <li>
                 <NavLink to="/about-us">ABOUT US</NavLink>
               </li>
@@ -167,6 +167,7 @@ const Navbar = () => {
             baseurl="/dashboard/"
             set={showprofile}
             gap="gap-3 text-sm"
+            showprofile={showprofile}
           />
         </Minicart>
       )}

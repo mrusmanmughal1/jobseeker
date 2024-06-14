@@ -10,7 +10,7 @@ import Loader from "./Loader";
 const RecentJObs = () => {
   const { data, isLoading, status, isError } = useAllJobs();
 if (!data ) {
-  return <Loader/>
+  return <Loader style="py-32"/>
 }
   return (
     <div className=" w-full   mx-auto  ">

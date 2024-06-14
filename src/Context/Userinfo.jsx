@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer } from "react";
 const User = createContext();
 
 const initialState = {
-  auth: null,
+  auth: null,  
   user_type: "",
   username: "",
   user_id: "",
@@ -12,6 +12,7 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
+      console.log(action.payload);
       return {
         ...state,
         user_type: action.payload.user_type,

@@ -7,6 +7,7 @@ import JobType from "../../UI/JobType";
 
 const JobsLayout = (data = []) => {
   const Jobs = data?.data?.data?.results;
+  console.log(Jobs)
 
   return (
     <div className="flex lg:flex-row flex-col w-11/12 mx-auto ">

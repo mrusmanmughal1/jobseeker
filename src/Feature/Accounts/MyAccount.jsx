@@ -1,5 +1,5 @@
 import { useUserinfo } from "../../Context/Userinfo";
-import { EMPLOYER } from "../../helpers/Constants";
+import { EMPLOYER } from "../../utils/Constants";
 import MyProfileCandidate from "../Candidate/MyProfileCandidate";
 import MyProfileEmployers from "../Employer/MyProfileEmployers";
 
