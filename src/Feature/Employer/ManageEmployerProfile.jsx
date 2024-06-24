@@ -1,31 +1,43 @@
 import { useFormik } from "formik";
-import { ManageProfileCandidate } from "../../helpers/Schema/FormValidation";
-import { useCandidateDetails } from "../../Services/Candidate/useCandidateDetails";
-import { useCandidateManageProfile } from "../../Services/Candidate/CandidateManageProfile";
+import { ManageProfileEmployer } from "../../helpers/Schema/FormValidation";
+import { useEmployerDetails } from "../../Services/Employer/useEmployerDetails";
+import Loader from "../../UI/Loader";
+import ErrorMsg from "../../UI/ErrorMsg";
 
 const ManageEmployerProfile = () => {
+  const { data, isLoading: loading, status, isError } = useEmployerDetails();
+
+  const {
+    email,
+    last_name,
+    first_name,
+    address_1,
+    address_2,
+    city,
+    country,
+    phone,
+    website,
+    about,
+    specialisms,
+    avatar_image,
+  } = data.data.data;
+
   const initialValues = {
-    email: "",
-    firstName: "",
-    lastName: "",
-    gender: "",
-    dateOfBirth: "",
-    address1: "",
-    address2: "",
-    city: "",
-    country: "",
-    phone: "",
-    website: "",
-    about: "",
-    coverLetter: "",
-    jobInterests: "",
-    minimumSalary: "",
-    avatarImage: null,
-    cvFile: null,
+    email: email,
+    firstName: first_name,
+    lastName: last_name,
+    address1: address_1,
+    address2: address_2,
+    city: city,
+    country: country,
+    phone: phone,
+    website: website,
+    about: about,
+    jobInterests: specialisms,
+    avatarImage: avatar_image,
     newPassword: "",
     confirmPassword: "",
   };
-  const { mutate: updateProfile, isLoading } = useCandidateManageProfile();
 
   const {
     values,
@@ -39,11 +51,17 @@ const ManageEmployerProfile = () => {
     initialValues,
     onSubmit: (values, action) => {
       console.log(values);
-      updateProfile(values);
+      // updateProfile(values);
       // action.resetForm();
     },
-    validationSchema: ManageProfileCandidate,
+    validationSchema: ManageProfileEmployer,
   });
+
+  if (loading) return <Loader style="py-40" />;
+  if (isError)
+    return (
+      <ErrorMsg ErrorMsg="Unable To fetch Data Right Now !  Please try again!" />
+    );
 
   return (
     <div className="md:w-3/4">
@@ -51,7 +69,7 @@ const ManageEmployerProfile = () => {
         <div className="flex flex-col gap-6">
           <div className="">
             <label className="font-semibold ">
-              Emailss
+              Email
               <span className="text-sm px-2 font-normal">Enter your email</span>
             </label>
             <input
@@ -115,51 +133,7 @@ const ManageEmployerProfile = () => {
               )}
             </div>
           </div>
-          <div className="flex md:flex-row flex-col gap-10">
-            <div className="w-full">
-              <label className="font-semibold ">
-                Gender
-                <span className="text-sm px-2 font-normal">
-                  Select your gender.
-                </span>
-              </label>
-              <select
-                name="gender"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.gender}
-                className="block w-full border p-3 bg-gray-100"
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-              {errors.gender && touched.gender && (
-                <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.gender}
-                </p>
-              )}
-            </div>
-            <div className="w-full">
-              <label className="font-semibold ">
-                Date Of Birth
-                <span className="text-sm px-2 font-normal">(dd/mm/yyyy)</span>
-              </label>
-              <input
-                type="date"
-                name="dateOfBirth"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.dateOfBirth}
-                className="py-3 bg-gray-100 px-2 outline-none w-full"
-              />
-              {errors.dateOfBirth && touched.dateOfBirth && (
-                <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.dateOfBirth}
-                </p>
-              )}
-            </div>
-          </div>
+          <div className="flex md:flex-row flex-col gap-10"></div>
           <div className="">
             <label className="font-semibold ">
               Address 1
@@ -314,28 +288,12 @@ const ManageEmployerProfile = () => {
               </p>
             )}
           </div>
-          <div className="">
-            <label className="font-semibold ">Cover Letter</label>
-            <input
-              type="text"
-              placeholder="Cover Letter"
-              name="coverLetter"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.coverLetter}
-              className="py-3 bg-gray-100 px-2 outline-none w-full"
-            />
-            {errors.coverLetter && touched.coverLetter && (
-              <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.coverLetter}
-              </p>
-            )}
-          </div>
+
           <div className="">
             <label className="font-semibold ">
-              Job Interests
+              Specialisms
               <span className="text-sm px-2 font-normal">
-                Select your interests
+                Select your Specialisms
               </span>
             </label>
             <input
@@ -355,26 +313,27 @@ const ManageEmployerProfile = () => {
           </div>
           <div className="">
             <label className="font-semibold ">
-              Minimum Salary
+              Vacancies
               <span className="text-sm px-2 font-normal">
-                Set minimum salary ($)
+                Enter your Vacancies
               </span>
             </label>
             <input
               type="number"
-              placeholder="Minimum Salary"
-              name="minimumSalary"
+              placeholder="Vacancies"
+              name="jobInterests"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.minimumSalary}
+              value={values.jobInterests}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.minimumSalary && touched.minimumSalary && (
+            {errors.jobInterests && touched.jobInterests && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.minimumSalary}
+                {errors.jobInterests}
               </p>
             )}
           </div>
+
           <div className="">
             <label className="font-semibold ">
               Avatar Image
@@ -397,28 +356,7 @@ const ManageEmployerProfile = () => {
               </p>
             )}
           </div>
-          <div className="">
-            <label className="font-semibold ">
-              CV File
-              <span className="text-sm px-2 font-normal">
-                Upload Your CV File
-              </span>
-            </label>
-            <input
-              type="file"
-              name="cvFile"
-              onChange={(event) => {
-                setFieldValue("cvFile", event.currentTarget.files[0]);
-              }}
-              onBlur={handleBlur}
-              className="py-3 bg-gray-100 px-2 outline-none w-full"
-            />
-            {errors.cvFile && touched.cvFile && (
-              <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.cvFile}
-              </p>
-            )}
-          </div>
+
           <div className="">
             <label className="font-semibold ">New Password</label>
             <input

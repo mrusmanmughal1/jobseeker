@@ -16,7 +16,7 @@ const AdminTopWidgets = () => {
   ];
   return (
     <div className="">
-      <div className="flex  justify-between flex-col md:flex-row gap-8 flex-wrap       ">
+      <div className="flex  justify-between flex-col md:flex-row gap-8       ">
         {Raw?.map((val, i) => {
           const { title, number, icons } = val;
           return (
@@ -27,7 +27,7 @@ const AdminTopWidgets = () => {
               <p className="font-bold uppercase   text-center text-lg">
                 {title}
               </p>
-              <p className="text-btn-primary     text-4xl font-bold flex  justify-center gap-4">
+              <p className="text-btn-primary  text-2xl   2xl:text-4xl font-bold flex  justify-center gap-4">
                 {number} {icons}
               </p>
             </div>

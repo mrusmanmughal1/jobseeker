@@ -2,11 +2,15 @@ import { useFormik } from "formik";
 import { ManageProfileCandidate } from "../../helpers/Schema/FormValidation";
 import { useCandidateManageProfile } from "../../Services/Candidate/CandidateManageProfile";
 import { useCandidateDetails } from "../../Services/Candidate/useCandidateDetails";
+import Select from "react-select";
+import { useEffect, useState } from "react";
+import { BASE_URL } from "../../config/Config";
 
 const ManageCandidateProfile = () => {
+  const [Specializations, setSpecializations] = useState();
+
   const { data } = useCandidateDetails();
   const {
-    account_type,
     avatar_image,
     city,
     country,
@@ -15,31 +19,34 @@ const ManageCandidateProfile = () => {
     first_name,
     job_interest,
     last_name,
+    gender,
     phone,
     salary,
-    username,
+    address_1,
+    address_2,
+    cover_letter,
+    about,
+    cv,
   } = data.data.data;
 
   const initialValues = {
     email: email,
-    firstName: first_name,
-    lastName: last_name,
-    gender: "",
-    dateOfBirth: dob,
-    address1: "",
-    address2: "",
+    first_name: first_name,
+    last_name: last_name,
+    gender: gender,
+    dob: dob,
+    address_1: address_1,
+    address_2: address_2,
     city: city,
     country: country,
     phone: phone,
     website: "",
-    about: "",
-    coverLetter: "",
-    jobInterests: "",
-    minimumSalary: salary,
-    avatarImage: avatar_image,
-    cvFile: null,
-    newPassword: "",
-    confirmPassword: "",
+    about: about,
+    salary: salary,
+    avatar_image: avatar_image,
+    cv: cv,
+    new_password: "",
+    confirm_password: "",
   };
   const { mutate: updateProfile, isLoading } = useCandidateManageProfile();
 
@@ -55,12 +62,44 @@ const ManageCandidateProfile = () => {
     initialValues,
     onSubmit: (values, action) => {
       console.log(values);
-      updateProfile(values);
+      const formData = new FormData();
+      Object.keys(values).forEach(key => {
+        formData.append(key, values[key]);
+      });
+      
+      updateProfile(formData);
       // action.resetForm();
     },
     validationSchema: ManageProfileCandidate,
   });
 
+  useEffect(() => {
+    const API = `${BASE_URL}api/specializations/`;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(API);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const jsonData = await response.json();
+        setSpecializations(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // handle special change
+  const handleSpecialChange = (SELECTED) => {
+    const selectedValues = SELECTED
+      ? SELECTED.map((option) => option.value)
+      : [];
+
+    setFieldValue("job_interest", selectedValues.toString());
+  };
   return (
     <div className="md:w-3/4">
       <form onSubmit={handleSubmit}>
@@ -96,15 +135,15 @@ const ManageCandidateProfile = () => {
               <input
                 type="text"
                 placeholder="First Name"
-                name="firstName"
+                name="first_name"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.firstName}
+                value={values.first_name}
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
-              {errors.firstName && touched.firstName && (
+              {errors.first_name && touched.first_name && (
                 <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.firstName}
+                  {errors.first_name}
                 </p>
               )}
             </div>
@@ -118,15 +157,15 @@ const ManageCandidateProfile = () => {
               <input
                 type="text"
                 placeholder="Last Name"
-                name="lastName"
+                name="last_name"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.lastName}
+                value={values.last_name}
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
-              {errors.lastName && touched.lastName && (
+              {errors.last_name && touched.last_name && (
                 <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.lastName}
+                  {errors.last_name}
                 </p>
               )}
             </div>
@@ -163,15 +202,15 @@ const ManageCandidateProfile = () => {
               </label>
               <input
                 type="date"
-                name="dateOfBirth"
+                name="dob"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.dateOfBirth}
+                value={values.dob}
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
-              {errors.dateOfBirth && touched.dateOfBirth && (
+              {errors.dob && touched.dob && (
                 <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.dateOfBirth}
+                  {errors.dob}
                 </p>
               )}
             </div>
@@ -186,15 +225,15 @@ const ManageCandidateProfile = () => {
             <input
               type="text"
               placeholder="Address"
-              name="address1"
+              name="address_1"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.address1}
+              value={values.address_1}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.address1 && touched.address1 && (
+            {errors.address_1 && touched.address_1 && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.address1}
+                {errors.address_1}
               </p>
             )}
           </div>
@@ -208,26 +247,26 @@ const ManageCandidateProfile = () => {
             <input
               type="text"
               placeholder="Address"
-              name="address2"
+              name="address_2"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.address2}
+              value={values.address_2}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.address2 && touched.address2 && (
+            {errors.address_2 && touched.address_2 && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.address2}
+                {errors.address_2}
               </p>
             )}
           </div>
           <div className="">
             <label className="font-semibold ">
-              City
-              <span className="text-sm px-2 font-normal">Enter your City </span>
+              city
+              <span className="text-sm px-2 font-normal">Enter your city </span>
             </label>
             <input
               type="text"
-              placeholder="City"
+              placeholder="city"
               name="city"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -333,41 +372,45 @@ const ManageCandidateProfile = () => {
           <div className="">
             <label className="font-semibold ">Cover Letter</label>
             <input
-              type="text"
+              type="file"
               placeholder="Cover Letter"
-              name="coverLetter"
-              onChange={handleChange}
+              name="cv"
+              id="cv"
+              onChange={(event) => {
+                setFieldValue("cv", event.currentTarget.files[0]);
+              }}
               onBlur={handleBlur}
-              value={values.coverLetter}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.coverLetter && touched.coverLetter && (
+            {errors.cover_letter && touched.cover_letter && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.coverLetter}
+                {errors.cover_letter}
               </p>
             )}
           </div>
-          <div className="">
-            <label className="font-semibold ">
-              Job Interests
-              <span className="text-sm px-2 font-normal">
-                Select your interests
-              </span>
-            </label>
-            <input
-              type="text"
-              placeholder="Job Interests"
-              name="jobInterests"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.jobInterests}
-              className="py-3 bg-gray-100 px-2 outline-none w-full"
-            />
-            {errors.jobInterests && touched.jobInterests && (
-              <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.jobInterests}
-              </p>
-            )}
+          <div className="w-full">
+            <div className="">
+              <div className="flex gap-2 items-center">
+                <p>Job Interest </p>
+                <p className="text-xs">Enter Your Job Interest </p>
+              </div>
+
+              <Select
+                isMulti
+                className=""
+                onChange={handleSpecialChange}
+                options={Specializations?.specializations?.map((option) => ({
+                  value: option,
+                  label: option,
+                }))}
+              />
+
+              {errors.specialization && touched.specialization && (
+                <p className="text-start px-1  text-sm font-semibold text-red-600">
+                  {errors.specialization}
+                </p>
+              )}
+            </div>
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -379,15 +422,15 @@ const ManageCandidateProfile = () => {
             <input
               type="number"
               placeholder="Minimum Salary"
-              name="minimumSalary"
+              name="salary"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.minimumSalary}
+              value={values.salary}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.minimumSalary && touched.minimumSalary && (
+            {errors.salary && touched.salary && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.minimumSalary}
+                {errors.salary}
               </p>
             )}
           </div>
@@ -400,16 +443,16 @@ const ManageCandidateProfile = () => {
             </label>
             <input
               type="file"
-              name="avatarImage"
+              name="avatar_image"
               onChange={(event) => {
-                setFieldValue("avatarImage", event.currentTarget.files[0]);
+                setFieldValue("avatar_image", event.currentTarget.files[0]);
               }}
               onBlur={handleBlur}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.avatarImage && touched.avatarImage && (
+            {errors.avatar_image && touched.avatar_image && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.avatarImage}
+                {errors.avatar_image}
               </p>
             )}
           </div>
@@ -422,16 +465,16 @@ const ManageCandidateProfile = () => {
             </label>
             <input
               type="file"
-              name="cvFile"
+              name="cv"
               onChange={(event) => {
-                setFieldValue("cvFile", event.currentTarget.files[0]);
+                setFieldValue("cv", event.currentTarget.files[0]);
               }}
               onBlur={handleBlur}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.cvFile && touched.cvFile && (
+            {errors.cv && touched.cv && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.cvFile}
+                {errors.cv}
               </p>
             )}
           </div>
@@ -440,15 +483,15 @@ const ManageCandidateProfile = () => {
             <input
               type="password"
               placeholder="New Password"
-              name="newPassword"
+              name="new_password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.newPassword}
+              value={values.new_password}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.newPassword && touched.newPassword && (
+            {errors.new_password && touched.new_password && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.newPassword}
+                {errors.new_password}
               </p>
             )}
           </div>
@@ -457,15 +500,15 @@ const ManageCandidateProfile = () => {
             <input
               type="password"
               placeholder="Confirm Password"
-              name="confirmPassword"
+              name="confirm_password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.confirmPassword}
+              value={values.confirm_password}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.confirmPassword && touched.confirmPassword && (
+            {errors.confirm_password && touched.confirm_password && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.confirmPassword}
+                {errors.confirm_password}
               </p>
             )}
           </div>

@@ -6,11 +6,14 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import { FaNetworkWired } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { IoSettingsSharp } from "react-icons/io5";
+import { useLogout } from "../Services/Logout/useLogout";
 const AdminSideBar = () => {
-
   const { dispatch } = useUserinfo();
+  const { mutate: logout } = useLogout();
+
   const handleClick = () => {
     dispatch({ type: "logout" });
+    logout();
   };
 
   const AdminNavLinks = [
@@ -19,9 +22,20 @@ const AdminSideBar = () => {
       to: `/admin/dashboard`,
       icon: <MdDashboardCustomize />,
     },
+
+    {
+      title: "Pending Jobs",
+      to: `/admin/pending-jobs`,
+      icon: <MdDashboardCustomize />,
+    },
+
     { title: "Candidates Lists", to: `/admin/candidates`, icon: <FaThList /> },
 
-    { title: "Jobs List", to: `/admin/jobs`, icon: <FaNetworkWired /> },
+    {
+      title: "Approved Jobs List",
+      to: `/admin/jobs`,
+      icon: <FaNetworkWired />,
+    },
 
     {
       title: "Employeer List",
@@ -37,8 +51,7 @@ const AdminSideBar = () => {
   return (
     <div className="relative w-full">
       <div className="   mx-auto   ">
-        <ul className={`flex flex-col    gap-5`}>
-          <li className="      pb-5 pt-5 "></li>
+        <ul className={`flex flex-col    gap-2 pt-8`}>
           {AdminNavLinks.map((NavValue, i) => {
             const { title, icon, to } = NavValue;
             return (

@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../config/Config";
 import Select from "react-select";
 import MiniLoader from "./MiniLoader";
+import { useSpecialization } from "../Services/General/useSpecialization";
+import Loader from "./Loader";
 const initialValues = {
   account_type: "",
   username: "",
@@ -16,39 +18,10 @@ const initialValues = {
   phone: "",
 };
 const RegisterFOrm = () => {
-  const [Specializations, setSpecializations] = useState();
+  const { data, isLoading: load, status, isError } = useSpecialization();
 
-  useEffect(() => {
-    const API = `${BASE_URL}api/specializations/`;
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch(API);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const jsonData = await response.json();
-        setSpecializations(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-    console.log(Specializations?.specializations);
-  }, []);
   const { mutate: Register, isLoading } = useRegister();
 
-  const arr = [
-    "usmna",
-    "ilyas",
-    " usman ",
-    "hello ",
-    "usmna",
-    "ilyas",
-    " usman ",
-    "hello ",
-  ];
   const {
     values,
     errors,
@@ -77,6 +50,8 @@ const RegisterFOrm = () => {
 
     setFieldValue("specialization", selectedValues);
   };
+
+  if(load) return <Loader style='h-screen'/>
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
@@ -281,7 +256,7 @@ const RegisterFOrm = () => {
                 isMulti
                 className=""
                 onChange={handleSpecialChange}
-                options={Specializations?.specializations?.map((option) => ({
+                options={data.data?.specializations?.map((option) => ({
                   value: option,
                   label: option,
                 }))}
@@ -299,7 +274,7 @@ const RegisterFOrm = () => {
               className="font-semibold px-8 py-4 rounded-md bg-purple-900 text-white"
               type="submit"
             >
-             {isLoading ? <MiniLoader/> : ' REGISTER NOW'}
+              {isLoading ? <MiniLoader /> : " REGISTER NOW"}
             </button>
           </div>
         </div>

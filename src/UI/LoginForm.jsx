@@ -15,7 +15,6 @@ const credentials = {
 
 const LoginForm = ({ paddingMain, width, fontSize }) => {
   const { mutate: Login, isLoading } = useLogin();
-  console.log(isLoading , 'loading')
 
   const [showPassword, setshowPassword] = useState(false);
 

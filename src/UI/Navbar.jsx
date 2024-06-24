@@ -30,7 +30,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const { auth,  user_type } = useUserinfo();
+  const { auth,  user_type , avatar } = useUserinfo();
   return (
     <section
       className={`${
@@ -102,7 +102,7 @@ const Navbar = () => {
                       <div className=" rounded-full">
                         <img
                           className="rounded-full w-7 h-7"
-                          src="https://jobsshopper.com/wp-content/uploads/2024/03/530903-150x150.jpg"
+                          src={avatar}
                           alt=""
                         />
                       </div>

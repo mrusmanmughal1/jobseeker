@@ -11,7 +11,10 @@ const MyProfileCandidate = () => {
   } = useCandidateDetails();
 
   if (isLoadingCandidates) return <Loader style="pt-20" />;
-  if (isError) return  <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later "/>;
+  if (isError)
+    return (
+      <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
+    );
   const { first_name, last_name, email, dob, phone, country, city, salary } =
     Candidates.data.data;
 
@@ -35,7 +38,6 @@ const MyProfileCandidate = () => {
             <li>Emaisl</li>
             <li>First Name</li>
             <li>Last name</li>
-            <li>Birthday</li>
             {/* <li>Address 1</li> */}
             <li>City</li>
             <li>Country</li>

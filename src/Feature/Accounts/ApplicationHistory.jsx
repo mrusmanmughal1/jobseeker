@@ -1,6 +1,7 @@
 import { FaEarthAmericas } from "react-icons/fa6";
+import { useJobHistoryEMp } from "../../Services/Employer/useJobHistoryEMp";
 const ApplicationHistory = () => {
-  const data = [1, 2, 2, 4];
+  const {data} = useJobHistoryEMp()
   return (
     <div className="rounded-md border ">
       <div className=" font-semibold  text-sm md:text-base bg-gray-200 flex p-3 px-5 ">
@@ -8,31 +9,31 @@ const ApplicationHistory = () => {
         <div className="w-1/3 md:w-1/4 md:text-center"> Date Applied </div>
         <div className="w-1/3 md:w-1/4 text-end">Status</div>
       </div>
-      {data.map(() => {
+      {data?.data?.results.map((val , i) => {
         return (
-          <>
+          <div key={i}>
             <div className="flex items-center py-4  hover:bg-gray-100 border-b ">
               <div className="md:w-full w-1/2 flex md:flex-row  flex-col  md:items-center justify-between px-4">
                 <div className="flex  text-sm  md:text-base flex-col gap-3">
-                  <div className="font-semibold">React Js Developer</div>
+                  <div className="font-semibold">{val?.title}</div>
                   <div className=" flex items-center gap-2 text-xs">
-                    <FaEarthAmericas /> Lahore , Pakistan
+                    <FaEarthAmericas /> {val?.addresses?.map((val)=> <span>{val.state}</span>)}
                   </div>
                 </div>
                 <div className="time  hidden md:block  text-btn-primary text-xs md:text-sm">
-                  part Time
+                {val.contract_type}
                 </div>
               </div>
               <div className="date w-1/4 md:w-1/4 text-center  text-sm  italic text-gray-400">
-                March 12, 2024
+                {val.job_posting_deadline}
               </div>
               <div className="status w-1/4 md:w-1/4 text-center">
                 <button className="bg-yellow-500 md:px-6 px-2 text-white  text-sm py-2 rounded-md">
-                  Pending
+                  {val.status}
                 </button>
               </div>
             </div>
-          </>
+          </div>
         );
       })}
     </div>

@@ -18,6 +18,7 @@ export const useLogin = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: (credentials) => getLogin(credentials),
     onSuccess: (data) => {
+      console.log(data)
       const { user_type, token } = data.data.data;
       dispatch({ type: "login", payload: data.data.data });
 

@@ -3,7 +3,7 @@ import { BASE_URL } from "../../config/Config";
 import axios from "axios";
 
 const getJobsListAdmin = async () => {
-  const API = `${BASE_URL}api/admin/jobs/`;
+  const API = `${BASE_URL}api/admin/jobs/pending/`;
 
 
   const Token = localStorage.getItem("Token");
@@ -17,9 +17,9 @@ const getJobsListAdmin = async () => {
   return res;
 };
 
-export const useJAdminobsList = () => {
+export const useAdminPendingJobs = () => {
   const { data, isLoading, isError, status } = useQuery({
-    queryKey: ["admin-jobs"],
+    queryKey: ["admin-pending-jobs"],
     queryFn: getJobsListAdmin,
   });
   return { data, isLoading, status, isError };

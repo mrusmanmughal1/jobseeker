@@ -7,17 +7,18 @@ const initialState = {
   user_type: "",
   username: "",
   user_id: "",
+  avatar:''
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
-      console.log(action.payload);
       return {
         ...state,
         user_type: action.payload.user_type,
         auth: action.payload.username,
         user_id: action.payload.user_id,
+        avatar :action.payload.avatar_image,
       };
     case "logout":
       return { user_type: null, auth: null };

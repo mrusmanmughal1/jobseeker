@@ -33,8 +33,6 @@ const MyProfileEmployers = () => {
             <li>Email</li>
             <li>First Name</li>
             <li>Last name</li>
-            <li>Birthday</li>
-            {/* <li>Address 1</li> */}
             <li>City</li>
             <li>Country</li>
             <li>Phone</li>
@@ -46,10 +44,8 @@ const MyProfileEmployers = () => {
             <li>{email}</li>
             <li>{first_name}</li>
             <li>{last_name}</li>
-            <li>{dob}</li>
+            <li>{city},</li>
             <li>Lahore</li>
-            <li>{city}</li>
-            <li>Pakistan</li>
             <li>{phone}</li>
             <li>{salary}</li>
           </ul>

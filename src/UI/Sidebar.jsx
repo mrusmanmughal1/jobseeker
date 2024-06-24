@@ -2,12 +2,12 @@ import { NavLink } from "react-router-dom";
 import { useUserinfo } from "../Context/Userinfo";
 import { useLogout } from "../Services/Logout/useLogout";
 
-const Sidebar = ({ baseurl, gap = "gap-5"  , showprofile}) => {
+const Sidebar = ({ baseurl, gap = "gap-5", showprofile }) => {
   const { user_type } = useUserinfo();
   const { mutate: logout } = useLogout();
   const handleClick = () => {
     logout();
-    showprofile(false)
+    showprofile(false);
   };
 
   return (

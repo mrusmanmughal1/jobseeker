@@ -1,7 +1,5 @@
 import { BiWorld } from "react-icons/bi";
-import { FaCheck } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { RxCross2 } from "react-icons/rx";
 import Adminfilters from "./Adminfilters";
 import { useJAdminobsList } from "../../Services/admin/useJAdminobsList";
 import Loader from "../../UI/Loader";
@@ -9,7 +7,7 @@ import Loader from "../../UI/Loader";
 const AdminJobsList = () => {
   const { data, isLoading, status, isError } = useJAdminobsList();
 
-  if (isLoading) return <Loader style="h-screen" />;
+  if (isLoading) return <Loader style="h-screen py-20" />;
   return (
     <div className="flex flex-col gap-4">
       <Adminfilters />
@@ -22,7 +20,12 @@ const AdminJobsList = () => {
           <div className="w-full md:w-1/3 flex flex-col gap-4">
             <p className="uppercase font-bold">{val.title}</p>
             <p className="text-xs flex gap-2 items-center">
-              <BiWorld /> {val.addresses.map((v) => <span  className="font-medium" key={i}>{v.city},  </span>)}
+              <BiWorld />{" "}
+              {val?.addresses?.map((v) => (
+                <span className="font-medium" key={i}>
+                  {v.city},{" "}
+                </span>
+              ))}
             </p>
           </div>
           <div className="w-full md:w-1/3 text-sm p-2 font-bold">
@@ -30,20 +33,16 @@ const AdminJobsList = () => {
               Salary : <span className="text-sm font-medium">{val.rate}</span>{" "}
             </p>
             <p>
-              Job Type : <span className="font-medium">{val.contract_type}</span>
+              Job Type :{" "}
+              <span className="font-medium">{val.contract_type}</span>
             </p>
           </div>
           <div className="md:w-1/3 w-full flex justify-end gap-4 md:flex-row md:items-center text-purple-900">
-            <div className="flex gap-4">
-              <button
-                className="flex text-xs bg-green-700 font-bold flex-col items-center
-               px-6 rounded-md py-[0.30rem] border-2 border-green-700 text-white hover:bg-green-700"
-              >
-                <FaCheck />
-              </button>
-              <button className="bg-red-600 px-6 py-[0.30rem] font-bold text-white text-xl rounded-md">
-                <RxCross2 />
-              </button>
+            <div className="flex gap-2 font-medium">
+              Status :
+              <span className="bg-btn-primary text-white p-2 rounded-sm uppercase text-xs font-semibold">
+                {val.status}
+              </span>
             </div>
             <NavLink to="/admin/view-jobs">
               <button

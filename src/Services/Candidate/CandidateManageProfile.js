@@ -8,8 +8,6 @@ const CandidateDetails = async (Credndials, id) => {
   const API = `${BASE_URL}api/manage-candidate-profile/${id}/`;
 
   const token = localStorage.getItem("Token");
-  console.log(Credndials);
-
   const res = await axios.put(API, Credndials, {
     headers: {
       Authorization: `Token ${token}`,
@@ -19,7 +17,7 @@ const CandidateDetails = async (Credndials, id) => {
 };
 
 export const useCandidateManageProfile = () => {
-    const {user_id} = useUserinfo()
+  const { user_id } = useUserinfo();
   const { mutate, isLoading } = useMutation({
     mutationFn: (credentials) => CandidateDetails(credentials, user_id),
     onSuccess: (res) => {

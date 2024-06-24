@@ -5,10 +5,10 @@ const AdminDashboard = () => {
   return (
     <div>
       <div className="flex         mx-auto   md:flex-row flex-col  ">
-        <div className="w-full flex  py-10 ps-10  bg-purple-950 text-white px-4   md:w-1/4">
+        <div className="w-[25%] flex  py-10 ps-10  bg-purple-950 text-white px-4   md:w-1/4">
           <AdminSideBar />
         </div>
-        <div className="md:w-11/12 w-full  mx-auto bg-purple-100 p-10 pb-20  ">
+        <div className=" md:w-[75%] w-full  mx-auto bg-purple-100 p-10 pb-20  ">
           {" "}
           {<Outlet />}
         </div>

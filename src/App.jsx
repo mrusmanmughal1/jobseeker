@@ -18,7 +18,7 @@ import Manageprofile from "./Feature/Accounts/Manageprofile";
 import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
 import NewPost from "./UI/NewJobPost";
-import Jobtitle from "./UI/Jobtitle";
+import Jobtitle from "./UI/JobDetails";
 import CandidateDetails from "./Feature/Candidate/CandidateDetails";
 import PrivacyLopicy from "./pages/PrivacyLopicy";
 import AdminPrivate from "./Feature/Admin/AdminPrivate";
@@ -33,6 +33,8 @@ import AdminViewJobs from "./UI/AdminViewJobs";
 import EmployerViewProfile from "./UI/EmployerViewProfile";
 import ForGetPassword from "./UI/ForGetPassword";
 import CandidateViewProfile from "./UI/CandidateViewprofile";
+import JobDetails from "./UI/JobDetails";
+import PendingJobs from "./Feature/Admin/PendingJobs";
 
 const App = () => {
   return (
@@ -54,6 +56,8 @@ const App = () => {
           <Route path="/admin/employeers" element={<AdminEmployeerList />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/admin/view-jobs" element={<AdminViewJobs />} />
+          <Route path="/admin/pending-jobs" element={<PendingJobs />} />
+
           <Route
             path="/admin/view-employeer-profile"
             element={<EmployerViewProfile />}
@@ -90,7 +94,7 @@ const App = () => {
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/register" index element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/job-Details" element={<Jobtitle />} />
+        <Route path="/job-Details/:id" element={<JobDetails />} />
         <Route path="/privacy-policy" element={<PrivacyLopicy />} />
         <Route path="/jobs-by-sector" element={<JobsBySector />} />
         {/* olol */}

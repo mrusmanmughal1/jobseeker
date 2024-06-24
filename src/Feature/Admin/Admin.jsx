@@ -1,10 +1,4 @@
-import {
-  ArcElement,
-  Chart as ChartJS,
-  Legend,
-  Tooltip,
-  
-} from "chart.js/auto";
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js/auto";
 
 import AdminBarGraph from "../../UI/AdminBarGraph";
 import AdminDoughnut from "../../UI/AdminDoughnut";
@@ -44,7 +38,7 @@ const Admin = () => {
         <AdminDoughnut />
       </div>
       <div className="">
-      <AdminLineGraph />
+        <AdminLineGraph />
       </div>
     </div>
   );

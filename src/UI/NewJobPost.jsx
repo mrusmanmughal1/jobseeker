@@ -1,36 +1,100 @@
 import { useFormik } from "formik";
 import { JobPost } from "../helpers/Schema/FormValidation";
 import { useJobPost } from "../Services/JobPost/useJobPost";
+import Select from "react-select";
+import { MdDelete } from "react-icons/md";
+
+import { useWorkAuthorization } from "../Services/General/useWorkAuthorization";
+import { useSpecialization } from "../Services/General/useSpecialization";
+import Loader from "./Loader";
+import ErrorMsg from "./ErrorMsg";
+import { useState } from "react";
 
 const NewPost = () => {
+  const [addressesval, setAddresses] = useState(
+    {
+      state: "",
+      city: "",
+      zip_code: "",
+    },
+  );
+  const [adressDetails, setadressDetails] = useState([]);
+  const { state, city, zip_code } = addressesval;
+
   const initialValues = {
     contract_type: "",
     title: "",
     remote_work: false,
-    addresses: "",
-    JobCity: "",
-    ZipCode: "",
+    addresses: [ {
+      state: "s",
+      city: "s",
+      zip_code: "s",
+    },],
     duration: "",
     rate: "",
     job_description: "",
-    WorkAuthority: "",
-    OtherWorkAuthority: "",
-    Specilization: "",
+    work_authorization: [],
+    other_work_authorization: "",
+    specializations_skills: [],
     job_posting_deadline: "",
   };
 
+
+// handle special change
+const handleSpecialChange = (SELECTED) => {
+  console.log(SELECTED);
+  const selectedValues = SELECTED ? SELECTED.map((option) => option.value) : [];
+    setFieldValue("specializations_skills", selectedValues);
+  console.log(selectedValues);
+
+};
+
+
+const handleWorkAuthChange = (SELECTED) => {
+  console.log(SELECTED);
+  const selectedValues = SELECTED ? SELECTED.map((option) => option.value) : [];
+    setFieldValue("work_authorization", selectedValues);
+  console.log(selectedValues);
+
+};
+
+
+  function handleChanging(e) {
+    setAddresses({ ...addressesval, [e.target.name]: e.target.value });
+    console.log(addressesval);
+    
+
+  }
+
   const { mutate: PostJob, isLoading } = useJobPost();
 
-  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+  const { values, errors, touched, handleChange, handleSubmit, handleBlur , setFieldValue} =
     useFormik({
       initialValues,
       onSubmit: (values, action) => {
+        // setadressDetails([...addressesval,adressDetails])
+    // setFieldValue("addresses", adressDetails);
         console.log(values);
         PostJob(values);
-        // action.resetForm();
       },
       validationSchema: JobPost,
     });
+  const {
+    data,
+    isLoading: workLoading,
+    isError: error,
+  } = useWorkAuthorization();
+  const {
+    data: specialization,
+    isLoading: load,
+    status,
+    isError,
+  } = useSpecialization();
+
+  
+  if (load || workLoading) return <Loader style="h-screen" />;
+  if (isError || error)
+    return <ErrorMsg ErrorMsg="Sorry Unable to fetch Data Try Again Later !" />;
   return (
     <div className="w-full md:w-3/5">
       <form onSubmit={handleSubmit}>
@@ -96,7 +160,7 @@ const NewPost = () => {
             <p>Job Title</p>
             <input
               type="text"
-              className="w-full p-2 bg-gray-100"
+              className="w-full p-2 py-3 bg-gray-100"
               placeholder="Job Title"
               name="title"
               onChange={handleChange}
@@ -129,61 +193,80 @@ const NewPost = () => {
               </p>
             )}
           </div>
+          <div className="">
+            <div className="flex flex-col items-center md:flex-row gap-2">
+              <div className="md:w-[32%]">
+                <div className="flex flex-col gap-3">
+                  <label htmlFor="addresses">Job Address</label>
+                  <input
+                    type="text"
+                    className="border p-2 py-3 w-full bg-gray-100"
+                    onChange={(e) => handleChanging(e)}
+                    onBlur={handleBlur}
+                    name="state"
+                    value={state}
+                  />
+                  {errors.addresses && touched.addresses && (
+                    <p className="text-start px-1 text-sm font-semibold text-red-600">
+                      {errors.addresses}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="md:w-[32%]">
+                <div className="flex flex-col gap-3">
+                  <label htmlFor="JobCity">City</label>
+                  <input
+                    name="city"
+                    value={city}
+                    type="text"
+                    className="border p-2 py-3 w-full bg-gray-100"
+                    onChange={(e) => handleChanging(e)}
+                    onBlur={handleBlur}
+                  />
+                  {errors.JobCity && touched.JobCity && (
+                    <p className="text-start px-1 text-sm font-semibold text-red-600">
+                      {errors.JobCity}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="md:w-[32%]">
+                <div className="flex flex-col gap-3">
+                  <label htmlFor="ZipCode">Zip Code</label>
+                  <input
+                    type="text"
+                    className="border p-2 py-3 w-full bg-gray-100"
+                    name="zip_code"
+                    onChange={(e) => handleChanging(e)}
+                    onBlur={handleBlur}
+                    value={zip_code}
+                  />
+                  {errors.zip_code && touched.zip_code && (
+                    <p className="text-start px-1 text-sm font-semibold text-red-600">
+                      {errors.zip_code}
+                    </p>
+                  )}
+                </div>
+              </div>
+              {/* {addresses.length > 2 && (
+                <div className="">
+                  <MdDelete
+                    className="text-red-600 pt-3 text-4xl hover:cursor-pointer"
+                    onClick={() => handleDelete()}
+                  />
+                </div>
+              )} */}
+            </div>
 
-          <div className="flex flex-col md:flex-row gap-2">
-            <div className="md:w-[32%]">
-              <div className="flex flex-col gap-3">
-                <label htmlFor="addresses">Job Address</label>
-                <input
-                  type="text"
-                  className="border p-2 w-full bg-gray-100"
-                  name="addresses"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.addresses}
-                />
-                {errors.addresses && touched.addresses && (
-                  <p className="text-start px-1 text-sm font-semibold text-red-600">
-                    {errors.addresses}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="md:w-[32%]">
-              <div className="flex flex-col gap-3">
-                <label htmlFor="JobCity">City</label>
-                <input
-                  type="text"
-                  className="border p-2 w-full bg-gray-100"
-                  name="JobCity"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.JobCity}
-                />
-                {errors.JobCity && touched.JobCity && (
-                  <p className="text-start px-1 text-sm font-semibold text-red-600">
-                    {errors.JobCity}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="md:w-[32%]">
-              <div className="flex flex-col gap-3">
-                <label htmlFor="ZipCode">Zip Code</label>
-                <input
-                  type="text"
-                  className="border p-2 w-full bg-gray-100"
-                  name="ZipCode"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.ZipCode}
-                />
-                {errors.ZipCode && touched.ZipCode && (
-                  <p className="text-start px-1 text-sm font-semibold text-red-600">
-                    {errors.ZipCode}
-                  </p>
-                )}
-              </div>
+            <div className="">
+              {/* <button
+                type="button"
+                onClick={handleAdd}
+                className="p-4 bg-btn-primary text-white rounded-md my-2"
+              >
+                Add Address
+              </button> */}
             </div>
           </div>
 
@@ -192,7 +275,7 @@ const NewPost = () => {
               <p>Duration</p>
               <input
                 type="text"
-                className="w-full p-2 bg-gray-100"
+                className="w-full p-2 py-3 bg-gray-100"
                 placeholder="Duration"
                 name="duration"
                 onChange={handleChange}
@@ -210,7 +293,7 @@ const NewPost = () => {
               <p>Rate</p>
               <input
                 type="text"
-                className="w-full p-2 bg-gray-100"
+                className="w-full p-2 py-3 bg-gray-100"
                 placeholder="Rate"
                 name="rate"
                 onChange={handleChange}
@@ -245,63 +328,70 @@ const NewPost = () => {
 
             <div>
               <p>Work Authorization</p>
-              <input
-                type="text"
-                className="w-full p-2 bg-gray-100"
-                placeholder="Work Authorization"
-                name="WorkAuthority"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.WorkAuthority}
+
+              <Select
+                isMulti
+                className=""
+                onChange={handleWorkAuthChange}
+                options={data?.data?.work_authorizations?.map((option) => ({
+                  value: option,
+                  label: option,
+                }))}
               />
-              {errors.WorkAuthority && touched.WorkAuthority && (
-                <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.WorkAuthority}
-                </p>
-              )}
+
+              {/* {errors.data.work_authorization &&
+                touched.data.work_authorization && (
+                  <p className="text-start px-1 text-sm font-semibold text-red-600">
+                    {errors.data.work_authorization}
+                  </p>
+                )} */}
             </div>
 
             <div>
               <p>Other Work Authorization</p>
               <input
                 type="text"
-                className="w-full p-2 bg-gray-100"
+                className="w-full p-2 py-3 bg-gray-100"
                 placeholder="Other Work Authorization"
-                name="OtherWorkAuthority"
+                name="other_work_authorization"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.OtherWorkAuthority}
+                value={values.other_work_authorization}
               />
-              {errors.OtherWorkAuthority && touched.OtherWorkAuthority && (
-                <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.OtherWorkAuthority}
-                </p>
-              )}
+              {errors.other_work_authorization &&
+                touched.other_work_authorization && (
+                  <p className="text-start px-1 text-sm font-semibold text-red-600">
+                    {errors.other_work_authorization}
+                  </p>
+                )}
             </div>
 
             <div>
               <p>Specializations & Skill</p>
-              <input
-                type="text"
-                className="w-full p-2 bg-gray-100"
-                placeholder="Specializations & Skill"
-                name="Specilization"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.Specilization}
+              <Select
+                isMulti
+                className=""
+                onChange={handleSpecialChange}
+                options={specialization.data?.specializations?.map(
+                  (option) => ({
+                    value: option,
+                    label: option,
+                  })
+                )}
               />
-              {errors.Specilization && touched.Specilization && (
-                <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.Specilization}
-                </p>
-              )}
+              {/* {errors.specializations_skills &&
+                touched.specializations_skills && (
+                  <p className="text-start px-1 text-sm font-semibold text-red-600">
+                    {errors.specializations_skills}
+                  </p>
+                )} */}
             </div>
 
             <div>
               <p>Job Posting Deadline (MM/DD/YYYY)</p>
               <input
                 type="date"
-                className="w-full p-2 bg-gray-100"
+                className="w-full p-2 py-3 bg-gray-100"
                 name="job_posting_deadline"
                 onChange={handleChange}
                 onBlur={handleBlur}

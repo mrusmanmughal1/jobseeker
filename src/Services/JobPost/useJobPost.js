@@ -4,7 +4,7 @@ import { BASE_URL } from "../../config/Config";
 import axios from "axios";
 const JobTheJob = async (formData) => {
   const Post = `${BASE_URL}api/jobs/create/`;
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("Token");
   console.log(`Token ${token}`);
 
   const res = await axios.post(Post, formData, {
@@ -12,6 +12,7 @@ const JobTheJob = async (formData) => {
       Authorization: `Token ${token}`,
     },
   });
+  console.log(formData , token)
   return res;
 };
 
