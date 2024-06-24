@@ -1,6 +1,6 @@
 import { Line } from "react-chartjs-2";
 
-const AdminLineGraph = () => {
+const AdminLineGraph = ({ candidates, pending, allJObs, employer }) => {
   const rev = [
     {
       label: "Jan",

@@ -3,11 +3,11 @@ import { createContext, useContext, useReducer } from "react";
 const User = createContext();
 
 const initialState = {
-  auth: null,  
+  auth: null,
   user_type: "",
   username: "",
   user_id: "",
-  avatar:''
+  avatar: "",
 };
 
 const reducer = (state, action) => {
@@ -18,7 +18,7 @@ const reducer = (state, action) => {
         user_type: action.payload.user_type,
         auth: action.payload.username,
         user_id: action.payload.user_id,
-        avatar :action.payload.avatar_image,
+        avatar: action.payload.avatar_image,
       };
     case "logout":
       return { user_type: null, auth: null };

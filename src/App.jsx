@@ -18,7 +18,6 @@ import Manageprofile from "./Feature/Accounts/Manageprofile";
 import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
 import NewPost from "./UI/NewJobPost";
-import Jobtitle from "./UI/JobDetails";
 import CandidateDetails from "./Feature/Candidate/CandidateDetails";
 import PrivacyLopicy from "./pages/PrivacyLopicy";
 import AdminPrivate from "./Feature/Admin/AdminPrivate";
@@ -35,6 +34,7 @@ import ForGetPassword from "./UI/ForGetPassword";
 import CandidateViewProfile from "./UI/CandidateViewprofile";
 import JobDetails from "./UI/JobDetails";
 import PendingJobs from "./Feature/Admin/PendingJobs";
+import CandidateAppliedJob from "./Feature/Candidate/CandidateAppliedJob";
 
 const App = () => {
   return (
@@ -80,6 +80,8 @@ const App = () => {
           <Route path="jobs-basket" element={<JobsBasket />} />
           <Route path="myaccount" element={<MyAccount />} />
           <Route path="applied" element={<ApplicationHistory />} />
+          <Route path="candidate-applied-job" element={<CandidateAppliedJob />} />
+
           <Route path="profile" element={<Manageprofile />} />
           <Route path="new-post" element={<NewPost />} />
         </Route>

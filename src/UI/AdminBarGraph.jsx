@@ -1,18 +1,18 @@
 import { Bar  } from "react-chartjs-2";
 
-const AdminBarGraph = () => {
+const AdminBarGraph = ({candidates  , allJObs , employer}) => {
   const SourceData = [
     {
       label: "Candidates",
-      value: 32,
+      value:  candidates?.data?.count,
     },
     {
       label: "Jobs Posted",
-      value: 45,
+      value: allJObs?.data?.count,
     },
     {
       label: "Employeers",
-      value: 23,
+      value: employer?.data?.count,
     },
   ];
   const options = {

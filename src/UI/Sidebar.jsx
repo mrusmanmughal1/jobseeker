@@ -16,9 +16,15 @@ const Sidebar = ({ baseurl, gap = "gap-5", showprofile }) => {
         <li className="border-b w- border-t pb-5 pt-5">
           <NavLink to={`${baseurl}myaccount`}> My Account</NavLink>
         </li>
-        <li className="border-b pb-5 ">
-          <NavLink to={`${baseurl}applied`}>Application History </NavLink>
+        {user_type == "employer" && (
+          <li className="border-b pb-5 ">
+            <NavLink to={`${baseurl}applied`}>Application History </NavLink>
+          </li>
+        )}
+        <li className="border-b pb-5  hidden">
+          <NavLink to={`${baseurl}candidate-applied-job`}>Job Applied </NavLink>
         </li>
+
         <li className="border-b pb-5">
           <NavLink to={`${baseurl}profile`}> Manage Profile </NavLink>
         </li>

@@ -3,14 +3,26 @@ import { FaCalendarCheck } from "react-icons/fa";
 import { BsPersonWorkspace } from "react-icons/bs";
 import { FaUserGraduate } from "react-icons/fa";
 import { BsBriefcaseFill } from "react-icons/bs";
-const AdminTopWidgets = () => {
+const AdminTopWidgets = ({ candidates, pending, allJObs, employer }) => {
   const Raw = [
-    { title: "Total Jobs Posted", number: 9000, icons: <BsBriefcaseFill /> },
-    { title: "Total  Employeers", number: 7700, icons: <BsPersonWorkspace /> },
-    { title: "Total  Candidates", number: 9080, icons: <FaUserGraduate /> },
     {
-      title: "Pending Approvals ",
-      number: 9080,
+      title: "Total Jobs Posted",
+      number: allJObs?.data?.count,
+      icons: <BsBriefcaseFill />,
+    },
+    {
+      title: "Total  Employeers",
+      number: employer?.data?.count,
+      icons: <BsPersonWorkspace />,
+    },
+    {
+      title: "Total  Candidates",
+      number: candidates?.data?.count,
+      icons: <FaUserGraduate />,
+    },
+    {
+      title: "Pending Approvals",
+      number: pending?.data?.count,
       icons: <FaCalendarCheck />,
     },
   ];

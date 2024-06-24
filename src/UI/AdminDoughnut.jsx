@@ -1,19 +1,19 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const AdminDoughnut = () => {
+const AdminDoughnut = ({ candidates, pending, allJObs, employer }) => {
   const SourceData = [
     {
       label: "Candidates",
-      value: 32,
+      value: candidates?.data?.count,
     },
     {
       label: "Jobs Posted",
-      value: 45,
+      value: allJObs?.data?.count,
     },
     {
       label: "Employeers",
-      value: 23,
+      value: employer?.data?.count,
     },
   ];
   const options = {

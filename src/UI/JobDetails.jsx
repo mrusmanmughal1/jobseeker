@@ -11,15 +11,18 @@ import SimilarJobs from "./SimilarJobs";
 import JobSubmitForm from "./JobSubmitForm";
 import { useState } from "react";
 import { useJobDetails } from "../Services/Jobs/useDetailsjob";
+import { useApplyJob } from "../Services/Candidate/useApplyJob";
+
 import Loader from "./Loader";
 import ErrorMsg from "./ErrorMsg";
 
 function JobDetails() {
+  const {mutate : applyjob , isLoading :load }= useApplyJob();
   const [showModel, setshowModel] = useState(false);
   const { data, isLoading, status, isError } = useJobDetails();
   if (isLoading) return <Loader style="h-screen" />;
   if (isError) return <ErrorMsg ErrorMsg="nodata" />;
-  console.log(data.data)
+  
   return (
     <div className=" ">
       <div className="bg-btn-primary py-8 px-4   lg:py-20">
@@ -27,7 +30,7 @@ function JobDetails() {
           <div className="flex flex-col md:flex-row justify-between text-white">
             <div className="mb-8 lg:mb-0 py-6 border-b w-full">
               <h1 className="text-xl font-bold">Job Title</h1>
-              <h2 className="text-4xl">{data.data.title}</h2>
+              <h2 className="text-4xl">{data?.data?.title} </h2>
             </div>
             <div className="flex flex-col items-center w-full lg:items-end uppercase mt-4 lg:mt-0">
               <p>Share this Job</p>
@@ -45,13 +48,13 @@ function JobDetails() {
               <p>Salary: {data?.data?.rate}</p>
               <p>
                 Location:
-                {data?.data?.addresses.map((val, i) => (
+                {data?.data?.addresses?.map((val, i) => (
                   <span key={i}> {val.city},</span>
                 ))}
               </p>
               <p>
                 Work Eligibility:{" "}
-                {data?.data?.work_authorization.map((val, i) => (
+                {data?.data?.work_authorization?.map((val, i) => (
                   <span key={i}> {val}</span>
                 ))}
               </p>
@@ -64,7 +67,8 @@ function JobDetails() {
               </button>
               <br className="lg:hidden" />
               <button
-                onClick={() => setshowModel(true)}
+              onClick={()=>applyjob(data.data.id)}
+                // onClick={() => setshowModel(true)}
                 className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold rounded-md py-2 border border-black"
               >
                 <FaSearch className="mr-2" />
@@ -77,7 +81,7 @@ function JobDetails() {
       <div className="py-8 px-4 md:px-6 mx-auto w-11/12">
         <h3>
           <span className="font-semibold">Required Skills</span>:{" "}
-          {data?.data?.specializations_skills.map((val, i) => (
+          {data?.data?.specializations_skills?.map((val, i) => (
             <span key={i}> {val}</span>
           ))}
         </h3>
