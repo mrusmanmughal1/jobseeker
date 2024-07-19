@@ -3,31 +3,44 @@ import { ManageProfileCandidate } from "../../helpers/Schema/FormValidation";
 import { useCandidateManageProfile } from "../../Services/Candidate/CandidateManageProfile";
 import { useCandidateDetails } from "../../Services/Candidate/useCandidateDetails";
 import Select from "react-select";
-import { useEffect, useState } from "react";
-import { BASE_URL } from "../../config/Config";
-
+import Loader from "../../UI/Loader";
+import ErrorMsg from "../../UI/ErrorMsg";
+import { useSpecialization } from "../../Services/General/useSpecialization";
 const ManageCandidateProfile = () => {
-  const [Specializations, setSpecializations] = useState();
+  const baseurl = "http://170.187.136.161:8010";
 
-  const { data } = useCandidateDetails();
+  const { data, isLoading: loadingDetails, isError } = useCandidateDetails();
   const {
-    avatar_image,
+    mutate: updateProfile,
+    isLoading,
+    isError: errorProfile,
+  } = useCandidateManageProfile();
+console.log(data)
+  if (isLoading || loadingDetails) return <Loader style="h-screen  " />;
+  if (isError || errorProfile)
+    return (
+      <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
+    );
+  const {
     city,
     country,
     dob,
     email,
     first_name,
-    job_interest,
     last_name,
     gender,
     phone,
     salary,
     address_1,
+    avatar_image,
+
     address_2,
-    cover_letter,
     about,
-    cv,
-  } = data.data.data;
+    cv_file,
+    job_interest,
+    cover_letter,
+  } = data?.data?.data;
+  console.log(salary)
 
   const initialValues = {
     email: email,
@@ -40,15 +53,14 @@ const ManageCandidateProfile = () => {
     city: city,
     country: country,
     phone: phone,
-    website: "",
     about: about,
-    salary: salary,
-    avatar_image: avatar_image,
-    cv: cv,
+    salary: salary || 0,
+    // avatar_image,
+    job_interest: job_interest,
+    cover_letter: cover_letter,
     new_password: "",
     confirm_password: "",
   };
-  const { mutate: updateProfile, isLoading } = useCandidateManageProfile();
 
   const {
     values,
@@ -61,37 +73,18 @@ const ManageCandidateProfile = () => {
   } = useFormik({
     initialValues,
     onSubmit: (values, action) => {
-      console.log(values);
       const formData = new FormData();
-      Object.keys(values).forEach(key => {
+      Object.keys(values).forEach((key) => {
         formData.append(key, values[key]);
       });
-      
+
       updateProfile(formData);
-      // action.resetForm();
     },
     validationSchema: ManageProfileCandidate,
   });
 
-  useEffect(() => {
-    const API = `${BASE_URL}api/specializations/`;
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch(API);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const jsonData = await response.json();
-        setSpecializations(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { data: Specializations, isLoading: loadspecial } = useSpecialization();
+ 
   // handle special change
   const handleSpecialChange = (SELECTED) => {
     const selectedValues = SELECTED
@@ -100,6 +93,7 @@ const ManageCandidateProfile = () => {
 
     setFieldValue("job_interest", selectedValues.toString());
   };
+
   return (
     <div className="md:w-3/4">
       <form onSubmit={handleSubmit}>
@@ -323,28 +317,7 @@ const ManageCandidateProfile = () => {
               </p>
             )}
           </div>
-          <div className="">
-            <label className="font-semibold ">
-              Website
-              <span className="text-sm px-2 font-normal">
-                Enter your Website
-              </span>
-            </label>
-            <input
-              type="text"
-              placeholder="Website"
-              name="website"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.website}
-              className="py-3 bg-gray-100 px-2 outline-none w-full"
-            />
-            {errors.website && touched.website && (
-              <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.website}
-              </p>
-            )}
-          </div>
+
           <div className="">
             <label className="font-semibold ">
               About
@@ -371,15 +344,15 @@ const ManageCandidateProfile = () => {
           </div>
           <div className="">
             <label className="font-semibold ">Cover Letter</label>
-            <input
-              type="file"
+            <textarea
+              rows="4"
+              cols="50"
+              type="text"
+              id="cover_letter"
               placeholder="Cover Letter"
-              name="cv"
-              id="cv"
-              onChange={(event) => {
-                setFieldValue("cv", event.currentTarget.files[0]);
-              }}
+              onChange={handleChange}
               onBlur={handleBlur}
+              value={values.cover_letter}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
             {errors.cover_letter && touched.cover_letter && (
@@ -394,34 +367,39 @@ const ManageCandidateProfile = () => {
                 <p>Job Interest </p>
                 <p className="text-xs">Enter Your Job Interest </p>
               </div>
-
               <Select
                 isMulti
                 className=""
+                name="job_interest"
+                id="job_interest"
                 onChange={handleSpecialChange}
-                options={Specializations?.specializations?.map((option) => ({
+                defaultValue={job_interest.map((option) => ({
+                  value: option,
+                  label: option,
+                }))}
+                options={Specializations?.data?.specializations?.map((option) => ({
                   value: option,
                   label: option,
                 }))}
               />
 
-              {errors.specialization && touched.specialization && (
+              {errors.job_interest && touched.job_interest && (
                 <p className="text-start px-1  text-sm font-semibold text-red-600">
-                  {errors.specialization}
+                  {errors.job_interest}
                 </p>
               )}
             </div>
           </div>
           <div className="">
             <label className="font-semibold ">
-              Minimum Salary
+              Minimum salary
               <span className="text-sm px-2 font-normal">
                 Set minimum salary ($)
               </span>
             </label>
             <input
               type="number"
-              placeholder="Minimum Salary"
+              placeholder="Minimum salary"
               name="salary"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -441,6 +419,14 @@ const ManageCandidateProfile = () => {
                 Upload Your Avatar Image
               </span>
             </label>
+            <div className="">
+              <img
+                src={baseurl + avatar_image}
+                alt="image"
+                width="150"
+                className="border my-2"
+              />
+            </div>
             <input
               type="file"
               name="avatar_image"
@@ -463,18 +449,27 @@ const ManageCandidateProfile = () => {
                 Upload Your CV File
               </span>
             </label>
+            <div className=" my-8">
+              <a
+                href={cv_file}
+                className="text-white bg-btn-primary p-4 "
+                download
+              >
+                Download Resume
+              </a>
+            </div>
             <input
               type="file"
-              name="cv"
+              name="cv_file"
               onChange={(event) => {
-                setFieldValue("cv", event.currentTarget.files[0]);
+                setFieldValue("cv_file", event.currentTarget.files[0]);
               }}
               onBlur={handleBlur}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.cv && touched.cv && (
+            {errors.cv_file && touched.cv_file && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.cv}
+                {errors.cv_file}
               </p>
             )}
           </div>

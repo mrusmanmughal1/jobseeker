@@ -4,7 +4,7 @@ import axios from "axios";
 import { useUserinfo } from "../../Context/Userinfo";
 
 const EmployerJobHistory = async () => {
-  const API = `${BASE_URL}api/employer/jobs-posting-history/`;
+  const API = `${BASE_URL}api/employer/dashboard/`;
 
   const token = localStorage.getItem("Token");
 

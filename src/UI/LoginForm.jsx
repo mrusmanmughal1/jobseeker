@@ -87,7 +87,10 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
               <label htmlFor="remember">Remember Me</label>
             </div>
             <div className=" font-semibold">
-              <NavLink to="/forget-password" className='hover:text-btn-primary'> Forget Password?</NavLink>
+              <NavLink to="/forget-password" className="hover:text-btn-primary">
+                {" "}
+                Forget Password?
+              </NavLink>
             </div>
           </div>
           <div className="flex    gap-4 justify-between">
@@ -97,7 +100,7 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
                 disabled={isLoading}
                 className="font-bold bg-[#4e007a] text-white border-btn-primary border-2  px-10  w-full  rounded-md py-2"
               >
-                {isLoading ? <MiniLoader/> : 'LOGIN'}
+                {isLoading ? <MiniLoader /> : "LOGIN"}
               </button>
             </div>
             <div className=" ">
@@ -107,7 +110,7 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
                   href=""
                   className=" text-[#4e007a] font-bold rounded-md   px-8   border-btn-primary border-2 py-2 hover:bg-black hover:text-white  transition-all hover:ease-in "
                 >
-                  REGISTER
+                  REGISTER {isLoading}
                 </button>
               </NavLink>
             </div>

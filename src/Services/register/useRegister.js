@@ -14,7 +14,6 @@ export const useRegister = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: (FORMDATA) => PosTRegistrationForm(FORMDATA),
     onSuccess: (data) => {
-
       navigate("/login", { replace: true });
 
       toast.success(data.data.message);

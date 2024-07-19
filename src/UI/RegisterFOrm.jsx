@@ -1,11 +1,7 @@
 import { useFormik } from "formik";
 import { RegisterSchema } from "../helpers/Schema/FormValidation";
 import { useRegister } from "../Services/register/useRegister";
-import { useEffect, useState } from "react";
-import { BASE_URL } from "../config/Config";
-import Select from "react-select";
 import MiniLoader from "./MiniLoader";
-import { useSpecialization } from "../Services/General/useSpecialization";
 import Loader from "./Loader";
 const initialValues = {
   account_type: "",
@@ -18,40 +14,31 @@ const initialValues = {
   phone: "",
 };
 const RegisterFOrm = () => {
-  const { data, isLoading: load, status, isError } = useSpecialization();
-
   const { mutate: Register, isLoading } = useRegister();
 
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-    setFieldValue,
-  } = useFormik({
-    initialValues,
-    onSubmit: (values, action) => {
-      console.log(values);
-      Register(values);
-      // action.resetForm();
-    },
-    validationSchema: RegisterSchema,
-  });
+  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+    useFormik({
+      initialValues,
+      onSubmit: (values, action) => {
+        console.log(values);
+        Register(values);
+        action.resetForm();
+      },
+      validationSchema: RegisterSchema,
+    });
 
-  // handle special change
-  const handleSpecialChange = (SELECTED) => {
-    console.log(SELECTED);
-    const selectedValues = SELECTED
-      ? SELECTED.map((option) => option.value)
-      : [];
-    console.log(selectedValues);
+  // // handle special change
+  // const handleSpecialChange = (SELECTED) => {
+  //   console.log(SELECTED);
+  //   const selectedValues = SELECTED
+  //     ? SELECTED.map((option) => option.value)
+  //     : [];
+  //   console.log(selectedValues);
 
-    setFieldValue("specialization", selectedValues);
-  };
+  //   setFieldValue("specialization", selectedValues);
+  // };
 
-  if(load) return <Loader style='h-screen'/>
+  // if (load) return <Loader style="h-screen" />;
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
@@ -245,7 +232,7 @@ const RegisterFOrm = () => {
               </div>
             </div>
           </div>
-          <div className="w-full">
+          {/* <div className="w-full">
             <div className="">
               <div className="flex gap-2 items-center">
                 <p>Specializations </p>
@@ -268,9 +255,10 @@ const RegisterFOrm = () => {
                 </p>
               )}
             </div>
-          </div>
+          </div> */}
           <div className=" text-center">
             <button
+              disabled={isLoading}
               className="font-semibold px-8 py-4 rounded-md bg-purple-900 text-white"
               type="submit"
             >
@@ -279,7 +267,6 @@ const RegisterFOrm = () => {
           </div>
         </div>
       </form>
-      {values.errors}
     </div>
   );
 };

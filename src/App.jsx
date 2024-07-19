@@ -10,14 +10,14 @@ import Contact from "./pages/Contact";
 import Jobs from "./pages/Jobs";
 import Register from "./pages/Register";
 import MyAccount from "./Feature/Accounts/MyAccount";
-import JobsBasket from "./Feature/Accounts/JobsBasket";
+import JobsBasket from "./Feature/Candidate/JobsBasket";
 import "./styles/styles.css";
 import Dashboard from "./pages/Dashboard";
-import ApplicationHistory from "./Feature/Accounts/ApplicationHistory";
+import ApplicationHistory from "./Feature/Employer/ApplicationHistory";
 import Manageprofile from "./Feature/Accounts/Manageprofile";
 import Candidate from "./Feature/Candidate/Candidate";
 import NotFound from "./pages/NotFound";
-import NewPost from "./UI/NewJobPost";
+import NewPost from "./Feature/Employer/NewJobPost";
 import CandidateDetails from "./Feature/Candidate/CandidateDetails";
 import PrivacyLopicy from "./pages/PrivacyLopicy";
 import AdminPrivate from "./Feature/Admin/AdminPrivate";
@@ -80,14 +80,18 @@ const App = () => {
           <Route path="jobs-basket" element={<JobsBasket />} />
           <Route path="myaccount" element={<MyAccount />} />
           <Route path="applied" element={<ApplicationHistory />} />
-          <Route path="candidate-applied-job" element={<CandidateAppliedJob />} />
+          <Route
+            path="candidate-applied-job"
+            element={<CandidateAppliedJob />}
+          />
 
           <Route path="profile" element={<Manageprofile />} />
           <Route path="new-post" element={<NewPost />} />
         </Route>
         {/* Public Routes */}
-        <Route path="/candidates" element={<Candidate />} />
-        <Route path="/Candidate-Details/:id" element={<CandidateDetails />} />
+        <Route path="candidates" element={<Candidate />} />
+        <Route path="Candidate-Details/:id" element={<CandidateDetails />} />
+
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/about-us" element={<About />} />

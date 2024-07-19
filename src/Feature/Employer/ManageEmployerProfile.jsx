@@ -2,11 +2,14 @@ import { useFormik } from "formik";
 import { ManageProfileEmployer } from "../../helpers/Schema/FormValidation";
 import { useEmployerDetails } from "../../Services/Employer/useEmployerDetails";
 import Loader from "../../UI/Loader";
+import Select from "react-select";
+
 import ErrorMsg from "../../UI/ErrorMsg";
+import { useSpecialization } from "../../Services/General/useSpecialization";
+import { useUpdateEmployer } from "../../Services/Employer/useUpdateEmployer";
 
 const ManageEmployerProfile = () => {
-  const { data, isLoading: loading, status, isError } = useEmployerDetails();
-
+  const { data, isLoading: loading, isError } = useEmployerDetails();
   const {
     email,
     last_name,
@@ -15,26 +18,39 @@ const ManageEmployerProfile = () => {
     address_2,
     city,
     country,
+    vacancies,
     phone,
     website,
     about,
     specialisms,
     avatar_image,
   } = data.data.data;
+  const {
+    data: specialismsData,
+    isLoading: loadSpecializim,
+    isError: specialismsErr,
+  } = useSpecialization();
+
+  const {
+    mutate: updateEmployerData,
+    isLoading,
+    isError: EmpErr,
+  } = useUpdateEmployer();
 
   const initialValues = {
-    email: email,
-    firstName: first_name,
-    lastName: last_name,
-    address1: address_1,
-    address2: address_2,
-    city: city,
-    country: country,
-    phone: phone,
-    website: website,
-    about: about,
-    jobInterests: specialisms,
-    avatarImage: avatar_image,
+    email: email || "",
+    firstName: first_name || "",
+    lastName: last_name || "",
+    address1: address_1 || "",
+    address2: address_2 || "",
+    city: city || "",
+    country: country || "",
+    phone: phone || "",
+    website: website || "",
+    vacancies: vacancies || "",
+    about: about || "",
+    specialisms: specialisms || "",
+    avatar_image: avatar_image || "",
     newPassword: "",
     confirmPassword: "",
   };
@@ -50,18 +66,33 @@ const ManageEmployerProfile = () => {
   } = useFormik({
     initialValues,
     onSubmit: (values, action) => {
-      console.log(values);
-      // updateProfile(values);
-      // action.resetForm();
+      const formData = new FormData();
+      Object.keys(values).forEach((key) => {
+        formData.append(key, values[key]);
+      });
+      console.log(errors);
+      console.log(formData);
+      updateEmployerData(formData);
     },
     validationSchema: ManageProfileEmployer,
   });
 
-  if (loading) return <Loader style="py-40" />;
-  if (isError)
+  const baseurl = "http://170.187.136.161:8010";
+
+  // handle special change
+  const handleSpecialChange = (SELECTED) => {
+    const selectedValues = SELECTED
+      ? SELECTED.map((option) => option.value)
+      : [];
+
+    setFieldValue("specialisms", selectedValues.toString());
+  };
+
+  if (isError || specialismsErr)
     return (
       <ErrorMsg ErrorMsg="Unable To fetch Data Right Now !  Please try again!" />
     );
+  if (loading || loadSpecializim || isLoading) return <Loader style="py-40" />;
 
   return (
     <div className="md:w-3/4">
@@ -296,18 +327,26 @@ const ManageEmployerProfile = () => {
                 Select your Specialisms
               </span>
             </label>
-            <input
-              type="text"
-              placeholder="Job Interests"
-              name="jobInterests"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.jobInterests}
-              className="py-3 bg-gray-100 px-2 outline-none w-full"
+            <Select
+              isMulti
+              className=""
+              name="job_interest"
+              id="job_interest"
+              onChange={handleSpecialChange}
+              defaultValue={specialisms?.map((option) => ({
+                value: option,
+                label: option,
+              }))}
+              options={specialismsData?.data?.specializations?.map(
+                (option) => ({
+                  value: option,
+                  label: option,
+                })
+              )}
             />
-            {errors.jobInterests && touched.jobInterests && (
+            {errors.specialisms && touched.specialisms && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.jobInterests}
+                {errors.specialisms}
               </p>
             )}
           </div>
@@ -324,12 +363,12 @@ const ManageEmployerProfile = () => {
               name="jobInterests"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.jobInterests}
+              value={values.vacancies}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.jobInterests && touched.jobInterests && (
+            {errors.vacancies && touched.vacancies && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.jobInterests}
+                {errors.vacancies}
               </p>
             )}
           </div>
@@ -341,18 +380,21 @@ const ManageEmployerProfile = () => {
                 Upload Your Avatar Image
               </span>
             </label>
+            <div className="">
+              <img src={baseurl + avatar_image} alt="iamge " width="150" />
+            </div>
             <input
               type="file"
-              name="avatarImage"
+              name="avatar_image"
               onChange={(event) => {
-                setFieldValue("avatarImage", event.currentTarget.files[0]);
+                setFieldValue("avatar_image", event.currentTarget.files[0]);
               }}
               onBlur={handleBlur}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.avatarImage && touched.avatarImage && (
+            {errors.avatar_image && touched.avatar_image && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.avatarImage}
+                {errors.avatar_image}
               </p>
             )}
           </div>

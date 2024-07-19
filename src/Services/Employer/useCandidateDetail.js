@@ -7,7 +7,7 @@ const CandidateDetails = async (id) => {
 
   const token = localStorage.getItem("Token");
   console.log(`Token ${token}`);
-
+  console.log(id);
   const res = await axios.get(API, {
     headers: {
       Authorization: `Token ${token}`,
@@ -18,7 +18,7 @@ const CandidateDetails = async (id) => {
 
 export const useCandidateDetail = (id) => {
   const { data, isLoading, isError, status } = useQuery({
-    queryKey: ["employerCandidate"],
+    queryKey: ["employerCandidate" , id],
     queryFn: () => CandidateDetails(id),
   });
   return { data, isLoading, status, isError };

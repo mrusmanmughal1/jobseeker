@@ -3,8 +3,7 @@ import { BASE_URL } from "../../config/Config";
 import axios from "axios";
 
 const getJobsListAdmin = async () => {
-  const API = `${BASE_URL}api/admin/jobs/pending/`;
-
+  const API = `${BASE_URL}api/admin/jobs/?status=pending`;
 
   const Token = localStorage.getItem("Token");
 

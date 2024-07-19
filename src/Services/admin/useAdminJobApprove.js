@@ -22,9 +22,8 @@ export const useAdminJobApprove = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: (id) => adminJobApprove(id),
     onSuccess: (res) => {
-        console.log(res)
       toast.success(res.data.detail);
-      queryClient.invalidateQueries({ queryKey: ['admin-jobs']});
+      queryClient.invalidateQueries({ queryKey: ['admin-pending-jobs']});
     },
     onError: (err) => {
       console.log(err), toast.error(err.message);

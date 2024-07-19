@@ -16,7 +16,7 @@ const MyProfileCandidate = () => {
       <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
     );
   const { first_name, last_name, email, dob, phone, country, city, salary } =
-    Candidates.data.data;
+    Candidates?.data?.data;
 
   return (
     <div className="   w-full  md:w-3/4   ">
@@ -35,10 +35,9 @@ const MyProfileCandidate = () => {
       <div className="flex gap-10 sm:gap-24 py-8">
         <div className="w-full">
           <ul className="flex  font-semibold flex-col gap-8">
-            <li>Emaisl</li>
+            <li>Email</li>
             <li>First Name</li>
             <li>Last name</li>
-            {/* <li>Address 1</li> */}
             <li>City</li>
             <li>Country</li>
             <li>Phone</li>
@@ -50,10 +49,8 @@ const MyProfileCandidate = () => {
             <li>{email}</li>
             <li>{first_name}</li>
             <li>{last_name}</li>
-            <li>{dob}</li>
-            <li>Lahore</li>
             <li>{city}</li>
-            <li>Pakistan</li>
+            <li>{country}</li>
             <li>{phone}</li>
             <li>{salary}</li>
           </ul>

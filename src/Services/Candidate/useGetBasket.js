@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
-import { useUserinfo } from "../../Context/Userinfo";
 
-const CandidateJObHistory = async () => {
-  const API = `${BASE_URL}api/candidate/applications/`;
-
+const JobBasket = async () => {
+  const API = `${BASE_URL}api/job-basket/`;
   const token = localStorage.getItem("Token");
 
   const res = await axios.get(API, {
@@ -16,11 +14,10 @@ const CandidateJObHistory = async () => {
   return res;
 };
 
-export const useCandidateHistory = () => {
-  const { user_id } = useUserinfo();
+export const useGetBasket = () => {
   const { data, isLoading, isError, status } = useQuery({
-    queryKey: ["Candidate-history"],
-    queryFn: () => CandidateJObHistory(user_id),
+    queryKey: ["basket"],
+    queryFn: () => JobBasket(),
   });
   return { data, isLoading, status, isError };
 };

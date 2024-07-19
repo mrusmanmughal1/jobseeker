@@ -4,15 +4,15 @@ import FeaturedJobs from "../../UI/FeaturedJobs";
 import Job from "../Job";
 import JobSearchbar from "../../UI/JobSearchbar";
 import JobType from "../../UI/JobType";
+import { Userinfo, useUserinfo } from "../../Context/Userinfo";
 
 const JobsLayout = (data = []) => {
   const Jobs = data?.data?.data?.results;
-  console.log(Jobs)
-
+const {user_type} = useUserinfo()
   return (
     <div className="flex lg:flex-row flex-col w-11/12 mx-auto ">
       <div className="pt-4 lg:w-[30%]  lg:order-none order-2">
-        <CvUpload />
+      {user_type == 'candidates' &&  <CvUpload />}  
         <FeaturedJobs />
         <JobType />
       </div>

@@ -15,14 +15,19 @@ import { useApplyJob } from "../Services/Candidate/useApplyJob";
 
 import Loader from "./Loader";
 import ErrorMsg from "./ErrorMsg";
+import { useUserinfo } from "../Context/Userinfo";
 
 function JobDetails() {
-  const {mutate : applyjob , isLoading :load }= useApplyJob();
+  const { mutate: applyjob, isLoading: load } = useApplyJob();
   const [showModel, setshowModel] = useState(false);
   const { data, isLoading, status, isError } = useJobDetails();
+  const { user_type } = useUserinfo();
   if (isLoading) return <Loader style="h-screen" />;
-  if (isError) return <ErrorMsg ErrorMsg="nodata" />;
-  
+  if (isError)
+    return (
+      <ErrorMsg ErrorMsg="No Data is Available Please Try Agian later Thank You." />
+    );
+
   return (
     <div className=" ">
       <div className="bg-btn-primary py-8 px-4   lg:py-20">
@@ -60,21 +65,23 @@ function JobDetails() {
               </p>
               <p>Job ID: {data.data.id}</p>
             </div>
-            <div className="mt-4 lg:mt-0 flex flex-col lg:gap-4">
-              <button className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold w-full rounded-md py-2 border border-black lg:mb-0 lg:mr-4">
-                <FaCartPlus className="mr-2" />
-                Add to job basket
-              </button>
-              <br className="lg:hidden" />
-              <button
-              onClick={()=>applyjob(data.data.id)}
-                // onClick={() => setshowModel(true)}
-                className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold rounded-md py-2 border border-black"
-              >
-                <FaSearch className="mr-2" />
-                Apply for this job
-              </button>
-            </div>
+            {user_type == 'candidate' && (
+              <div className="mt-4 lg:mt-0 flex flex-col lg:gap-4">
+                <button className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold w-full rounded-md py-2 border border-black lg:mb-0 lg:mr-4">
+                  <FaCartPlus className="mr-2" />
+                  Add to job basket
+                </button>
+                <br className="lg:hidden" />
+                <button
+                  onClick={() => applyjob(data?.data?.id)}
+                  // onClick={() => setshowModel(true)}
+                  className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold rounded-md py-2 border border-black"
+                >
+                  <FaSearch className="mr-2" />
+                  Apply for this job
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ const ForGetPassword = () => {
               id="email"
               value={values.email}
               onChange={handleChange}
-              className="w-full border rounded-md border-black px-2"
+              className="w-full border rounded-sm border-black px-2"
               placeholder="Please Enter Your Email Here ! "
             />
             {errors.email && touched.email && (

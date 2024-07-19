@@ -1,18 +1,21 @@
 import { NavLink } from "react-router-dom";
-import { useCandidateDetails } from "../../Services/Candidate/useCandidateDetails";
 import Loader from "../../UI/Loader";
 import { useEmployerDetails } from "../../Services/Employer/useEmployerDetails";
- 
 
 const MyProfileEmployers = () => {
- 
-
   const { data: Employer, isLoading: isLoadingEmployer } = useEmployerDetails();
 
   if (isLoadingEmployer) return <Loader style="pt-20" />;
-  const { first_name, last_name, email, dob, phone, country, city, salary } =
-    Employer.data.data;
-
+  const {
+    first_name,
+    last_name,
+    email,
+    phone,
+    country,
+    city,
+    website,
+    vacancies,
+  } = Employer?.data?.data;
   return (
     <div className="   w-full  md:w-3/4   ">
       <div className="  flex justify-between   ">
@@ -33,10 +36,9 @@ const MyProfileEmployers = () => {
             <li>Email</li>
             <li>First Name</li>
             <li>Last name</li>
-            <li>City</li>
-            <li>Country</li>
             <li>Phone</li>
-            <li>Minimum Salary</li>
+            <li>Website</li>
+            <li>vacancies</li>
           </ul>
         </div>
         <div className="w-full">
@@ -44,10 +46,9 @@ const MyProfileEmployers = () => {
             <li>{email}</li>
             <li>{first_name}</li>
             <li>{last_name}</li>
-            <li>{city},</li>
-            <li>Lahore</li>
             <li>{phone}</li>
-            <li>{salary}</li>
+            <li>{website || "Null"}</li>
+            <li>{vacancies}</li>
           </ul>
         </div>
       </div>
@@ -56,7 +57,7 @@ const MyProfileEmployers = () => {
           APPLICATION HISTORY
         </p>
         <p className="text-sm">
-          You have applied for 3 jobs in the past 30 days. &nbsp;
+          Candidates have applied 1 jobs in the past 30 days. &nbsp;
           <a href="" className="text-btn-primary">
             View application
           </a>

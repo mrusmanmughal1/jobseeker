@@ -23,31 +23,32 @@ export const RegisterSchema = Yup.object({
   first_name: Yup.string().max(45).required("Please Enter Your Password !"),
   last_name: Yup.string().max(45).required("Please Enter Your Password !"),
   phone: Yup.string().required("Please Enter Your Password !"),
-  specialization: Yup.array()
-    .min(1, "At least one specialization is required")
-    .required("Specialization is required"),
+  // specialization: Yup.array()
+  //   .min(1, "At least one specialization is required")
+  //   .required("Specialization is required"),
 });
 
 // Employer Job Posting
 
-export const JobPost = Yup.object({
-  // contract_type: Yup.string().required("Please Select A Contract Type !"),
-  // title: Yup.string().required("Please Write Job Title  !"),
-  // remote_work: Yup.boolean()
-  //   .required("The isRemote field is required")
-  //   .oneOf([true, false], "The isRemote field must be true or false"),
-  // addresses: Yup.string().required("Please Provide Job Address!"),
-  // JobCity: Yup.string().required("Please Provide Job City  !"),
-  // ZipCode: Yup.string().required("Please Provide Zip Code  !"),
-  // duration: Yup.string().required("Please Provide Duration !"),
-  // rate: Yup.string().required("Please  Provide Job rate  !"),
-  // job_description: Yup.string().required("Please  Provid Description !"),
-  // work_authorization: Yup.string().required("Please Provide Work Authority  !"),
-  // other_work_authorization: Yup.string().required(
-  //    "Please  Provide Other Authority  !"
-  //  ),
-  //  specializations_skills: Yup.string().required("Please Provide Specilization!"),
-  // job_posting_deadline: Yup.string().required("Please Provide Job DeadLine !"),
+
+export const JobPost = Yup.object().shape({
+  contract_type: Yup.string().required('Contract type is required'),
+  title: Yup.string().required('Job title is required'),
+  remote_work: Yup.boolean(),
+  addresses: Yup.array().of(
+    Yup.object().shape({
+      state: Yup.string().required('State is required'),
+      city: Yup.string().required('City is required'),
+      zip_code: Yup.string().required('Zip code is required'),
+    })
+  ).min(1, 'At least one address is required'),
+  duration: Yup.string().required('Duration is required'),
+  rate: Yup.string().required('Rate is required'),
+  job_description: Yup.string().required('Job description is required'),
+  work_authorization: Yup.array().of(Yup.string()),
+  other_work_authorization: Yup.string(),
+  specializations_skills: Yup.array().of(Yup.string()),
+  job_posting_deadline: Yup.date().required('Job posting deadline is required').min(new Date(), 'Deadline must be in the future'),
 });
 
 // forget Password
@@ -62,32 +63,33 @@ export const ManageProfileCandidate = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-    first_name: Yup.string().required("First Name is required"),
-    last_name: Yup.string().required("Last Name is required"),
+  first_name: Yup.string().required("First Name is required"),
+  last_name: Yup.string().required("Last Name is required"),
   gender: Yup.string()
     .oneOf(["male", "female"], "Invalid gender")
     .required("Gender is required"),
-    dob: Yup.string().required("Date of Birth is required"),
-    address_1: Yup.string().required("Address 1 is required"),
-    address_2: Yup.string(),
+  dob: Yup.string().required("Date of Birth is required"),
+  address_1: Yup.string().required("Address 1 is required"),
+  address_2: Yup.string(),
   city: Yup.string().required("City is required"),
   country: Yup.string().required("Country is required"),
   phone: Yup.string().required("Phone number is required"),
-  website: Yup.string(),
   about: Yup.string(),
   cover_letter: Yup.string(),
-  jobInterests: Yup.string(),
+  job_interest: Yup.mixed()
+    .nullable()
+    .required("please Add Your Job Interest "),
   salary: Yup.number()
     .min(0, "Minimum Salary must be a positive number")
     .required("Minimum Salary is required"),
-    avatar_image: Yup.mixed().required("Avatar Image is required"),
-    cv: Yup.mixed().required("CV File is required"),
-    new_password: Yup.string()
-    .min(8, "Password must be at least 8 characters"),
-     
-    confirm_password: Yup.string()
-    .oneOf([Yup.ref("new_password"), null], "Passwords must match")
-     
+  // avatar_image: Yup.mixed().required("Avatar Image is required"),
+  // cv_file: Yup.mixed().required("CV File is required"),
+  new_password: Yup.string().min(8, "Password must be at least 8 characters"),
+
+  confirm_password: Yup.string().oneOf(
+    [Yup.ref("new_password"), null],
+    "Passwords must match"
+  ),
 });
 
 // manage profile employer
@@ -106,13 +108,13 @@ export const ManageProfileEmployer = Yup.object({
   phone: Yup.string().required("Phone number is required"),
   website: Yup.string(),
   about: Yup.string(),
-  jobInterests: Yup.string(),
+  // specialisms: Yup.string(),
+  vacancies: Yup.string(),
+  // avatarImage: Yup.mixed().required("Avatar Image is required"),
+  newPassword: Yup.string().min(8, "Password must be at least 8 characters"),
 
-  avatarImage: Yup.mixed().required("Avatar Image is required"),
-  newPassword: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("New Password is required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
-    .required("Confirm Password is required"),
+  confirmPassword: Yup.string().oneOf(
+    [Yup.ref("newPassword"), null],
+    "Passwords must match"
+  ),
 });

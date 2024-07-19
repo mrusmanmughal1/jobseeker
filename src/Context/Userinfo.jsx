@@ -1,24 +1,30 @@
-import { createContext, useContext, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 
 const User = createContext();
 
 const initialState = {
   auth: null,
-  user_type: "",
   username: "",
   user_id: "",
-  avatar: "",
+  user_type: "",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "login":
+      const data = localStorage.getItem("User_Data");
       return {
         ...state,
         user_type: action.payload.user_type,
-        auth: action.payload.username,
+        auth: true,
         user_id: action.payload.user_id,
-        avatar: action.payload.avatar_image,
+        username: action.payload.username,
       };
     case "logout":
       return { user_type: null, auth: null };
@@ -28,12 +34,18 @@ const reducer = (state, action) => {
 };
 
 const Userinfo = ({ children }) => {
-  const [{ auth, user_type, user_id, username }, dispatch] = useReducer(
+  const [data, setdata] = useState();
+  useEffect(() => {
+    const userData = localStorage.setItem("User_Data", JSON.stringify(data));
+  }, [data]);
+  const [{ auth, user_type, user_id, username, avatar }, dispatch] = useReducer(
     reducer,
     initialState
   );
   return (
-    <User.Provider value={{ dispatch, auth, user_type, user_id, username }}>
+    <User.Provider
+      value={{ dispatch, auth, user_type, user_id, username, avatar }}
+    >
       {children}
     </User.Provider>
   );

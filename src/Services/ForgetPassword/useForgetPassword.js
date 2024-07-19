@@ -17,7 +17,7 @@ export const useFOrgetPassword = () => {
       toast.success(res.data.message);
     },
     onError: (err) => {
-      toast.error(err.response.data.error);
+      toast.error(err.message);
     },
   });
 

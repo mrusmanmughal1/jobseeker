@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CandidateProfile from "../../UI/CandidateProfile";
 import FeaturedJobs from "../../UI/FeaturedJobs";
 import ImageBanner from "../../UI/ImageBanner";
@@ -7,8 +7,29 @@ import SearchFilter from "../../UI/SearchFilter";
 import { useAllCandidates } from "../../Services/Candidate/useCandidateList";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
+import { useEffect } from "react";
+import { useUserinfo } from "../../Context/Userinfo";
 
 const Candidate = () => {
+  const navigate = useNavigate();
+  const { auth, user_type } = useUserinfo();
+
+  useEffect(() => {
+    if (!auth) {
+      navigate("/login");
+    }
+  }, [auth, navigate]);
+
+  if (auth && user_type === "employer") {
+    return <Candidates />;
+  } else {
+    navigate("/login");
+  }
+};
+
+export default Candidate;
+
+export const Candidates = () => {
   const { data, isLoading, status, isError } = useAllCandidates();
   if (isLoading) return <Loader style="py-40" />;
   if (isError)
@@ -25,7 +46,7 @@ const Candidate = () => {
         </div>
         <div className=" w-full lg:w-[75%]">
           <JobSearchbar />
-          {data?.data?.data.map((val, i) => {
+          {data?.data?.results?.map((val, i) => {
             return (
               <div key={i} className="my-4 w-full pt-5">
                 <NavLink to={`/Candidate-Details/${val?.id}`}>
@@ -39,5 +60,3 @@ const Candidate = () => {
     </div>
   );
 };
-
-export default Candidate;

@@ -4,11 +4,11 @@ import axios from "axios";
 import { useUserinfo } from "../../Context/Userinfo";
 import toast from "react-hot-toast";
 
-const CandidateDetails = async (Credndials, id) => {
-  const API = `${BASE_URL}api/manage-candidate-profile/${id}/`;
+const EmployerUpdate = async (Credndials, id) => {
+  const API = `${BASE_URL}api/manage-employer-profile/${id}/`;
 
   const token = localStorage.getItem("Token");
-  const res = await axios.put(API, Credndials, {
+  const res = await axios.patch(API, Credndials, {
     headers: {
       Authorization: `Token ${token}`,
     },
@@ -16,20 +16,20 @@ const CandidateDetails = async (Credndials, id) => {
   return res;
 };
 
-export const useCandidateManageProfile = () => {
+export const useUpdateEmployer = () => {
   const { user_id } = useUserinfo();
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation({
-    mutationFn: (credentials) => CandidateDetails(credentials, user_id),
+  const { mutate, isLoading  , isError} = useMutation({
+    mutationFn: (credentials) => EmployerUpdate(credentials, user_id),
     onSuccess: (res) => {
       toast.success(res.data.message);
-      queryClient.invalidateQueries({ queryKey: ['candidate']});
+      queryClient.invalidateQueries({ queryKey: ["Employer"] });
     },
     onError: (err) => {
-      console.log(err)
+      console.log(err);
       toast.error(err.response.data.error);
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isLoading , isError };
 };

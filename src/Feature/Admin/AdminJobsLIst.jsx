@@ -3,11 +3,16 @@ import { NavLink } from "react-router-dom";
 import Adminfilters from "./Adminfilters";
 import { useJAdminobsList } from "../../Services/admin/useJAdminobsList";
 import Loader from "../../UI/Loader";
-
+import { useAllJobs } from "../../Services/Jobs/useAllJobs";
+import ErrorMsg from "../../UI/ErrorMsg";
 const AdminJobsList = () => {
-  const { data, isLoading, status, isError } = useJAdminobsList();
+  const { data, isLoading, status, isError } = useAllJobs();
 
   if (isLoading) return <Loader style="h-screen py-20" />;
+  if (data.data.results.length == 0)
+    return (
+      <ErrorMsg ErrorMsg="No Data Availale Right Now Try Again Later . Thank You" />
+    );
   return (
     <div className="flex flex-col gap-4">
       <Adminfilters />

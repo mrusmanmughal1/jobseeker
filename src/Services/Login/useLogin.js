@@ -3,8 +3,8 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
-
 import { useUserinfo } from "../../Context/Userinfo";
+
 const getLogin = async (credentials) => {
   const Post = `${BASE_URL}api/login/`;
   const res = await axios.post(Post, credentials);
@@ -18,7 +18,6 @@ export const useLogin = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: (credentials) => getLogin(credentials),
     onSuccess: (data) => {
-      console.log(data)
       const { user_type, token } = data.data.data;
       dispatch({ type: "login", payload: data.data.data });
 
@@ -37,8 +36,9 @@ export const useLogin = () => {
 
     // Handle Error
     onError: (err) => {
+      console.log(err);
       const errorMessage =
-        err.response?.data?.error || err.message || "Please Try Again Later!";
+        err.response?.data?.message || err.response.data.error;
       toast.error(errorMessage);
     },
   });

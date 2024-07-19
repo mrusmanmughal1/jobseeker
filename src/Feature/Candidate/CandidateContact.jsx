@@ -1,6 +1,6 @@
 import Button from "../../Reuseables/Button";
 
-const CandidateContact = () => {
+const CandidateContact = ({ email, phone, city, country, download }) => {
   return (
     <div className="md:w-1/4">
       <div className="bg-slate-100">
@@ -9,9 +9,14 @@ const CandidateContact = () => {
         </div>
         <div className="p-4 bg-slate-100">
           <form className="flex flex-col gap-4">
-            <input type="text" className="py-2" />
-            <input type="text" className="py-2" />
-            <textarea rows="4" cols="50" />
+            <input type="text" className="p-2" placeholder="Name" />
+            <input type="text" className="p-2" placeholder="Subject" />
+            <textarea
+              rows="4"
+              cols="50"
+              className="p-2"
+              placeholder="Message"
+            />
             <button className="bg-btn-primary text-white p-4 rounded-md font-semibold">
               SEND MESSAGE
             </button>
@@ -20,20 +25,26 @@ const CandidateContact = () => {
         <div className="flex p-4 flex-col gap-4 py-4">
           <div className="">
             <p className="text-btn-primary font-semibold ">Address</p>
-            <p>USA</p>
+            <p>
+              {city} , {country}
+            </p>
           </div>
           <div className="">
             <p className="text-btn-primary font-semibold "> Email</p>
-            <p>Pakistan@gmail.com</p>
+            <p>{email}</p>
           </div>
           <div className="">
             <p className="text-btn-primary font-semibold "> Call</p>
-            <p>+92 8363 3278383 8373 </p>
+            <p>{phone} </p>
           </div>
         </div>
       </div>
       <div className="  flex   flex-col  gap-2 py-2 ">
-        <Button>DOWNLOAD CV</Button>
+        <Button>
+          <a href={download} download>
+            DOWNLOAD CV{" "}
+          </a>
+        </Button>
 
         <Button>VIEW CV</Button>
       </div>

@@ -1,35 +1,28 @@
 import { useFormik } from "formik";
-import { JobPost } from "../helpers/Schema/FormValidation";
-import { useJobPost } from "../Services/JobPost/useJobPost";
+import { JobPost } from "../../helpers/Schema/FormValidation";
+import { useJobPost } from "../../Services/JobPost/useJobPost";
 import Select from "react-select";
-import { MdDelete } from "react-icons/md";
 
-import { useWorkAuthorization } from "../Services/General/useWorkAuthorization";
-import { useSpecialization } from "../Services/General/useSpecialization";
-import Loader from "./Loader";
-import ErrorMsg from "./ErrorMsg";
-import { useState } from "react";
+import { useWorkAuthorization } from "../../Services/General/useWorkAuthorization";
+import { useSpecialization } from "../../Services/General/useSpecialization";
+import { IoIosAddCircle } from "react-icons/io";
+import { IoIosRemoveCircle } from "react-icons/io";
+import Loader from "../../UI/Loader";
+import ErrorMsg from "../../UI/ErrorMsg";
+import MiniLoader from "../../UI/MiniLoader";
 
 const NewPost = () => {
-  const [addressesval, setAddresses] = useState(
-    {
-      state: "",
-      city: "",
-      zip_code: "",
-    },
-  );
-  const [adressDetails, setadressDetails] = useState([]);
-  const { state, city, zip_code } = addressesval;
-
   const initialValues = {
     contract_type: "",
     title: "",
     remote_work: false,
-    addresses: [ {
-      state: "s",
-      city: "s",
-      zip_code: "s",
-    },],
+    addresses: [
+      {
+        state: "",
+        city: "",
+        zip_code: "",
+      },
+    ],
     duration: "",
     rate: "",
     job_description: "",
@@ -39,46 +32,27 @@ const NewPost = () => {
     job_posting_deadline: "",
   };
 
-
-// handle special change
-const handleSpecialChange = (SELECTED) => {
-  console.log(SELECTED);
-  const selectedValues = SELECTED ? SELECTED.map((option) => option.value) : [];
-    setFieldValue("specializations_skills", selectedValues);
-  console.log(selectedValues);
-
-};
-
-
-const handleWorkAuthChange = (SELECTED) => {
-  console.log(SELECTED);
-  const selectedValues = SELECTED ? SELECTED.map((option) => option.value) : [];
-    setFieldValue("work_authorization", selectedValues);
-  console.log(selectedValues);
-
-};
-
-
-  function handleChanging(e) {
-    setAddresses({ ...addressesval, [e.target.name]: e.target.value });
-    console.log(addressesval);
-    
-
-  }
+  
+  
 
   const { mutate: PostJob, isLoading } = useJobPost();
 
-  const { values, errors, touched, handleChange, handleSubmit, handleBlur , setFieldValue} =
-    useFormik({
-      initialValues,
-      onSubmit: (values, action) => {
-        // setadressDetails([...addressesval,adressDetails])
-    // setFieldValue("addresses", adressDetails);
-        console.log(values);
-        PostJob(values);
-      },
-      validationSchema: JobPost,
-    });
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    setFieldValue,
+  } = useFormik({
+    initialValues,
+    onSubmit: (values, action) => {
+      console.log(values);
+      PostJob(values);
+    },
+    validationSchema: JobPost,
+  });
   const {
     data,
     isLoading: workLoading,
@@ -91,8 +65,47 @@ const handleWorkAuthChange = (SELECTED) => {
     isError,
   } = useSpecialization();
 
-  
-  if (load || workLoading) return <Loader style="h-screen" />;
+  const handleAddressChange = (index, e) => {
+    const { name, value } = e.target;
+    const newAddresses = [...values.addresses];
+    newAddresses[index] = { ...newAddresses[index], [name]: value };
+    setFieldValue("addresses", newAddresses);
+  };
+  // Add a new address field
+  const handleAddAddress = () => {
+    setFieldValue("addresses", [
+      ...values.addresses,
+      { state: "", city: "", zip_code: "" },
+    ]);
+    console.log(initialValues);
+  };
+
+  // Remove an address field
+  const handleRemoveAddress = (index) => {
+    setFieldValue(
+      "addresses",
+      values.addresses.filter((_, i) => i !== index)
+    );
+  };
+
+  // handle special change
+  const handleSpecialChange = (SELECTED) => {
+    console.log(SELECTED);
+    const selectedValues = SELECTED
+      ? SELECTED.map((option) => option.value)
+      : [];
+    setFieldValue("specializations_skills", selectedValues);
+  };
+
+  const handleWorkAuthChange = (SELECTED) => {
+    console.log(SELECTED);
+    const selectedValues = SELECTED
+      ? SELECTED.map((option) => option.value)
+      : [];
+    setFieldValue("work_authorization", selectedValues);
+  };
+
+  if (load || workLoading) return <Loader style="py-20" />;
   if (isError || error)
     return <ErrorMsg ErrorMsg="Sorry Unable to fetch Data Try Again Later !" />;
   return (
@@ -193,7 +206,7 @@ const handleWorkAuthChange = (SELECTED) => {
               </p>
             )}
           </div>
-          <div className="">
+          {/* <div className="">
             <div className="flex flex-col items-center md:flex-row gap-2">
               <div className="md:w-[32%]">
                 <div className="flex flex-col gap-3">
@@ -249,25 +262,101 @@ const handleWorkAuthChange = (SELECTED) => {
                   )}
                 </div>
               </div>
-              {/* {addresses.length > 2 && (
-                <div className="">
-                  <MdDelete
-                    className="text-red-600 pt-3 text-4xl hover:cursor-pointer"
-                    onClick={() => handleDelete()}
-                  />
-                </div>
-              )} */}
+              
             </div>
 
-            <div className="">
-              {/* <button
-                type="button"
-                onClick={handleAdd}
-                className="p-4 bg-btn-primary text-white rounded-md my-2"
+            
+          </div> */}
+          <div className="space-y-4">
+            <p>Job Address</p>
+            {values?.addresses?.map((address, index) => (
+              <div
+                key={index}
+                className="flex flex-col md:flex-row   gap-2 items-end"
               >
-                Add Address
-              </button> */}
-            </div>
+                <div className="md:w-[32%]">
+                  <div className="flex flex-col  gap-3">
+                    <label htmlFor={`address-state-${index}`}>State</label>
+                    <input
+                      type="text"
+                      id={`address-state-${index}`}
+                      name="state"
+                      className="border p-2 py-3 w-full bg-gray-100"
+                      onChange={(e) => handleAddressChange(index, e)}
+                      onBlur={handleBlur}
+                      value={address?.state}
+                    />
+                    {errors.addresses &&
+                      errors.addresses[index] &&
+                      errors.addresses[index]?.state && (
+                        <p className="text-start px-1 text-sm font-semibold text-red-600">
+                          {errors.addresses[index].state}
+                        </p>
+                      )}
+                  </div>
+                </div>
+                <div className="md:w-[32%]">
+                  <div className="flex flex-col gap-3">
+                    <label htmlFor={`address-city-${index}`}>City</label>
+                    <input
+                      type="text"
+                      id={`address-city-${index}`}
+                      name="city"
+                      className="border p-2 py-3 w-full bg-gray-100"
+                      onChange={(e) => handleAddressChange(index, e)}
+                      onBlur={handleBlur}
+                      value={address?.city}
+                    />
+                    {errors.addresses &&
+                      errors.addresses[index] &&
+                      errors.addresses[index].city && (
+                        <p className="text-start px-1 text-sm font-semibold text-red-600">
+                          {errors.addresses[index]?.city}
+                        </p>
+                      )}
+                  </div>
+                </div>
+                <div className="md:w-[32%]">
+                  <div className="flex flex-col gap-3">
+                    <label htmlFor={`address-zip_code-${index}`}>
+                      Zip Code
+                    </label>
+                    <input
+                      type="text"
+                      id={`address-zip_code-${index}`}
+                      name="zip_code"
+                      className="border p-2 py-3 w-full bg-gray-100"
+                      onChange={(e) => handleAddressChange(index, e)}
+                      onBlur={handleBlur}
+                      value={address.zip_code}
+                    />
+                    {errors.addresses &&
+                      errors.addresses[index] &&
+                      errors.addresses[index].zip_code && (
+                        <p className="text-start px-1 text-sm font-semibold text-red-600">
+                          {errors.addresses[index]?.zip_code}
+                        </p>
+                      )}
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveAddress(index)}
+                    className="bg-red-500 text-white p-2 rounded"
+                  >
+                    <IoIosRemoveCircle />
+                  </button>
+                </div>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddAddress}
+              className="bg-blue-500 flex gap-2 items-center text-white p-2 rounded"
+            >
+              <IoIosAddCircle /> Add More
+            </button>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -379,12 +468,12 @@ const handleWorkAuthChange = (SELECTED) => {
                   })
                 )}
               />
-              {/* {errors.specializations_skills &&
+              {errors.specializations_skills &&
                 touched.specializations_skills && (
                   <p className="text-start px-1 text-sm font-semibold text-red-600">
                     {errors.specializations_skills}
                   </p>
-                )} */}
+                )}
             </div>
 
             <div>
@@ -410,7 +499,7 @@ const handleWorkAuthChange = (SELECTED) => {
               type="submit"
               className="px-8 py-4 rounded-md font-semibold text-white bg-btn-primary"
             >
-              POST JOB
+              {isLoading ? <MiniLoader /> : "POST JOB"}
             </button>
           </div>
         </div>

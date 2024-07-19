@@ -6,22 +6,15 @@ import { useParams } from "react-router-dom";
 const getJobDetails = async (id) => {
   const API = `${BASE_URL}api/jobs/${id}/`;
 
-  const token = localStorage.getItem("Token");
-  console.log(`Token ${token}`);
-
-  const res = await axios.get(API, {
-    headers: {
-      Authorization: `Token ${token}`,
-    },
-  });
+  const res = await axios.get(API);
   return res;
 };
 
 export const useJobDetails = () => {
-  const {id} = useParams()
+  const { id } = useParams();
 
   const { data, isLoading, isError, status } = useQuery({
-    queryKey: ["candidate"],
+    queryKey: ["single-jobDetails"],
     queryFn: () => getJobDetails(id),
   });
   return { data, isLoading, status, isError };

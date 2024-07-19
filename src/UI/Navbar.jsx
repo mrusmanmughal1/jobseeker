@@ -12,13 +12,16 @@ import Sidebar from "./Sidebar";
 import LoginForm from "./LoginForm";
 import { FaUser } from "react-icons/fa";
 import MiniJobsCart from "./MiniJobsCart";
+import { IoIosArrowDown } from "react-icons/io";
+import { useGetBasket } from "../Services/Candidate/useGetBasket";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [showLogin, setshow] = useState(false);
   const [showMblNav, setshowMblNav] = useState(false);
   const [profile, showprofile] = useState(false);
   const [cart, setcart] = useState(false);
-
+  const { auth, user_type, avatar  , username} = useUserinfo();
+  const {data} = useGetBasket()
   // sticky Navbar no scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +33,8 @@ const Navbar = () => {
     };
   }, []);
 
-  const { auth,  user_type , avatar } = useUserinfo();
+  const imgurl = `http://170.187.136.161:8010${avatar}`;
+const profileimg = 'https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg'
   return (
     <section
       className={`${
@@ -51,7 +55,7 @@ const Navbar = () => {
                 <li>
                   <NavLink to="/jobs">JOBS</NavLink>
                 </li>
-                {user_type == 'employer' && (
+                {user_type == "employer" && (
                   <li>
                     <NavLink to="/candidates">Candidates</NavLink>
                   </li>
@@ -98,31 +102,28 @@ const Navbar = () => {
               {auth && (
                 <>
                   <div onClick={() => showprofile(!profile)}>
-                    <div className="flex items-center  cursor-pointer  mx-4 font-semibold gap-2">
-                      <div className=" rounded-full">
-                        <img
-                          className="rounded-full w-7 h-7"
-                          src={avatar}
-                          alt=""
-                        />
+                    <div className="flex items-center  cursor-pointer   font-semibold gap-2">
+                      <div className=" rounded-full border  overflow-hidden w-12 h-12 ">
+                        <img className="   h-12  object-cover " src={ profileimg || imgurl} alt="Image" />
                       </div>
-                      <p>{auth}</p>
-                      <img src={loginicon} width={35} />
+                      <p>{username}</p>
+                      <IoIosArrowDown className="text-3xl hover:text-btn-primary"/>
                     </div>
                   </div>
-                {user_type =='candidate' &&   <div
-                    className="relative cursor-pointer"
-                    onClick={() => setcart(!cart)}
-                  >
-                    <div className="  gap-4 flex items-center font-semibold">
-                      <p>JOB CART</p>
-                      <BsCart className="text-2xl" />
-                    </div>
+                  {user_type == "candidate" && (
+                    <div
+                      className="relative cursor-pointer hover:text-btn-primary"
+                      onClick={() => setcart(!cart)}
+                    >
+                      <div className="  gap-4 flex items-center font-semibold">
+                        <BsCart className="text-2xl" />
+                      </div>
 
-                    <div className="rounded-full border-2 absolute bottom-6 border-purple-950 px-1   text-sm left-28 ">
-                      {9}
+                      <div className="rounded-full border-2 absolute bottom-6 border-purple-950  p-1 px-2   text-sm left-0 ">
+                        {data?.data?.count } 
+                      </div>
                     </div>
-                  </div>}
+                  )}
                 </>
               )}
               {!auth && (

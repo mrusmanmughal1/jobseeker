@@ -7,7 +7,6 @@ const CandidateDetails = async (id) => {
   const API = `${BASE_URL}api/candidate-profile/${id}/`;
 
   const token = localStorage.getItem("Token");
-  console.log(`Token ${token}`);
 
   const res = await axios.get(API, {
     headers: {

@@ -24,7 +24,7 @@ export const useJobPost = () => {
       toast.success(res.data.message);
     },
     onError: (err) => {
-      console.log(err), toast.error(err.message);
+      console.log(err), toast.error(err.response.data);
     },
   });
 

@@ -8,7 +8,7 @@ const DashboadLayout = () => {
   
   return (
     <div>
-      <ImageBanner text={SidebarStatus} />
+      <ImageBanner   />
 
       <div className="flex md:gap-24     w-11/12 mx-auto py-10 md:flex-row flex-col gap-8">
         <div className="w-full   md:w-1/4">
