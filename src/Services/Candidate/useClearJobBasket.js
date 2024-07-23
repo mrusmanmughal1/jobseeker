@@ -1,17 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
- 
+
 import toast from "react-hot-toast";
 
-const JobBasket = async (id) => {
+const ClearJobBasket = async () => {
   const API = `${BASE_URL}api/job-basket/`;
   const token = localStorage.getItem("Token");
-  const body = {
-    job: id,
-  };
 
-  const res = await axios.post(API, body, {
+  const res = await axios.delete(API, {
     headers: {
       Authorization: `Token ${token}`,
     },
@@ -19,11 +16,11 @@ const JobBasket = async (id) => {
   return res;
 };
 
-export const useJobBasket = () => {
+export const useClearJobBasket = () => {
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, isError } = useMutation({
-    mutationFn: (credentials) => JobBasket(credentials),
+    mutationFn: () => ClearJobBasket(),
     onSuccess: (res) => {
       toast.success(res.data.message);
       queryClient.invalidateQueries({ queryKey: ["basket"] });

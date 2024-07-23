@@ -8,13 +8,17 @@ import { useApplyJob } from "../../Services/Candidate/useApplyJob";
 const JobsBasket = () => {
   const { data, isLoading, isError } = useGetBasket();
   const { mutate: apply, isLoading: load } = useApplyJob();
-  const reversedResults = data?.data?.results ? [...data.data.results].reverse() : [];
+  const reversedResults = data?.data?.results
+    ? [...data.data.results].reverse()
+    : [];
 
   if (isLoading) return <Loader style="h-screen py-20" />;
   if (isError)
     return (
       <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
     );
+  if (data.data.count == 0)
+    return <ErrorMsg ErrorMsg=" No Job in the cart right now . . . " />;
   return (
     <div className="rounded-md border md:w-11/12  max-w-full mx-auto ">
       <div className=" font-semibold  text-sm md:text-sm  gap-2   justify-between bg-gray-200 flex   p-3  px-4  md:px-10 ">
@@ -26,7 +30,7 @@ const JobsBasket = () => {
         return (
           <>
             <div
-              key={i + 3} 
+              key={i + 3}
               className="flex items-center py-4  justify-between md:text-xs   hover:bg-gray-100 border-b "
             >
               <div className="lg:max-w-full w-2/5 flex lg:flex-row  flex-col  lg:items-center justify-between ps-4">

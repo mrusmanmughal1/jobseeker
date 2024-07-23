@@ -3,12 +3,11 @@ import { BASE_URL } from "../../config/Config";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const ApplyJob = async ({id , method}) => {
+const ApplyJob = async ({ id, method }) => {
   const API = `${BASE_URL}api/jobs/apply/`;
-console.log("first")
   const token = localStorage.getItem("Token");
   const res = await axios({
-    method ,   
+    method,
     url: API,
     data: {
       job: id,
@@ -24,10 +23,12 @@ export const useApplyJob = () => {
   const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: ({id , method}) => ApplyJob({id , method}),
+    mutationFn: ({ id, method }) => ApplyJob({ id, method }),
     onSuccess: (res) => {
       toast.success(res.data.message);
-      queryClient.invalidateQueries({ queryKey: ["basket"] });
+      queryClient.invalidateQueries({
+        queryKey: ["basket", "Candidate-history"],
+      });
     },
     onError: (err) => {
       toast.error(err.response.data.message);

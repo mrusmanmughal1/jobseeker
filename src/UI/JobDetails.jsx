@@ -15,7 +15,7 @@ import { useApplyJob } from "../Services/Candidate/useApplyJob";
 
 import Loader from "./Loader";
 import ErrorMsg from "./ErrorMsg";
-import { useUserinfo } from "../Context/Userinfo";
+import { useUserinfo } from "../Context/AuthContext";
 
 function JobDetails() {
   const { mutate: applyjob, isLoading: load } = useApplyJob();

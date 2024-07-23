@@ -17,6 +17,8 @@ const AdminCandidateList = () => {
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
   return (
     <div className="flex flex-col gap-4">
+      <div className="font-bold uppercase"> Candidates List   <span className="text-btn-primary">({data?.data?.count})</span> </div>
+
       <Adminfilters />
       {data?.data?.results?.map((v, i) => (
         <div

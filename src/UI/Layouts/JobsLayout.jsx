@@ -4,7 +4,7 @@ import FeaturedJobs from "../../UI/FeaturedJobs";
 import Job from "../Job";
 import JobSearchbar from "../../UI/JobSearchbar";
 import JobType from "../../UI/JobType";
-import { Userinfo, useUserinfo } from "../../Context/Userinfo";
+import {   useUserinfo } from "../../Context/AuthContext";
 
 const JobsLayout = (data = []) => {
   const Jobs = data?.data?.data?.results;

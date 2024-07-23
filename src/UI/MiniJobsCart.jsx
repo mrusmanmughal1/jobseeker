@@ -6,12 +6,23 @@ import MiniLoader from "./MiniLoader";
 import { FiMapPin } from "react-icons/fi";
 import { SlBasket } from "react-icons/sl";
 import { NavLink } from "react-router-dom";
+import { useClearJobBasket } from "../Services/Candidate/useClearJobBasket";
 const MiniJobsCart = () => {
   const { data, isLoading, isError } = useGetBasket();
+  const {
+    mutate: Clearcart,
+    isLoading: cartloading,
+    isError: cartError,
+  } = useClearJobBasket();
   if (isLoading) return <MiniLoader />;
   const reversedResults = data?.data?.results
     ? [...data.data.results].reverse()
     : [];
+
+  const handleClear = () => {
+    Clearcart();
+    console.log("usman")
+  };
   if (data?.data?.results?.length == 0)
     return (
       <div className="font-semibold pb-4">
@@ -64,7 +75,10 @@ const MiniJobsCart = () => {
           >
             <IoCartSharp /> Basket
           </NavLink>
-          <button className="bg-btn-primary px-4 py-3 rounded-md flex items-center uppercase gap-3">
+          <button
+            onClick={() => handleClear()}
+            className="bg-btn-primary px-4 py-3 rounded-md flex items-center uppercase gap-3"
+          >
             <FaTelegramPlane /> Clear
           </button>
         </div>

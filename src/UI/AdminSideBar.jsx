@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useUserinfo } from "../Context/Userinfo";
+import { useUserinfo } from "../Context/AuthContext";
 import { MdDashboardCustomize } from "react-icons/md";
 import { FaThList } from "react-icons/fa";
 import { BsPersonWorkspace } from "react-icons/bs";
@@ -22,15 +22,6 @@ const AdminSideBar = () => {
       to: `/admin/dashboard`,
       icon: <MdDashboardCustomize />,
     },
-
-    {
-      title: "Pending Jobs",
-      to: `/admin/pending-jobs`,
-      icon: <MdDashboardCustomize />,
-    },
-
-    { title: "Candidates Lists", to: `/admin/candidates`, icon: <FaThList /> },
-
     {
       title: "Approved Jobs List",
       to: `/admin/jobs`,
@@ -38,7 +29,20 @@ const AdminSideBar = () => {
     },
 
     {
-      title: "Employeer List",
+      title: "Pending Jobs List",
+      to: `/admin/pending-jobs`,
+      icon: <MdDashboardCustomize />,
+    },
+    {
+      title: "Rejected Jobs List",
+      to: `/admin/rejected`,
+      icon: <FaNetworkWired />,
+    },
+
+    { title: "Candidates Lists", to: `/admin/candidates`, icon: <FaThList /> },
+
+    {
+      title: "Employers List",
       to: `/admin/employeers`,
       icon: <BsPersonWorkspace />,
     },

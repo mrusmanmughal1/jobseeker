@@ -1,4 +1,3 @@
-import { BiWorld } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import { useAllEmployer } from "../../Services/admin/useAllEmployer";
 import Loader from "../../UI/Loader";
@@ -17,6 +16,12 @@ const AdminEmployeerList = () => {
   console.log(data);
   return (
     <div className="flex flex-col gap-4">
+      <div className="font-bold uppercase">
+        {" "}
+        EMPLOYERS LIST{" "}
+        <span className="text-btn-primary">({data?.data?.count})</span>{" "}
+      </div>
+
       {data?.data?.results.map((v, i) => (
         <div
           key={i}
@@ -29,9 +34,7 @@ const AdminEmployeerList = () => {
                 <img src={v?.avatar_image || img} className="w-16 " alt="" />
               </div>
               <div className="">
-                <p className="uppercase font-bold">
-                  {v?.username}  
-                </p>
+                <p className="uppercase font-bold">{v?.username}</p>
                 <p className="text-xs flex gap-2 items-center">
                   <span className="font-semibold">Date Joined </span>:{" "}
                   {v?.date_joined}

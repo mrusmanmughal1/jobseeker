@@ -5,19 +5,29 @@ import AdminDoughnut from "../../UI/AdminDoughnut";
 import AdminLineGraph from "../../UI/AdminLineGraph";
 import AdminTopWidgets from "../../UI/AdminTopWidgets";
 import { useAllCandidates } from "../../Services/Candidate/useCandidateList";
-import { useAdminPendingJobs } from "../../Services/admin/useAdminPendingJobs";
+// import { useAdminPendingJobs } from "../../Services/admin/useAdminPendingJobs";
 import { useAllEmployer } from "../../Services/admin/useAllEmployer";
 import Loader from "../../UI/Loader";
-import { useJAdminobsList } from "../../Services/admin/useJAdminobsList";
+import { useAdminJobsLIsts } from "../../Services/admin/useAdminJobsLists";
+// import { useJAdminobsList } from "../../Services/admin/useJAdminobsList";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Admin = () => {
   const { data: candidates, isLoading: candidatesLoading } = useAllCandidates();
-  const { data: pending, isLoading: pendingLoading } = useAdminPendingJobs();
-  const { data: allJObs, isLoading: loadingAlljobs } = useJAdminobsList();
+  const {
+    data: pending,
+    isLoading: isPending,
+    isError,
+  } = useAdminJobsLIsts("pending");
+
+  const {
+    data: AllJobs,
+    isLoading: isAllJobs,
+    isError: jobError,
+  } = useAdminJobsLIsts();
   const { data: emp, isLoading: loadingEmployers } = useAllEmployer();
-  if (candidatesLoading && pendingLoading && loadingAlljobs && loadingEmployers)
+  if (candidatesLoading && isPending && isAllJobs && loadingEmployers)
     return <Loader style="h-screen py-20" />;
   return (
     <div>
@@ -29,7 +39,7 @@ const Admin = () => {
       {/* Widgets added  */}
       <AdminTopWidgets
         candidates={candidates}
-        allJObs={allJObs}
+        AllJobs={AllJobs}
         employer={emp}
         pending={pending}
       />
@@ -38,20 +48,20 @@ const Admin = () => {
       <div className=" flex flex-col    md:flex-row md:gap-2 gap-8    lg:gap-14 py-14  ">
         <AdminBarGraph
           candidates={candidates}
-          allJObs={allJObs}
+          AllJobs={AllJobs}
           employer={emp}
         />
         {/* / Doughnut */}
         <AdminDoughnut
           candidates={candidates}
-          allJObs={allJObs}
+          AllJobs={AllJobs}
           employer={emp}
         />
       </div>
       <div className="">
         <AdminLineGraph
           candidates={candidates}
-          allJObs={allJObs}
+          AllJobs={AllJobs}
           employer={emp}
         />
       </div>

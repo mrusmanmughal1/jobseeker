@@ -30,25 +30,28 @@ export const RegisterSchema = Yup.object({
 
 // Employer Job Posting
 
-
 export const JobPost = Yup.object().shape({
-  contract_type: Yup.string().required('Contract type is required'),
-  title: Yup.string().required('Job title is required'),
+  contract_type: Yup.string().required("Contract type is required"),
+  title: Yup.string().required("Job title is required"),
   remote_work: Yup.boolean(),
-  addresses: Yup.array().of(
-    Yup.object().shape({
-      state: Yup.string().required('State is required'),
-      city: Yup.string().required('City is required'),
-      zip_code: Yup.string().required('Zip code is required'),
-    })
-  ).min(1, 'At least one address is required'),
-  duration: Yup.string().required('Duration is required'),
-  rate: Yup.string().required('Rate is required'),
-  job_description: Yup.string().required('Job description is required'),
+  addresses: Yup.array()
+    .of(
+      Yup.object().shape({
+        state: Yup.string().required("State is required"),
+        city: Yup.string().required("City is required"),
+        zip_code: Yup.string().required("Zip code is required"),
+      })
+    )
+    .min(1, "At least one address is required"),
+  duration: Yup.string().required("Duration is required"),
+  rate: Yup.string().required("Rate is required"),
+  job_description: Yup.string().required("Job description is required"),
   work_authorization: Yup.array().of(Yup.string()),
   other_work_authorization: Yup.string(),
   specializations_skills: Yup.array().of(Yup.string()),
-  job_posting_deadline: Yup.date().required('Job posting deadline is required').min(new Date(), 'Deadline must be in the future'),
+  job_posting_deadline: Yup.date()
+    .required("Job posting deadline is required")
+    .min(new Date(), "Deadline must be in the future"),
 });
 
 // forget Password
@@ -68,7 +71,8 @@ export const ManageProfileCandidate = Yup.object({
   gender: Yup.string()
     .oneOf(["male", "female"], "Invalid gender")
     .required("Gender is required"),
-  dob: Yup.string().required("Date of Birth is required"),
+  date_of_birth: Yup.string().required("Date of Birth is required"),
+  job_profession: Yup.string().required("Enter Your Profession "),
   address_1: Yup.string().required("Address 1 is required"),
   address_2: Yup.string(),
   city: Yup.string().required("City is required"),
@@ -79,7 +83,7 @@ export const ManageProfileCandidate = Yup.object({
   job_interest: Yup.mixed()
     .nullable()
     .required("please Add Your Job Interest "),
-  salary: Yup.number()
+  minimum_salary: Yup.number()
     .min(0, "Minimum Salary must be a positive number")
     .required("Minimum Salary is required"),
   // avatar_image: Yup.mixed().required("Avatar Image is required"),

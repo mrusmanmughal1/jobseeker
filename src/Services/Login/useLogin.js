@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
-import { useUserinfo } from "../../Context/Userinfo";
+import { useUserinfo } from "../../Context/AuthContext";
 
 const getLogin = async (credentials) => {
   const Post = `${BASE_URL}api/login/`;
@@ -36,7 +36,6 @@ export const useLogin = () => {
 
     // Handle Error
     onError: (err) => {
-      console.log(err);
       const errorMessage =
         err.response?.data?.message || err.response.data.error;
       toast.error(errorMessage);

@@ -35,6 +35,7 @@ import CandidateViewProfile from "./UI/CandidateViewprofile";
 import JobDetails from "./UI/JobDetails";
 import PendingJobs from "./Feature/Admin/PendingJobs";
 import CandidateAppliedJob from "./Feature/Candidate/CandidateAppliedJob";
+import AdminRejectedList from "./Feature/Admin/AdminRejectedList";
 
 const App = () => {
   return (
@@ -53,6 +54,8 @@ const App = () => {
           <Route path="dashboard" index element={<Admin />} />
           <Route path="candidates" element={<AdminCandidateList />} />
           <Route path="/admin/Jobs" element={<AdminJobsLIst />} />
+          <Route path="/admin/rejected" element={<AdminRejectedList />} />
+
           <Route path="/admin/employeers" element={<AdminEmployeerList />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/admin/view-jobs" element={<AdminViewJobs />} />

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserinfo } from "../../Context/Userinfo";
+import { useUserinfo } from "../../Context/AuthContext";
 
 const ProtectedRoutes = ({ children }) => {
   const navigate = useNavigate();

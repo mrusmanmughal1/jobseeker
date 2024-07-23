@@ -1,4 +1,4 @@
-import { useUserinfo } from "../../Context/Userinfo";
+import { useUserinfo } from "../../Context/AuthContext";
 import { EMPLOYER } from "../../utils/Constants";
 import MyProfileCandidate from "../Candidate/MyProfileCandidate";
 import MyProfileEmployers from "../Employer/MyProfileEmployers";

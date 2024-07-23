@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
-import { useUserinfo } from "../../Context/Userinfo";
+import { useUserinfo } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
 
 const CandidateDetails = async (Credndials, id) => {

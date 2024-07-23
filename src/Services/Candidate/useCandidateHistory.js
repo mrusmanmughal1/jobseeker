@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
-import { useUserinfo } from "../../Context/Userinfo";
+import { useUserinfo } from "../../Context/AuthContext";
 
 const CandidateJObHistory = async () => {
   const API = `${BASE_URL}api/candidate/applications/`;

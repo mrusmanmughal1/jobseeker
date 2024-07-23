@@ -7,7 +7,7 @@ import { RxCross2 } from "react-icons/rx";
 import Mobilenav from "./Mobilenav";
 import loginicon from "../assets/login-icon.webp";
 import { BsCart } from "react-icons/bs";
-import { useUserinfo } from "../Context/Userinfo";
+import { useUserinfo } from "../Context/AuthContext";
 import Sidebar from "./Sidebar";
 import LoginForm from "./LoginForm";
 import { FaUser } from "react-icons/fa";
@@ -20,8 +20,8 @@ const Navbar = () => {
   const [showMblNav, setshowMblNav] = useState(false);
   const [profile, showprofile] = useState(false);
   const [cart, setcart] = useState(false);
-  const { auth, user_type, avatar  , username} = useUserinfo();
-  const {data} = useGetBasket()
+  const { auth, user_type, avatar, username } = useUserinfo();
+  const { data } = useGetBasket();
   // sticky Navbar no scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -33,8 +33,9 @@ const Navbar = () => {
     };
   }, []);
 
-  const imgurl = `http://170.187.136.161:8010${avatar}`;
-const profileimg = 'https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg'
+  
+  const profileimg =
+    "https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg";
   return (
     <section
       className={`${
@@ -104,10 +105,18 @@ const profileimg = 'https://static.vecteezy.com/system/resources/thumbnails/005/
                   <div onClick={() => showprofile(!profile)}>
                     <div className="flex items-center  cursor-pointer   font-semibold gap-2">
                       <div className=" rounded-full border  overflow-hidden w-12 h-12 ">
-                        <img className="   h-12  object-cover " src={ profileimg || imgurl} alt="Image" />
+                        <img
+                          className="   h-12  object-cover "
+                          src={
+                            avatar
+                              ? `${`http://170.187.136.161:8010${avatar}`}`
+                              : `${profileimg}`
+                          }
+                          alt="Image"
+                        />
                       </div>
                       <p>{username}</p>
-                      <IoIosArrowDown className="text-3xl hover:text-btn-primary"/>
+                      <IoIosArrowDown className="text-3xl hover:text-btn-primary" />
                     </div>
                   </div>
                   {user_type == "candidate" && (
@@ -120,7 +129,7 @@ const profileimg = 'https://static.vecteezy.com/system/resources/thumbnails/005/
                       </div>
 
                       <div className="rounded-full border-2 absolute bottom-6 border-purple-950  p-1 px-2   text-sm left-0 ">
-                        {data?.data?.count } 
+                        {data?.data?.count}
                       </div>
                     </div>
                   )}

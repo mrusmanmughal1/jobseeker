@@ -13,6 +13,7 @@ const initialState = {
   username: "",
   user_id: "",
   user_type: "",
+  avatar: "",
 };
 
 const reducer = (state, action) => {
@@ -25,6 +26,7 @@ const reducer = (state, action) => {
         auth: true,
         user_id: action.payload.user_id,
         username: action.payload.username,
+        avatar: action.payload.avatar,
       };
     case "logout":
       return { user_type: null, auth: null };
@@ -33,7 +35,7 @@ const reducer = (state, action) => {
   }
 };
 
-const Userinfo = ({ children }) => {
+const AuthContext = ({ children }) => {
   const [data, setdata] = useState();
   useEffect(() => {
     const userData = localStorage.setItem("User_Data", JSON.stringify(data));
@@ -57,4 +59,4 @@ const useUserinfo = () => {
   return Userdata;
 };
 
-export { Userinfo, useUserinfo };
+export { AuthContext, useUserinfo };

@@ -6,12 +6,16 @@ import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 const CandidateDetails = () => {
   const { id } = useParams();
-  const { data, isLoading, isError } = useCandidateDetail(id);
-
+  const { data, isLoading, isError, error } = useCandidateDetail(id);
   if (isLoading) return <Loader style="py-20 h-screen" />;
   if (isError)
     return (
-      <ErrorMsg ErrorMsg="Sorry Unable to fecth data try again later ... " />
+      <ErrorMsg
+        ErrorMsg={
+          error?.response?.data?.detail ||
+          "Sorry Unable to fecth data try again later ... "
+        }
+      />
     );
   const baseurl = "http://170.187.136.161:8010";
   const {
@@ -25,7 +29,7 @@ const CandidateDetails = () => {
     phone,
     city,
     country,
-  } = data.data.data || {};
+  } = data?.data?.data || {};
   return (
     <div>
       <div className="candidate-man relative  ">

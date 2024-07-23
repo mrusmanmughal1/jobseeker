@@ -5,7 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { useUserinfo } from "../Context/Userinfo";
+import { useUserinfo } from "../Context/AuthContext";
 
 const Footer = () => {
   const { role } = useUserinfo();

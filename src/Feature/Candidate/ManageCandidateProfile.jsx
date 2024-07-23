@@ -6,16 +6,14 @@ import Select from "react-select";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 import { useSpecialization } from "../../Services/General/useSpecialization";
+import { BASE_URL, BASE_URL_IMG } from "../../config/Config";
 const ManageCandidateProfile = () => {
-  const baseurl = "http://170.187.136.161:8010";
-
   const { data, isLoading: loadingDetails, isError } = useCandidateDetails();
   const {
     mutate: updateProfile,
     isLoading,
     isError: errorProfile,
   } = useCandidateManageProfile();
-console.log(data)
   if (isLoading || loadingDetails) return <Loader style="h-screen  " />;
   if (isError || errorProfile)
     return (
@@ -33,29 +31,29 @@ console.log(data)
     salary,
     address_1,
     avatar_image,
-
+    exp_level,
     address_2,
+    job_profession,
     about,
     cv_file,
     job_interest,
     cover_letter,
   } = data?.data?.data;
-  console.log(salary)
-
   const initialValues = {
     email: email,
     first_name: first_name,
     last_name: last_name,
     gender: gender,
-    dob: dob,
+    date_of_birth: dob,
     address_1: address_1,
     address_2: address_2,
     city: city,
     country: country,
+    exp_level: exp_level,
     phone: phone,
     about: about,
-    salary: salary || 0,
-    // avatar_image,
+    job_profession: job_profession,
+    minimum_salary: salary || 0,
     job_interest: job_interest,
     cover_letter: cover_letter,
     new_password: "",
@@ -73,6 +71,7 @@ console.log(data)
   } = useFormik({
     initialValues,
     onSubmit: (values, action) => {
+      console.log(values);
       const formData = new FormData();
       Object.keys(values).forEach((key) => {
         formData.append(key, values[key]);
@@ -84,7 +83,7 @@ console.log(data)
   });
 
   const { data: Specializations, isLoading: loadspecial } = useSpecialization();
- 
+
   // handle special change
   const handleSpecialChange = (SELECTED) => {
     const selectedValues = SELECTED
@@ -196,18 +195,68 @@ console.log(data)
               </label>
               <input
                 type="date"
-                name="dob"
+                name="date_of_birth"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.dob}
+                value={values.date_of_birth}
                 className="py-3 bg-gray-100 px-2 outline-none w-full"
               />
-              {errors.dob && touched.dob && (
+              {errors.date_of_birth && touched.date_of_birth && (
                 <p className="text-start px-1 text-sm font-semibold text-red-600">
-                  {errors.dob}
+                  {errors.date_of_birth}
                 </p>
               )}
             </div>
+          </div>
+          <div className="">
+            <label className="font-semibold ">
+              Profession
+              <span className="text-sm px-2 font-normal">
+                Enter your Profession{" "}
+                <span className="text-xs"> eg# (Developer,Teacher) </span>
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Address"
+              name="job_profession"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.job_profession}
+              className="py-3 bg-gray-100 px-2 outline-none w-full"
+            />
+            {errors.job_profession && touched.job_profession && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.job_profession}
+              </p>
+            )}
+          </div>
+          <div className="w-full">
+            <label className="font-semibold ">
+              Experience Level
+              <span className="text-sm px-2 font-normal">
+                Select your Experience Level.
+              </span>
+            </label>
+            <select
+              name="gender"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.exp_level}
+              className="block w-full border p-3 bg-gray-100"
+            >
+              <option value="Beginner" selected>
+                Beginner
+              </option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advance">Advance</option>
+              <option value="Expert">Expert</option>
+            </select>
+            {errors.exp_level && touched.exp_level && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.exp_level}
+              </p>
+            )}
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -377,10 +426,12 @@ console.log(data)
                   value: option,
                   label: option,
                 }))}
-                options={Specializations?.data?.specializations?.map((option) => ({
-                  value: option,
-                  label: option,
-                }))}
+                options={Specializations?.data?.specializations?.map(
+                  (option) => ({
+                    value: option,
+                    label: option,
+                  })
+                )}
               />
 
               {errors.job_interest && touched.job_interest && (
@@ -400,15 +451,15 @@ console.log(data)
             <input
               type="number"
               placeholder="Minimum salary"
-              name="salary"
+              name="minimum_salary"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.salary}
+              value={values.minimum_salary}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.salary && touched.salary && (
+            {errors.minimum_salary && touched.minimum_salary && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.salary}
+                {errors.minimum_salary}
               </p>
             )}
           </div>
@@ -421,7 +472,7 @@ console.log(data)
             </label>
             <div className="">
               <img
-                src={baseurl + avatar_image}
+                src={BASE_URL_IMG + avatar_image}
                 alt="image"
                 width="150"
                 className="border my-2"
@@ -429,7 +480,9 @@ console.log(data)
             </div>
             <input
               type="file"
+              accept="application/pdf,application/vnd.ms-word"
               name="avatar_image"
+              value={values.avatar_image}
               onChange={(event) => {
                 setFieldValue("avatar_image", event.currentTarget.files[0]);
               }}

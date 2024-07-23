@@ -17,9 +17,9 @@ const CandidateDetails = async (id) => {
 };
 
 export const useCandidateDetail = (id) => {
-  const { data, isLoading, isError, status } = useQuery({
+  const { data, isLoading, isError, status  , error} = useQuery({
     queryKey: ["employerCandidate" , id],
     queryFn: () => CandidateDetails(id),
   });
-  return { data, isLoading, status, isError };
+  return { data, isLoading, status, isError  , error};
 };

@@ -5,6 +5,7 @@ import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 const CandidateAppliedJob = () => {
   const { data, isloading, isError } = useCandidateHistory();
+  console.log(data)
   if (isloading) return <Loader style="h-screen py-20" />;
   if (isError)
     return <ErrorMsg ErrorMsg="Try Again Later Unable To fetch Data !" />;

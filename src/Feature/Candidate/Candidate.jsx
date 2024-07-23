@@ -8,7 +8,7 @@ import { useAllCandidates } from "../../Services/Candidate/useCandidateList";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 import { useEffect } from "react";
-import { useUserinfo } from "../../Context/Userinfo";
+import { useUserinfo } from "../../Context/AuthContext";
 
 const Candidate = () => {
   const navigate = useNavigate();
