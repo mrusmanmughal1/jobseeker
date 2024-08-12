@@ -1,7 +1,14 @@
 import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-const JobSearchbar = () => {
+const JobSearchbar = ({
+  isRemote,
+  handleChange,
+  title,
+  location,
+  handleRemoteChange,
+  seclicked,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Set isVisible to true when the component mounts
@@ -21,6 +28,9 @@ const JobSearchbar = () => {
           <FaSearch className="text-btn-primary" />
           <input
             type="text rounded-md"
+            value={title}
+            name="title"
+            onChange={(e) => handleChange(e)}
             className="p-5 pe-16 outline-none w-full rounded-md"
             placeholder="Key Word / Job Title"
           />
@@ -30,7 +40,10 @@ const JobSearchbar = () => {
         <p className="text-white">Where</p>
         <div className="">
           <input
-            type="text   "
+            location={location}
+            type="text"
+            name="location"
+            onChange={(e) => handleChange(e)}
             className="p-5 outline-none rounded-md border px-10 w-full"
             placeholder="Location"
           />
@@ -38,12 +51,22 @@ const JobSearchbar = () => {
       </div>
       <div className=" flex flex-col sm:gap-0   gap-4">
         <div className="flex gap-1  items-center mt-2 sm:mt-0 ">
-          <input type="checkbox" className="text-black" name="" id="remote" />
+          <input
+            type="checkbox"
+            className="text-black"
+            name="isRemote"
+            id="remote"
+            checked={isRemote}
+            onChange={(e) => handleRemoteChange(e)}
+          />
           <label htmlFor="remote" className="text-sm text-white">
             Remote Only
           </label>
         </div>
-        <button className="px-10 text-sm rounded-md font-bold text-white py-5 bg-[#4e007a]">
+        <button
+          onClick={() => seclicked()}
+          className="px-10 text-sm rounded-md font-bold text-white py-5 bg-[#4e007a]"
+        >
           Search
         </button>
       </div>

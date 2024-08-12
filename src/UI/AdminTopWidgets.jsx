@@ -1,13 +1,13 @@
-import React, { useState } from "react";
 import { FaCalendarCheck } from "react-icons/fa";
 import { BsPersonWorkspace } from "react-icons/bs";
 import { FaUserGraduate } from "react-icons/fa";
 import { BsBriefcaseFill } from "react-icons/bs";
-const AdminTopWidgets = ({ candidates, pending, allJObs, employer }) => {
+import { useState } from "react";
+const AdminTopWidgets = ({ candidates, pending, AllJobs, employer }) => {
   const Raw = [
     {
       title: "Total Jobs Posted",
-      number: allJObs?.data?.count,
+      number: AllJobs?.data?.count,
       icons: <BsBriefcaseFill />,
     },
     {

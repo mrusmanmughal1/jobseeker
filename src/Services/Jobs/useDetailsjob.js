@@ -14,7 +14,7 @@ export const useJobDetails = () => {
   const { id } = useParams();
 
   const { data, isLoading, isError, status } = useQuery({
-    queryKey: ["single-jobDetails"],
+    queryKey: ["single-jobDetails", id],
     queryFn: () => getJobDetails(id),
   });
   return { data, isLoading, status, isError };

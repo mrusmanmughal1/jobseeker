@@ -11,15 +11,15 @@ const getNewPassword = async (email) => {
 };
 
 export const useFOrgetPassword = () => {
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading, isError } = useMutation({
     mutationFn: (credentials) => getNewPassword(credentials.email),
     onSuccess: (res) => {
       toast.success(res.data.message);
     },
     onError: (err) => {
-      toast.error(err.message);
+      toast.error(err.response.data.error);
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isLoading, isError };
 };

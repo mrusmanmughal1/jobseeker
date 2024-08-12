@@ -15,8 +15,16 @@ const MyProfileCandidate = () => {
     return (
       <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
     );
-  const { first_name, last_name, email, dob, phone, country, city, salary } =
-    Candidates?.data?.data;
+  const {
+    first_name,
+    last_name,
+    email,
+    dob,
+    phone,
+    country,
+    city,
+    candidate_salary,
+  } = Candidates?.data?.data;
 
   return (
     <div className="   w-full  md:w-3/4   ">
@@ -52,7 +60,7 @@ const MyProfileCandidate = () => {
             <li>{city}</li>
             <li>{country}</li>
             <li>{phone}</li>
-            <li>{salary}</li>
+            <li>{candidate_salary}</li>
           </ul>
         </div>
       </div>
@@ -61,10 +69,13 @@ const MyProfileCandidate = () => {
           APPLICATION HISTORY
         </p>
         <p className="text-sm">
-          You have applied for 3 jobs in the past 30 days. &nbsp;
-          <a href="" className="text-btn-primary">
+          {Candidates?.data?.recent_applications_count} &nbsp;
+          <NavLink
+            to="/dashboard/candidate-applied-job"
+            className="text-btn-primary"
+          >
             View application
-          </a>
+          </NavLink>
         </p>
       </div>
     </div>

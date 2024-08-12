@@ -7,14 +7,17 @@ import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 import { useSpecialization } from "../../Services/General/useSpecialization";
 import { BASE_URL, BASE_URL_IMG } from "../../config/Config";
+import { HiDocumentDownload } from "react-icons/hi";
+import profileimg from "../../assets/Profile-picture.png";
+import MiniLoader from "../../UI/MiniLoader";
 const ManageCandidateProfile = () => {
   const { data, isLoading: loadingDetails, isError } = useCandidateDetails();
   const {
     mutate: updateProfile,
-    isLoading,
+    isPending,
     isError: errorProfile,
   } = useCandidateManageProfile();
-  if (isLoading || loadingDetails) return <Loader style="h-screen  " />;
+  if (loadingDetails) return <Loader style="h-screen  " />;
   if (isError || errorProfile)
     return (
       <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
@@ -28,7 +31,7 @@ const ManageCandidateProfile = () => {
     last_name,
     gender,
     phone,
-    salary,
+    candidate_salary,
     address_1,
     avatar_image,
     exp_level,
@@ -38,6 +41,7 @@ const ManageCandidateProfile = () => {
     cv_file,
     job_interest,
     cover_letter,
+    experience,
   } = data?.data?.data;
   const initialValues = {
     email: email,
@@ -48,18 +52,18 @@ const ManageCandidateProfile = () => {
     address_1: address_1,
     address_2: address_2,
     city: city,
+    experience: experience,
     country: country,
     exp_level: exp_level,
     phone: phone,
     about: about,
     job_profession: job_profession,
-    minimum_salary: salary || 0,
+    minimum_salary: candidate_salary,
     job_interest: job_interest,
     cover_letter: cover_letter,
     new_password: "",
     confirm_password: "",
   };
-
   const {
     values,
     errors,
@@ -92,7 +96,6 @@ const ManageCandidateProfile = () => {
 
     setFieldValue("job_interest", selectedValues.toString());
   };
-
   return (
     <div className="md:w-3/4">
       <form onSubmit={handleSubmit}>
@@ -218,7 +221,7 @@ const ManageCandidateProfile = () => {
             </label>
             <input
               type="text"
-              placeholder="Address"
+              placeholder="Profession"
               name="job_profession"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -239,17 +242,17 @@ const ManageCandidateProfile = () => {
               </span>
             </label>
             <select
-              name="gender"
+              name="exp_level"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.exp_level}
               className="block w-full border p-3 bg-gray-100"
             >
-              <option value="Beginner" selected>
-                Beginner
+              <option value="Associate" selected>
+                Associate
               </option>
               <option value="Intermediate">Intermediate</option>
-              <option value="Advance">Advance</option>
+              <option value="Senior">Senior</option>
               <option value="Expert">Expert</option>
             </select>
             {errors.exp_level && touched.exp_level && (
@@ -258,6 +261,29 @@ const ManageCandidateProfile = () => {
               </p>
             )}
           </div>
+          <div className="w-full">
+            <label className="font-semibold ">
+              Experience
+              <span className="text-sm px-2 font-normal">
+                Enter Experience In Years.
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Address"
+              name="experience"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.experience}
+              className="py-3 bg-gray-100 px-2 outline-none w-full"
+            />
+            {errors.experience && touched.experience && (
+              <p className="text-start px-1 text-sm font-semibold text-red-600">
+                {errors.experience}
+              </p>
+            )}
+          </div>
+
           <div className="">
             <label className="font-semibold ">
               Address 1
@@ -472,17 +498,16 @@ const ManageCandidateProfile = () => {
             </label>
             <div className="">
               <img
-                src={BASE_URL_IMG + avatar_image}
+                src={avatar_image ? BASE_URL_IMG + avatar_image : profileimg}
                 alt="image"
-                width="150"
+                width="200"
                 className="border my-2"
               />
             </div>
             <input
               type="file"
-              accept="application/pdf,application/vnd.ms-word"
               name="avatar_image"
-              value={values.avatar_image}
+              accept="image/jpeg, image/png, image/gif, image/webp"
               onChange={(event) => {
                 setFieldValue("avatar_image", event.currentTarget.files[0]);
               }}
@@ -495,6 +520,20 @@ const ManageCandidateProfile = () => {
               </p>
             )}
           </div>
+          {cv_file && (
+            <div className="">
+              <a
+                href={cv_file}
+                className="text-white bg-btn-primary p-3 inline-block rounded-md    "
+                download
+              >
+                <div className="flex">
+                  <HiDocumentDownload className="text-2xl text-white" />
+                  Download cv
+                </div>
+              </a>
+            </div>
+          )}
           <div className="">
             <label className="font-semibold ">
               CV File
@@ -502,18 +541,11 @@ const ManageCandidateProfile = () => {
                 Upload Your CV File
               </span>
             </label>
-            <div className=" my-8">
-              <a
-                href={cv_file}
-                className="text-white bg-btn-primary p-4 "
-                download
-              >
-                Download Resume
-              </a>
-            </div>
+
             <input
               type="file"
               name="cv_file"
+              accept=".doc,.docx,application/pdf"
               onChange={(event) => {
                 setFieldValue("cv_file", event.currentTarget.files[0]);
               }}
@@ -564,9 +596,10 @@ const ManageCandidateProfile = () => {
         <div className=" text-center py-6">
           <button
             type="submit"
+            disabled={isPending}
             className="bg-btn-primary px-8 py-4 rounded-md text-white font-semibold"
           >
-            SAVE CHANGES
+            {isPending ? <MiniLoader /> : " SAVE CHANGES"}
           </button>
         </div>
       </form>

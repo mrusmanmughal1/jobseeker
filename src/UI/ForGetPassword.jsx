@@ -4,16 +4,13 @@ import { useFormik } from "formik";
 import { ForgetPasswordSchema } from "../helpers/Schema/FormValidation";
 
 const ForGetPassword = () => {
-  const { mutate: ForgetPassword, isLoading } = useFOrgetPassword();
+  const { mutate: ForgetPassword, isLoading, isError } = useFOrgetPassword();
 
   const initialValues = {
     email: "",
   };
 
-  
-
-  const { values, errors, touched, handleChange, handleSubmit } =
-  useFormik({
+  const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues,
     onSubmit: (values, action) => {
       ForgetPassword(values);
@@ -24,30 +21,35 @@ const ForGetPassword = () => {
     <div>
       <div className="h-96 flex justify-center items-center">
         <form className="space-y-10 gap-4 w-1/2 " onSubmit={handleSubmit}>
-          <div className="text-center font-bold uppercase text-2xl">
+          <div className="text-center font-bold uppercase text-2xl text-btn-primary">
             Forgot Password ?
           </div>
-          <div className="flex gap-4">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={values.email}
-              onChange={handleChange}
-              className="w-full border rounded-sm border-black px-2"
-              placeholder="Please Enter Your Email Here ! "
-            />
+          <div className="  g ">
+            <div className="w-full flex gap-3">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={values.email}
+                onChange={handleChange}
+                className={`w-full border rounded-sm  outline-purple-400  p-3 ${
+                  isError && "border-red-900"
+                }`}
+                placeholder="Please Enter Your Email Here ! "
+              />
+              <button
+                type="submit"
+                className="bg-btn-primary w-48 text-white py-3 rounded-md"
+              >
+                Send Email
+              </button>
+            </div>
+
             {errors.email && touched.email && (
-              <p className="text-start px-1  text-sm font-semibold text-red-600">
+              <p className="text-start px-1  text-sm font-semibold text-red-600 capitalize">
                 {errors.email}
               </p>
             )}
-            <button
-              type="submit"
-              className="bg-btn-primary w-48 text-white py-4 rounded-md"
-            >
-              Send Email
-            </button>
           </div>
         </form>
       </div>

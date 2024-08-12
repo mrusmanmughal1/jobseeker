@@ -5,7 +5,7 @@ import GeneralHeaders from "./GeneralHeaders";
 const Header = () => {
   const { user_type } = useUserinfo();
   return (
-    <>{user_type == "administrator" ? <AdminNavbar /> : <GeneralHeaders />}</>
+    <div className="relative">{user_type == "administrator" ? <AdminNavbar /> : <GeneralHeaders />}</div>
   );
 };
 

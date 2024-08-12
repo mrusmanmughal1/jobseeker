@@ -6,7 +6,6 @@ const getCandidates = async () => {
   const API = `${BASE_URL}api/view-applications/`;
 
   const token = localStorage.getItem("Token");
-  console.log(`Token ${token}`);
 
   const res = await axios.get(API, {
     headers: {

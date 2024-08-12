@@ -36,11 +36,18 @@ import JobDetails from "./UI/JobDetails";
 import PendingJobs from "./Feature/Admin/PendingJobs";
 import CandidateAppliedJob from "./Feature/Candidate/CandidateAppliedJob";
 import AdminRejectedList from "./Feature/Admin/AdminRejectedList";
+import ChatMain from "./Feature/Chat/ChatMain";
+import { useUserinfo } from "./Context/AuthContext";
+import EmpInterviewList from "./Feature/Employer/EmpInterviewList";
+import UpdateJob from "./Feature/Employer/UpdateJob";
 
 const App = () => {
+  const { user_type } = useUserinfo();
   return (
     <BrowserRouter>
       <Header />
+      {user_type && <ChatMain />}
+
       <Routes>
         {/* admin  */}
         <Route
@@ -83,6 +90,9 @@ const App = () => {
           <Route path="jobs-basket" element={<JobsBasket />} />
           <Route path="myaccount" element={<MyAccount />} />
           <Route path="applied" element={<ApplicationHistory />} />
+          <Route path="scheduled-interviews" element={<EmpInterviewList />} />
+          <Route path="update-job/:id" element={<UpdateJob />} />
+
           <Route
             path="candidate-applied-job"
             element={<CandidateAppliedJob />}

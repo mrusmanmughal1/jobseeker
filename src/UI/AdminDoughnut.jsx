@@ -1,7 +1,7 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const AdminDoughnut = ({ candidates, pending, allJObs, employer }) => {
+const AdminDoughnut = ({ candidates, pending, AllJobs, employer }) => {
   const SourceData = [
     {
       label: "Candidates",
@@ -9,7 +9,7 @@ const AdminDoughnut = ({ candidates, pending, allJObs, employer }) => {
     },
     {
       label: "Jobs Posted",
-      value: allJObs?.data?.count,
+      value: AllJobs?.data?.count,
     },
     {
       label: "Employeers",

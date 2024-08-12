@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const CvUpload = () => {
   return (
-    <div className="w-72 mt cv mx-auto rela">
+    <NavLink to='/dashboard/profile'>
+    <div   className="w-72 mt cv mx-auto rela">
       <div className="bg-blue-600   flex flex-col gap-4 py-4 text-center text-white rounded-md">
         <div className=" py-4   ">
           <p className="font-semibold text-4xl px-5  ">Upload Your CV</p>
@@ -21,6 +23,7 @@ const CvUpload = () => {
         </div>
       </div>
     </div>
+    </NavLink>
   );
 };
 

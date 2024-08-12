@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useUserinfo } from "../Context/AuthContext";
 import { useLogout } from "../Services/Logout/useLogout";
+import { useEmployerDetails } from "../Services/Employer/useEmployerDetails";
 
 const Sidebar = ({ baseurl, gap = "gap-5", showprofile }) => {
   const { user_type } = useUserinfo();
@@ -9,7 +10,9 @@ const Sidebar = ({ baseurl, gap = "gap-5", showprofile }) => {
     logout();
     showprofile(false);
   };
-
+  const { data } = useEmployerDetails();
+  const { license_number, specialisms, country, email } =
+    data?.data?.data || [];
   return (
     <div className="   mx-auto  w-full  ">
       <ul className={`flex flex-col   ${gap}`}>
@@ -33,14 +36,25 @@ const Sidebar = ({ baseurl, gap = "gap-5", showprofile }) => {
         </li>
         {user_type == "candidate" && (
           <li className="border-b pb-5">
-            <NavLink to={`${baseurl}jobs-basket`}>Jobs Basket</NavLink>
+            <NavLink to={`${baseurl}jobs-basket`}>Jobs cart</NavLink>
           </li>
         )}
-        {user_type == "employer" && (
-          <li className="border-b pb-5">
-            <NavLink to={`${baseurl}new-post`}>New Post</NavLink>
-          </li>
-        )}
+        {user_type === "employer" &&
+          license_number &&
+          specialisms &&
+          country &&
+          email && (
+            <>
+              <li className="border-b pb-5">
+                <NavLink to={`${baseurl}new-post`}>New Post</NavLink>
+              </li>
+              <li className="border-b pb-5">
+                <NavLink to={`${baseurl}scheduled-interviews`}>
+                  Scheduled Interviews
+                </NavLink>
+              </li>
+            </>
+          )}
 
         <button className="border-b pb-5 text-start" onClick={handleClick}>
           Logout

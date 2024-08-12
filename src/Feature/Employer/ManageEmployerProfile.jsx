@@ -7,7 +7,9 @@ import Select from "react-select";
 import ErrorMsg from "../../UI/ErrorMsg";
 import { useSpecialization } from "../../Services/General/useSpecialization";
 import { useUpdateEmployer } from "../../Services/Employer/useUpdateEmployer";
-
+import pic from "../../assets/Profile-picture.png";
+import MiniLoader from "../../UI/MiniLoader";
+import { BASE_URL_IMG } from "../../config/Config";
 const ManageEmployerProfile = () => {
   const { data, isLoading: loading, isError } = useEmployerDetails();
   const {
@@ -18,13 +20,15 @@ const ManageEmployerProfile = () => {
     address_2,
     city,
     country,
-    vacancies,
     phone,
     website,
     about,
     specialisms,
     avatar_image,
-  } = data.data.data;
+    company_size,
+    license_number,
+    license_image,
+  } = data?.data?.data || {};
   const {
     data: specialismsData,
     isLoading: loadSpecializim,
@@ -33,7 +37,7 @@ const ManageEmployerProfile = () => {
 
   const {
     mutate: updateEmployerData,
-    isLoading,
+    isPending,
     isError: EmpErr,
   } = useUpdateEmployer();
 
@@ -41,20 +45,21 @@ const ManageEmployerProfile = () => {
     email: email || "",
     firstName: first_name || "",
     lastName: last_name || "",
-    address1: address_1 || "",
-    address2: address_2 || "",
+    address_1: address_1 || "",
+    address_2: address_2 || "",
     city: city || "",
     country: country || "",
     phone: phone || "",
     website: website || "",
-    vacancies: vacancies || "",
+    // vacancies: vacancies || "",
     about: about || "",
     specialisms: specialisms || "",
-    avatar_image: avatar_image || "",
+    company_size: company_size || "",
+    license_number: license_number || "",
+    // license_image: license_image || "",
     newPassword: "",
     confirmPassword: "",
   };
-
   const {
     values,
     errors,
@@ -92,7 +97,7 @@ const ManageEmployerProfile = () => {
     return (
       <ErrorMsg ErrorMsg="Unable To fetch Data Right Now !  Please try again!" />
     );
-  if (loading || loadSpecializim || isLoading) return <Loader style="py-40" />;
+  if (loading || loadSpecializim) return <Loader style="py-40" />;
 
   return (
     <div className="md:w-3/4">
@@ -175,15 +180,15 @@ const ManageEmployerProfile = () => {
             <input
               type="text"
               placeholder="Address"
-              name="address1"
+              name="address_1"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.address1}
+              value={values.address_1}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.address1 && touched.address1 && (
+            {errors.address_1 && touched.address_1 && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.address1}
+                {errors.address_1}
               </p>
             )}
           </div>
@@ -197,15 +202,15 @@ const ManageEmployerProfile = () => {
             <input
               type="text"
               placeholder="Address"
-              name="address2"
+              name="address_2"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.address2}
+              value={values.address_2}
               className="py-3 bg-gray-100 px-2 outline-none w-full"
             />
-            {errors.address2 && touched.address2 && (
+            {errors.address_2 && touched.address_2 && (
               <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.address2}
+                {errors.address_2}
               </p>
             )}
           </div>
@@ -229,27 +234,122 @@ const ManageEmployerProfile = () => {
               </p>
             )}
           </div>
-          <div className="">
-            <label className="font-semibold ">
-              Country
-              <span className="text-sm px-2 font-normal">
-                Enter your Country
-              </span>
-            </label>
-            <input
-              type="text"
-              placeholder="Country"
-              name="country"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.country}
-              className="py-3 bg-gray-100 px-2 outline-none w-full"
-            />
-            {errors.country && touched.country && (
-              <p className="text-start px-1 text-sm font-semibold text-red-600">
-                {errors.country}
-              </p>
-            )}
+
+          {/* company data  */}
+          <div className="   pb-5  ">
+            <div className="font-semibold py-5">
+              {" "}
+              Enter Your Company Details
+            </div>
+            <div className="space-y-6">
+              <div className="">
+                <label className="font-semibold ">
+                  Country
+                  <span className="text-sm px-2 font-normal">
+                    Select your Country
+                  </span>
+                </label>
+                <select
+                  name="country"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.country}
+                  className="block w-full border p-3 bg-gray-100"
+                >
+                  <option value="Associate">Select your Country</option>
+                  <option value="Pakistan">Pakistan</option>
+                  <option value="India">India</option>
+                  <option value="Italy">Italy</option>
+                  <option value="USA">USA</option>
+                  <option value="GCC">GCC</option>
+                </select>
+                {errors.country && touched.country && (
+                  <p className="text-start px-1 text-sm font-semibold text-red-600">
+                    {errors.country}
+                  </p>
+                )}
+              </div>
+              <div className="">
+                <label className="font-semibold ">
+                  Company Size
+                  <span className="text-sm px-2 font-normal">
+                    Enter Company Size
+                  </span>
+                </label>
+                <select
+                  name="company_size"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.company_size}
+                  className="block w-full border p-3 bg-gray-100"
+                >
+                  <option value="Associate" defaultValue={"Select Any Values"}>
+                    Select Any Values
+                  </option>
+                  <option value="1-10">1-10</option>
+                  <option value="11-50">11-50</option>
+                  <option value="51-200">51-200</option>
+                  <option value="201-500">201-500</option>
+                  <option value="501-1000">501-1000</option>
+                  <option value="1001-5000">1001-5000</option>
+                </select>
+                {errors.company_size && touched.company_size && (
+                  <p className="text-start px-1 text-sm font-semibold text-red-600">
+                    {errors.company_size}
+                  </p>
+                )}
+              </div>
+              <div className="">
+                <label className="font-semibold ">
+                  1. NTN/PAN/License No
+                  <span className="text-sm px-2 font-normal">
+                    (based on selected country):
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="license_number"
+                  name="license_number"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.license_number}
+                  className="py-3 bg-gray-100 px-2 outline-none w-full"
+                />
+                {errors.license_number && touched.license_number && (
+                  <p className="text-start px-1 text-sm font-semibold text-red-600">
+                    {errors.license_number}
+                  </p>
+                )}
+              </div>
+              <div className="">
+                <label className="font-semibold ">License Image</label>
+                <div className="py-4">
+                  <img
+                    src={license_image ? BASE_URL_IMG + license_image : pic}
+                    alt="iamge "
+                    width="300"
+                    className="border"
+                  />
+                </div>
+                <input
+                  type="file"
+                  name="license_image"
+                  onChange={(event) => {
+                    setFieldValue(
+                      "license_image",
+                      event.currentTarget.files[0]
+                    );
+                  }}
+                  onBlur={handleBlur}
+                  className="py-3 bg-gray-100 px-2 outline-none w-full"
+                />
+                {errors.license_image && touched.license_image && (
+                  <p className="text-start px-1 text-sm font-semibold text-red-600">
+                    {errors.license_image}
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
           <div className="">
             <label className="font-semibold ">
@@ -350,7 +450,7 @@ const ManageEmployerProfile = () => {
               </p>
             )}
           </div>
-          <div className="">
+          {/* <div className="">
             <label className="font-semibold ">
               Vacancies
               <span className="text-sm px-2 font-normal">
@@ -371,7 +471,7 @@ const ManageEmployerProfile = () => {
                 {errors.vacancies}
               </p>
             )}
-          </div>
+          </div> */}
 
           <div className="">
             <label className="font-semibold ">
@@ -380,8 +480,12 @@ const ManageEmployerProfile = () => {
                 Upload Your Avatar Image
               </span>
             </label>
-            <div className="">
-              <img src={baseurl + avatar_image} alt="iamge " width="150" />
+            <div className="pb-2">
+              <img
+                src={avatar_image ? BASE_URL_IMG + avatar_image : pic}
+                alt="iamge "
+                width="200"
+              />
             </div>
             <input
               type="file"
@@ -437,9 +541,10 @@ const ManageEmployerProfile = () => {
         <div className=" text-center py-6">
           <button
             type="submit"
+            disabled={isPending}
             className="bg-btn-primary px-8 py-4 rounded-md text-white font-semibold"
           >
-            SAVE CHANGES
+            {isPending ? <MiniLoader /> : "  SAVE CHANGES"}
           </button>
         </div>
       </form>

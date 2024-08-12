@@ -5,11 +5,10 @@ import AdminDoughnut from "../../UI/AdminDoughnut";
 import AdminLineGraph from "../../UI/AdminLineGraph";
 import AdminTopWidgets from "../../UI/AdminTopWidgets";
 import { useAllCandidates } from "../../Services/Candidate/useCandidateList";
-// import { useAdminPendingJobs } from "../../Services/admin/useAdminPendingJobs";
 import { useAllEmployer } from "../../Services/admin/useAllEmployer";
 import Loader from "../../UI/Loader";
 import { useAdminJobsLIsts } from "../../Services/admin/useAdminJobsLists";
-// import { useJAdminobsList } from "../../Services/admin/useJAdminobsList";
+import { useAlljobslist } from "../../Services/admin/useAlljobslist";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -25,7 +24,8 @@ const Admin = () => {
     data: AllJobs,
     isLoading: isAllJobs,
     isError: jobError,
-  } = useAdminJobsLIsts();
+  } = useAlljobslist();
+
   const { data: emp, isLoading: loadingEmployers } = useAllEmployer();
   if (candidatesLoading && isPending && isAllJobs && loadingEmployers)
     return <Loader style="h-screen py-20" />;

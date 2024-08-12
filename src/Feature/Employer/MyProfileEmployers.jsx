@@ -6,13 +6,13 @@ const MyProfileEmployers = () => {
   const { data: Employer, isLoading: isLoadingEmployer } = useEmployerDetails();
 
   if (isLoadingEmployer) return <Loader style="pt-20" />;
+  console.log(Employer);
   const {
     first_name,
     last_name,
     email,
     phone,
-    country,
-    city,
+
     website,
     vacancies,
   } = Employer?.data?.data;
@@ -32,7 +32,7 @@ const MyProfileEmployers = () => {
       </div>
       <div className="flex gap-10 sm:gap-24 py-8">
         <div className="w-full">
-          <ul className="flex  font-semibold flex-col gap-8">
+          <ul className="flex w-32 font-semibold flex-col gap-8">
             <li>Email</li>
             <li>First Name</li>
             <li>Last name</li>
@@ -47,7 +47,7 @@ const MyProfileEmployers = () => {
             <li>{first_name}</li>
             <li>{last_name}</li>
             <li>{phone}</li>
-            <li>{website || "Null"}</li>
+            <li className="truncate">{website || "Null"}</li>
             <li>{vacancies}</li>
           </ul>
         </div>

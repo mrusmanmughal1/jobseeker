@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
 import { useUserinfo } from "../../Context/AuthContext";
@@ -19,7 +19,7 @@ const EmployerUpdate = async (Credndials, id) => {
 export const useUpdateEmployer = () => {
   const { user_id } = useUserinfo();
   const queryClient = useQueryClient();
-  const { mutate, isLoading  , isError} = useMutation({
+  const { mutate, isPending, isError } = useMutation({
     mutationFn: (credentials) => EmployerUpdate(credentials, user_id),
     onSuccess: (res) => {
       toast.success(res.data.message);
@@ -31,5 +31,5 @@ export const useUpdateEmployer = () => {
     },
   });
 
-  return { mutate, isLoading , isError };
+  return { mutate, isPending, isError };
 };

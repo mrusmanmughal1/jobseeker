@@ -1,5 +1,6 @@
+import { BASE_URL_IMG } from "../config/Config";
+
 const CandidateProfile = ({ candidateData }) => {
-  const baseurl = "http://170.187.136.161:8010";
   const url =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   return (
@@ -9,17 +10,15 @@ const CandidateProfile = ({ candidateData }) => {
           <img
             src={
               candidateData?.avatar_image
-                ? baseurl + candidateData?.avatar_image
+                ? BASE_URL_IMG + candidateData?.avatar_image
                 : url
             }
             alt=""
-            className="w-24 h-24 object-contain"
+            className="w-20 h-20 object-contain"
           />
           <div className="flex  items-center gap-5">
             <div className="">
-              <p className="font-semibold text-2xl">
-                {candidateData?.username}
-              </p>
+              <p className="font-semibold text-xl">{candidateData?.username}</p>
               <p>{candidateData?.country}</p>
             </div>
             <div className="flex justify-center items-center">

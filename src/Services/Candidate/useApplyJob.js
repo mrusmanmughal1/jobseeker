@@ -22,7 +22,7 @@ const ApplyJob = async ({ id, method }) => {
 export const useApplyJob = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ id, method }) => ApplyJob({ id, method }),
     onSuccess: (res) => {
       toast.success(res.data.message);
@@ -35,5 +35,5 @@ export const useApplyJob = () => {
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isPending };
 };

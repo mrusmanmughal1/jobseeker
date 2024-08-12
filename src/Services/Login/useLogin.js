@@ -15,12 +15,11 @@ export const useLogin = () => {
   const { dispatch } = useUserinfo();
 
   const navigate = useNavigate();
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (credentials) => getLogin(credentials),
     onSuccess: (data) => {
       const { user_type, token } = data.data.data;
       dispatch({ type: "login", payload: data.data.data });
-
       // setting Tokken and UserData to DB
       localStorage.setItem("Token", token);
       localStorage.setItem("User_Data", JSON.stringify(data.data.data));
@@ -42,5 +41,5 @@ export const useLogin = () => {
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isPending };
 };

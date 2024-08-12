@@ -3,6 +3,9 @@ import { RegisterSchema } from "../helpers/Schema/FormValidation";
 import { useRegister } from "../Services/register/useRegister";
 import MiniLoader from "./MiniLoader";
 import Loader from "./Loader";
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { useState } from "react";
 const initialValues = {
   account_type: "",
   username: "",
@@ -14,31 +17,41 @@ const initialValues = {
   phone: "",
 };
 const RegisterFOrm = () => {
-  const { mutate: Register, isLoading } = useRegister();
+  const { mutate: Register, isPending } = useRegister();
+  const [showpassword, setshowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
-  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
-    useFormik({
-      initialValues,
-      onSubmit: (values, action) => {
-        console.log(values);
-        Register(values);
-        action.resetForm();
-      },
-      validationSchema: RegisterSchema,
-    });
+  const { password, confirmPassword } = showpassword;
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    onSubmit: async (values, action) => {
+      try {
+        await Register(values);
+        // Reset the form after successful job posting
+      } catch (error) {
+        console.error("Failed to post job:", error);
+      }
+    },
+    validationSchema: RegisterSchema,
+  });
+  const handleclick = (field) => {
+    setshowPassword((prev) => ({
+      ...prev,
+      [field]: !prev[field], // Toggle the visibility state for the specific field
+    }));
+    console.log(showpassword);
+  };
 
-  // // handle special change
-  // const handleSpecialChange = (SELECTED) => {
-  //   console.log(SELECTED);
-  //   const selectedValues = SELECTED
-  //     ? SELECTED.map((option) => option.value)
-  //     : [];
-  //   console.log(selectedValues);
-
-  //   setFieldValue("specialization", selectedValues);
-  // };
-
-  // if (load) return <Loader style="h-screen" />;
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
@@ -106,7 +119,7 @@ const RegisterFOrm = () => {
             <input
               type="text"
               className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
-              placeholder="USER NAME"
+              placeholder="Phone"
               name="phone"
               id="phone"
               onChange={handleChange}
@@ -147,16 +160,29 @@ const RegisterFOrm = () => {
               <p>Password </p>
               <p className="text-xs">Enter Your Password </p>
             </div>
-            <input
-              type="password"
-              className="py-4 px-2 rounded-sm border  w-full text-black font-semibold bg-gray-200 outline-none"
-              placeholder="Password "
-              name="password"
-              id="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
+            <div className="relative">
+              <div
+                onClick={() => handleclick("password")}
+                className="absolute hover:cursor-pointer right-4 top-1/3 "
+              >
+                {password ? (
+                  <FaEyeSlash name="password" />
+                ) : (
+                  <FaEye name="password" />
+                )}
+              </div>
+              <input
+                type={`${password ? "text" : "password"}`}
+                className="py-4 px-2 rounded-sm border  w-full text-black font-semibold bg-gray-200 outline-none"
+                placeholder="Password "
+                name="password"
+                id="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+            </div>
+
             {errors.password && touched.password && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
                 {errors.password}
@@ -168,16 +194,29 @@ const RegisterFOrm = () => {
               <p>Confirm Password </p>
               <p className="text-xs">Enter Confirm Password </p>
             </div>
-            <input
-              type="password"
-              className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
-              placeholder="Confirm Password "
-              name="confirm_password"
-              id="confirm_password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.confirm_password}
-            />
+            <div className="relative">
+              <div
+                onClick={() => handleclick("confirmPassword")}
+                className="absolute hover:cursor-pointer right-4 top-1/3 "
+              >
+                {confirmPassword ? (
+                  <FaEyeSlash name="confirmPassword" />
+                ) : (
+                  <FaEye name="confirmPassword" />
+                )}
+              </div>
+              <input
+                type={`${confirmPassword ? "text" : "password"}`}
+                className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
+                placeholder="Confirm Password "
+                name="confirm_password"
+                id="confirm_password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.confirm_password}
+              />
+            </div>
+
             {errors.confirm_password && touched.confirm_password && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
                 {errors.confirm_password}
@@ -258,11 +297,11 @@ const RegisterFOrm = () => {
           </div> */}
           <div className=" text-center">
             <button
-              disabled={isLoading}
+              disabled={isPending}
               className="font-semibold px-8 py-4 rounded-md bg-purple-900 text-white"
               type="submit"
             >
-              {isLoading ? <MiniLoader /> : " REGISTER NOW"}
+              {isPending ? <MiniLoader /> : " REGISTER NOW"}
             </button>
           </div>
         </div>

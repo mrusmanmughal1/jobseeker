@@ -14,6 +14,7 @@ import { FaUser } from "react-icons/fa";
 import MiniJobsCart from "./MiniJobsCart";
 import { IoIosArrowDown } from "react-icons/io";
 import { useGetBasket } from "../Services/Candidate/useGetBasket";
+import { BASE_URL_IMG } from "../config/Config";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [showLogin, setshow] = useState(false);
@@ -21,7 +22,9 @@ const Navbar = () => {
   const [profile, showprofile] = useState(false);
   const [cart, setcart] = useState(false);
   const { auth, user_type, avatar, username } = useUserinfo();
-  const { data } = useGetBasket();
+  const { data } = useGetBasket({
+    enabled: user_type, // Enable the query only when user is logged in
+  });
   // sticky Navbar no scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +36,6 @@ const Navbar = () => {
     };
   }, []);
 
-  
   const profileimg =
     "https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg";
   return (
@@ -42,7 +44,7 @@ const Navbar = () => {
         isSticky && "fixed top-0 bottom-0 shadow   w-full  z-10 bg-white h-20"
       }   shadow `}
     >
-      <div className=" flex justify-between   w-11/12 mx-auto  items-center ">
+      <div className=" flex justify-between     w-11/12 mx-auto  items-center ">
         <div className="flex    w-full lg:w-auto  md:text-sm   relative justify-between items-center  gap-10">
           <NavLink to="/">
             <Logo width={210} isSticky={isSticky} />
@@ -107,11 +109,9 @@ const Navbar = () => {
                       <div className=" rounded-full border  overflow-hidden w-12 h-12 ">
                         <img
                           className="   h-12  object-cover "
-                          src={
-                            avatar
-                              ? `${`http://170.187.136.161:8010${avatar}`}`
-                              : `${profileimg}`
-                          }
+                          src={`${
+                            avatar ? `${BASE_URL_IMG + avatar}` : profileimg
+                          }`}
                           alt="Image"
                         />
                       </div>

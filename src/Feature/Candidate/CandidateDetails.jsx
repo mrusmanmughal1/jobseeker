@@ -4,7 +4,15 @@ import { useCandidateDetail } from "../../Services/Employer/useCandidateDetail";
 import { useParams } from "react-router-dom";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
+import { IoIosChatboxes } from "react-icons/io";
+import { useChatContext } from "../../Context/ChatContext";
+import Model from "../../Reuseables/Model";
+import MessageCandidates from "./MessageCandidates";
+import { useState } from "react";
+
 const CandidateDetails = () => {
+  const [mode, setmodel] = useState(false);
+
   const { id } = useParams();
   const { data, isLoading, isError, error } = useCandidateDetail(id);
   if (isLoading) return <Loader style="py-20 h-screen" />;
@@ -29,7 +37,22 @@ const CandidateDetails = () => {
     phone,
     city,
     country,
+    username,
+    id: idd,
   } = data?.data?.data || {};
+  const { show, setshow, dispatch } = useChatContext();
+  const hanldeChat = () => {
+    const rec = `user_id${username}${idd}`;
+    const Receiver_user_id = rec.replace(/ /g, "_");
+    // setshow(!show);
+    const R_ID = {
+      Receiver_user_id: Receiver_user_id,
+      Recever_id: idd,
+    };
+
+    setmodel(true);
+    dispatch({ type: "Receiver", payload: R_ID });
+  };
   return (
     <div>
       <div className="candidate-man relative  ">
@@ -60,7 +83,13 @@ const CandidateDetails = () => {
                       DOWNLOAD CV
                     </a>
                   </Button>
-                  <Button>View CV</Button>
+                  {/* <Button>View CV</Button> */}
+                  <button
+                    onClick={hanldeChat}
+                    className="bg-btn-primary p-2 px-4 rounded-md text-3xl"
+                  >
+                    <IoIosChatboxes />
+                  </button>
                 </div>
               </div>
             </div>
@@ -95,6 +124,16 @@ const CandidateDetails = () => {
           </div>
         </div>
       </div>
+      <Model model={mode}>
+        <MessageCandidates
+          RecUserName={username}
+          RecvID={idd}
+          Recfirst_name={first_name}
+          Reclast_name={last_name}
+          setmodel={setmodel}
+          url={baseurl + avatar_image}
+        />
+      </Model>
     </div>
   );
 };

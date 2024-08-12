@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
- 
+
 import { LoginSchema } from "../helpers/Schema/FormValidation";
 import { NavLink } from "react-router-dom";
 import { useLogin } from "../Services/Login/useLogin";
@@ -14,7 +14,8 @@ const credentials = {
 };
 
 const LoginForm = ({ paddingMain, width, fontSize }) => {
-  const { mutate: Login, isLoading } = useLogin();
+  const [isLoading, setIsLoading] = useState(false);
+  const { mutate: Login, isPending } = useLogin();
 
   const [showPassword, setshowPassword] = useState(false);
 
@@ -22,7 +23,10 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
     useFormik({
       initialValues: credentials,
       onSubmit: (values, action) => {
-        Login(values);
+        setIsLoading(true);
+        Login(values, {
+          onSuccess: () => setIsLoading(false),
+        });
       },
       validationSchema: LoginSchema,
     });
@@ -97,10 +101,10 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
             <div className=" ">
               <button
                 type="submit"
-                disabled={isLoading}
-                className="font-bold bg-[#4e007a] text-white border-btn-primary border-2  px-10  w-full  rounded-md py-2"
+                disabled={isPending}
+                className="font-bold bg-[#4e007a] disabled:cursor-not-allowed text-white border-btn-primary border-2  px-10  w-full  rounded-md py-2"
               >
-                {isLoading ? <MiniLoader /> : "LOGIN"}
+                {isPending ? <MiniLoader /> : "LOGIN"}
               </button>
             </div>
             <div className=" ">
@@ -108,9 +112,10 @@ const LoginForm = ({ paddingMain, width, fontSize }) => {
                 <button
                   type="button"
                   href=""
+                  disabled={isPending}
                   className=" text-[#4e007a] font-bold rounded-md   px-8   border-btn-primary border-2 py-2 hover:bg-black hover:text-white  transition-all hover:ease-in "
                 >
-                  REGISTER {isLoading}
+                  REGISTER
                 </button>
               </NavLink>
             </div>

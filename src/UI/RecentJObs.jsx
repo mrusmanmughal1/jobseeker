@@ -13,9 +13,9 @@ const RecentJObs = () => {
   if (isLoading) return <Loader />;
   if (data?.data?.count == 0 || isError) {
     return (
-      <div className="">
+      <div className="w-full">
         <ErrorMsg
-          ErrorMsg={"  No Job Available is  Right Now !  Try Later ."}
+          ErrorMsg={"  No Job is  Available  Right Now !  Try Later ."}
         />
       </div>
     );

@@ -1,8 +1,7 @@
-
-const ErrorMsg = ({ErrorMsg}) => {
+const ErrorMsg = ({ ErrorMsg }) => {
   return (
-    <div className='py-20 font-semibold text-2xl text-center' >{ErrorMsg}</div>
-  )
-}
+    <div className="py-20 font-semibold text-xl text-center">{ErrorMsg}</div>
+  );
+};
 
-export default ErrorMsg
+export default ErrorMsg;

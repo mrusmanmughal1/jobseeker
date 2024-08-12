@@ -5,7 +5,6 @@ import {
   FaTwitter,
   FaLinkedinIn,
 } from "react-icons/fa";
-import { IoMailOutline } from "react-icons/io5";
 import Profile from "../assets/Profile-picture.png";
 import SimilarJobs from "./SimilarJobs";
 import JobSubmitForm from "./JobSubmitForm";
@@ -16,11 +15,47 @@ import { useApplyJob } from "../Services/Candidate/useApplyJob";
 import Loader from "./Loader";
 import ErrorMsg from "./ErrorMsg";
 import { useUserinfo } from "../Context/AuthContext";
+import { useCandidateHistory } from "../Services/Candidate/useCandidateHistory";
+import { BASE_URL, BASE_URL_IMG } from "../config/Config";
+import { useJobBasket } from "../Services/Candidate/useJobBacket";
+import { useParams } from "react-router-dom";
 
 function JobDetails() {
   const { mutate: applyjob, isLoading: load } = useApplyJob();
   const [showModel, setshowModel] = useState(false);
   const { data, isLoading, status, isError } = useJobDetails();
+  const { data: jobhistory } = useCandidateHistory();
+  const {
+    mutate: jobbasket,
+    isLoading: basketload,
+    isError: basketError,
+  } = useJobBasket();
+
+  // Check if the job has already been applied for
+  const isApplied = jobhistory?.data?.data?.applications.some(
+    (app) => app.job_id === data?.data?.id
+  );
+  const currenturl = window.location.href;
+  console.log(currenturl);
+  const shareOnFacebook = () => {
+    const url = encodeURIComponent(currenturl); // The URL you want to share
+    const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+
+    window.open(fbShareUrl, "_blank", "width=600,height=400");
+  };
+  const shareOnTwitter = () => {
+    const url = encodeURIComponent(currenturl); // The URL you want to share
+    const text = encodeURIComponent("Check out this awesome post!"); // Optional text for the tweet
+    const twitterShareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+
+    window.open(twitterShareUrl, "_blank", "width=600,height=400");
+  };
+  const shareOnLinkedIn = () => {
+    const url = encodeURIComponent(currenturl); // The URL you want to share
+    const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+
+    window.open(linkedinShareUrl, "_blank", "width=600,height=400");
+  };
   const { user_type } = useUserinfo();
   if (isLoading) return <Loader style="h-screen" />;
   if (isError)
@@ -40,10 +75,15 @@ function JobDetails() {
             <div className="flex flex-col items-center w-full lg:items-end uppercase mt-4 lg:mt-0">
               <p>Share this Job</p>
               <div className="flex mt-2 gap-4">
-                <FaFacebookSquare className="mr-2 text-4xl" />
-                <FaTwitter className="mr-2 text-4xl" />
-                <FaLinkedinIn className="mr-2 text-4xl" />
-                <IoMailOutline className="mr-2 text-4xl" />
+                <FaFacebookSquare
+                  className="mr-2 text-4xl"
+                  onClick={shareOnFacebook}
+                />
+                <FaTwitter onClick={shareOnTwitter} className="mr-2 text-4xl" />
+                <FaLinkedinIn
+                  className="mr-2 text-4xl"
+                  onClick={shareOnLinkedIn}
+                />
               </div>
             </div>
           </div>
@@ -65,21 +105,37 @@ function JobDetails() {
               </p>
               <p>Job ID: {data.data.id}</p>
             </div>
-            {user_type == 'candidate' && (
+            {user_type === "candidate" && (
               <div className="mt-4 lg:mt-0 flex flex-col lg:gap-4">
-                <button className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold w-full rounded-md py-2 border border-black lg:mb-0 lg:mr-4">
-                  <FaCartPlus className="mr-2" />
-                  Add to job basket
-                </button>
-                <br className="lg:hidden" />
-                <button
-                  onClick={() => applyjob(data?.data?.id)}
-                  // onClick={() => setshowModel(true)}
-                  className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold rounded-md py-2 border border-black"
-                >
-                  <FaSearch className="mr-2" />
-                  Apply for this job
-                </button>
+                {!isApplied ? (
+                  <>
+                    <button
+                      onClick={() => jobbasket(data.data.id)}
+                      className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold w-full rounded-md py-2 border border-black lg:mb-0 lg:mr-4"
+                    >
+                      <FaCartPlus className="mr-2" />
+                      Add to job basket
+                    </button>
+                    <br className="lg:hidden" />
+                    <button
+                      onClick={() =>
+                        applyjob({ id: data?.data?.id, method: "POST" })
+                      }
+                      className="uppercase text-md flex items-center px-6 text-white bg-[#008000] font-semibold rounded-md py-2 border border-black"
+                    >
+                      <FaSearch className="mr-2" />
+                      Apply for this job
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className="uppercase text-md flex items-center px-6 text-white bg-gray-500 font-semibold rounded-md py-2 border border-black"
+                    disabled
+                  >
+                    <FaSearch className="mr-2" />
+                    Already Applied
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -89,7 +145,7 @@ function JobDetails() {
         <h3>
           <span className="font-semibold">Required Skills</span>:{" "}
           {data?.data?.specializations_skills?.map((val, i) => (
-            <span key={i}> {val}</span>
+            <span key={i}> {val} ,</span>
           ))}
         </h3>
       </div>
@@ -98,14 +154,24 @@ function JobDetails() {
         <div className="flex  w-11/12 mx-auto  pb-20 flex-col md:flex-row gap-10">
           <div className=" flex-1">
             <div className="flex flex-col lg:flex-row px-6 py-12">
-              <img src={Profile} alt="/" className="w-full lg:w-auto" />
+              <img
+                src={
+                  data.data.company_image
+                    ? BASE_URL_IMG + data.data.company_image
+                    : Profile
+                }
+                alt="/"
+                width={150}
+              />
               <div className="lg:w-3/4 px-8 mt-4 lg:mt-0 flex flex-col justify-center">
                 <div className="font-semibold text-2xl mb-4">
                   {data.data.employer_name}
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p>1 Active Position</p>
-                  <p>View More Jobs</p>
+                  <p>
+                    Candidates Applied on this job :{" "}
+                    {data.data.applications_count}
+                  </p>
                 </div>
               </div>
             </div>

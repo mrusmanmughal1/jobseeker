@@ -5,6 +5,10 @@ import axios from "axios";
 const JobTheJob = async (formData) => {
   const Post = `${BASE_URL}api/jobs/create/`;
   const token = localStorage.getItem("Token");
+  if (formData.remote_work) {
+    delete formData.addresses;
+  }
+  console.log(formData);
   console.log(`Token ${token}`);
 
   const res = await axios.post(Post, formData, {
@@ -12,21 +16,21 @@ const JobTheJob = async (formData) => {
       Authorization: `Token ${token}`,
     },
   });
-  console.log(formData , token)
   return res;
 };
 
 export const useJobPost = () => {
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (JONFORM) => JobTheJob(JONFORM),
     onSuccess: (res) => {
       console.log(res);
       toast.success(res.data.message);
+      return res;
     },
     onError: (err) => {
       console.log(err), toast.error(err.response.data);
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isPending };
 };

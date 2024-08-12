@@ -1,14 +1,14 @@
-import { Bar  } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
-const AdminBarGraph = ({candidates  , allJObs , employer}) => {
+const AdminBarGraph = ({ candidates, AllJobs, employer }) => {
   const SourceData = [
     {
       label: "Candidates",
-      value:  candidates?.data?.count,
+      value: candidates?.data?.count,
     },
     {
       label: "Jobs Posted",
-      value: allJObs?.data?.count,
+      value: AllJobs?.data?.count,
     },
     {
       label: "Employeers",
@@ -17,7 +17,7 @@ const AdminBarGraph = ({candidates  , allJObs , employer}) => {
   ];
   const options = {
     responsive: true,
-          maintainAspectRatio: true,
+    maintainAspectRatio: true,
     plugins: {
       legend: {
         position: "bottom",
@@ -28,7 +28,8 @@ const AdminBarGraph = ({candidates  , allJObs , employer}) => {
   return (
     <div className=" w-full md:h-80  flex justify-center bg-white rounded-md shadow-lg p-8 ">
       {/* bar chart  */}
-      <Bar className="aa"
+      <Bar
+        className="aa"
         options={options}
         data={{
           labels: SourceData.map((data) => data.label),

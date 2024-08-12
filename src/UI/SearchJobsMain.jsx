@@ -2,6 +2,7 @@ import JobSearchbar from "./JobSearchbar";
 import { Parallax } from "react-parallax";
 import bgimp from "../assets/jobsshopper_banner.webp";
 import { useEffect, useState } from "react";
+import MainSearchBox from "./MainSearchBox";
 const SearchJobsMain = () => {
   const style = {
     backgroundSize: "cover", // Ensure the background image covers the entire container
@@ -42,7 +43,7 @@ const SearchJobsMain = () => {
           
           `}
           >
-            <JobSearchbar />
+            <MainSearchBox />
           </div>
         </div>
       </Parallax>

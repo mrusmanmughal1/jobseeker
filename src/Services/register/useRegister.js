@@ -11,15 +11,21 @@ const PosTRegistrationForm = async (FormData) => {
 
 export const useRegister = () => {
   const navigate = useNavigate();
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (FORMDATA) => PosTRegistrationForm(FORMDATA),
     onSuccess: (data) => {
       navigate("/login", { replace: true });
 
       toast.success(data.data.message);
     },
-    onError: (err) => toast.error(err.message),
+    onError: (err) => {
+      toast.error(
+        err.response.data.phone ||
+          err.response.data.email ||
+          err.response.data.username
+      );
+    },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isPending };
 };

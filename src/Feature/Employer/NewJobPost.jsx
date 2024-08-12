@@ -10,6 +10,8 @@ import { IoIosRemoveCircle } from "react-icons/io";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 import MiniLoader from "../../UI/MiniLoader";
+import { useUpdatejob } from "../../Services/Employer/useUpdatejob";
+import { useParams } from "react-router-dom";
 
 const NewPost = () => {
   const initialValues = {
@@ -24,18 +26,18 @@ const NewPost = () => {
       },
     ],
     duration: "",
+    minimum_experience: "",
+    working_hours: "",
+    skill_level: "",
     rate: "",
     job_description: "",
     work_authorization: [],
-    other_work_authorization: "",
+    other_work_authorization: null,
     specializations_skills: [],
     job_posting_deadline: "",
   };
 
-  
-  
-
-  const { mutate: PostJob, isLoading } = useJobPost();
+  const { mutate: PostJob, isPending: updatePending } = useJobPost();
 
   const {
     values,
@@ -45,14 +47,21 @@ const NewPost = () => {
     handleSubmit,
     handleBlur,
     setFieldValue,
+    resetForm,
   } = useFormik({
     initialValues,
-    onSubmit: (values, action) => {
-      console.log(values);
-      PostJob(values);
+    onSubmit: async (values, action) => {
+      console.log(errors);
+      try {
+        await PostJob(values, {
+          onSuccess: () => resetForm(),
+        });
+        // Reset the form after successful job posting
+      } catch (error) {}
     },
     validationSchema: JobPost,
   });
+  console.log(errors);
   const {
     data,
     isLoading: workLoading,
@@ -206,160 +215,120 @@ const NewPost = () => {
               </p>
             )}
           </div>
-          {/* <div className="">
-            <div className="flex flex-col items-center md:flex-row gap-2">
-              <div className="md:w-[32%]">
-                <div className="flex flex-col gap-3">
-                  <label htmlFor="addresses">Job Address</label>
-                  <input
-                    type="text"
-                    className="border p-2 py-3 w-full bg-gray-100"
-                    onChange={(e) => handleChanging(e)}
-                    onBlur={handleBlur}
-                    name="state"
-                    value={state}
-                  />
-                  {errors.addresses && touched.addresses && (
-                    <p className="text-start px-1 text-sm font-semibold text-red-600">
-                      {errors.addresses}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="md:w-[32%]">
-                <div className="flex flex-col gap-3">
-                  <label htmlFor="JobCity">City</label>
-                  <input
-                    name="city"
-                    value={city}
-                    type="text"
-                    className="border p-2 py-3 w-full bg-gray-100"
-                    onChange={(e) => handleChanging(e)}
-                    onBlur={handleBlur}
-                  />
-                  {errors.JobCity && touched.JobCity && (
-                    <p className="text-start px-1 text-sm font-semibold text-red-600">
-                      {errors.JobCity}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="md:w-[32%]">
-                <div className="flex flex-col gap-3">
-                  <label htmlFor="ZipCode">Zip Code</label>
-                  <input
-                    type="text"
-                    className="border p-2 py-3 w-full bg-gray-100"
-                    name="zip_code"
-                    onChange={(e) => handleChanging(e)}
-                    onBlur={handleBlur}
-                    value={zip_code}
-                  />
-                  {errors.zip_code && touched.zip_code && (
-                    <p className="text-start px-1 text-sm font-semibold text-red-600">
-                      {errors.zip_code}
-                    </p>
-                  )}
-                </div>
-              </div>
-              
-            </div>
 
-            
-          </div> */}
-          <div className="space-y-4">
-            <p>Job Address</p>
-            {values?.addresses?.map((address, index) => (
-              <div
-                key={index}
-                className="flex flex-col md:flex-row   gap-2 items-end"
+          {/* Addresses */}
+          {!values.remote_work && (
+            <div className="space-y-4">
+              <p>Job Address</p>
+              {values.addresses.map((address, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col md:flex-row gap-2 items-end"
+                >
+                  {["state", "city", "zip_code"].map((field) => (
+                    <div className="md:w-[32%]" key={field}>
+                      <div className="flex flex-col gap-3">
+                        <label htmlFor={`address-${field}-${index}`}>
+                          {field.charAt(0).toUpperCase() + field.slice(1)}
+                        </label>
+                        <input
+                          type="text"
+                          id={`address-${field}-${index}`}
+                          name={field}
+                          className="border p-2 py-3 w-full bg-gray-100"
+                          onChange={(e) => handleAddressChange(index, e)}
+                          onBlur={handleBlur}
+                          value={address[field]}
+                        />
+                        {touched.addresses?.[index]?.[field] &&
+                          errors.addresses?.[index]?.[field] && (
+                            <p className="text-start px-1 text-sm font-semibold text-red-600">
+                              {errors.addresses[index][field]}
+                            </p>
+                          )}
+                      </div>
+                    </div>
+                  ))}
+                  <div className="flex items-center">
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveAddress(index)}
+                      className="bg-red-500 text-white p-2 rounded"
+                    >
+                      <IoIosRemoveCircle />
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={handleAddAddress}
+                className="bg-blue-500 flex gap-2 items-center text-white p-2 rounded"
               >
-                <div className="md:w-[32%]">
-                  <div className="flex flex-col  gap-3">
-                    <label htmlFor={`address-state-${index}`}>State</label>
-                    <input
-                      type="text"
-                      id={`address-state-${index}`}
-                      name="state"
-                      className="border p-2 py-3 w-full bg-gray-100"
-                      onChange={(e) => handleAddressChange(index, e)}
-                      onBlur={handleBlur}
-                      value={address?.state}
-                    />
-                    {errors.addresses &&
-                      errors.addresses[index] &&
-                      errors.addresses[index]?.state && (
-                        <p className="text-start px-1 text-sm font-semibold text-red-600">
-                          {errors.addresses[index].state}
-                        </p>
-                      )}
-                  </div>
-                </div>
-                <div className="md:w-[32%]">
-                  <div className="flex flex-col gap-3">
-                    <label htmlFor={`address-city-${index}`}>City</label>
-                    <input
-                      type="text"
-                      id={`address-city-${index}`}
-                      name="city"
-                      className="border p-2 py-3 w-full bg-gray-100"
-                      onChange={(e) => handleAddressChange(index, e)}
-                      onBlur={handleBlur}
-                      value={address?.city}
-                    />
-                    {errors.addresses &&
-                      errors.addresses[index] &&
-                      errors.addresses[index].city && (
-                        <p className="text-start px-1 text-sm font-semibold text-red-600">
-                          {errors.addresses[index]?.city}
-                        </p>
-                      )}
-                  </div>
-                </div>
-                <div className="md:w-[32%]">
-                  <div className="flex flex-col gap-3">
-                    <label htmlFor={`address-zip_code-${index}`}>
-                      Zip Code
-                    </label>
-                    <input
-                      type="text"
-                      id={`address-zip_code-${index}`}
-                      name="zip_code"
-                      className="border p-2 py-3 w-full bg-gray-100"
-                      onChange={(e) => handleAddressChange(index, e)}
-                      onBlur={handleBlur}
-                      value={address.zip_code}
-                    />
-                    {errors.addresses &&
-                      errors.addresses[index] &&
-                      errors.addresses[index].zip_code && (
-                        <p className="text-start px-1 text-sm font-semibold text-red-600">
-                          {errors.addresses[index]?.zip_code}
-                        </p>
-                      )}
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveAddress(index)}
-                    className="bg-red-500 text-white p-2 rounded"
-                  >
-                    <IoIosRemoveCircle />
-                  </button>
-                </div>
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={handleAddAddress}
-              className="bg-blue-500 flex gap-2 items-center text-white p-2 rounded"
-            >
-              <IoIosAddCircle /> Add More
-            </button>
-          </div>
+                <IoIosAddCircle /> Add More
+              </button>
+            </div>
+          )}
+
+          {/* other  */}
 
           <div className="flex flex-col gap-4">
+            <div>
+              <p>Working hours </p>
+              <input
+                type="text"
+                className="w-full p-2 py-3 bg-gray-100"
+                placeholder="Enter  working Hours "
+                name="working_hours"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.working_hours}
+              />
+              {errors.working_hours && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.working_hours}
+                </p>
+              )}
+            </div>
+            <div>
+              <p>Experience </p>
+              <input
+                type="text"
+                className="w-full p-2 py-3 bg-gray-100"
+                placeholder="Enter Your Experience "
+                name="minimum_experience"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.minimum_experience}
+              />
+              {errors.minimum_experience && touched.minimum_experience && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.minimum_experience}
+                </p>
+              )}
+            </div>
+            <div className="w-full">
+              <label className=" ">Skill Level</label>
+              <select
+                name="skill_level"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.skill_level}
+                className="block w-full border p-3 bg-gray-100"
+              >
+                <option>Select Skill Level </option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advance">Advance</option>
+
+                <option value="Expert">Expert</option>
+              </select>
+              {errors.skill_level && touched.skill_level && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.skill_level}
+                </p>
+              )}
+            </div>
             <div>
               <p>Duration</p>
               <input
@@ -377,11 +346,10 @@ const NewPost = () => {
                 </p>
               )}
             </div>
-
             <div>
               <p>Rate</p>
               <input
-                type="text"
+                type="number"
                 className="w-full p-2 py-3 bg-gray-100"
                 placeholder="Rate"
                 name="rate"
@@ -395,7 +363,6 @@ const NewPost = () => {
                 </p>
               )}
             </div>
-
             <div>
               <p>Job Description</p>
               <textarea
@@ -414,7 +381,6 @@ const NewPost = () => {
                 </p>
               )}
             </div>
-
             <div>
               <p>Work Authorization</p>
 
@@ -428,14 +394,12 @@ const NewPost = () => {
                 }))}
               />
 
-              {/* {errors.data.work_authorization &&
-                touched.data.work_authorization && (
-                  <p className="text-start px-1 text-sm font-semibold text-red-600">
-                    {errors.data.work_authorization}
-                  </p>
-                )} */}
+              {errors.work_authorization && touched.work_authorization && (
+                <p className="text-start px-1 text-sm font-semibold text-red-600">
+                  {errors.work_authorization}
+                </p>
+              )}
             </div>
-
             <div>
               <p>Other Work Authorization</p>
               <input
@@ -447,14 +411,7 @@ const NewPost = () => {
                 onBlur={handleBlur}
                 value={values.other_work_authorization}
               />
-              {errors.other_work_authorization &&
-                touched.other_work_authorization && (
-                  <p className="text-start px-1 text-sm font-semibold text-red-600">
-                    {errors.other_work_authorization}
-                  </p>
-                )}
             </div>
-
             <div>
               <p>Specializations & Skill</p>
               <Select
@@ -475,7 +432,6 @@ const NewPost = () => {
                   </p>
                 )}
             </div>
-
             <div>
               <p>Job Posting Deadline (MM/DD/YYYY)</p>
               <input
@@ -496,10 +452,11 @@ const NewPost = () => {
 
           <div className="text-center">
             <button
+              disabled={updatePending}
               type="submit"
               className="px-8 py-4 rounded-md font-semibold text-white bg-btn-primary"
             >
-              {isLoading ? <MiniLoader /> : "POST JOB"}
+              {updatePending ? <MiniLoader /> : "POST JOB"}
             </button>
           </div>
         </div>

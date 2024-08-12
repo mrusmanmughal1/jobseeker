@@ -9,7 +9,7 @@ const LoginPage = () => {
   const { auth } = useUserinfo();
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("sec");
+    console.log(auth);
     if (auth) {
       navigate("/");
     }

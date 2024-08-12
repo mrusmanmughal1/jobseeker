@@ -19,7 +19,9 @@ const Job = ({ job = [], rec }) => {
   const CartJobsID = data?.data?.results.map((val) => val?.id);
   const carted = CartJobsID?.includes(job?.id);
 
-  const appliedJobsID = history?.data?.data.map((val) => val.job_id);
+  const appliedJobsID = history
+    ? history.data.data.applications?.map((val) => val?.job_id)
+    : [];
   const applied = appliedJobsID?.includes(job?.id);
 
   const buttonText = carted ? "ADDED" : applied ? "APPLIED" : "ADD";
@@ -30,7 +32,7 @@ const Job = ({ job = [], rec }) => {
       ? "bg-primary-green border-white text-white"
       : buttonText === "APPLIED"
       ? "bg-btn-primary text-white"
-      : "border-purple-900 text-purple-900 ";
+      : "border-purple-900 text-purple-900  hover:bg-btn-primary hover:text-white";
   return (
     <div
       className={`${

@@ -14,8 +14,7 @@ body {
 html {
   scroll-behavior: smooth;
 }
- .css-13cymwt-control{
-padding: 6px;
-background: #E5E7EB !important;
-
+.css-13cymwt-control {
+  padding: 6px;
+  background: #e5e7eb !important;
 }

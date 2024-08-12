@@ -4,8 +4,8 @@ import axios from "axios";
 
 import toast from "react-hot-toast";
 
-const ClearJobBasket = async () => {
-  const API = `${BASE_URL}api/job-basket/`;
+const ClearJobBasket = async (id) => {
+  const API = `${BASE_URL}api/job-basket-clear/${id ? id : ""}`;
   const token = localStorage.getItem("Token");
 
   const res = await axios.delete(API, {
@@ -20,7 +20,7 @@ export const useClearJobBasket = () => {
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, isError } = useMutation({
-    mutationFn: () => ClearJobBasket(),
+    mutationFn: (id) => ClearJobBasket(id),
     onSuccess: (res) => {
       toast.success(res.data.message);
       queryClient.invalidateQueries({ queryKey: ["basket"] });

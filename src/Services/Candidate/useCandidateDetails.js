@@ -17,10 +17,11 @@ const CandidateDetails = async (id) => {
 };
 
 export const useCandidateDetails = () => {
-  const { user_id } = useUserinfo();
+  const { user_id, user_type } = useUserinfo();
   const { data, isLoading, isError, status } = useQuery({
     queryKey: ["candidate"],
     queryFn: () => CandidateDetails(user_id),
+    enabled: user_type === "candidate",
   });
   return { data, isLoading, status, isError };
 };

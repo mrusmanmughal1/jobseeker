@@ -19,17 +19,17 @@ const CandidateDetails = async (Credndials, id) => {
 export const useCandidateManageProfile = () => {
   const { user_id } = useUserinfo();
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (credentials) => CandidateDetails(credentials, user_id),
     onSuccess: (res) => {
       toast.success(res.data.message);
-      queryClient.invalidateQueries({ queryKey: ['candidate']});
+      queryClient.invalidateQueries({ queryKey: ["candidate"] });
     },
     onError: (err) => {
-      console.log(err)
+      console.log(err);
       toast.error(err.response.data.error);
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isPending };
 };

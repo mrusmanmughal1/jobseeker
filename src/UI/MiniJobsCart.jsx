@@ -7,8 +7,13 @@ import { FiMapPin } from "react-icons/fi";
 import { SlBasket } from "react-icons/sl";
 import { NavLink } from "react-router-dom";
 import { useClearJobBasket } from "../Services/Candidate/useClearJobBasket";
+import { useId } from "react";
+
 const MiniJobsCart = () => {
-  const { data, isLoading, isError } = useGetBasket();
+  const id = useId();
+  const { data, isLoading, isError } = useGetBasket({
+    enabled: false,
+  });
   const {
     mutate: Clearcart,
     isLoading: cartloading,
@@ -21,7 +26,6 @@ const MiniJobsCart = () => {
 
   const handleClear = () => {
     Clearcart();
-    console.log("usman")
   };
   if (data?.data?.results?.length == 0)
     return (
@@ -50,12 +54,15 @@ const MiniJobsCart = () => {
         <div className="h-60 overflow-y-scroll">
           {reversedResults.map((val) => {
             return (
-              <div className=" flex flex-col gap-1 bg-slate-100 p-2 ps-4 mb-2">
+              <div
+                key={val.id}
+                className=" flex flex-col gap-1 bg-slate-100 p-2 ps-4 mb-2"
+              >
                 <p className="uppercase font-semibold font-sm ">{val?.title}</p>
                 <p className="text-xs text-black flex items-center gap-2">
                   <FiMapPin />{" "}
-                  {val?.addresses?.map((val) => (
-                    <span>{val.city} , </span>
+                  {val?.addresses?.map((val, i) => (
+                    <span key={i}>{val.city} , </span>
                   ))}
                 </p>
                 <p className="text-xs">

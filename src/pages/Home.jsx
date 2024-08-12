@@ -5,7 +5,7 @@ import SearchJobsMain from "../UI/SearchJobsMain";
 
 const Home = () => {
   return (
-    <section id="main-section">
+    <section id="main-section ">
       <SearchJobsMain />
       <MainInfoBar />
       <div className="flex flex-col   lg:flex-row md:gap-10 gap-0    w-11/12 mx-auto py-4">

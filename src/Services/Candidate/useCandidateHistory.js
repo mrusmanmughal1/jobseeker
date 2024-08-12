@@ -17,10 +17,11 @@ const CandidateJObHistory = async () => {
 };
 
 export const useCandidateHistory = () => {
-  const { user_id } = useUserinfo();
+  const { user_id, user_type } = useUserinfo();
   const { data, isLoading, isError, status } = useQuery({
     queryKey: ["Candidate-history"],
     queryFn: () => CandidateJObHistory(user_id),
+    enabled: user_type === "candidate",
   });
   return { data, isLoading, status, isError };
 };
