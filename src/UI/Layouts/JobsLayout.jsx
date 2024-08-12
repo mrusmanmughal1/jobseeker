@@ -72,6 +72,7 @@ const JobsLayout = (data = []) => {
     }
   };
   const { data: candidateCVUpdated } = useCandidateDetails();
+
   return (
     <div className="flex lg:flex-row flex-col w-11/12 mx-auto ">
       <div className="pt-4 lg:w-[30%]  lg:order-none order-2">
@@ -95,7 +96,8 @@ const JobsLayout = (data = []) => {
         </div>
         <div className="flex items-center w-full justify-between pb-2">
           <p className="px-6 font-semibold text-sm">
-            Jobs Available ({SearchedData?.data?.count || 0})
+            Jobs Available (
+            {SearchedData?.data?.contract_type_counts?.length || 0})
           </p>
           <div className="flex gap-1">
             <button

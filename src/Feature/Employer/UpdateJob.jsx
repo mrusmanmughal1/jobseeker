@@ -153,7 +153,7 @@ const UpdateJob = ({ edit, setupdateModel }) => {
       : [];
     setFieldValue("work_authorization", selectedValues);
   };
-  if (ErrorMsg) return <ErrorMsg ErrorMsg={"Unable To Fetch Data "} />;
+  if (!edit) return <ErrorMsg ErrorMsg={"Unable To Fetch Data "} />;
   return (
     <div className="w-full relative p-8 pb-32">
       <div className="text-end ab absolute right-0 -top-1  ">
