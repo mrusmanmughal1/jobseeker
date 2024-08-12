@@ -5,7 +5,7 @@ import JobsLayout from "../UI/Layouts/JobsLayout";
 import Loader from "../UI/Loader";
 
 const Jobs = () => {
-  const { data, isLoading, status, isError } = useAllJobs();
+  const { data: totalJobs, isLoading, status, isError } = useAllJobs();
 
   if (isLoading) return <Loader style=" py-64" />;
   if (!status) return <Loader />;
@@ -16,11 +16,11 @@ const Jobs = () => {
       {isError && (
         <ErrorMsg
           ErrorMsg={
-            "Sorry ! Unable To Fetch Data at this Time Try Again Later ."
+            "Sorry! Unable to fetch data at this time. Please try again later."
           }
         />
       )}
-      {data && <JobsLayout data={data} />}
+      {totalJobs && <JobsLayout alljobs={totalJobs} />}
     </div>
   );
 };

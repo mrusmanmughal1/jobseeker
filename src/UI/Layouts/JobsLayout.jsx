@@ -12,7 +12,7 @@ import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
 import { useLocation } from "react-router-dom";
 import { useCandidateDetails } from "../../Services/Candidate/useCandidateDetails";
 import ErrorMsg from "../ErrorMsg";
-const JobsLayout = (data = []) => {
+const JobsLayout = (alljobs = []) => {
   const [clicked, setClicked] = useState(false);
   const [key, setKeyword] = useState("");
   const [searched, setsearch] = useState({
