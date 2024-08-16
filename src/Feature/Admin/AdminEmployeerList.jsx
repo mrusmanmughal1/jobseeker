@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useAllEmployer } from "../../Services/admin/useAllEmployer";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
+import { BASE_URL_IMG } from "../../config/Config";
 
 const AdminEmployeerList = () => {
   const { data, isLoading } = useAllEmployer();
@@ -13,13 +14,11 @@ const AdminEmployeerList = () => {
     );
   const img =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
-  console.log(data);
   return (
     <div className="flex flex-col gap-4">
       <div className="font-bold uppercase">
-        {" "}
-        EMPLOYERS LIST{" "}
-        <span className="text-btn-primary">({data?.data?.count})</span>{" "}
+        EMPLOYERS LIST
+        <span className="text-btn-primary">({data?.data?.count})</span>
       </div>
 
       {data?.data?.results.map((v, i) => (
@@ -31,12 +30,16 @@ const AdminEmployeerList = () => {
           <div className="w-full md:w-4/3 flex flex-col gap-4">
             <div className="flex gap-6 items-center">
               <div className=" overflow-hidden">
-                <img src={v?.avatar_image || img} className="w-16 " alt="" />
+                <img
+                  src={v?.avatar_image ? BASE_URL_IMG + v.avatar_image : img}
+                  className="w-16 "
+                  alt=""
+                />
               </div>
               <div className="">
                 <p className="uppercase font-bold">{v?.username}</p>
                 <p className="text-xs flex gap-2 items-center">
-                  <span className="font-semibold">Date Joined </span>:{" "}
+                  <span className="font-semibold">Date Joined </span>:
                   {v?.date_joined}
                 </p>
               </div>

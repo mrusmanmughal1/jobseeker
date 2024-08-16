@@ -9,9 +9,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../../Services/Firebase/Firebase.Config";
 import { useUserinfo } from "../../Context/AuthContext";
-import logo from "../../assets/logo.webp"
+import logo from "../../assets/logo.webp";
+import { BASE_URL } from "../../config/Config";
 
-const IndexChat = ({setuser , setshow}) => {
+const IndexChat = ({ setuser, setshow }) => {
   const [inboxes, setInboxes] = useState([]); // To store all chat documents
   const [loading, setLoading] = useState(true); // To show loading state
   const [error, setError] = useState(null); // To store error messages
@@ -49,45 +50,42 @@ const IndexChat = ({setuser , setshow}) => {
   return (
     <div className="overflow-y-scroll h-full">
       {inboxes?.map((val, i) => {
+        console.log(val);
         const { id, lastMsg, name, timeStamp, url } = val;
-
-        const timestampNumber = parseInt(timeStamp, 10); 
+        console.log(url);
+        const timestampNumber = parseInt(timeStamp, 10);
         const date = new Date(timestampNumber);
         const options = {
           weekday: "short",
           year: "numeric",
-          month: "short", 
+          month: "short",
           day: "numeric",
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
-          hour12: true
+          hour12: true,
         };
 
         const localTimeString = date.toLocaleString("en-US", options);
 
-
         return (
           <div
-          onClick={()=>setuser({id,name,url} , setshow(true))}
+            onClick={() => setuser({ id, name, url }, setshow(true))}
             key={id}
             className="px-2 py-2 border-b hover:bg-slate-300 hover:cursor-pointer"
           >
             <div className="flex items-center uppercase gap-4  w-full">
               <div className=" rounded-full  overflow-hidden ">
-                <img src={ url =="http://170.187.136.161:8010" ?logo : url} alt=""  className="size-8"/>
+                <img src={url} alt="" className="size-8" />
               </div>
               <div className="flex justify-between w-full items-center">
-              <div className="">
-                <p className="font-bold ">{name}</p>
-                <div className="  text-xs"> {lastMsg}</div>
+                <div className="">
+                  <p className="font-bold ">{name}</p>
+                  <div className="  text-xs"> {lastMsg}</div>
+                </div>
+
+                <p className="text-xs">{localTimeString}</p>
               </div>
-
-              <p className="text-xs">{localTimeString}</p>
-
-              </div>
-             
-
             </div>
           </div>
         );

@@ -6,19 +6,11 @@ const MyProfileEmployers = () => {
   const { data: Employer, isLoading: isLoadingEmployer } = useEmployerDetails();
 
   if (isLoadingEmployer) return <Loader style="pt-20" />;
-  console.log(Employer);
-  const {
-    first_name,
-    last_name,
-    email,
-    phone,
-
-    website,
-    vacancies,
-  } = Employer?.data?.data;
+  const { first_name, last_name, email, phone, website, vacancies } =
+    Employer?.data?.data || {};
   return (
-    <div className="   w-full  md:w-3/4   ">
-      <div className="  flex justify-between   ">
+    <div className="w-full  md:w-3/4">
+      <div className="flex justify-between">
         <p className="text-3xl font-semibold  tracking-wider">
           ACCOUNT INFORMATION
         </p>

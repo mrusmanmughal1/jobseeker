@@ -10,7 +10,7 @@ const Model = ({ children, model, index }) => {
         <div className="fixed inset-0 transition-opacity">
           <div className="absolute inset-0 bg-gray-950 opacity-80" />
           <div
-            className="inline-block   mt-20 bg-white rounded-lg text-left overflow-y-auto shadow-xl transform transition-all     md:w-1/2  sm:w-full max-h-screen"
+            className="inline-block   mt-10 bg-white rounded-lg text-left overflow-y-auto shadow-xl transform transition-all     md:w-1/2  sm:w-full max-h-screen"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"

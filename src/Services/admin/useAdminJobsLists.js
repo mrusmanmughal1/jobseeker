@@ -8,7 +8,7 @@ const adminjoblist = async (status) => {
 
   const config = {
     headers: {
-      Authorization: `Token ${Token}`,
+      Authorization: `Bearer ${Token}`,
     },
   };
   const res = await axios.get(API, config);

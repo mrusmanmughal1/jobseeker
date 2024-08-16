@@ -10,16 +10,16 @@ const CandidateDetails = async (id) => {
   console.log(id);
   const res = await axios.get(API, {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   return res;
 };
 
 export const useCandidateDetail = (id) => {
-  const { data, isLoading, isError, status  , error} = useQuery({
-    queryKey: ["employerCandidate" , id],
+  const { data, isLoading, isError, status, error } = useQuery({
+    queryKey: ["employerCandidate", id],
     queryFn: () => CandidateDetails(id),
   });
-  return { data, isLoading, status, isError  , error};
+  return { data, isLoading, status, isError, error };
 };

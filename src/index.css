@@ -18,3 +18,9 @@ html {
   padding: 6px;
   background: #e5e7eb !important;
 }
+.clamp-lines {
+  max-height: calc(4 * 1.5em); /* Number of lines * line-height */
+  line-height: 1.5em; /* Line height */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Optional: Adds "..." at the end */
+}

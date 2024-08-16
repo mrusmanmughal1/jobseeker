@@ -14,7 +14,7 @@ const adminJobApprove = async ({ id, payload }) => {
     { action: payload },
     {
       headers: {
-        Authorization: `Token ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -23,7 +23,7 @@ const adminJobApprove = async ({ id, payload }) => {
 
 export const useAdminJobApprove = () => {
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ id, payload }) => adminJobApprove({ id, payload }),
     onSuccess: (res) => {
       toast.success(res.data.detail);
@@ -34,5 +34,5 @@ export const useAdminJobApprove = () => {
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isPending };
 };

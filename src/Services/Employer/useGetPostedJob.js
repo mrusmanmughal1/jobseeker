@@ -9,7 +9,7 @@ const getJob = async (id) => {
 
   const res = await axios.get(API, {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   return res;

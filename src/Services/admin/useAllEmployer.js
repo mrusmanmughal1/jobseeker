@@ -7,15 +7,14 @@ import axios from "axios";
 const getAllEmployers = async () => {
   const API = `${BASE_URL}api/employers-profile-list/`;
 
-
   const Token = localStorage.getItem("Token");
 
   const config = {
     headers: {
-      Authorization: `Token ${Token}`,
+      Authorization: `Bearer ${Token}`,
     },
   };
-  const res = await axios.get(API , config);
+  const res = await axios.get(API, config);
   return res;
 };
 

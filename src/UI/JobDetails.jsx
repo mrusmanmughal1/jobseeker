@@ -93,9 +93,11 @@ function JobDetails() {
               <p>Salary: {data?.data?.rate}</p>
               <p>
                 Location:
-                {data?.data?.addresses?.map((val, i) => (
-                  <span key={i}> {val.city},</span>
-                ))}
+                {data.data.remote_work
+                  ? " Remote "
+                  : data?.data?.addresses?.map((val, i) => (
+                      <span key={i}> {val.city},</span>
+                    ))}
               </p>
               <p>
                 Work Eligibility:{" "}

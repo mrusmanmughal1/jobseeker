@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BASE_URL } from "../../config/Config";
 import axios from "axios";
- 
+
 import toast from "react-hot-toast";
 
 const JobBasket = async (id) => {
@@ -13,7 +13,7 @@ const JobBasket = async (id) => {
 
   const res = await axios.post(API, body, {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   return res;

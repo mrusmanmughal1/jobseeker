@@ -7,16 +7,41 @@ import Loader from "../../UI/Loader";
 import { useAdminJobApprove } from "../../Services/admin/useAdminJobApprove";
 import ErrorMsg from "../../UI/ErrorMsg";
 import { useAdminJobsLIsts } from "../../Services/admin/useAdminJobsLists";
+import MiniLoader from "../../UI/MiniLoader";
+import { useState } from "react";
 
 const PendingJobs = () => {
   const { data, isLoading, isError } = useAdminJobsLIsts("pending");
-
-  const { mutate: JobApprove, isLoading: load } = useAdminJobApprove();
-  if (isLoading || load) return <Loader style="h-screen  " />;
+  const [approved, setApprovingId] = useState(null);
+  const [reject, setRejectingId] = useState(null);
+  const { mutate: JobApprove, isPending: load } = useAdminJobApprove();
+  if (isLoading) return <Loader style="h-screen  " />;
   if (data?.data?.results?.length == 0)
     return (
       <ErrorMsg ErrorMsg="No Data Availale Right Now Try Again Later . Thank You" />
     );
+
+  const handleApprove = (id) => {
+    setApprovingId(id);
+    JobApprove(
+      { id, payload: "approve" },
+      {
+        onSuccess: () => setApprovingId(null),
+        onError: () => setApprovingId(null),
+      }
+    );
+  };
+
+  const handleReject = (id) => {
+    setRejectingId(id);
+    JobApprove(
+      { id, payload: "reject" },
+      {
+        onSuccess: () => setRejectingId(null),
+        onError: () => setRejectingId(null),
+      }
+    );
+  };
   return (
     <div className="flex flex-col gap-4">
       <div className="font-bold uppercase">
@@ -63,21 +88,32 @@ const PendingJobs = () => {
           <div className="md:w-1/3 w-full flex justify-end gap-4 md:flex-row md:items-center text-purple-900">
             <div className="flex gap-4">
               <button
-                onClick={() => JobApprove({ id: val.id, payload: "approve" })}
+                disabled={approved === val.id || reject === val.id}
+                onClick={() => handleApprove(val.id)}
                 className="flex  bg-green-700 font-bold flex-col items-center
                px-6 rounded-md py-[0.30rem] border-2 border-green-700 text-white hover:bg-green-700"
               >
-                <FaCheck />
+                {approved === val.id ? (
+                  <MiniLoader color={"border-green-200"} />
+                ) : (
+                  <FaCheck />
+                )}
               </button>
               <button
-                onClick={() => JobApprove({ id: val.id, payload: "reject" })}
+                disabled={approved === val.id || reject === val.id}
+                onClick={() => handleReject(val.id)}
                 className="bg-red-600 px-6 py-[0.30rem] font-bold text-white text-xl rounded-md"
               >
-                <RxCross2 />
+                {reject === val.id ? (
+                  <MiniLoader color={"border-red-200"} />
+                ) : (
+                  <RxCross2 />
+                )}
               </button>
             </div>
             <NavLink to="/admin/view-jobs">
               <button
+                disabled={load}
                 className="text-xs font-semibold lg:px-2 xl:px-6 xl:py-3 px-6
                rounded-md py-3 border-2 border-purple-900 hover:text-white hover:bg-purple-900"
               >

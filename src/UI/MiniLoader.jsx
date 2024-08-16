@@ -1,9 +1,13 @@
-const MiniLoader = () => {
+const MiniLoader = ({ color }) => {
   return (
-    <div className="  flex  items-center flex-col gap-5 px-4 ">
+    <div className="flex  items-center flex-col gap-5 px-4 ">
       <div
-        className="w-4 h-4 rounded-full animate-spin
-        border-4  border-solid border-purple-500 border-t-transparent"
+        className={`w-4 h-4 rounded-full animate-spin
+        border-4  border-solid  ${
+          color ? color : "border-purple-500"
+        } border-t-transparent`}
+        role="status"
+        aria-label="Loading"
       ></div>
     </div>
   );

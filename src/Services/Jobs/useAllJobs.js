@@ -5,8 +5,6 @@ import axios from "axios";
 const getAllJobs = async () => {
   const API = `${BASE_URL}api/jobs/`;
 
-   
-
   const res = await axios.get(API);
   return res;
 };

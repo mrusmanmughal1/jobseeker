@@ -1,14 +1,11 @@
 import { useUpdatejob } from "../../Services/Employer/useUpdatejob";
-import { useJobDetails } from "../../Services/Jobs/useDetailsjob";
 import { useFormik } from "formik";
 import { JobPost } from "../../helpers/Schema/FormValidation";
 import Select from "react-select";
-
 import { useWorkAuthorization } from "../../Services/General/useWorkAuthorization";
 import { useSpecialization } from "../../Services/General/useSpecialization";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
-import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 import MiniLoader from "../../UI/MiniLoader";
 import { RxCross2 } from "react-icons/rx";

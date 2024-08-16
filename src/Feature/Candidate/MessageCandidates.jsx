@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { useUserinfo } from "../../Context/AuthContext";
 import { db } from "../../Services/Firebase/Firebase.Config";
+import toast from "react-hot-toast";
+import MiniLoader from "../../UI/MiniLoader";
 const MessageCandidates = ({
   RecUserName,
   Recfirst_name,
@@ -13,6 +15,7 @@ const MessageCandidates = ({
   const [message, setmessage] = useState("");
 
   const { user_id, username, avatar } = useUserinfo();
+  const [loading, setloading] = useState(false);
   const [empty, setempty] = useState();
 
   const id = `user_id${username}${user_id}`;
@@ -26,6 +29,7 @@ const MessageCandidates = ({
       setempty("Message cannot be empty");
       return;
     }
+    setloading(true);
     const timeStamp = Date.now().toString(); // Create chat model
     const chatModel = {
       timeStamp,
@@ -70,6 +74,8 @@ const MessageCandidates = ({
 
       console.log("Message Sent!");
       setmessage("");
+      toast.success("Your Message is Successfully sent !");
+      setloading(false);
       setmodel(false);
     } catch (error) {
       console.error("Error writing document: ", error);
@@ -98,9 +104,10 @@ const MessageCandidates = ({
         <div className=" flex justify-between">
           <button
             onClick={sendMessage}
+            disabled={loading}
             className="text-white bg-btn-primary p-4 rounded-md my-4"
           >
-            Send Message
+            {loading ? <MiniLoader /> : "Send Message"}
           </button>
           <button
             className="text-white bg-gray-500 p-4 rounded-md my-4"

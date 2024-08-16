@@ -284,7 +284,7 @@ const NewPost = () => {
                 onBlur={handleBlur}
                 value={values.working_hours}
               />
-              {errors.working_hours && (
+              {errors.working_hours && touched.working_hours && (
                 <p className="text-start px-1 text-sm font-semibold text-red-600">
                   {errors.working_hours}
                 </p>

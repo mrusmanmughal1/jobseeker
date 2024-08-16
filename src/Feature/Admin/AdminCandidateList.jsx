@@ -4,6 +4,7 @@ import Adminfilters from "./Adminfilters";
 import { useAllCandidates } from "../../Services/Candidate/useCandidateList";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
+import { BASE_URL_IMG } from "../../config/Config";
 
 const AdminCandidateList = () => {
   const { data, isLoading, status, isError } = useAllCandidates();
@@ -12,12 +13,15 @@ const AdminCandidateList = () => {
     return (
       <ErrorMsg ErrorMsg="No Data Availale Right Now Try Again Later . Thank You" />
     );
-  const baseurl = "http://170.187.136.161:8010";
   const url =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
   return (
     <div className="flex flex-col gap-4">
-      <div className="font-bold uppercase"> Candidates List   <span className="text-btn-primary">({data?.data?.count})</span> </div>
+      <div className="font-bold uppercase">
+        {" "}
+        Candidates List{" "}
+        <span className="text-btn-primary">({data?.data?.count})</span>{" "}
+      </div>
 
       <Adminfilters />
       {data?.data?.results?.map((v, i) => (
@@ -30,7 +34,7 @@ const AdminCandidateList = () => {
             <div className="flex gap-6 items-center">
               <div className=" rounded-full">
                 <img
-                  src={v?.avatar_image ? baseurl + v?.avatar_image : url}
+                  src={v?.avatar_image ? BASE_URL_IMG + v?.avatar_image : url}
                   alt=""
                   className="w-24"
                 />

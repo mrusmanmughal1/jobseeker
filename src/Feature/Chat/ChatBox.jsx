@@ -11,7 +11,7 @@ const ChatBox = () => {
     setCurrentUser(null); // Reset currentUser to null
     setIsChatOpen(false);
   };
-  console.log(currentUser , " current")
+  console.log(currentUser, " current");
   return (
     <div className="fixed bottom-20 right-10 rounded-xl overflow-hidden z-20 bg-slate-100">
       <div className="flex flex-col justify-between w-96 h-96">

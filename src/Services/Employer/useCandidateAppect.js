@@ -17,7 +17,7 @@ const candidateapproval = async ({ id, status }) => {
     },
     {
       headers: {
-        Authorization: `Token ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );

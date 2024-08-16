@@ -14,7 +14,7 @@ const ScheduleInterview = async (data) => {
 
     {
       headers: {
-        Authorization: `Token ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );

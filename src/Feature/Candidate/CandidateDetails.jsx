@@ -9,6 +9,7 @@ import { useChatContext } from "../../Context/ChatContext";
 import Model from "../../Reuseables/Model";
 import MessageCandidates from "./MessageCandidates";
 import { useState } from "react";
+import { BASE_URL, BASE_URL_IMG } from "../../config/Config";
 
 const CandidateDetails = () => {
   const [mode, setmodel] = useState(false);
@@ -25,7 +26,6 @@ const CandidateDetails = () => {
         }
       />
     );
-  const baseurl = "http://170.187.136.161:8010";
   const {
     first_name,
     last_name,
@@ -61,7 +61,11 @@ const CandidateDetails = () => {
           <div className=" relative text-white py-14 md:py-20 flex  md:justify-between  md:items-center flex-col items-start gap-8  md:flex-row  ">
             <div className="  flex-1  ">
               <div className=" py-4 border-b border-white flex flex-col gap-4">
-                <img src={baseurl + avatar_image} alt="" width={200} />
+                <img
+                  src={avatar_image ? BASE_URL_IMG + avatar_image : ""}
+                  alt=""
+                  width={200}
+                />
                 <p className="text-3xl font-semibold">CANDIDATE</p>
                 <p className="text-xl">
                   {first_name} {last_name}
@@ -79,7 +83,7 @@ const CandidateDetails = () => {
               <div className=" text-end flex flex-col gap-4 ">
                 <div className="flex md:gap-4 gap-2 flex-col md:flex-row ">
                   <Button>
-                    <a href={baseurl + cv_file} download>
+                    <a href={BASE_URL + cv_file} download>
                       DOWNLOAD CV
                     </a>
                   </Button>
@@ -119,7 +123,7 @@ const CandidateDetails = () => {
               phone={phone}
               city={city}
               country={country}
-              download={baseurl + cv_file}
+              download={BASE_URL + cv_file}
             />
           </div>
         </div>
@@ -131,7 +135,7 @@ const CandidateDetails = () => {
           Recfirst_name={first_name}
           Reclast_name={last_name}
           setmodel={setmodel}
-          url={baseurl + avatar_image}
+          url={BASE_URL + avatar_image}
         />
       </Model>
     </div>

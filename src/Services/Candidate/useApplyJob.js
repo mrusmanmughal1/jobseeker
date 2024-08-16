@@ -13,7 +13,7 @@ const ApplyJob = async ({ id, method }) => {
       job: id,
     },
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   return res;

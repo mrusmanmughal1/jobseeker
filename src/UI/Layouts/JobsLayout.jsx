@@ -94,10 +94,9 @@ const JobsLayout = (alljobs = []) => {
             seclicked={setClicked}
           />
         </div>
-        <div className="flex items-center w-full justify-between pb-2">
-          <p className="px-6 font-semibold text-sm">
-            Jobs Available (
-            {SearchedData?.data?.contract_type_counts?.length || 0})
+        <div className="flex items-center w-full justify-between">
+          <p className="ps-8 font-semibold text-sm">
+            Jobs Available ({SearchedData?.data?.results.length || 0})
           </p>
           <div className="flex gap-1">
             <button
@@ -117,7 +116,7 @@ const JobsLayout = (alljobs = []) => {
           </div>
         </div>
 
-        <div className=" lg:ps-8 mt-8">
+        <div className=" lg:ps-8 mt-4">
           {isSearch ? (
             <Loader style="py-10" />
           ) : SearchError ? (

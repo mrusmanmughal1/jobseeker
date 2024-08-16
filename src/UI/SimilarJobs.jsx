@@ -20,11 +20,12 @@ const SimilarJobs = () => {
         <ErrorMsg ErrorMsg="No Recommendations" />{" "}
       </div>
     );
+  console.log(similarJobs.data);
   return (
     <div className="shadow py-8  bg-white rounded-md">
       <div className="text-2xl font-semibold pb-5 px-4">Similar Jobs</div>
       <div className=" border-b border-t">
-        {similarJobs?.data?.data ? (
+        {similarJobs?.data?.data.legth == 0 ? (
           <ErrorMsg ErrorMsg="No Similar Job Available" />
         ) : (
           similarJobs?.data?.data?.map((val, i) => {
@@ -50,7 +51,12 @@ const SimilarJobs = () => {
                       {val?.contract_type}
                     </div>
                   </div>
-                  <p className="text-black"> {val?.job_description}</p>
+                  <div className="clamp-lines">
+                    <p className="text-black clamp-lines">
+                      {" "}
+                      {val?.job_description}
+                    </p>
+                  </div>
                 </div>
               </NavLink>
             );

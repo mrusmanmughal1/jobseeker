@@ -15,6 +15,7 @@ import MiniJobsCart from "./MiniJobsCart";
 import { IoIosArrowDown } from "react-icons/io";
 import { useGetBasket } from "../Services/Candidate/useGetBasket";
 import { BASE_URL_IMG } from "../config/Config";
+import { useEmployerDetails } from "../Services/Employer/useEmployerDetails";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [showLogin, setshow] = useState(false);
@@ -25,6 +26,10 @@ const Navbar = () => {
   const { data } = useGetBasket({
     enabled: user_type, // Enable the query only when user is logged in
   });
+
+  const { data: EmployerData } = useEmployerDetails();
+  const { license_number, specialisms, country, email } =
+    EmployerData?.data?.data || [];
   // sticky Navbar no scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -58,10 +63,15 @@ const Navbar = () => {
                 <li>
                   <NavLink to="/jobs">JOBS</NavLink>
                 </li>
-                {user_type == "employer" && (
+                {user_type == "employer" &&
+                license_number &&
+                specialisms &&
+                country ? (
                   <li>
                     <NavLink to="/candidates">Candidates</NavLink>
                   </li>
+                ) : (
+                  ""
                 )}
               </ul>
             </nav>
