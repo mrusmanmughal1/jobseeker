@@ -158,7 +158,10 @@ const RegisterFOrm = () => {
           <div className="">
             <div className="flex gap-2 items-center">
               <p>Password </p>
-              <p className="text-xs">Enter Your Password </p>
+              <p className="text-xs">
+                {" "}
+                Must Contain (Number, letters, and special characters ){" "}
+              </p>
             </div>
             <div className="relative">
               <div

@@ -58,7 +58,7 @@ const UpdateJob = ({ edit, setupdateModel }) => {
     job_description: job_description,
     work_authorization: work_authorization || [],
 
-    other_work_authorization: other_work_authorization || null,
+    other_work_authorization: other_work_authorization == "" || null,
     specializations_skills: specializations_skills || [],
     job_posting_deadline: job_posting_deadline,
   };
@@ -75,7 +75,9 @@ const UpdateJob = ({ edit, setupdateModel }) => {
     onSubmit: async (values, action) => {
       console.log(errors);
       try {
-        await updatejob(values);
+        await updatejob(values, {
+          onSuccess: () => setupdateModel(false),
+        });
         // Reset the form after successful job posting
       } catch (error) {
         console.log("first");
@@ -329,7 +331,7 @@ const UpdateJob = ({ edit, setupdateModel }) => {
                 onBlur={handleBlur}
                 value={values.working_hours}
               />
-              {errors.working_hours && (
+              {errors.working_hours && touched.working_hours && (
                 <p className="text-start px-1 text-sm font-semibold text-red-600">
                   {errors.working_hours}
                 </p>
@@ -431,17 +433,15 @@ const UpdateJob = ({ edit, setupdateModel }) => {
 
               <Select
                 isMulti
+                name="work_authorization"
                 className=""
                 onChange={handleWorkAuthChange}
-                defaultValue={work_authorization?.map((option) => ({
+                value={values.work_authorization?.map((option) => ({
                   value: option,
                   label: option,
                 }))}
                 options={workAuthData?.data?.work_authorizations?.map(
-                  (option) => ({
-                    value: option,
-                    label: option,
-                  })
+                  (option) => ({ value: option, label: option })
                 )}
               />
 
@@ -475,7 +475,7 @@ const UpdateJob = ({ edit, setupdateModel }) => {
                 isMulti
                 className=""
                 onChange={handleSpecialChange}
-                defaultValue={specializations_skills?.map((option) => ({
+                value={values.specializations_skills?.map((option) => ({
                   value: option,
                   label: option,
                 }))}

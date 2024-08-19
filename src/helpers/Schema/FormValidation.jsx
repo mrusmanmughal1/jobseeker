@@ -11,12 +11,18 @@ export const LoginSchema = Yup.object({
 
 export const RegisterSchema = Yup.object({
   account_type: Yup.string().required("Please Select Account Type !"),
-  username: Yup.string().min(4).max(25).required("Enter Your User name  !"),
+  username: Yup.string().min(4).max(25).required("Enter Your User Name  !"),
   email: Yup.string().email().required("Please Enter Your Email !"),
-  password: Yup.string().min(6).required("Please Enter Your Password !"),
+
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters") // Minimum length
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter") // At least one uppercase letter
+    .matches(/[0-9]/, "Password must contain at least one number") // At least one number
+    .matches(/[\W_]/, "Password must contain at least one special character") // At least one special character
+    .required("New Password is required"),
   confirm_password: Yup.string()
-    .required()
-    .oneOf([Yup.ref("password"), null], "Passwords must be  Match"),
+    .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+    .required("Confirm Password is required"),
   first_name: Yup.string().max(45).required("Please Enter Your First Name !"),
   last_name: Yup.string().max(45).required("Please Enter Your Last Name !"),
   phone: Yup.string().required("Please Enter Your Phone Number !"),
@@ -126,7 +132,12 @@ export const ManageProfileEmployer = Yup.object({
   // specialisms: Yup.string(),
   vacancies: Yup.string(),
   // avatarImage: Yup.mixed().required("Avatar Image is required"),
-  newPassword: Yup.string().min(6, "Password must be at least 8 characters"),
+  newPassword: Yup.string()
+    .min(8, "Password must be at least 8 characters") // Minimum length
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter") // At least one uppercase letter
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter") // At least one lowercase letter
+    .matches(/[0-9]/, "Password must contain at least one number") // At least one number
+    .matches(/[\W_]/, "Password must contain at least one special character"), // At least one special character
 
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("newPassword"), null],

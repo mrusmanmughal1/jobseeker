@@ -34,7 +34,6 @@ const ManageEmployerProfile = () => {
     isLoading: loadSpecializim,
     isError: specialismsErr,
   } = useSpecialization();
-
   const {
     mutate: updateEmployerData,
     isPending,

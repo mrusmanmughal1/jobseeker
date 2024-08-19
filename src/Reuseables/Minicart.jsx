@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Minicart = ({ children, style, data, set }) => {
   const top = data ? "top-22" : "md:top-[7.5rem] top-24";

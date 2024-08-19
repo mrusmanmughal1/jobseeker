@@ -19,11 +19,6 @@ const ManageCandidateProfile = () => {
   } = useCandidateManageProfile();
   const { data: Specializations, isLoading: loadspecial } = useSpecialization();
 
-  if (loadingDetails || loadspecial) return <Loader style="h-screen  " />;
-  if (isError || errorProfile)
-    return (
-      <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
-    );
   const {
     city,
     country,
@@ -96,6 +91,12 @@ const ManageCandidateProfile = () => {
 
     setFieldValue("job_interest", selectedValues.toString());
   };
+
+  if (loadingDetails || loadspecial) return <Loader style="h-screen  " />;
+  if (isError || errorProfile)
+    return (
+      <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
+    );
   return (
     <div className="md:w-3/4">
       <form onSubmit={handleSubmit}>
