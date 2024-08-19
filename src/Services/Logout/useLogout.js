@@ -29,6 +29,7 @@ export const useLogout = () => {
     mutationFn: () => getLogout(),
     onSuccess: (data) => {
       // Clear local storage
+      localStorage.clear();
       localStorage.removeItem("Token");
       localStorage.removeItem("User_Data");
       dispatch({ type: "logout" });

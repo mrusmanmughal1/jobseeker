@@ -8,11 +8,15 @@ import { useApplyJob } from "../../Services/Candidate/useApplyJob";
 import { useClearJobBasket } from "../../Services/Candidate/useClearJobBasket";
 import { useUserinfo } from "../../Context/AuthContext";
 import MiniLoader from "../../UI/MiniLoader";
+import { useState } from "react";
 const JobsBasket = () => {
   const { user_type } = useUserinfo();
   const { data, isLoading, isError } = useGetBasket();
   const { mutate: apply, isPending } = useApplyJob();
-  const { mutate: clear, isLoading: loadclear } = useClearJobBasket();
+  const { mutate: clear, isPending: loadclear } = useClearJobBasket();
+
+  const [ApplyLoad, setApplyLoad] = useState();
+  const [RejectLoad, setRejectLoad] = useState();
   const reversedResults = data?.data?.results
     ? [...data.data.results].reverse()
     : [];
@@ -24,6 +28,16 @@ const JobsBasket = () => {
     );
   if (data.data.count == 0)
     return <ErrorMsg ErrorMsg=" No Job in the cart right now . . . " />;
+
+  const handleApply = (jobId) => {
+    setLoadingJobId(jobId);
+    apply({ id: jobId, method: "POST" }).finally(() => setLoadingJobId(null));
+  };
+
+  const handleClear = (jobId) => {
+    setLoadingJobId(jobId);
+    clear(jobId).finally(() => setLoadingJobId(null));
+  };
   return (
     <div className="rounded-md border md:w-11/12  max-w-full mx-auto ">
       <div className=" font-semibold  text-sm md:text-sm  gap-2   justify-between bg-gray-200 flex   p-3  px-4  md:px-10 ">
@@ -63,16 +77,32 @@ const JobsBasket = () => {
               </div>
               <div className="  w-1/4 md:w-[30%]   flex justify-end md:justify-end pe-2 md:pe-4 gap-1 lg:gap-3">
                 <button
-                  onClick={() => apply({ id: val.id, method: "POST" })}
+                  onClick={() => {
+                    setApplyLoad(val.id);
+                    apply({ id: val.id, method: "POST" });
+                  }}
+                  disabled={isPending}
                   className="bg-green-500 lg:px-6 px-2 text-white  text-sm py-2 rounded-md"
                 >
-                  {isPending ? <MiniLoader /> : <FaCheck />}
+                  {isPending && ApplyLoad == val.id ? (
+                    <MiniLoader color="bg-green-700" />
+                  ) : (
+                    <FaCheck />
+                  )}
                 </button>
                 <button
-                  onClick={() => clear(val.id)}
+                  disabled={loadclear}
+                  onClick={() => {
+                    setRejectLoad(val.id);
+                    clear(val.id);
+                  }}
                   className="bg-red-500 lg:px-6 px-2 text-white  text-sm py-2 rounded-md"
                 >
-                  <ImCross />
+                  {loadclear && RejectLoad == val.id ? (
+                    <MiniLoader color="bg-red-700" />
+                  ) : (
+                    <ImCross />
+                  )}
                 </button>
               </div>
             </div>

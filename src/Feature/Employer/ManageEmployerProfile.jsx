@@ -41,6 +41,12 @@ const ManageEmployerProfile = () => {
     isError: EmpErr,
   } = useUpdateEmployer();
 
+  if (isError || specialismsErr)
+    return (
+      <ErrorMsg ErrorMsg="Unable To fetch Data Right Now !  Please try again!" />
+    );
+  if (loading || loadSpecializim) return <Loader style="py-40" />;
+
   const initialValues = {
     email: email || "",
     firstName: first_name || "",
@@ -82,8 +88,6 @@ const ManageEmployerProfile = () => {
     validationSchema: ManageProfileEmployer,
   });
 
-  const baseurl = "http://170.187.136.161:8010";
-
   // handle special change
   const handleSpecialChange = (SELECTED) => {
     const selectedValues = SELECTED
@@ -92,12 +96,6 @@ const ManageEmployerProfile = () => {
 
     setFieldValue("specialisms", selectedValues.toString());
   };
-
-  if (isError || specialismsErr)
-    return (
-      <ErrorMsg ErrorMsg="Unable To fetch Data Right Now !  Please try again!" />
-    );
-  if (loading || loadSpecializim) return <Loader style="py-40" />;
 
   return (
     <div className="md:w-3/4">
@@ -359,7 +357,7 @@ const ManageEmployerProfile = () => {
               </span>
             </label>
             <input
-              type="text"
+              type="number"
               placeholder="Phone"
               name="phone"
               onChange={handleChange}

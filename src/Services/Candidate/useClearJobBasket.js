@@ -19,7 +19,7 @@ const ClearJobBasket = async (id) => {
 export const useClearJobBasket = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, isError } = useMutation({
+  const { mutate, isPending, isError } = useMutation({
     mutationFn: (id) => ClearJobBasket(id),
     onSuccess: (res) => {
       toast.success(res.data.message);
@@ -31,5 +31,5 @@ export const useClearJobBasket = () => {
     },
   });
 
-  return { mutate, isLoading, isError };
+  return { mutate, isPending, isError };
 };

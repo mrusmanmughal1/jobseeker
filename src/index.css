@@ -24,3 +24,14 @@ html {
   overflow: hidden;
   text-overflow: ellipsis; /* Optional: Adds "..." at the end */
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

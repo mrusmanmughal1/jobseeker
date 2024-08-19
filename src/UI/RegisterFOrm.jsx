@@ -117,7 +117,7 @@ const RegisterFOrm = () => {
               <p className="text-xs">Enter Your Phone </p>
             </div>
             <input
-              type="text"
+              type="number"
               className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
               placeholder="Phone"
               name="phone"

@@ -17,7 +17,9 @@ const ManageCandidateProfile = () => {
     isPending,
     isError: errorProfile,
   } = useCandidateManageProfile();
-  if (loadingDetails) return <Loader style="h-screen  " />;
+  const { data: Specializations, isLoading: loadspecial } = useSpecialization();
+
+  if (loadingDetails || loadspecial) return <Loader style="h-screen  " />;
   if (isError || errorProfile)
     return (
       <ErrorMsg ErrorMsg="Sorry ! unable to fetch Data right now Please Try Again later " />
@@ -42,25 +44,25 @@ const ManageCandidateProfile = () => {
     job_interest,
     cover_letter,
     experience,
-  } = data?.data?.data;
+  } = data?.data?.data || {};
   const initialValues = {
-    email: email,
-    first_name: first_name,
-    last_name: last_name,
-    gender: gender,
-    date_of_birth: dob,
-    address_1: address_1,
-    address_2: address_2,
-    city: city,
-    experience: experience,
-    country: country,
-    exp_level: exp_level,
-    phone: phone,
-    about: about,
-    job_profession: job_profession,
-    minimum_salary: candidate_salary,
-    job_interest: job_interest,
-    cover_letter: cover_letter,
+    email: email || "",
+    first_name: first_name || "",
+    last_name: last_name || "",
+    gender: gender || "",
+    date_of_birth: dob || "",
+    address_1: address_1 || "",
+    address_2: address_2 || "",
+    city: city || "",
+    experience: experience || "",
+    country: country || "",
+    exp_level: exp_level || "",
+    phone: phone || "",
+    about: about || "",
+    job_profession: job_profession || "",
+    minimum_salary: candidate_salary || "",
+    job_interest: job_interest || "",
+    cover_letter: cover_letter || "",
     new_password: "",
     confirm_password: "",
   };
@@ -85,8 +87,6 @@ const ManageCandidateProfile = () => {
     },
     validationSchema: ManageProfileCandidate,
   });
-
-  const { data: Specializations, isLoading: loadspecial } = useSpecialization();
 
   // handle special change
   const handleSpecialChange = (SELECTED) => {

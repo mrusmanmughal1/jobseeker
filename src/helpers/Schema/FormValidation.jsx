@@ -119,12 +119,14 @@ export const ManageProfileEmployer = Yup.object({
   city: Yup.string().required("City is required"),
   country: Yup.string().required("Country is required"),
   phone: Yup.string().required("Phone number is required"),
-  website: Yup.string(),
+  website: Yup.string()
+    .url("Enter a valid website URL") // Checks if the string is a valid URL
+    .required("Enter Your Website"),
   about: Yup.string(),
   // specialisms: Yup.string(),
   vacancies: Yup.string(),
   // avatarImage: Yup.mixed().required("Avatar Image is required"),
-  newPassword: Yup.string().min(8, "Password must be at least 8 characters"),
+  newPassword: Yup.string().min(6, "Password must be at least 8 characters"),
 
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("newPassword"), null],
