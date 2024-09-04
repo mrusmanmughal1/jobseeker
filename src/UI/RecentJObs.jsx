@@ -3,11 +3,11 @@ import {
   BiSolidRightArrowSquare,
 } from "react-icons/bi";
 
-import Job from "./Job";
 import { useAllJobs } from "../Services/Jobs/useAllJobs";
 import { NavLink } from "react-router-dom";
 import Loader from "./Loader";
 import ErrorMsg from "./ErrorMsg";
+import Job from "./Job";
 const RecentJObs = () => {
   const { data, isLoading, isError } = useAllJobs();
   if (isLoading) return <Loader />;
@@ -34,7 +34,7 @@ const RecentJObs = () => {
         </div>
       </div>
       <div className="border  mt-8">
-        {data?.data?.results.slice(0, 5).map((val, i) => (
+        {data?.data?.results?.results?.slice(0, 5).map((val, i) => (
           <Job key={i} job={val} rec="res" />
         ))}
       </div>

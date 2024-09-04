@@ -13,7 +13,7 @@ const JobBasket = async (id) => {
 
   const res = await axios.post(API, body, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
     },
   });
   return res;

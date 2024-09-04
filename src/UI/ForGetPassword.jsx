@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useFOrgetPassword } from "../Services/ForgetPassword/useForgetPassword";
 import { useFormik } from "formik";
 import { ForgetPasswordSchema } from "../helpers/Schema/FormValidation";
+import MiniLoader from "./MiniLoader";
 
 const ForGetPassword = () => {
-  const { mutate: ForgetPassword, isLoading, isError } = useFOrgetPassword();
+  const { mutate: ForgetPassword, isPending, isError } = useFOrgetPassword();
 
   const initialValues = {
     email: "",
@@ -41,7 +42,11 @@ const ForGetPassword = () => {
                 type="submit"
                 className="bg-btn-primary w-48 text-white py-3 rounded-md"
               >
-                Send Email
+                {isPending ? (
+                  <MiniLoader color="border-purple-600" />
+                ) : (
+                  " Send Email"
+                )}
               </button>
             </div>
 

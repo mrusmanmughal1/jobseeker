@@ -40,6 +40,7 @@ import ChatMain from "./Feature/Chat/ChatMain";
 import { useUserinfo } from "./Context/AuthContext";
 import EmpInterviewList from "./Feature/Employer/EmpInterviewList";
 import UpdateJob from "./Feature/Employer/UpdateJob";
+import EmployeersProtecetedRoute from "./UI/Layouts/EmployeersProtecetedRoute";
 
 const App = () => {
   const { user_type } = useUserinfo();
@@ -102,8 +103,22 @@ const App = () => {
           <Route path="new-post" element={<NewPost />} />
         </Route>
         {/* Public Routes */}
-        <Route path="candidates" element={<Candidate />} />
-        <Route path="Candidate-Details/:id" element={<CandidateDetails />} />
+        <Route
+          path="candidates"
+          element={
+            <EmployeersProtecetedRoute>
+              <Candidate />
+            </EmployeersProtecetedRoute>
+          }
+        />
+        <Route
+          path="Candidate-Details/:id"
+          element={
+            <EmployeersProtecetedRoute>
+              <CandidateDetails />
+            </EmployeersProtecetedRoute>
+          }
+        />
 
         <Route path="/" index element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />

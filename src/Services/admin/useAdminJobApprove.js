@@ -14,7 +14,7 @@ const adminJobApprove = async ({ id, payload }) => {
     { action: payload },
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Token ${token}`,
       },
     }
   );

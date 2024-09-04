@@ -2,21 +2,25 @@ import { useFormik } from "formik";
 import { RegisterSchema } from "../helpers/Schema/FormValidation";
 import { useRegister } from "../Services/register/useRegister";
 import MiniLoader from "./MiniLoader";
-import Loader from "./Loader";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/bootstrap.css";
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
-const initialValues = {
-  account_type: "",
-  username: "",
-  email: "",
-  password: "",
-  confirm_password: "",
-  first_name: "",
-  last_name: "",
-  phone: "",
-};
+
 const RegisterFOrm = () => {
+  const [phone, setPhone] = useState("");
+  const initialValues = {
+    account_type: "",
+    username: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+    first_name: "",
+    last_name: "",
+    phone: "",
+  };
   const { mutate: Register, isPending } = useRegister();
   const [showpassword, setshowPassword] = useState({
     password: false,
@@ -24,26 +28,23 @@ const RegisterFOrm = () => {
   });
 
   const { password, confirmPassword } = showpassword;
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleSubmit,
-    handleBlur,
-    resetForm,
-  } = useFormik({
-    initialValues,
-    onSubmit: async (values, action) => {
-      try {
-        await Register(values);
-        // Reset the form after successful job posting
-      } catch (error) {
-        console.error("Failed to post job:", error);
-      }
-    },
-    validationSchema: RegisterSchema,
-  });
+  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+    useFormik({
+      initialValues,
+      onSubmit: async (values, action) => {
+        try {
+          const FormData = {
+            ...values,
+            phone: `+${phone}${values.phone}`,
+          };
+          await Register(FormData);
+          // Reset the form after successful job posting
+        } catch (error) {
+          console.error("Failed to post job:", error);
+        }
+      },
+      validationSchema: RegisterSchema,
+    });
   const handleclick = (field) => {
     setshowPassword((prev) => ({
       ...prev,
@@ -116,16 +117,26 @@ const RegisterFOrm = () => {
               <p>Phone </p>
               <p className="text-xs">Enter Your Phone </p>
             </div>
-            <input
-              type="number"
-              className="py-4 px-2 rounded-sm border w-full text-black font-semibold bg-gray-200 outline-none"
-              placeholder="Phone"
-              name="phone"
-              id="phone"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.phone}
-            />
+            <div className="flex">
+              <PhoneInput
+                country={"eg"}
+                enableSearch={true}
+                value={phone}
+                className="w-32"
+                onChange={(phone) => setPhone(phone)}
+              />
+
+              <input
+                type="number"
+                className="py-4 px-2 z-50 border-r border-2 rounded-sm border-gray-100   w-full text-black font-semibold bg-gray-200 outline-none"
+                placeholder="Phone"
+                name="phone"
+                id="phone"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.phone}
+              />
+            </div>
             {errors.phone && touched.phone && (
               <p className="text-start px-1  text-sm font-semibold text-red-600">
                 {errors.phone}
@@ -157,7 +168,7 @@ const RegisterFOrm = () => {
           </div>
           <div className="">
             <div className="flex gap-2 items-center">
-              <p>Password </p>
+              <p id="password">Password </p>
               <p className="text-xs">
                 {" "}
                 Must Contain (Number, letters, and special characters ){" "}
@@ -225,6 +236,14 @@ const RegisterFOrm = () => {
                 {errors.confirm_password}
               </p>
             )}
+            {!errors.password &&
+              !errors.confirm_password &&
+              values.password !== "" &&
+              values.password === values.confirm_password && (
+                <p className="text-green-600 font-semibold capitalize">
+                  Password matched
+                </p>
+              )}
           </div>
           <div className="flex md:flex-row flex-col md:gap-8 gap-4">
             <div className="w-full">
@@ -274,30 +293,7 @@ const RegisterFOrm = () => {
               </div>
             </div>
           </div>
-          {/* <div className="w-full">
-            <div className="">
-              <div className="flex gap-2 items-center">
-                <p>Specializations </p>
-                <p className="text-xs">Enter Specializations </p>
-              </div>
 
-              <Select
-                isMulti
-                className=""
-                onChange={handleSpecialChange}
-                options={data.data?.specializations?.map((option) => ({
-                  value: option,
-                  label: option,
-                }))}
-              />
-
-              {errors.specialization && touched.specialization && (
-                <p className="text-start px-1  text-sm font-semibold text-red-600">
-                  {errors.specialization}
-                </p>
-              )}
-            </div>
-          </div> */}
           <div className=" text-center">
             <button
               disabled={isPending}
@@ -309,6 +305,11 @@ const RegisterFOrm = () => {
           </div>
         </div>
       </form>
+      <ReactTooltip
+        id="password"
+        place="bottom"
+        content="Password Must Contain Following "
+      />
     </div>
   );
 };

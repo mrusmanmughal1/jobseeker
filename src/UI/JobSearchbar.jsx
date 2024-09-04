@@ -41,6 +41,7 @@ const JobSearchbar = ({
         <div className="">
           <input
             location={location}
+            value={location}
             type="text"
             name="location"
             onChange={(e) => handleChange(e)}

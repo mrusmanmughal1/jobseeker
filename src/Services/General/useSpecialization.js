@@ -10,9 +10,9 @@ const getSpecialization = async () => {
 };
 
 export const useSpecialization = () => {
-  const { data, isLoading, isError, status } = useQuery({
+  const { data, isLoading, isPending, isError, status } = useQuery({
     queryKey: ["specializations"],
     queryFn: getSpecialization,
   });
-  return { data, isLoading, status, isError };
+  return { data, isLoading, status, isError, isPending };
 };

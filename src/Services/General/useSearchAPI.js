@@ -9,12 +9,18 @@ const getSearchedData = async (val) => {
     isRemote,
     keyword = "",
     specializations_skills = "",
+    posted_in_last = "",
+    contract_type = "",
   } = val.searched;
 
   const params = new URLSearchParams();
   if (keyword) params.append("keyword", keyword);
   if (title) params.append("job_title", title);
+  if (contract_type) params.append("contract_type", contract_type);
   if (location) params.append("city", location);
+
+  if (posted_in_last) params.append("posted_in_last", posted_in_last);
+
   if (specializations_skills)
     params.append("specializations_skills", specializations_skills);
 

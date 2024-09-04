@@ -16,13 +16,14 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useGetBasket } from "../Services/Candidate/useGetBasket";
 import { BASE_URL_IMG } from "../config/Config";
 import { useEmployerDetails } from "../Services/Employer/useEmployerDetails";
+import logo from "../assets/Profile-picture.png";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [showLogin, setshow] = useState(false);
   const [showMblNav, setshowMblNav] = useState(false);
   const [profile, showprofile] = useState(false);
   const [cart, setcart] = useState(false);
-  const { auth, user_type, avatar, username } = useUserinfo();
+  const { auth, user_type, avatar_image, username } = useUserinfo();
   const { data } = useGetBasket({
     enabled: user_type, // Enable the query only when user is logged in
   });
@@ -41,8 +42,6 @@ const Navbar = () => {
     };
   }, []);
 
-  const profileimg =
-    "https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg";
   return (
     <section
       className={`${
@@ -120,7 +119,9 @@ const Navbar = () => {
                         <img
                           className="   h-12  object-cover "
                           src={`${
-                            avatar ? `${BASE_URL_IMG + avatar}` : profileimg
+                            avatar_image
+                              ? `${BASE_URL_IMG + avatar_image}`
+                              : logo
                           }`}
                           alt="Image"
                         />

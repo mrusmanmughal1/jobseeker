@@ -16,11 +16,9 @@ const SimilarJobs = () => {
   if (isError || similarJobs.data.count)
     return (
       <div className="border">
-        {" "}
-        <ErrorMsg ErrorMsg="No Recommendations" />{" "}
+        <ErrorMsg ErrorMsg="No Recommendations" />
       </div>
     );
-  console.log(similarJobs.data);
   return (
     <div className="shadow py-8  bg-white rounded-md">
       <div className="text-2xl font-semibold pb-5 px-4">Similar Jobs</div>
@@ -28,7 +26,7 @@ const SimilarJobs = () => {
         {similarJobs?.data?.data.legth == 0 ? (
           <ErrorMsg ErrorMsg="No Similar Job Available" />
         ) : (
-          similarJobs?.data?.data?.map((val, i) => {
+          similarJobs?.data.data.results?.slice(0, 5).map((val, i) => {
             return (
               <NavLink to={`/job-Details/${val.id}`} key={val}>
                 <div

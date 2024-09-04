@@ -20,14 +20,20 @@ const JobsLayout = (alljobs = []) => {
     location: "",
     isRemote: false,
     specializations_skills: "",
+    posted_in_last: "",
+    contract_type: "",
   });
-  const { title, location, isRemote } = searched;
+
+  const { title, location, isRemote, posted_in_last } = searched;
   const [page, setPage] = useState(1);
 
   const locationObj = useLocation();
   const queryParams = new URLSearchParams(locationObj.search);
   const titles = queryParams.get("title") || "";
   const locationParam = queryParams.get("location") || "";
+  const posted = queryParams.get("posted_in_last") || "";
+  const contacttype = queryParams.get("contract_type") || "";
+
   const specializations_skills =
     queryParams.get("specializations_skills") || "";
   const isRemotes = queryParams.get("isRemote") === "true" || false;
@@ -38,8 +44,18 @@ const JobsLayout = (alljobs = []) => {
       location: locationParam || "",
       isRemote: isRemotes || "",
       specializations_skills: key || "",
+      posted: posted || "",
+      contract_type: contacttype || "",
     });
-  }, [titles, locationParam, isRemotes, key, specializations_skills]);
+  }, [
+    titles,
+    locationParam,
+    isRemotes,
+    key,
+    specializations_skills,
+    posted,
+    contacttype,
+  ]);
 
   const handleChange = (e) => {
     setsearch({ ...searched, [e.target.name]: e.target.value });
@@ -72,14 +88,17 @@ const JobsLayout = (alljobs = []) => {
     }
   };
   const { data: candidateCVUpdated } = useCandidateDetails();
-
   return (
     <div className="flex lg:flex-row flex-col w-11/12 mx-auto ">
       <div className="pt-4 lg:w-[30%]  lg:order-none order-2">
         {user_type === "candidate" &&
           !candidateCVUpdated?.data?.data?.cv_file && <CvUpload />}
         <FeaturedJobs />
-        <JobType />
+        <JobType
+          setsearch={setsearch}
+          posted_in_last={posted_in_last}
+          alljobs={alljobs}
+        />
       </div>
 
       <div className=" w-full   py-8 md:pt-4">
@@ -96,19 +115,19 @@ const JobsLayout = (alljobs = []) => {
         </div>
         <div className="flex items-center w-full justify-between">
           <p className="ps-8 font-semibold text-sm">
-            Jobs Available ({SearchedData?.data?.results.length || 0})
+            Jobs Available ({SearchedData?.data?.results.count || 0})
           </p>
           <div className="flex gap-1">
             <button
               onClick={handlePreviousPage}
-              disabled={!hasPreviousPage}
+              disabled={!SearchedData?.data?.results.previous}
               className="bg-slate-200 rounded-full p-3 disabled:bg-slate-200 disabled:cursor-not-allowed hover:bg-btn-primary hover:text-white hover:cursor-pointer"
             >
               <GrCaretPrevious />
             </button>
             <button
               onClick={handleNextPage}
-              disabled={!hasNextPage}
+              disabled={!SearchedData?.data?.results.next}
               className="bg-slate-200 rounded-full p-3 disabled:bg-slate-200 disabled:cursor-not-allowed hover:bg-btn-primary hover:text-white hover:cursor-pointer"
             >
               <GrCaretNext />
@@ -126,7 +145,7 @@ const JobsLayout = (alljobs = []) => {
               {SearchedData.data.count === 0 ? (
                 <ErrorMsg ErrorMsg="No Data is Available Right Now . Try Again Later." />
               ) : (
-                SearchedData?.data?.results?.map((val, i) => (
+                SearchedData?.data?.results.results?.map((val, i) => (
                   <Job job={val} key={i} />
                 ))
               )}

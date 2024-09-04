@@ -10,7 +10,7 @@ const ClearJobBasket = async (id) => {
 
   const res = await axios.delete(API, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
     },
   });
   return res;

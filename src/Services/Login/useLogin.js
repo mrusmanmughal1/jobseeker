@@ -5,11 +5,10 @@ import { BASE_URL } from "../../config/Config";
 import axios from "axios";
 import { useUserinfo } from "../../Context/AuthContext";
 import { v4 as uuidv4 } from "uuid";
-import api from "./useLoginInterSept";
 
 const getLogin = async (credentials) => {
   const Post = `${BASE_URL}api/login/`;
-  const res = await api.post(Post, credentials);
+  const res = await axios.post(Post, credentials);
   return res;
 };
 
@@ -25,7 +24,7 @@ export const useLogin = () => {
       // Include deviceType in the credentials
       const credentialsWithDeviceType = {
         ...credentials,
-        device_id: deviceType,
+        device_id: `WebProtal-${deviceType}`,
       };
 
       // Pass credentials with device type to the login function
@@ -34,12 +33,10 @@ export const useLogin = () => {
     },
     onSuccess: (data) => {
       // device_type
-      const { user_type, access_token, device_id, refresh_token } =
-        data.data.data;
+      const { user_type, token, device_id } = data.data.data;
       dispatch({ type: "login", payload: data.data.data });
       // setting Tokken and UserData to DB
-      localStorage.setItem("Token", access_token);
-      localStorage.setItem("refresh_token", refresh_token);
+      localStorage.setItem("Token", token);
 
       localStorage.setItem("User_Data", JSON.stringify(data.data.data));
       localStorage.setItem("Device_id", device_id);

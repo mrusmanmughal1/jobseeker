@@ -4,21 +4,19 @@ import { BASE_URL } from "../../config/Config";
 import axios from "axios";
 
 import { useUserinfo } from "../../Context/AuthContext";
-import api from "../Login/useLoginInterSept";
 const getLogout = async () => {
   const Post = `${BASE_URL}api/logout/`;
   const Token = localStorage.getItem("Token");
   const Device_id = localStorage.getItem("Device_id");
   const body = {
-    access_token: Token,
     device_id: Device_id,
   };
   const config = {
     headers: {
-      Authorization: `Bearer  ${Token}`,
+      Authorization: `Token ${Token}`,
     },
   };
-  const res = await api.post(Post, body, config);
+  const res = await axios.post(Post, body, config);
   return res;
 };
 
@@ -30,8 +28,7 @@ export const useLogout = () => {
     onSuccess: (data) => {
       // Clear local storage
       localStorage.clear();
-      localStorage.removeItem("Token");
-      localStorage.removeItem("User_Data");
+
       dispatch({ type: "logout" });
 
       toast.success(data.data.message);

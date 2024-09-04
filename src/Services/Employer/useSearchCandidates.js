@@ -9,7 +9,7 @@ const SearchCandidates = async (query) => {
 
   const res = await axios.get(API, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
     },
   });
   return res;

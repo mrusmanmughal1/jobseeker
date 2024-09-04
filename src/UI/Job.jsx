@@ -50,7 +50,7 @@ const Job = ({ job = [], rec }) => {
             <p className="text-xs flex gap-2 items-center">
               <BiWorld />
               {job?.addresses?.map((val, i) => (
-                <span key={i}>{val.city}</span>
+                <span key={i}>{val.city} , </span>
               ))}
             </p>
           )}

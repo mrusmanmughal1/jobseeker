@@ -6,7 +6,7 @@ import Select from "react-select";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
 import { useSpecialization } from "../../Services/General/useSpecialization";
-import { BASE_URL, BASE_URL_IMG } from "../../config/Config";
+import { BASE_URL_IMG } from "../../config/Config";
 import { HiDocumentDownload } from "react-icons/hi";
 import profileimg from "../../assets/Profile-picture.png";
 import MiniLoader from "../../UI/MiniLoader";
@@ -60,6 +60,8 @@ const ManageCandidateProfile = () => {
     cover_letter: cover_letter || "",
     new_password: "",
     confirm_password: "",
+    cv_file: "",
+    avatar_image: "",
   };
   const {
     values,

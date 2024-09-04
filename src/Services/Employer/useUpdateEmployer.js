@@ -10,7 +10,7 @@ const EmployerUpdate = async (Credndials, id) => {
   const token = localStorage.getItem("Token");
   const res = await axios.patch(API, Credndials, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
     },
   });
   return res;

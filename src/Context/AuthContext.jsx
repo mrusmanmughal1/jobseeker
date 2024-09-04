@@ -13,20 +13,19 @@ const initialState = {
   username: "",
   user_id: "",
   user_type: "",
-  avatar: "",
+  avatar_image: "",
 };
 
 const reducer = (state, action) => {
-  console.log(action?.payload?.avatar_image, "state");
   switch (action.type) {
     case "login":
       return {
         ...state,
         auth: true,
+        avatar_image: action.payload.avatar_image || state.avatar,
         user_type: action.payload.user_type,
         user_id: action.payload.user_id,
         username: action.payload.username,
-        avatar: action?.payload?.avatar_image,
       };
     case "logout":
       return { ...initialState, auth: false }; // Reset state on logout
@@ -36,10 +35,8 @@ const reducer = (state, action) => {
 };
 
 const AuthContext = ({ children }) => {
-  const [{ auth, user_type, user_id, username, avatar }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ auth, user_type, user_id, username, avatar_image }, dispatch] =
+    useReducer(reducer, initialState);
   useEffect(() => {
     const storedUserData = localStorage.getItem("User_Data");
     if (storedUserData) {
@@ -58,7 +55,7 @@ const AuthContext = ({ children }) => {
 
   return (
     <User.Provider
-      value={{ dispatch, auth, user_type, user_id, username, avatar }}
+      value={{ dispatch, auth, user_type, user_id, username, avatar_image }}
     >
       {children}
     </User.Provider>

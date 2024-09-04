@@ -13,7 +13,7 @@ const DeleteJob = async (id) => {
 
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Token ${token}`,
       },
     }
   );

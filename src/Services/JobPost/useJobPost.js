@@ -13,7 +13,7 @@ const JobTheJob = async (formData) => {
 
   const res = await axios.post(Post, formData, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
     },
   });
   return res;

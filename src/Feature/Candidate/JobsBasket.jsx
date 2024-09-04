@@ -9,6 +9,7 @@ import { useClearJobBasket } from "../../Services/Candidate/useClearJobBasket";
 import { useUserinfo } from "../../Context/AuthContext";
 import MiniLoader from "../../UI/MiniLoader";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 const JobsBasket = () => {
   const { user_type } = useUserinfo();
   const { data, isLoading, isError } = useGetBasket();
@@ -60,7 +61,12 @@ const JobsBasket = () => {
             >
               <div className="lg:max-w-full w-2/5 flex lg:flex-row  flex-col  lg:items-center justify-between ps-4">
                 <div className="flex  text-sm   lg:text-base flex-col gap-3">
-                  <div className="font-semibold">{val.title}</div>
+                  <NavLink
+                    to={`/job-Details/${val.id}`}
+                    className="font-semibold"
+                  >
+                    {val.title}
+                  </NavLink>
                   <div className=" flex items-center gap-2 text-xs">
                     <FaEarthAmericas />{" "}
                     {val.addresses.map((val, i) => (

@@ -21,14 +21,11 @@ export const RegisterSchema = Yup.object({
     .matches(/[\W_]/, "Password must contain at least one special character") // At least one special character
     .required("New Password is required"),
   confirm_password: Yup.string()
-    .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
   first_name: Yup.string().max(45).required("Please Enter Your First Name !"),
   last_name: Yup.string().max(45).required("Please Enter Your Last Name !"),
   phone: Yup.string().required("Please Enter Your Phone Number !"),
-  // specialization: Yup.array()
-  //   .min(1, "At least one specialization is required")
-  //   .required("Specialization is required"),
 });
 
 // Employer Job Posting
@@ -103,8 +100,8 @@ export const ManageProfileCandidate = Yup.object({
   minimum_salary: Yup.number()
     .min(0, "Minimum Salary must be a positive number")
     .required("Minimum Salary is required"),
-  // avatar_image: Yup.mixed().required("Avatar Image is required"),
-  // cv_file: Yup.mixed().required("CV File is required"),
+  avatar_image: Yup.mixed().required("Avatar Image is required"),
+  cv_file: Yup.mixed().required("CV File is required"),
   new_password: Yup.string().min(8, "Password must be at least 8 characters"),
 
   confirm_password: Yup.string().oneOf(
@@ -173,4 +170,14 @@ export const IntervireOnsite = Yup.object({
   // date_time_end: Yup.date()
   //   .required(" Start Time is Required")
   //   .min(new Date(), "Deadline must be in the future"),
+});
+
+//contact Us form validation schema
+export const ContatUs = Yup.object({
+  Name: Yup.string().required("Enter Your Name"),
+  Email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  Subject: Yup.string().required("Enter Subject"),
+  Message: Yup.string().required(" Enter Your Message"),
 });

@@ -13,6 +13,11 @@ import { BASE_URL_IMG } from "../../config/Config";
 const ManageEmployerProfile = () => {
   const { data, isLoading: loading, isError } = useEmployerDetails();
   const {
+    data: specialismsData,
+    isPending: loadSpecializim,
+    isError: specialismsErr,
+  } = useSpecialization();
+  const {
     email,
     last_name,
     first_name,
@@ -30,21 +35,10 @@ const ManageEmployerProfile = () => {
     license_image,
   } = data?.data?.data || {};
   const {
-    data: specialismsData,
-    isLoading: loadSpecializim,
-    isError: specialismsErr,
-  } = useSpecialization();
-  const {
     mutate: updateEmployerData,
     isPending,
     isError: EmpErr,
   } = useUpdateEmployer();
-
-  if (isError || specialismsErr)
-    return (
-      <ErrorMsg ErrorMsg="Unable To fetch Data Right Now !  Please try again!" />
-    );
-  if (loading || loadSpecializim) return <Loader style="py-40" />;
 
   const initialValues = {
     email: email || "",
@@ -80,8 +74,7 @@ const ManageEmployerProfile = () => {
       Object.keys(values).forEach((key) => {
         formData.append(key, values[key]);
       });
-      console.log(errors);
-      console.log(formData);
+
       updateEmployerData(formData);
     },
     validationSchema: ManageProfileEmployer,
@@ -95,6 +88,13 @@ const ManageEmployerProfile = () => {
 
     setFieldValue("specialisms", selectedValues.toString());
   };
+  if (loading || loadSpecializim || isPending) return <Loader style="py-40" />;
+
+  if (isError || specialismsErr || EmpErr)
+    return (
+      <ErrorMsg ErrorMsg="Unable To fetch Data Right Now !  Please try again!" />
+    );
+  console.log(values);
 
   return (
     <div className="md:w-3/4">
@@ -103,7 +103,9 @@ const ManageEmployerProfile = () => {
           <div className="">
             <label className="font-semibold ">
               Email
-              <span className="text-sm px-2 font-normal">Enter your email</span>
+              <span className="text-sm px-2 font-normal">
+                Enter your E-mail
+              </span>
             </label>
             <input
               type="text"

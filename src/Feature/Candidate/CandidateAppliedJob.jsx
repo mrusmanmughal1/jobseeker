@@ -3,6 +3,7 @@ import { FaEarthAmericas } from "react-icons/fa6";
 import { useCandidateHistory } from "../../Services/Candidate/useCandidateHistory";
 import Loader from "../../UI/Loader";
 import ErrorMsg from "../../UI/ErrorMsg";
+import { NavLink } from "react-router-dom";
 const CandidateAppliedJob = () => {
   const { data, isloading, isError } = useCandidateHistory();
   if (isloading) return <Loader style="h-screen py-20" />;
@@ -33,7 +34,12 @@ const CandidateAppliedJob = () => {
             <div className="flex items-center py-4  hover:bg-gray-100 border-b ">
               <div className="md:w-full w-1/2 flex md:flex-row  flex-col  md:items-center justify-between px-4">
                 <div className="flex  text-sm  md:text-base flex-col gap-3">
-                  <div className="font-semibold">{val?.title}</div>
+                  <NavLink
+                    className="font-semibold"
+                    to={`/job-Details/${val.job_id}`}
+                  >
+                    {val?.title}
+                  </NavLink>
                   <div className=" flex items-center gap-2 text-xs">
                     <FaEarthAmericas />{" "}
                     {val?.addresses?.map((val) => (

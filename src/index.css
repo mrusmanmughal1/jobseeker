@@ -35,3 +35,19 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.react-tel-input {
+  display: flex;
+}
+.react-tel-input .form-control {
+  width: 100px;
+  padding: 18.5px 14px 18.5px 50px !important;
+  background-color: #e5e7eb;
+  border: none;
+  outline: none;
+  border-radius: 0;
+}
+.react-tel-input .selected-flag.open:before {
+  border-color: transparent;
+  box-shadow: none;
+}
